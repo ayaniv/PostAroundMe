@@ -1,0 +1,90 @@
+﻿
+/* Page
+-------------------------------------------------------------- */
+html, body {height:100%; margin:0 0 0 0; font-family: Helvetica, Arial, sans-serif;}
+
+.arrow{ margin-top:300px; position:absolute; top:0; padding:10px;}
+
+.floatRight { right:90px;}
+
+ #fuzz{ position:absolute; top:0; left:0; height:100%; width:100%; z-index:100; background-color:#000; opacity:0.5;  text-align:left; }
+
+.HeadLine {width:100%; height:6px; background-color:#848b8f;}
+.HairHeadLine {width:100%; height:1px; background-color:#ecf0f2;}
+
+.MainDiv {background-image:url('../images/bg.png'); height:668px; width:100%; background-repeat:repeat-x; }
+
+.MainDiv .LogoBg {background-image:url('../images/logo_bg.png'); width:523px; height:313px; margin-left:-65px; z-index:1px; position:relative }
+.MainDiv .LogoClear {margin-left:71px; margin-top:29px; width:258px; height:50px; position:absolute; top:0; }
+
+.MainDiv .PostBox {position:absolute; width:510px; height:37px; top:0; margin-left:348px; margin-top:32px;}
+.MainDiv .PostBox .Shpitz { z-index:2; background-image:url('../images/input_shpitz.png'); height:37px; width:7px; float:left; }
+.MainDiv .PostBox .Field { float:left; height:35px; width:426px;  }
+.MainDiv .PostBox .Field input[type="text"] {height:31px; width:413px; border:0px; font-size:24px; padding-left:5px; padding-top:2px; color:#dfe2e4;}
+.MainDiv .PostBox .Field textarea  { z-index:0; position:relative; border: 1px solid #82898e;  height:31px; resize:none; width:412px;  font-size:16px; font-family:Arial; padding-left:5px; padding-top:2px; color:#82898E;}
+.MainDiv .PostBox .Field input[type="submit"] { cursor:pointer; height:37px; width:80px; background-image:url('../images/post_button.png'); border:0px; float:right;}
+.MainDiv .PostBox .Submit { cursor:pointer; height:37px; width:80px; background-image:url('../images/post_button.png'); border:0px; float:right;}
+
+.MainDiv .UserBox {  font-size:13px; float:right; margin-left:20px; width:195px; height:50px; top:0; margin-left:909px; margin-top:24px; position:absolute}
+.MainDiv .UserBox .Text { padding-top:10px; float:left; padding-right:5px; height:50px; width:140px;}
+.MainDiv .UserBox .Text a {text-decoration:none; } 
+.MainDiv .UserBox .Text .Name {vertical-align:middle; color:#57849d; display:block; font-weight:bold;}
+.MainDiv .UserBox .Text .Account {vertical-align:middle; color:#82898e; display:block; float:left; }
+.MainDiv .UserBox .Text .Icon {background-image:url('../images/trainagle_grey.png'); width:9px; height:6px; float:left; margin-top:5px; margin-left:8px;}
+.MainDiv .UserBox .Image {float:right; width:50px; height:50px;}
+
+.MainDiv .GeoHead {height:25px; margin-top:104px; color:#57849d; margin-left:70px; position:absolute; top:0px;  font-size:13px; width:1040px; }
+.MainDiv .GeoHead .Text {font-size:15px; float:left; }
+.MainDiv .GeoHead .Buttons { float:left;}
+.MainDiv .GeoHead .Buttons div { cursor:pointer; margin-left:5px; background-image: url('../images/filterButtonOff.png'); width:85px; height:18px; text-align:center; float:left; font-size:15px; }
+.MainDiv .GeoHead .Buttons .selected {background-image: url('../images/filterButtonOn.png'); color:#e0e5e7; float:left; font-size:14px; }
+
+.MainDiv .Content {margin-top:130px;  margin-left:67px; position:absolute; top:0px;  font-size:13px; width:1040px; }
+.MainDiv .Content .Container {float:left; height:540px; width:260px; background-color:Transparent;}
+
+.MainDiv .Content .Box { cursor:pointer; position:relative; width:254px; height:130px; background-color:#eaedee; margin-left:3px; margin-right:3px; margin-bottom:6px; float:left;  }
+.MainDiv .Content .Box .LineRed { width:100%; height:7px; background-color:#f90543; margin-bottom:5px; }
+.LineOrange { width:100%; height:7px; background-color:#f4660f; margin-bottom:5px; }
+.MainDiv .Content .Box .LineNavy { width:100%; height:7px; background-color:#424e55; margin-bottom:5px; }
+.MainDiv .Content .Box .Bottom { bottom:0; position:absolute; width:100%; background-color:#eaedee; }
+
+.MainDiv .Content .Box .Image {float:left; width:50px; margin-right:8px;}
+.MainDiv .Content .Box .Title { margin-top:-3px; margin-right:4px;  float:left; width:190px; text-transform: uppercase; color:#424e55; font-size:18px; }
+.MainDiv .Content .Box .Text { margin-left:58px; /*margin-top:6px;*/ margin-right:4px; color:#424e55; font-size:12px; }
+
+.MoreInfo { display:none; /*margin-top:15px; margin-right:4px;*/ float:left; width:249px; /*position:absolute;*/ margin-left:5px; }
+.MoreInfo .TitleInfo {font-size:18px; color:#424e55; }
+.MainDiv .TimeStamp { background-color:#EAEDEE; padding-right:4px;  float:left; width:239px; font-size:11px;   position:absolute; bottom:0; padding-bottom:2px; padding-left:5px; color:#969c9f }
+.MainDiv .Corner {    background-color:white; position:absolute; bottom:0;  margin-left:243px;  }
+
+.MainDiv .Content .Open { height:266px; }
+
+.MainDiv .Content .CommercialBox { cursor:pointer; position:relative; width:254px; height:130px; background-color:#eaedee; margin-left:3px; margin-right:3px; margin-bottom:6px; float:left;  }
+.MainDiv .Content .CommercialBox .Line { width:100%; height:7px; background-color:#e70575; margin-bottom:1px; }
+.MainDiv .Content .CommercialBox .Image {float:left; }
+.MainDiv .Content .CommercialBox .Title { float:left; padding-left:5px; margin-top:5px; text-transform: uppercase; color:#424e55; font-size:18px; }
+.MainDiv .Content .CommercialBox .Text { clear:both; margin-top:-2px; padding-left:5px; margin-right:4px;  color:#424e55; font-size:12px; display:block; }
+
+
+
+
+
+.BottomDiv { margin-top:0px; display:block; padding-top:23px; background-image:url('../images/bg_bottom.png'); width:100%; background-repeat:repeat-x; min-height:200px; }
+.BottomDiv .Logo { margin-left:70px;  }
+.BottomDiv .Text { margin-left:70px;  font-size:11px; color:#9ea5a9;  font-style:italic;  }
+.BottomDiv .Text .Footer { color:#969ea2; }
+
+
+ul
+{
+list-style-type: none;
+padding: 0px;
+margin: 0px;
+}
+
+li { color:#424E55; background-repeat: no-repeat; background-position: 0px 5px;  padding-left: 14px; margin-top:5px;  }
+
+li.Mail  { background-image: url('../images/iconMail.gif'); }
+li.Phone  { background-image: url('../images/iconPhone.gif'); }
+li.Fax   { background-image: url('../images/iconFax.gif'); }
+li.Location   { background-image: url('../images/iconLocation.gif'); }

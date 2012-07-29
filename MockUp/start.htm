@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Untitled Page</title>
+    <script type="text/javascript" src="scripts/gears_init.js"></script>
+    <script type="text/javascript" src="scripts/data.js"></script>
+</head>
+<body>
+<p id="status"></p>
+
+<script type="text/javascript">
+        
+                                     
+    navigator.geolocation.getCurrentPosition(showPosition, errorCallback, {enableHighAccuracy: true, maximumAge:600000});
+    
+    
+        var lat = 32.09519; // 32.064301;//  32.07826// 25.091075; 
+    var lon = 34.775602; // 34.772887; //34.773861 //121.559835;  
+    
+    
+
+        function showPosition(position) {
+        var d = calcDist(position.coords.latitude, position.coords.longitude, lat , lon);
+        alert(d);
+            
+        
+        }
+        
+          function errorCallback(error) {
+            // Update a div element with error.message.
+            }
+            
+            
+    function toRad(Value) {
+        
+        return Value * Math.PI / 180;
+    }
+    
+    function calcDist(lat1, lon1, lat2, lon2) 
+    {
+    
+        var R = 6371; // Radius of the earth in km
+        var dLat = toRad(lat2-lat1);  // Javascript functions in radians
+        var dLon = toRad(lon2-lon1); 
+        var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * 
+                Math.sin(dLon/2) * Math.sin(dLon/2); 
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+        var d = R * c * 1000; // Distance in m
+        return Math.ceil(d);
+    }  
+
+</script>
+
+<script type="text/javascript"> 
+ 
+//$(document).ready(function(){
+ 
+// geoWidget();               
+// 
+//	function geoWidget() {
+//		
+//		$('#COOLWIDGET').geoWidget({		
+//	        ip: ipaddr,
+//	        ipinfodbKey: 'd04e13f7240c174e20db353cb7dda02d15b0b00081df4e647e62acb52bf40d72',
+//	        title: '',
+//	        address: '',	// Paris, France
+//	        latitude: '',	// 48.8566667 
+//	        longitude: '',	// 2.3509871
+//	        textFieldStyle:'width:25em',
+//	        mapStyle:'width:25em; height:25em',
+//	   //     imageAddressValid:'img/locationValid.png',
+//	    //    imageAddressInvalid:'img/locationInvalid.png',
+//	     //   imageAjaxLoader:'img/ajax-loader-opaque.gif',
+//	        callback:function(address, latitude, longitude, errorCode, errorMessage){ 
+//	            if (errorCode == undefined && errorMessage == undefined ) {
+//	                alert('Callback result=' + address + ' (' + latitude + ', ' + longitude + ')');					
+//	            } else {				
+//	                // most possible error codes are: MISSING_IPINFODB_KEY, UNKNOWN_IP, ZERO_RESULTS and OVER_QUERY_LIMIT
+//	                alert('['+errorCode+'] '+errorMessage);
+//	            }
+//	        }
+//	   	});		
+//		
+//	}
+	
+	
+    
+    
+    
+//});
+ 
+</script> 
+
+
+</body>
+</html>

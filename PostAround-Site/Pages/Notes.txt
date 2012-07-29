@@ -1,0 +1,47 @@
+﻿            Markup for adding slider to the addmessage window
+			<div id="SliderBarAddMessage" class="Slider" style="margin-top:80px;">
+                <div style="width:246px;">
+                    <label for="amountAddMessage" style="float:left; font-size:20px; color:#57849d; font-family:Calibri, Arial; font-style:italic;">Up to Distance</label>
+	                <input readonly="readonly" value="ALL" type="text" id="amountAddMessage" style="float:right; background:transparent; border:0; color:#6AA1BB; font-weight:bold; font-size:16px; font-style:italic; width:50px; font-family:Calibri,Arial; text-align:right; padding:0px; margin:5px;  " />
+	            </div>
+	            <div style="width:244px; position:absolute; margin-top:26px;">
+                    <div id="sliderAddMessage"></div>
+                </div>
+            </div>
+            <br /><br />
+            <div class="FreeText" style="color:#82898e; font-size:14px;"> 
+            Only people located up to this distance will see your post.
+            <br />Simply drag the slider to change it.
+            </div>
+
+
+			    $("#sliderAddMessage").slider({
+        value: 10500,
+        min: 0,
+        max: 11000,
+        step: 500,
+        change: function (event, ui) {
+
+
+        },
+        slide: function (event, ui) {
+            if (ui.value > 10000) {
+                $("#amountAddMessage").val("ALL");
+            } else {
+                if (ui.value < 1000)
+                    if (ui.value <= 0) {
+                        ui.value = 0;
+                        $("#amountAddMessage").val("Here");
+
+                    }
+                    else {
+                        $("#amountAddMessage").val(ui.value + "m");
+                    }
+                else {
+
+                    $("#amountAddMessage").val((ui.value / 1000) + "km");
+                }
+
+            }
+        }
+    });

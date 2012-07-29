@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<HEAD>
+<TITLE>PopUp Div + Background Disable</TITLE>
+<style>
+body
+{
+background-image:url("1.gif");
+}
+.parentDisable
+{
+z-index:999;
+width:100%;
+height:100%;
+display:none;
+position:absolute;
+top:0;
+left:0;
+background-color: #000;
+color: #aaa;
+opacity: .4;
+filter: alpha(opacity=50);
+}
+#popup
+{
+width:300;
+height:300;
+position:relative;
+color: #000;
+background-color: RED;
+top:25%;
+background-image:url(catbg-1.gif);
+
+}
+#close
+{
+position:absolute;
+top:0;
+right:0;
+}
+</style>
+<script type="text/javascript">
+function pop(div)
+{
+document.getElementById(div).style.display='block';
+return false
+}
+function hide(div)
+{
+document.getElementById(div).style.display='none';
+return false
+}
+</script>
+</HEAD>
+<BODY>
+<div id="pop1" class="parentDisable">
+<center>
+<div id="popup">
+<span style="color:Black">This is popup 1</span>
+<a href="#" onClick="return hide('pop1')">
+<div id="close">
+<img src="close.png" width="40px" height="40px"/>
+</div>
+</a>
+</div>
+</div>
+
+
+
+<center>
+<h3>Simple Popup Div + Background Disable Example</h3>
+</br></br>
+<a href="#" onClick="return pop('pop1')">Popup 1</a>
+</center>
+
+
+</BODY>
+</HTML>

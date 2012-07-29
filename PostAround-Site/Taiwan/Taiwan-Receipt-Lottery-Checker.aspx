@@ -1,0 +1,137 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Taiwan-Receipt-Lottery-Checker.aspx.cs" Inherits="Taiwan_Taiwan_Receipt_Lottery_Checker" %>
+
+<%@ Register src="../Controls/FacebookLike.ascx" tagname="FacebookLike" tagprefix="uc1" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>Taiwan Receipt Lottery | Uniform Invoice Lottery Checker</title>
+    <link rel="stylesheet" href="../css/screen.css" type="text/css" media="screen" charset="utf-8" />
+</head>
+<body>
+
+<div id="fb-root"></div>
+<script>    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+    } (document, 'script', 'facebook-jssdk'));</script>
+
+
+    <form id="form1" runat="server">
+
+            <div class="HeadLine" ></div>
+    <div class="HairHeadLine"></div>
+        <div class="BottomDiv" id="BottomDiv" style="background:none">
+        <div class="Logo">
+        <h1>Taiwan Receipt Lottery Checker</h1>
+        Check if you won Taiwan Receipts Lottery
+        <br />
+        with Uniform-Invoice Winning Numbers web checker
+        
+
+                </div>  
+        <br />  
+        <div class="Text" style="font-style:normal; color:#424E55; font-size:13px;">
+
+
+    
+    Winning numbers for months <asp:TextBox ID="txtMonth" runat="server"></asp:TextBox>
+    
+    as can be shown <a href="http://english.etax.nat.gov.tw/wSite/lp?ctNode=11647&CtUnit=1746&BaseDSD=7" target="_blank">here</a>
+    <br /><br />
+    <table style="wdith:800">
+    <tr>
+    <td>Special Prize Number:</td>
+    <td><asp:TextBox id="txtSpecial" runat="server"></asp:TextBox></td>
+    <td style="padding-left:30px;">First Prize #1:</td>
+    <td><asp:TextBox id="txtFirst1" runat="server"></asp:TextBox></td>
+    <td style="padding-left:30px;">Addition #1:</td>
+    <td><asp:TextBox id="txtAdd1" runat="server"></asp:TextBox></td>
+    </tr>
+    <tr>
+    <td>Grand Prize Number:</td>
+    <td><asp:TextBox id="txtGrand" runat="server"></asp:TextBox></td>
+    <td style="padding-left:30px;">First Prize #2:</td>
+    <td><asp:TextBox id="txtFirst2" runat="server"></asp:TextBox></td>
+    <td style="padding-left:30px;">Addition #2:</td>
+    <td><asp:TextBox id="txtAdd2" runat="server"></asp:TextBox></td>
+    </tr>
+
+    <tr>
+    <td></td>
+    <td></td>
+    <td style="padding-left:30px;">First Prize #3:</td>
+    <td><asp:TextBox id="txtFirst3" runat="server"></asp:TextBox></td>
+    <td></td>
+    <td></td>
+    </tr>
+
+    </table>
+    
+    </div>
+    <div>
+            <h4>how to check taiwan receipt lottery?</h4>
+        Don't need to know anything, simply enter your receipts numbers below
+        and check how much money you won.<br />
+        Enter the last <b>3 digits</b> (or more) of your receipts <b>seperated by a comma (,)</b> and click "Check":<br /><br />
+    <asp:TextBox TextMode="MultiLine" ID="txtNumbers" runat="server" style="width:800px; height:100px"></asp:TextBox>
+    
+    <br />
+    <asp:Button ID="btnCheck" runat="server" Text="Check" onclick="btnCheck_Click" />
+    <br />
+    <br />
+    Checking Results:
+    <br />
+    <asp:TextBox ID="txtResults" Enabled="false" style="width:800px" runat="server" TextMode="MultiLine"></asp:TextBox>
+    <br />
+    <hr />
+    sponsored by:
+    <div style="border:1px solid; width:780px; height:102px; padding:10px; background-color:#fffe89">
+        <div style="float:left; padding-right:10px;">
+    <a href="http://postaround.me"><img border="0" src="../images/pam_map.png" alt="Local Pinboard" width="364" height="102" style="border:none" /></a>
+    </div>
+    <div class="Text"  style="font-style:normal; color:#424E55; font-size:13px;  >
+    This serive is free of charge. sponsored and hosted by
+    <br />
+    <a href="http://postaround.me"><b>Postaround.me | Local Pinboard</b></a>
+    <br /><br />
+    The easiest way to talk with your neighborhood
+    <br />
+    and post anything you like among your neighbors.
+    <br />
+    <a href="http://postaround.me">Check this out !</a>
+    </div>
+    <br />
+    </div>
+            
+    <br />
+    
+   <div class="fb-comments" data-href="http://postaround.me/taiwan" data-num-posts="2" data-width="470"></div>
+   <uc1:FacebookLike ID="FacebookLike1" runat="server" />
+   
+    </div>
+    </div>
+    </form>
+
+
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-28432512-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+</script>
+
+
+</body>
+</html>
