@@ -337,28 +337,7 @@
 
     }
 
-    function GetTextWithLink(posStart, text, addHttp) {
-        var href = "<a style='color:#6AA1BB' href='[link]' target='_blank'>External Website</a>";
-        var posEnd = 0;
-        var link = "";
-        
-        posEnd = text.indexOf(' ', posStart);
-        if (posEnd < 0) {
-            posEnd = text.indexOf('\n', posStart);
-            if (posEnd < 0)
-                posEnd = text.length;
-        }
-        link = text.substring(posStart, posEnd);
-        
-        if (addHttp)
-            href = href.replace('[link]', "http://" + link);
-        else
-            href = href.replace('[link]', link);
 
-        text = text.replace(link, href);
-        
-        return text;
-    }
 
     function FormatText(text) {
 
@@ -485,6 +464,9 @@
         
         //english
         var direction = "ltr"
+
+        str = str.replace(/[0-9]/g, '');
+        str = str.trim();
 
         //hebrew
         if ((str.charCodeAt(0) > 0x590) && (str.charCodeAt(0) < 0x5FF))

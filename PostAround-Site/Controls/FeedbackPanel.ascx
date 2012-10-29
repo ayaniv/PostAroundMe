@@ -9,7 +9,7 @@
             <div style="float:left;background:url('images/headings.png') no-repeat 0px 0px; width:231px; height:22px;">&nbsp;</div>
             
             
-            <div id="xbuttonFeedback" style="width:14px; height:11px; float: right; padding: 10px; padding-top: 4px; cursor: pointer;">
+            <div id="xbuttonFeedback" style="width:14px; height:15px; float: right; cursor: pointer;">
          <div style="background: url('images/icons.png') repeat scroll -140px -143px; float: right;
              height: 14px; width: 11px;">
          </div>
@@ -30,7 +30,7 @@
     
  
     <div id="feedbackForm">
-      <div style="width:250px; margin-bottom:10px; float:left; font-size:14px; color:#82898E;" span="2" ><b><i>Post Around Me</i></b> is under development and always will be. Have something to comment? Just send us feedback!</div>
+      <div style="width:250px; margin-bottom:10px; float:left; font-size:14px; color:#82898E;" span="2" ><b><i>PostAround.Me</i></b> is under development and always will be. Have something to comment? Just send us feedback!</div>
       <div style="width:70px; margin-top:10px; float:left; font-size:14px; font-weight:bold; color:#82898E" >Name</div>
       <div style="width:180px; margin-top:10px; float:left;"><input style="width:200px; border:solid 1px #c0c0c0; height:20px; padding:4px; font-family:Arial; font-size:13px;" id="txtFeedbackName" name="txtFeedbackName" type="text" /></div>
       <div style="width:70px; margin-top:10px; float:left; font-size:14px; font-weight:bold; color:#82898E" >Email</div>

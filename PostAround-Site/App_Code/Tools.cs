@@ -30,6 +30,36 @@ public static class Tools
         return result;
     }
 
+    public static void Logger(string errMsg, string where)
+    {
+        string path = ConfigurationManager.AppSettings["PhysicalPath"] + "Pages\\log.txt";
+
+
+        string strLogText = errMsg;
+        //string path =  @"C:\eWaveProjects\BezeqStore\Zibaba\Logs\log.txt"; // "C:\data\sites\XBezeqZibaba\Logs\log.txt";
+        // Create a writer and open the file:
+        StreamWriter log;
+
+        if (!File.Exists(path))
+        {
+            log = new StreamWriter(path);
+        }
+        else
+        {
+            log = File.AppendText(path);
+        }
+
+        // Write to the file:
+        log.WriteLine(DateTime.Now);
+        log.WriteLine("error in fuction: '" + where + "' :");
+        log.WriteLine(strLogText);
+        log.WriteLine();
+
+        // Close the stream:
+        log.Close();
+    }
+
+
     public static string Encrypt(string toEncrypt, bool useHashing)
     {
         byte[] keyArray;
@@ -183,77 +213,7 @@ public static class Tools
 
     }
 
-    public static void SendMailMessageAsync(string from, string to, string bcc, string cc, string subject, string body)
-    {
-        ThreadPool.QueueUserWorkItem(delegate { SendMailMessage(from, to, bcc, cc, subject, body); });
-    }
 
-    public static void SendMailMessage(string from, string to, string bcc, string cc, string subject, string body)
-    {
-        // Instantiate a new instance of MailMessage
-        MailMessage mMailMessage = new MailMessage();
-
-        //MailAddress fromMail = new MailAddress(from, "PostAround.Me");
-        //mMailMessage.Sender = fromMail;
-        
-
-        // Set the recepient address of the mail message
-        mMailMessage.To.Add(new MailAddress(to));
-        // Check if the bcc value is null or an empty string
-        if ((bcc != null) && (bcc != string.Empty))
-        {
-            // Set the Bcc address of the mail message
-            mMailMessage.Bcc.Add(new MailAddress(bcc));
-        }
-        // Check if the cc value is null or an empty value
-        if ((cc != null) && (cc != string.Empty))
-        {
-            // Set the CC address of the mail message
-            mMailMessage.CC.Add(new MailAddress(cc));
-        }
-        
-        // Set the subject of the mail message
-        mMailMessage.Subject = subject;
-        // Set the body of the mail message
-        mMailMessage.Body = body;
-        // Set the format of the mail message body as HTML
-        mMailMessage.IsBodyHtml = true;
-
-        // Set the priority of the mail message to normal
-        mMailMessage.Priority = MailPriority.Normal;
-        // Instantiate a new instance of SmtpClient
-
-        
-
-        SmtpClient mSmtpClient = new SmtpClient();
-        object userState = mMailMessage; 
-        //mSmtpClient.SendCompleted +=new SendCompletedEventHandler(mSmtpClient_SendCompleted);
-
-        // Send the mail message
-        mSmtpClient.SendAsync(mMailMessage, userState);
-    }
-
-    //static void mSmtpClient_SendCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
-    //{
-    //    //Get the Original MailMessage object
-    //    MailMessage mail = (MailMessage)e.UserState;
-
-    //    //write out the subject
-    //    string subject = mail.Subject;
-
-    //    if (e.Cancelled)
-    //    {
-    //        Console.WriteLine("Send canceled for mail with subject [{0}].", subject);
-    //    }
-    //    if (e.Error != null)
-    //    {
-    //        Console.WriteLine("Error {1} occurred when sending mail [{0}] ", subject, e.Error.ToString());
-    //    }
-    //    else
-    //    {
-    //        Console.WriteLine("Message [{0}] sent.", subject);
-    //    }
-    //}
 
     
 

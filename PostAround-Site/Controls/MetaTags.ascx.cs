@@ -26,12 +26,13 @@ public partial class Controls_MetaTags : System.Web.UI.UserControl
         string strMsgId = Request.QueryString["id"];
         string page = Path.GetFileNameWithoutExtension(HttpContext.Current.Request.Url.AbsoluteUri).ToLower();
         
+
         if ( (page == "post") && (Int32.TryParse(strMsgId, out msgId)) && msgId > 0)
         {
             MyMessage msg = GetMessageByID(msgId);
             if (msg != null)
             {
-                title = msg.title + " : Post Around Me";
+                title = msg.title;
                 description = FormatText(msg.description);
                 url = siteUrl + "post/" + msg.msgId;
                 string latlon = msg.latitude + "," + msg.longitude;

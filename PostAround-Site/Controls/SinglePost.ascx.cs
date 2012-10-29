@@ -8,6 +8,7 @@ using PostAroundService;
 using PostAround.Entities;
 using System.Configuration;
 using System.Web.UI.HtmlControls;
+using System.Text.RegularExpressions;
 
 public partial class Controls_SinglePost : System.Web.UI.UserControl
 {
@@ -106,6 +107,10 @@ public partial class Controls_SinglePost : System.Web.UI.UserControl
          if (str == null)
              return direction;
 
+         str = Regex.Replace(str, @"[\d-]", string.Empty);
+         str = str.Trim();
+         
+
         //hebrew
         if ((str[0] > 0x590) && (str[0] < 0x5FF))
             direction = "rtl";
@@ -182,7 +187,7 @@ public partial class Controls_SinglePost : System.Web.UI.UserControl
 
 
     private string GetTextWithLink(int posStart, string text, bool addHttp) {
-        string href = "<a style='color:#6AA1BB' href='[link]' target='_blank'>External Website</a>";
+        string href = "<a style='color:#6AA1BB' href='[link]' target='_blank'>[title]</a>";
         int posEnd = 0;
         string link = "";
         
@@ -193,6 +198,8 @@ public partial class Controls_SinglePost : System.Web.UI.UserControl
                 posEnd = text.Length;
         }
         link = text.Substring(posStart, posEnd - posStart);
+
+        href = href.Replace("[title]", link);
         
         if (addHttp)
             href = href.Replace("[link]", "http://" + link);

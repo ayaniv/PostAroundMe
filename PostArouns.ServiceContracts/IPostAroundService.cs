@@ -40,7 +40,8 @@ namespace PostAround.ServiceContracts
         [OperationContract]
         User GetCurrentUser(int ID);
 
- 
+        [OperationContract]
+        User GetUserByID(int ID);
 
         [OperationContract]
         int InsertUpdateUser(User user);

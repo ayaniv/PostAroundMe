@@ -20,7 +20,7 @@ public partial class Controls_CategoriesButton : System.Web.UI.UserControl
 
         Category firstCategory = new Category();
         firstCategory.ID = 0;
-        firstCategory.Name = "All Categories";
+        firstCategory.Name = "Categories";
         firstCategory.Color = "#e3e3e3";
         lstCategories.Insert(0, firstCategory);
 

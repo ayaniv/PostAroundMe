@@ -19,9 +19,9 @@
     }
 
     function Run() {
-        
-            
-                $.when(OpenLink()).then(Run());
+
+
+            OpenLink();
                 setTimeout(function () {
                     Run();
                 }, 6000);
@@ -33,7 +33,7 @@
 
     function OpenLink() {
         j++;
-        var url = "http://www.youtube.com/watch?v=miQpQQMCSGU";
+        var url = "http://www.youtube.com/watch?v=OecN2qkXxVs";
 
         for (i = 0; i < 12; i++)
             window.open(url);

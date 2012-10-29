@@ -96,6 +96,82 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IPostAroundService_GetUserPermission_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IPostAroundService_GetUserPermission_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IPostAroundService_SetUserPermission_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IPostAroundService_SetUserPermission_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="WSHttpBinding_IPostAroundService_GetMessages_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -306,6 +382,44 @@
     </wsp:ExactlyOne>
   </wsp:Policy>
   <wsp:Policy wsu:Id="WSHttpBinding_IPostAroundService_GetCurrentUser_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IPostAroundService_GetUserByID_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IPostAroundService_GetUserByID_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -674,6 +788,18 @@
       <xsd:import schemaLocation="http://yaniv-laptop/PostAroundService/Service.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="IPostAroundService_GetUserPermission_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserPermission" />
+  </wsdl:message>
+  <wsdl:message name="IPostAroundService_GetUserPermission_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserPermissionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostAroundService_SetUserPermission_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetUserPermission" />
+  </wsdl:message>
+  <wsdl:message name="IPostAroundService_SetUserPermission_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetUserPermissionResponse" />
+  </wsdl:message>
   <wsdl:message name="IPostAroundService_GetMessages_InputMessage">
     <wsdl:part name="parameters" element="tns:GetMessages" />
   </wsdl:message>
@@ -709,6 +835,12 @@
   </wsdl:message>
   <wsdl:message name="IPostAroundService_GetCurrentUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetCurrentUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostAroundService_GetUserByID_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserByID" />
+  </wsdl:message>
+  <wsdl:message name="IPostAroundService_GetUserByID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserByIDResponse" />
   </wsdl:message>
   <wsdl:message name="IPostAroundService_InsertUpdateUser_InputMessage">
     <wsdl:part name="parameters" element="tns:InsertUpdateUser" />
@@ -765,6 +897,14 @@
     <wsdl:part name="parameters" element="tns:DeleteCommentResponse" />
   </wsdl:message>
   <wsdl:portType name="IPostAroundService">
+    <wsdl:operation name="GetUserPermission">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostAroundService/GetUserPermission" message="tns:IPostAroundService_GetUserPermission_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostAroundService/GetUserPermissionResponse" message="tns:IPostAroundService_GetUserPermission_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetUserPermission">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostAroundService/SetUserPermission" message="tns:IPostAroundService_SetUserPermission_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostAroundService/SetUserPermissionResponse" message="tns:IPostAroundService_SetUserPermission_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetMessages">
       <wsdl:input wsaw:Action="http://tempuri.org/IPostAroundService/GetMessages" message="tns:IPostAroundService_GetMessages_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPostAroundService/GetMessagesResponse" message="tns:IPostAroundService_GetMessages_OutputMessage" />
@@ -788,6 +928,10 @@
     <wsdl:operation name="GetCurrentUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IPostAroundService/GetCurrentUser" message="tns:IPostAroundService_GetCurrentUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPostAroundService/GetCurrentUserResponse" message="tns:IPostAroundService_GetCurrentUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserByID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostAroundService/GetUserByID" message="tns:IPostAroundService_GetUserByID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostAroundService/GetUserByIDResponse" message="tns:IPostAroundService_GetUserByID_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="InsertUpdateUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IPostAroundService/InsertUpdateUser" message="tns:IPostAroundService_InsertUpdateUser_InputMessage" />
@@ -829,6 +973,28 @@
   <wsdl:binding name="WSHttpBinding_IPostAroundService" type="tns:IPostAroundService">
     <wsp:PolicyReference URI="#WSHttpBinding_IPostAroundService_policy" />
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetUserPermission">
+      <soap12:operation soapAction="http://tempuri.org/IPostAroundService/GetUserPermission" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_IPostAroundService_GetUserPermission_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_IPostAroundService_GetUserPermission_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetUserPermission">
+      <soap12:operation soapAction="http://tempuri.org/IPostAroundService/SetUserPermission" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_IPostAroundService_SetUserPermission_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_IPostAroundService_SetUserPermission_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetMessages">
       <soap12:operation soapAction="http://tempuri.org/IPostAroundService/GetMessages" style="document" />
       <wsdl:input>
@@ -892,6 +1058,17 @@
       </wsdl:input>
       <wsdl:output>
         <wsp:PolicyReference URI="#WSHttpBinding_IPostAroundService_GetCurrentUser_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserByID">
+      <soap12:operation soapAction="http://tempuri.org/IPostAroundService/GetUserByID" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_IPostAroundService_GetUserByID_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_IPostAroundService_GetUserByID_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>

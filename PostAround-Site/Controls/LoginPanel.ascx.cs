@@ -362,7 +362,12 @@ public partial class Controls_LoginPanel : System.Web.UI.UserControl
                 // make user instance and put values in it
                 user = new User();
                 user.firstName = facebookResponse.first_name;
-                user.lastName = /*facebookResponse.middle_name + " " + */ facebookResponse.last_name;
+                
+                if (!string.IsNullOrWhiteSpace(facebookResponse.middle_name))
+                    user.lastName = facebookResponse.middle_name + " " +  facebookResponse.last_name;
+                else 
+                    user.lastName = facebookResponse.last_name;
+                
                 user.facebookID = facebookResponse.id;
                 user.email = facebookResponse.email;
                 user.avatarImageUrl = "https://graph.facebook.com/" + facebookResponse.id + "/picture";

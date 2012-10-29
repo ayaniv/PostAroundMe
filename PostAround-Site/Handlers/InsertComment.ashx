@@ -3,6 +3,8 @@
 using System;
 using System.Web;
 using PostAroundService;
+using PostAround.Entities;
+using System.Net;
 
 public class InsertComment : IHttpHandler {
     
@@ -14,14 +16,6 @@ public class InsertComment : IHttpHandler {
         //string strUserId = "";
         int userid = 0;
         int retVal = -1;
-
-        //strUserId = context.Request["userID"];
-        //if (!string.IsNullOrWhiteSpace(strUserId))
-        //{
-        //    strUserId = strUserId.Replace('$', '+');
-        //    strUserId = Tools.Decrypt(strUserId, true);
-        //    Int32.TryParse(strUserId, out userid);
-        //}
 
         userid = Tools.GetUserIdFromCookie(context);
         
@@ -38,27 +32,16 @@ public class InsertComment : IHttpHandler {
             PostAroundServiceClient client = new PostAroundServiceClient();
 
             retVal = client.InsertComment(comment);
-
+            client.Close();
             if (retVal > 0)
             {
-                //string mapPathHtmls = System.Configuration.ConfigurationManager.AppSettings["PhysicalPath"] + @"\htmls";
-                //string template = mapPathHtmls + "\\MailReply.htm";
-                //MailData data = new MailData();
-                //data.Date = "29 Jan 1983";
-                //data.SenderFullName = "Yaniv Aharon";
-                //data.Message = "Hello World";
-                //data.SenderFname = "Yaniv";
-                //data.MsgID = 192;
-                //data.UnsubscribeCode = "yaniv";
-                //data.SenderImage = "https://graph.facebook.com/567517451/picture";
-
-
-                //Mails.ReplyMailComposer mail = new Mails.ReplyMailComposer(data, template, "New Comment to your post around !");
-                //string body = mail.Compose();
-                //string title = mail.Title();
-                Tools.SendMailMessageAsync("yaniv@postround.me", "ayaniv@gmail.com", null, null, "title", "body");
+                comment.ID = retVal;
+                comment.userID = userid;
+                
+                // In a new thread - send email on reply
+                System.Threading.ThreadPool.QueueUserWorkItem(delegate { SendMailOnReply(comment); });
             }
-            client.Close();
+            
         }
             
             
@@ -73,6 +56,53 @@ public class InsertComment : IHttpHandler {
         get {
             return false;
         }
+    }
+
+    private void SendMailOnReply(Comment comment)
+    {
+        // add check if can send email
+        // change the unsubsription to frienly-url
+        PostAroundServiceClient client = new PostAroundServiceClient();
+        
+        string mapPathHtmls = System.Configuration.ConfigurationManager.AppSettings["PhysicalPath"] + @"\htmls";
+        string template = mapPathHtmls + "\\MailReply.htm";
+        MailData data = new MailData();
+        User senderUser = client.GetUserByID(comment.userID);
+        MyMessage mainMessage = client.GetMessageById(comment.messageID, "", "", 0, 0, 0);
+        User recipientUser = client.GetUserByID(mainMessage.userid);
+        client.Close();
+        data.recipientEmail = recipientUser.email;
+
+        data.Date = DateTime.Now.ToString("d MMMM, yyyy", System.Globalization.CultureInfo.CreateSpecificCulture("en-US"));
+        data.SenderFullName = senderUser.firstName + " " + senderUser.lastName;
+        data.Message = comment.body;
+        data.SenderFname = senderUser.firstName;
+        data.MsgID = comment.messageID;
+        data.UnsubscribeCode = GetUnsubscriptionCode(mainMessage.userid, (int)Enums.Permissions.EmailPermission);
+        data.SenderImage = senderUser.avatarImageUrl;
+
+        Mails.ReplyMailComposer mail = new Mails.ReplyMailComposer(data, template, "New Comment to your post around !");
+        string body = mail.Compose();
+        string title = mail.Title();
+        Mails.Helper.SendMailMessageAsync("", mail.MailTo(), null, null, title, body);
+    }
+
+    private string GetUnsubscriptionCode(int userId, int permissionId)
+    {
+        string code;
+        string codeTemplate = "userid={0}&permissionId={1}";
+
+        // we want to have this string: userid=12&permissionId=1
+        code = String.Format(codeTemplate, userId, permissionId);
+
+        // then we will encrypt it
+        code = Tools.Encrypt(code, true);
+
+        // then we will encode it to 64 bit
+        code = Tools.EncodeTo64(code);
+
+        return code;
+        
     }
 
 }

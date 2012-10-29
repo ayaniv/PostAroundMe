@@ -215,7 +215,7 @@
 
 
              </div>
-             <div style="clear:both; float:right; font-size:11px; font-style:italic; padding:6px;">
+             <div style="clear:both; float:left; font-size:11px; font-style:italic; padding:6px;">
              e.g. Xinhai Rd. Taipei, Taiwan</div>
          </div>
      </div>
@@ -230,7 +230,9 @@
              </div>
          </div>
          <div style="float: left; font-size: 12px; color: #3C3C3C; margin-left: 6px;">
-             Post also on my Facebook wall</div>
+             Post to Facebook</div>
+
+
      </div>
                         
                         
@@ -247,16 +249,16 @@
             <div style="clear:both" >
 
 
-                <div style="margin-top:12px; float:right;">
+                <div style="margin-top:12px; float:left;">
 
-                                <div id="MandatoryFieldsMessage" style="display:none; float:left; width:230px; color:#FF0000; font-size:13px; ">
+                <div id="MandatoryFieldsMessage" style="display:none; margin-left:10px; float:right; width:237px; color:#FF0000; font-size:13px; ">
                 Please fill the following fields:
                 <div id="MandatoryFields" style="font-weight:bold"></div>
                 
                 </div>
 
 
-                    <div id="PostButton" class="Submit" style="float:left">Post</div>
+                    <div id="PostButton" class="Submit" style="float:right">Post</div>
                 </div>
             </div>
             

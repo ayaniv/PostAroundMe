@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="SocialLinks.ascx.cs" Inherits="Controls_SocialLinks" %>
 
-<%@ Register src="FacebookLike.ascx" tagname="FacebookLike" tagprefix="uc1" %>
+<%@ Register src="FacebookLikePage.ascx" tagname="FacebookLike" tagprefix="uc1" %>
 <%@ Register src="GooglePlus.ascx" tagname="GooglePlus" tagprefix="uc1" %>
 
      

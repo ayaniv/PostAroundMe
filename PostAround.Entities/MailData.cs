@@ -23,6 +23,8 @@ namespace PostAround.Entities
         public string UnsubscribeCode;
         [DataMember]
         public string SenderImage;
+        [DataMember]
+        public string recipientEmail;
 
     }
 }

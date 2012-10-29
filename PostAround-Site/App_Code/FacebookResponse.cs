@@ -19,8 +19,8 @@ public class FacebookResponse
     [DataMember]
     public string first_name;
 
-    //[DataMember]
-    //public string middle_name;
+    [DataMember]
+    public string middle_name;
 
     [DataMember]
     public string last_name;

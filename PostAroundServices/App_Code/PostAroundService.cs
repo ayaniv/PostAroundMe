@@ -237,7 +237,7 @@ public class PostAroundService : IPostAroundService
 
             user.address = ""; // dr.address;
             user.avatarImageUrl = dr.avatarImageUrl;
-            user.email = ""; //dr.email;
+            user.email = dr.email;
             user.firstName = dr.FirstName;
             user.lastName = dr.LastName;
             user.latidute = dr.Latidute;
@@ -401,6 +401,18 @@ public class PostAroundService : IPostAroundService
         return res;
     }
 
+    public User GetUserByID(int ID)
+    {
+        List<User> lstUsers = new List<User>();
+
+        UsersTableAdapter usersAdapter = new UsersTableAdapter();
+        PostAroundMeDataSet.UsersDataTable dtResult = usersAdapter.GetUserByID(ID);
+
+        lstUsers = UserTranslator(dtResult);
+
+        return lstUsers.FirstOrDefault();
+    }
+
     public User GetCurrentUser(int ID)
     {
         List<User> lstUsers = new List<User>();
@@ -409,6 +421,7 @@ public class PostAroundService : IPostAroundService
         PostAroundMeDataSet.UsersDataTable dtResult = usersAdapter.GetUserByID(ID);
 
         lstUsers = UserTranslator(dtResult);
+        lstUsers.FirstOrDefault().email = "";
 
         return lstUsers.FirstOrDefault();
     }

@@ -41,6 +41,11 @@ namespace Mails
             return m_title;
         }
 
+        public string MailTo()
+        {
+            return m_credentials.recipientEmail;
+        }
+
 
 
         

@@ -1,1 +1,3 @@
 ajaxmin.exe sourcefile.js –out outputfile.js –clobber
+
+ajaxmin.exe C:\Users\Yaniv\Projects\PostAroundMe\PostAround-Site\scripts\scriptsNew.js -out C:\Users\Yaniv\Projects\PostAroundMe\PostAround-Site\scripts\compress\scriptsNew.js -clobber

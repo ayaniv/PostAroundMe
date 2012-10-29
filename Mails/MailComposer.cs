@@ -9,6 +9,7 @@ namespace Mails
     {
         string Compose();
         string Title();
+        string MailTo();
 
     }
 }

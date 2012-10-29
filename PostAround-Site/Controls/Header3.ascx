@@ -46,7 +46,7 @@
         <div id="RightWing" style="float:right; height:80px; width:400px; margin-right:17px;">
         
         <ul class="HeaderList" style="float:right">
-        <li style="width:50px; cursor:default;" id="divAbout">
+        <li style="cursor:default;" id="divAbout">
         
         
         <!-- About Start -->
@@ -61,7 +61,7 @@
         <div id="AboutBox" class="MoreBox" style="width:84px;">
             <ul>
                 <li id="liBlog"><a href="http://blog.postaround.me" target="_blank" class="LogoutLink" style="padding:0;">Blog</a></li>
-                <li id="liContact"><a href="mailto:info@posaround.me"  class="LogoutLink">Contact</a></li>
+                <li id="liContact"><a href="mailto:info@postaround.me"  class="LogoutLink">Contact</a></li>
             </ul>
             
             
@@ -93,14 +93,14 @@
         <li style="width:90px;" id="liAddPost"><span style="background:url('<%=homePage%>images/icons.png'); float:left; background-position:-184px -143px; margin-right:7px; width:24px; height:18px;"></span>Add Post
         <%--<div style="background:url('images/icons.png');  background-position:-100px -156px; margin-left:7px; z-index:1; position:absolute; margin-top:8px; width:10px; clear:both; height:6px;" ></div>--%>
         </li>
-        <li style="width:74px;" id="liCategory">
+        <li id="liCategory">
         
         <uc1:CategoriesButton ID="CategoriesButton1" runat="server" />
         <span style="background:url('<%=homePage%>images/icons.png'); float:right; background-position:-100px -152px; margin-left:7px; width:7px; margin-top:5px; height:4px;"></span>
         
         </li>
         
-        <li id="liSort" style="width:100px; ">
+        <li id="liSort">
         <!-- Sort Start -->
         <div id="btnSort" class="ChooseCategory" >
                     

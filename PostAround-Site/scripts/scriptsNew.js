@@ -10,12 +10,41 @@ function SetPostButtonState(on) {
     }
 }
 
+
+function GetTextWithLink(posStart, text, addHttp) {
+    var href = "<a style='color:#6AA1BB; text-decoration:none;' href='[link]' target='_blank'>[title]</a>";
+    var posEnd = 0;
+    var link = "";
+
+    posEnd = text.indexOf(' ', posStart);
+    if (posEnd < 0) {
+        posEnd = text.indexOf('\n', posStart);
+        if (posEnd < 0)
+            posEnd = text.length;
+    }
+    link = text.substring(posStart, posEnd);
+
+    href = href.replace('[title]', link);
+
+    if (addHttp)
+        href = href.replace('[link]', "http://" + link);
+    else
+        href = href.replace('[link]', link);
+
+    text = text.replace(link, href);
+
+
+    return text;
+}
+
 // load google maps v2
 google.load("maps", "2");
 $(function () {
 
     //variable declaration
     // save the current slider uptoMeters value
+    var TRESHOLD = 10;
+    var POST_WIDTH = 284;
     var currSliderValue = null;
     var singleton = true;
     var getMessageState = 0; //{0: ready, 1:busy}
@@ -48,7 +77,7 @@ $(function () {
     var currCatId = 0;
     var sortBy = 0;
     var isMine = 0;
-    var xpos = 0;
+
     var maxYpos = 0;
     var boxesHeightsInRow;
     var screenWidth = 0;
@@ -63,6 +92,10 @@ $(function () {
     var PopUpIsOpened = false;
     var lastBottomMargin = 0;
     var currZoomLevel = 0;
+    // if not support in Geolocation
+    isBrowserSupportGeoocation = true;
+    CheckBrowserSupport();
+    DisableAutoDiscoverForUnsupportedBrowsers();
 
     //set init values
     mouse_is_inside_popup = false;
@@ -164,7 +197,7 @@ $(function () {
         max: 21000,
         step: 1000,
         change: function (event, ui) {
-
+            fromNumber = 0;
             if (ui.value > 20000) {
                 // go to DB and bring all
                 uptoMeters = -1;
@@ -180,6 +213,7 @@ $(function () {
                     uptoMeters = ui.value;
 
                     StartTimerAndGetMessages(false);
+
                     currZoomLevel = ui.value / 1000;
                     if (currZoomLevel > 10)
                         SetZoom(10);
@@ -274,27 +308,8 @@ $(function () {
 
         }
     }
-    
-    // User clicked on Auto Discover on the homepage
-    function GetPosition() {
-        // if you have address already
-        if (address != "" && myLat != "" && myLon != "") {
-            //allowScrolling = true;
-            $('#moreButtonsText').html(address + " ");
-            $.when(ChangeToSmallHeader()).then(SetSlide());
-        } else {
-            //ShowMoreButtonsArea(40);
-            if (window.navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-		        showPosition, errorCallback, {
-		            enableHighAccuracy: true, maximumAge: 600000
-		        }
-        );
-            } else {
-                $('#moreButtonsText').html("<b>Your browser doesn't support it...</b> please type your address manually...");
-            }
-        }
-    }
+
+
 
     $('#TryAgain').click(function () {
         GetPosition();
@@ -326,20 +341,1940 @@ $(function () {
         ShowAddMessageWindow(true);
     });
 
-    function UpdateMaxMessagesPerScreen() {
 
-        var screenWidth = $(window).width();
-        var screenHeight = $(window).height();
-        var msgsPerRow = 0;
-        var leftMargin = 70;
-        var topMargin = 24;
-        var headHeight = 189;
-        var total = 0;
-        msgsPerRow = Math.floor((screenWidth - leftMargin) / 284);
-        msgPerColumn = Math.floor((screenHeight - topMargin - headHeight) / 163);
-        total = msgsPerRow * msgPerColumn + 1;
-        //maxMessagesPerScreen = UpdateMaxMessagesPerScreen();
-        return total;
+
+
+
+
+
+
+
+    $('[placeholder]').focus(function () {
+        var input = $(this);
+        if (input.val() == input.attr('placeholder')) {
+            input.val('');
+            input.removeClass('placeholder');
+        }
+    }).blur(function () {
+        var input = $(this);
+        if (input.val() == '' || input.val() == input.attr('placeholder')) {
+            if (input.attr('id') != 'amount' && input.attr('id') != 'content') {
+                //this is protection for 'amount' and 'search location'
+                input.addClass('placeholder');
+                input.val(input.attr('placeholder'));
+            }
+        }
+    }).blur();
+
+
+    $('[placeholder]').parents('form').submit(function () {
+        $(this).find('[placeholder]').each(function () {
+            var input = $(this);
+            if (input.val() == input.attr('placeholder')) {
+                input.val('');
+            }
+        })
+    });
+
+
+
+    function hasPlaceholderSupport() {
+        var input = document.createElement('input');
+        return ('placeholder' in input);
+    }
+
+
+    $("#content").focus(function () {
+        $(this).css('background-position', '0px -35px');
+    });
+    $("#content").blur(function () {
+        if ($("#content").val() == '') {
+            //            if (myLon == "" && myLat == "") {
+            //                $("#WelcomeBubble").show();
+            //                $("#AutoDiscoverBubble").hide();
+            //            }
+            //$("#content").val('Street Address, City, State');
+            $(this).css("background", "#FFF url('images/locationInputBg.png') 0 0");
+        }
+        else {
+            hasValue = true;
+        }
+        return false;
+    });
+
+
+
+    function SetSlide() {
+
+        $("#slider").slider("value", 10000);
+        $("#amount").val("10KM");
+
+
+
+    }
+
+
+    $("#bubbleOk").click(function () {
+
+        var url = siteUrl + "/Handlers/SaveLocation.ashx";
+
+        var myJSON = {
+            "dontShowMeAgainWelcome": "1"
+        };
+
+
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: myJSON,
+            sync: false,
+            dataType: "json",
+            success: function (data) { $("#WelcomeBubble").hide(); }
+        })
+
+
+
+    });
+
+    $(".TopButton").hover(function () {
+        $(this).css("background-position", "0px -143px");
+    }, function () {
+        $(this).css("background-position", "0px -111px");
+    });
+
+    function DoScroll() {
+        var scroll = document.body.scrollTop;
+        if (scroll < 150) {
+            $('html, body').animate({ scrollTop: 300 }, "slow");
+
+        }
+    }
+
+    $("#headerBtnAddPost").click(function () {
+        $(".TopButton").click();
+    });
+
+    $(".TopButton").click(function () {
+        $("#AddMessageWindow").css("margin-top", -300);
+        //if (currentUser != null) {
+        //$("#txtPopupDetails").val($(""#content").val());
+        if ($("#AddMessageWindow").css("display") == "none") {
+
+            // DO SCROLL IF NEEDED
+            //DoScroll();
+
+            ShowAddMessageWindow(true);
+
+
+        }
+        else {
+
+            HideAddMessageWindow();
+
+        }
+        //} else {
+        //alert("Please Log In");
+        //}
+
+
+    });
+
+    function HideAddMessageWindow() {
+        $('#txtPopupDetails1').show();
+        $("#AddMessageWindow").hide();
+        $('#fuzz').hide();
+    }
+
+    function ShowAddMessageWindow(isNewMessage) {
+        $('#txtPopupDetails1').hide();
+        //SetPostButtonState(true);
+
+        if (currentUser != null) {
+            ManageBrowserSupport();
+        }
+
+        if (isNewMessage) {
+            if (HasAddress())
+                ShowLocationInAddMessgae();
+            else
+                ShowSearchLocationInAddMessage();
+        }
+
+
+
+        $("#AddMessageWindow").show();
+        $('#txtPopupDetails').focus();
+        $('#fuzz').fadeIn();
+    }
+
+
+
+
+
+
+
+
+    $(".DropDown li").hover(function () {
+
+        $(this).addClass("DropDownBg");
+        $(this).css("background-color", $(this).children("span:first").css("background-color"));
+        $(this).children().eq(2).css("color", "#FFF");
+        //$(this).children().eq(2).css("font-weight", "bold");
+        $(this).children().eq(1).hide();
+    }, function () {
+        $(this).removeClass("DropDownBg");
+        $(this).css("background-color", "");
+        $(this).children().eq(2).css("color", "#82898E");
+        //$(this).children().eq(2).css("font-weight", "normal");
+        $(this).children().eq(1).show();
+    });
+
+    //    function FilterResultsByCategoryID(collection, catId) {
+    //        alert("Yaniv");
+    //        if (catId == 0)
+    //            currResults = collection;
+    //        else
+    //            currResults = jQuery.grep(collection, function (a) { return a.catID == catId });
+
+    //        if (currResults != null)
+    //            resultsNum = currResults.length;
+    //        else
+    //            resultsNum = 0;
+
+
+    //        $.when(ShowMessages(currResults)).then(ArrangeBoxes($('#MessagesContainer').children().length));
+
+    //    }
+
+    function SetCategoryNameInButton(html) {
+        var word = $(html).children("span:last").html();
+        word = TruncString(word, 10);
+        $("#btnCategory").html(word);
+
+    }
+
+
+    $("#CategoriesBox li").click(function () {
+
+
+        currCatId = $(this).children("input").val();
+
+
+        fromNumber = 0;
+        $.when(ZeroiseBoxes()).then(GetMessages());
+
+        $(this).css("background-color", "");
+        $(this).children().eq(2).css("color", "#82898E");
+        $(this).children().eq(1).show();
+
+        SetCategoryNameInButton($(this))
+
+        mouse_is_inside_categories_clicked = false;
+        $("#CategoriesBox").hide();
+    });
+
+
+    $("#SortBox li").click(function () {
+
+        sortBy = $(this).children("input").val();
+
+        if ((sortBy == 1) && (myLon == "" && myLat == ""))
+            alert("Please Insert Location");
+        else {
+            fromNumber = 0;
+            $.when(ZeroiseBoxes()).then(GetMessages());
+
+            $("#btnSort").html($(this).html())
+        }
+
+
+
+        mouse_is_inside_sort_clicked = false;
+        $("#SortBox").hide();
+
+    });
+
+    //    function SortResultsBy(sortMethodId) {
+    //        alert("sort");
+    //        if (sortMethodId == 1)
+    //            currResults = currResults.sort(DistanceComparator);
+    //        else
+    //            currResults = currResults.sort(DateComparator).reverse();
+
+
+    //        $.when(ShowMessages(currResults)).then(ArrangeBoxes($('#MessagesContainer').children().length));
+    //    }
+
+    function DistanceComparator(a, b) {
+        return parseInt(a.Distance) - parseInt(b.Distance);
+
+    }
+
+    function DateComparator(a, b) {
+        return parseInt(a.msgId) - parseInt(b.msgId);
+
+    }
+
+
+    function FlushErrorMessages() {
+        errorText = "";
+        $("#ddlCategory").css("border-color", "#C8C8C8");
+        $("#txtPopupTitle").css("border-color", "#C8C8C8");
+        $("#txtPopupDetails").css("border-color", "#C8C8C8");
+        $(".ui-button").css("border-color", "#C8C8C8");
+        $('#addMessageAddressInput').css("border-color", "#C8C8C8");
+        $("#MandatoryFieldsMessage").hide();
+    }
+
+    var errorText;
+    function IsClientFieldsOfAddMessageHasError() {
+        var flag = false;
+        errorText = "";
+        if (currPostCategory == "") {
+            $("#ddlCategory").css("border-color", "#FF0000");
+            errorText = "Category"
+            flag = true;
+        } else {
+            $("#ddlCategory").css("border-color", "#C8C8C8");
+        }
+
+
+        if (($.trim($("#txtPopupTitle").val()) == '') || ($.trim($("#txtPopupTitle").val()) == 'Add Title...')) {
+            $("#txtPopupTitle").css("border-color", "#FF0000");
+            if (errorText != "")
+                errorText = errorText + ", ";
+            errorText = errorText + "Title";
+            flag = true;
+        } else {
+            $("#txtPopupTitle").css("border-color", "#C8C8C8");
+        }
+
+
+        if (($.trim($("#txtPopupDetails").val()) == '') || ($.trim($("#txtPopupDetails").val()) == "What's on your mind?")) {
+            $("#txtPopupDetails").css("border-color", "#FF0000");
+            if (errorText != "")
+                errorText = errorText + ", "
+            errorText = errorText + "Details";
+            flag = true;
+        } else {
+            $("#txtPopupDetails").css("border-color", "#C8C8C8");
+        }
+        if ($("#txtAddMessageLat").val() == "" || $("#txtAddMessageLon").val() == "") {
+            $(".ui-button").css("border-color", "#FF0000");
+            $('#addMessageAddressInput').css("border-color", "#FF0000");
+            //Radio2Click();
+            if (errorText != "")
+                errorText = errorText + ", "
+            errorText = errorText + "Location";
+            flag = true;
+        } else {
+            $(".ui-button").css("border-color", "#C8C8C8");
+        }
+
+
+        return flag;
+    }
+
+    function AskForPermision() {
+        FB.login(function (response) {
+            CheckPermission();
+        }, { scope: 'publish_stream' });
+    }
+
+
+
+    function CheckPermission() {
+        FB.api('/me/permissions', checkAppUserPermissions);
+
+        function checkAppUserPermissions(response) {
+            if (response.data[0].publish_stream != 1)
+                $("#ChkFacebook").click();
+        }
+    }
+
+
+
+    $("#PostButton").click(function () {
+
+
+
+        var hasProblem = IsClientFieldsOfAddMessageHasError();
+
+        if (hasProblem == true) {
+            $("#MandatoryFields").html(errorText);
+            $("#MandatoryFieldsMessage").show();
+            return false;
+        }
+
+        else {
+
+            SetPostButtonState(false);
+
+
+            $("#MandatoryFieldsMessage").hide();
+
+            if (address != "") {
+                // to avoid the problem with edit message without inserting location
+                $('#moreButtonsText').html(address + " ");
+                //ChangeToSmallHeader();
+            }
+
+            //SetSlide();
+            SendPostToServer();
+
+        }
+
+    });
+
+
+
+
+
+
+    function InitLastCall() {
+        var lastCall1 = new Object();
+        lastCall1.myLat = myLat;
+        lastCall1.myLon = myLon;
+        lastCall1.uptoMeters = uptoMeters;
+        lastCall1.gmtHours = gmtHours;
+        lastCall1.fromNumber = fromNumber;
+        lastCall1.currCatId = currCatId;
+        lastCall1.sortBy = sortBy;
+        lastCall1.isMine = isMine;
+        lastCall1.maxMessagesPerScreen = maxMessagesPerScreen;
+        return lastCall1;
+    }
+
+    function CheckGetMessageParamsChange() {
+        if (lastCall == null)
+            return true;
+        else {
+            if (lastCall.myLat != myLat)
+                return true;
+            if (lastCall.myLon != myLon)
+                return true;
+            if (lastCall.uptoMeters != uptoMeters)
+                return true;
+            if (lastCall.gmtHours != gmtHours)
+                return true;
+            if (lastCall.fromNumber != fromNumber)
+                return true;
+            if (lastCall.currCatId != currCatId)
+                return true;
+            if (lastCall.sortBy != sortBy)
+                return true;
+            if (lastCall.isMine != isMine)
+                return true;
+            if (lastCall.maxMessagesPerScreen != maxMessagesPerScreen)
+                return true;
+        }
+
+        return false;
+    }
+
+
+    function SliderIsChanged() {
+        if (lastCall == null)
+            return true;
+        else if (lastCall.uptoMeters != uptoMeters)
+            return true;
+
+        return false;
+    }
+
+
+
+
+
+    function SetPaging(data, pageNum) {
+        //var str = "<b>[from]-[to] of [sum] posts around you !</b>"
+        var str = "<b>showing [sum] posts around you !</b>"
+        str = str.replace("[sum]", data.length);
+        var currPageFirstMessageNum = (pageNum - 1) * (numberOfColumns * itemsPerColumn) + 1;
+        var currPageLastMessageNum = (pageNum) * (numberOfColumns * itemsPerColumn);
+        if (currPageLastMessageNum > data.length)
+            currPageLastMessageNum = data.length;
+
+        //str = str.replace("[from]", currPageFirstMessageNum).replace("[to]", currPageLastMessageNum);
+
+        //$('#geoHeadText').html(str);
+
+    }
+
+    function SetAmountOfPosts(num) {
+        var str = "<b>showing [sum] posts around you !</b>"
+        str = str.replace("[sum]", num);
+        //$('#geoHeadText').html(str);
+    }
+
+
+    function SendPostToServer() {
+
+        if (requestRunning) { // don't do anything if an AJAX request is pending
+            return;
+        }
+
+        var url = siteUrl + "/Handlers/SetMessage.ashx";
+
+        var myJSON = {
+
+            //categorId
+            "catID": currPostCategory,
+
+            //Title
+            "title": $("#txtPopupTitle").val(),
+
+            //Details
+            "description": $("#txtPopupDetails").val(),
+
+            //Photo
+            "image": $("#txtImage").val(),
+
+            //Location: Latidute
+            "lat": $("#txtAddMessageLat").val(),
+
+            //Location: Longitude
+            "lon": $("#txtAddMessageLon").val(),
+
+            //Location: Address
+            "address": unescape($("#txtAddMessageAddress").val()),
+
+            //post to wall
+            "postToWall": $("#chkPostToWall").is(':checked'),
+
+            //message id - for edit posts
+            "msgId": $("#txtAddMessageMsgId").val(),
+
+            //messate type, not in use, just for future option
+            "type": "1"
+        };
+
+
+
+        var res = $.ajax({
+            type: 'POST',
+            url: url,
+            data: myJSON,
+            sync: false,
+            dataType: "json",
+            success: function (data) {
+
+                if (data > 0) {
+
+                    if ($("#chkPostToWall").is(':checked'))
+                        PostToWall(myJSON.description, myJSON.title, 'www.postaround.me', "Just posted around " + GetStatefromAddress(address), myJSON.image, 'http://www.postaround.me/post/' + data);
+
+
+                    HideAddMessageWindow();
+                    currCatId = 0;
+                    sortBy = 0;
+                    isMine = 0;
+                    ZeroiseBoxes();
+                    maxYpos = 0;
+
+                    FlushScreen();
+                    $("#txtAddMessageMsgId").val('')
+
+                    if (SliderIsChanged()) {
+                        $.when(ChangeToSmallHeader()).then(SetSlide());
+                    } else {
+                        // dont wait, just get messgaes
+                        StartTimerAndGetMessages(true);
+                    }
+
+                } else {
+
+                    $("#MandatoryFields").html("Server Returned Error. Try again");
+                    $("#MandatoryFieldsMessage").show();
+
+                }
+            },
+
+            beforeSend: function () {
+                requestRunning = true;
+            },
+            complete: function () {
+                requestRunning = false;
+                SetPostButtonState(true);
+            }
+
+        }).responseText;
+
+
+
+
+    }
+
+    function FlushScreen() {
+
+        //categorId
+        currPostCategory = "";
+        $("#addPostBtnCategoryText").html('<span style="margin-left:5px; padding-top:3px; float:left;">Choose Category...</span>');
+
+        //Title
+        $("#txtPopupTitle").val('');
+
+        //Details
+        $("#txtPopupDetails").val('');
+        $("#txtPopupDetails1").blur();
+
+        //Photo
+        $("#RemoveImage").click();
+
+        //Location: Latidute
+        $("#txtAddMessageLat").val('');
+
+        //Location: Longitude
+        $("#txtAddMessageLon").val('');
+
+        //Location: Address
+        $("#txtAddMessageAddress").val('');
+        $("#divAddress").html('');
+        $("#divManualAddress").hide();
+        $("#CurrLocation").hide();
+        $("#addMessageAddressInput").val('');
+
+        //post to wall
+        $("#chkPostToWall").attr('checked', false);
+
+        //message id - for edit posts
+        $("#txtAddMessageMsgId").val('');
+
+        //set radio buttons off --yaniv radio
+        //setRadiosOff();
+
+        //show the placeholder in add messages fields
+        $('#PopupBox').children().find('[placeholder]').blur();
+
+        //flush error messages
+        FlushErrorMessages();
+
+
+
+
+    }
+
+    $('#content').keydown(function (e) {
+
+        $(this).css("background", "#FFF");
+
+        if (e.keyCode == 13) {
+            $('#SearchBtn').click();
+        } else {
+            if (!hasValue) {
+                $('#content').val('');
+                hasValue = true;
+            }
+        }
+
+
+    });
+
+    $('#txtAddressChange').keydown(function (e) {
+
+        if (e.keyCode == 13) {
+            $('#SearchBtn').click();
+        }
+
+
+    });
+
+    $('#addMessageAddressInput').keydown(function (e) {
+
+        if (e.keyCode == 13) {
+            $('#addMessageAddressSearchButton').click();
+        }
+
+
+    });
+
+    function ClearPositionCookie() {
+
+        //call ajax to save cookie
+
+        var url = siteUrl + "/Handlers/ClearLocationCookie.ashx";
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            sync: false,
+            dataType: "json",
+            success: function (data) { location.reload(true) }
+        });
+
+    }
+
+
+    $('#addMessageAddressSearchButton').click(function () {
+
+        GetLatLngToAddMessage($('#addMessageAddressInput').val());
+    });
+
+
+
+    $('#ChangeLocationAddMessage').click(function () {
+        $('#ChangeLocationAddMessage').hide();
+        $('#divManualAddress').show();
+        $('#divAddress').hide();
+
+
+    });
+
+    $('#ChangeLocationAddMessage').hover(function () {
+        $(this).addClass('underline pointer');
+    },
+
+        function () {
+            $(this).removeClass('underline pointer');
+        }
+    );
+
+    function SaveLocationInCookie() {
+        //call ajax to save cookie
+
+        var url = siteUrl + "/Handlers/SaveLocation.ashx";
+
+        var myJSON = {
+            "lat": myLat,
+            "lng": myLon,
+            "address": escape(address)
+        };
+
+
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: myJSON,
+            sync: false,
+            dataType: "json",
+            success: function (data) { /*$('#SaveLocation').hide(); $('#LocationSaved').show();*/ }
+        });
+
+
+    }
+
+
+
+    $('#AutoDiscover').hover(function () {
+        if (isBrowserSupportGeoocation)
+        { }
+        $('#autoDiscoverText').fadeIn();
+
+    },
+
+        function () {
+            if (isBrowserSupportGeoocation) { }
+            $('#autoDiscoverText').fadeOut();
+
+        }
+    );
+
+    $('#btnChangeLocation').click(function () {
+        ToggleMapPanel(false)
+        MakeAddressLinkabilityDie();
+        $('#TopMessage').hide();
+        $('#SearchLocation').show();
+        if ($('#MapPas').css("display") == "none") {
+            //ToggleMapPanel();
+        }
+
+    });
+
+
+    $('#btnChangeLocationAddPost').click(function () {
+        $('#divManualAddress').show();
+        $('#TopMessageAddPost').hide();
+    });
+
+
+    function ToggleMapPanel(isRegular) {
+
+        if (($('#MapPas').css("display") != "none") && isRegular) {
+
+            //it is open. then CLOSE
+            $('#MapPas').slideUp("slow", "easeInOutSine");
+            $('#MapReal').fadeOut();
+
+
+        }
+        else {
+
+
+
+            //it is closed. then OPEN
+            $('#MapPas').slideDown("slow", "easeInOutSine");
+            $('#MapReal').fadeIn();
+            ResizeMap(myMap);
+
+        }
+
+    }
+
+
+
+
+
+
+    $('.LocationLink').hover(function () {
+        $(this).css("text-decoration", "underline");
+    },
+
+        function () {
+            $(this).css("text-decoration", "none");
+
+        }
+    );
+
+    function ChangeToSmallHeader() {
+
+        $.when(ChangeToSmallHeaderStep1()).then(ChangeToSmallHeaderStep2());
+
+    }
+
+    function ChangeToSmallHeaderStep2() {
+        if ($('#MapPas').css("display") != "none") {
+            //$('#MapPas').slideUp("slow", "linear");
+            MakeAddressLinkability();
+
+        }
+
+    }
+
+    function ChangeToSmallHeaderStep1() {
+        showMyLocation(myLat, myLon);
+
+        if ($('#MapPas').css("display") != "none") {
+            $('#MapPasText').fadeOut();
+            $('#moreButtonsText').css("cursor", "pointer");
+            $('#LocationLinks').show();
+            $('#TopMessage').show();
+            $('#SearchLocation').hide();
+        }
+
+
+
+
+    }
+
+    function MakeAddressLinkabilityDie() {
+        $('#moreButtonsText').die('click');
+        $('#moreButtonsText').die('mouseover');
+        $('#moreButtonsText').die('mouseout');
+        $('#moreButtonsText').css("color", "#333");
+    }
+
+    function MakeAddressLinkability() {
+        MakeAddressLinkabilityDie();
+        //$('#moreButtonsText').css("color", "#6AA1BB");
+        $('#moreButtonsText').live('click', function () { ToggleMapPanel(true) });
+        $('#moreButtonsText').live('mouseover', function () { $(this).css("text-decoration", "underline"); });
+        $('#moreButtonsText').live('mouseout', function () { $(this).css("text-decoration", "none"); });
+    }
+
+
+
+
+
+    $('#AutoDiscover').hover(function () {
+        $(this).addClass('underline pointer');
+    },
+
+        function () {
+            $(this).removeClass('underline pointer');
+        }
+    );
+
+    $('#SaveLocation').hover(function () {
+        $(this).addClass('underline pointer');
+    },
+
+        function () {
+            $(this).removeClass('underline pointer');
+        }
+    );
+
+
+
+    $('#addMessageAddressInput').click(function () {
+        if ($(this).val() == "Enter address, location, city or zipcode...") $(this).val('')
+    });
+
+    $('#addMessageAddressInput').blur(function () {
+        if ($(this).val() == '') $(this).val('Enter address, location, city or zipcode...')
+    });
+
+
+
+    $('#txtAddressChange').click(function () {
+        if ($(this).val() == "Enter address, location, city or zipcode...") $(this).val('')
+    });
+
+    $('#txtAddressChange').blur(function () {
+        if ($(this).val() == '') $(this).val('Enter address, location, city or zipcode...')
+    });
+
+    function RemoveAfter(msgId) {
+        var i = 0;
+        var j = 0;
+        var msgIndex = 0;
+
+        var array = $("#MessagesContainer").children();
+        var found = false;
+        while ((found == false) && (i < array.length)) {
+            if ($(array.eq(i)).attr("box-id") == msgId) {
+                msgIndex = i;
+                found = true;
+            }
+
+            i++;
+        }
+        if (i == array.length || found == true) {
+            fromNumber = msgIndex;
+            for (j = msgIndex; j < array.length; j++)
+                $(array.eq(j)).remove();
+        }
+    }
+
+
+    function ShowImmediateComment(id, body, msgId, box) {
+        // create json data with the comment details
+
+        var currCommentsContainer = $("#MessagesContainer").find('[box-id=' + msgId + ']').find("#currCommentsView");
+        var currCommentsContainerPopUp = $(box).find("#currCommentsView");
+
+
+
+        var currentTime = new Date();
+
+        var myJSON = {
+            "ID": id,
+            "Mine": true,
+            "avatarImageUrl": currentUser.Image,
+            "commentUserLink": currentUser.link,
+            "body": body,
+            "strDate": currentTime.format("d mmm yyyy"),
+            "strTime": currentTime.format("HH:MM"),
+            "name": currentUser.FirstName + " " + currentUser.LastName
+        };
+
+        // put the data in the template
+        var markup;
+        var currComment
+
+        if (PopUpIsOpened) {
+            markup = unescape($("#TemplateCommentBig").html());
+
+            /* Compile markup string as a named template */
+            $.template("CommentTemplate", markup)
+
+            currComment = $.tmpl("CommentTemplate", myJSON);
+
+            // push the template on comments area
+            $(currComment).appendTo(currCommentsContainerPopUp);
+        }
+        //            if (!isDirectLink) {
+        markup = unescape($("#TemplateComment").html());
+
+        /* Compile markup string as a named template */
+        $.template("CommentTemplate", markup)
+
+        currComment = $.tmpl("CommentTemplate", myJSON);
+
+        // push the template on comments area
+        $(currComment).appendTo(currCommentsContainer);
+        //            }
+
+
+
+
+
+    }
+
+
+
+
+    function IncreaseCommentsNum(box) {
+
+        var comments = $(box).find("#commentsNum");
+        var commentsNum = $(comments).html();
+        $(comments).html(++commentsNum);
+
+    }
+
+
+    function DecreaseCommentsNum(box) {
+
+        var comments = $(box).find("#commentsNum");
+        var commentsNum = $(comments).html();
+        $(comments).html(--commentsNum);
+
+    }
+
+
+    $('.Border').live('mouseover', function () { $(this).css("border-color", "#6AA1BB"); ($(this).find('.ImageBox')).css('opacity', '0.5'); });
+    $('.Border').live('mouseout', function () { $(this).css("border-color", "#E2DDCF"); ($(this).find('.ImageBox')).css('opacity', '1'); });
+    $('.ImageBox').live('click', function () { ShowPopUp.apply(this); });
+
+    $('.zoomIn').live('click', function () { ShowPopUp.apply(this); });
+    $('.zoomIn').live('mouseover', function () { $(this).addClass('underline'); });
+    $('.zoomIn').live('mouseout', function () { $(this).removeClass('underline'); });
+
+    //    $('#CommentsWord').live('click', function () { ShowComments.apply(this); });
+    //    $('#CommentsWord').live('mouseover', function () { $(this).addClass('underline pointer'); });
+    //    $('#CommentsWord').live('mouseout', function () { $(this).removeClass('underline pointer'); });
+
+    $('#Comment').live('keyup', function (e) { if (e.keyCode != 13) return; PostComment($(this).parents('.Box'), $(this).val()) });
+    $('#Comment').live('keypress', function (e) {
+        if (e.keyCode != 13) return;
+        var msg = $(this).val().replace("\n", "");
+        return false;
+    });
+
+    $('#Comment').live('focus', function () {
+        if ($(this).val() == "Write a comment...") {
+            $(this).addClass('TextColorBlack');
+            $(this).val('')
+        }
+    });
+    $('#Comment').live('blur', function () {
+        if ($(this).val() == "") {
+            $(this).removeClass('TextColorBlack');
+            $(this).val("Write a comment...")
+        }
+    });
+
+    $('#HidePost').live('click', function () { DeletePost.apply(this); });
+    //$('#HidePost').live('mouseover', function () { $(this).addClass('pointer'); });
+    //$('#HidePost').live('mouseout', function () { $(this).removeClass('pointer'); });
+
+    $('#HideComment').live('click', function () { HideComment.apply(this); });
+
+    $('#EditPost').live('click', function () { EditPost.apply(this); });
+    //$('#EditPost').live('mouseover', function () { $(this).addClass('pointer'); });
+    //$('#EditPost').live('mouseout', function () { $(this).removeClass('pointer'); });
+
+
+    $('#Marker').live('mouseover', function () { $(this).parent().find("#ShowOnMap").addClass('underline'); });
+    $('#Marker').live('mouseout', function () { $(this).parent().find("#ShowOnMap").removeClass('underline'); });
+
+    $('#ShowOnMap').live('mouseover', function () { $(this).addClass('underline'); });
+    $('#ShowOnMap').live('mouseout', function () { $(this).removeClass('underline'); });
+
+    $(".MineButton").live('mouseover', function () { $(this).css("background-color", "#7ab5c4"); });
+    $(".MineButton").live('mouseout', function () { $(this).css("background-color", ""); });
+
+
+    $("#ShowOnMap").live("click",
+    function () {
+        DisplayMap.apply(this);
+        //ShowPopUp.apply(this);
+    });
+
+    $("#Marker").live("click",
+    function () {
+        $('#ShowOnMap').click();
+    });
+
+
+
+
+    function ShowMessageForEdit(data) {
+
+
+
+
+
+        //categorId
+        currPostCategory = data.catID;
+        //ALSO IN FIELD
+        var inputField = $("#CategoriesBoxAddMessage").find('input[value="' + data.catID + '"]"');
+        $("#addPostBtnCategoryText").html(inputField.parent().html());
+
+        //Title
+        $("#txtPopupTitle").val(data.title);
+
+        //Details
+        $("#txtPopupDetails").val(data.description);
+
+        //Photo
+        $("#txtImage").val(data.image);
+        //ALSO IN FIELD
+        if (data.image != "") {
+            //show image path in fileuploader list
+            ShowImageInFileUploaderList(data.image);
+        }
+
+        //Location: Latidute
+        $("#txtAddMessageLat").val(data.latitude);
+
+        //Location: Longitude
+        $("#txtAddMessageLon").val(data.longitude);
+
+        //Location: Address
+        $("#txtAddMessageAddress").val(data.msgAddress);
+        //ALSO IN FIELD --yaniv radio
+        //setRadio('radio1');
+        $("#divAddress").html(data.msgAddress);
+        $("#CurrLocation").show();
+        $("#divManualAddress").hide();
+
+
+
+        //message id - for edit posts
+        $("#txtAddMessageMsgId").val(data.msgId);
+
+        // FINALLY - show the window
+        ShowAddMessageWindow(false);
+
+
+    }
+
+
+
+    function ShowImageInFileUploaderList(strImage) {
+        $(".qq-upload-list").empty();
+        var item = '<li><span class="qq-upload-file" style="font-size:10px">' + strImage + '</span></li>';
+
+        $(item).appendTo($(".qq-upload-list"));
+
+        $("#RemoveImage").show();
+
+    }
+
+
+    function SetColors() {
+
+        var currColor = "";
+        $('.Line').each(function () {
+            currColor = $(this).attr("color");
+            $(this).css("background-color", currColor);
+        });
+    }
+
+
+    $('#AboutArea').click(function () {
+        if ($("#AboutBox").css("display") == "none")
+            $("#AboutBox").show();
+        //$("#AboutBox").css("margin-left.show();
+        else
+            $("#AboutBox").hide();
+    });
+
+
+
+    $('#divLogin').hover(function () {
+        $(this).css("background-color", "#487690");
+        if (currentUser != null) {
+            $("#MoreBox").show();
+        }
+
+    }, function () {
+        $(this).css("background-color", "");
+        if (currentUser != null) {
+            $("#MoreBox").hide();
+        }
+    });
+
+
+
+    $('#liAddPost').hover(function () {
+        $(this).css("background-color", "#487690");
+
+    }, function () {
+        $(this).css("background-color", "");
+
+    });
+
+    $('#liCategory').hover(function () {
+        $(this).css("background-color", "#487690");
+        $("#CategoriesBox").show();
+        //$("#SortBox").show();
+
+        //$('#topShpitz').animate({marginLeft: "300px"});
+
+    }, function () {
+        $(this).css("background-color", "");
+        $("#CategoriesBox").hide();
+        //$("#SortBox").hide();
+        //$('#topShpitz').animate({ marginLeft: "42px" });
+    });
+
+
+
+
+    $('#liSort').hover(function () {
+        $(this).css("background-color", "#487690");
+        $("#SortBox").show();
+        //$('#topShpitz').animate({marginLeft: "300px"});
+
+    }, function () {
+        $(this).css("background-color", "");
+        $("#SortBox").hide();
+        //$('#topShpitz').animate({ marginLeft: "42px" });
+    });
+
+    $('#divAbout').hover(function () {
+        $(this).css("background-color", "#487690");
+        $("#AboutBox").show();
+
+    }, function () {
+        $(this).css("background-color", "");
+        $("#AboutBox").hide();
+    });
+
+    var menuWidth = parseInt($('#divLogin').css('width').replace("px", ""));
+    $('#MoreBox').css("width", menuWidth + 34);
+    $('#MoreBox li').css("width", menuWidth + 24);
+
+    $('#xbutton').click(function () {
+        $('#txtPopupDetails1').show();
+        $("#txtAddMessageMsgId").val('');
+        FlushScreen();
+        HideAddMessageWindow();
+    });
+
+    $('#xbuttonLoginMsg').click(function () {
+
+        HideAddMessageWindow();
+    });
+
+    $('#xbuttonPopUp').click(function () {
+        $(this).parents(".PopupBox").hide();
+        $('#fuzz').hide();
+    });
+
+
+
+    $('#xbuttonFeedback').click(function () {
+        $('a.feedback-tab').click();
+    });
+
+    $('#xbuttonMoreButtons').click(function () {
+        HideMoreButtonsArea(40);
+    });
+
+
+    $('#MoreBox').hover(function () {
+        mouse_is_inside = true;
+    }, function () {
+        mouse_is_inside = false;
+    });
+
+    $('#PopUp').hover(function () {
+        mouse_is_inside_popup = true;
+    }, function () {
+        mouse_is_inside_popup = false;
+    });
+
+
+    $("#UserSettings").hover(function () {
+        mouse_is_clicked_inside = true;
+    }, function () {
+        mouse_is_clicked_inside = false;
+    });
+
+    $('#SortBox').hover(function () {
+        mouse_is_inside_sort = true;
+    }, function () {
+        mouse_is_inside_sort = false;
+    });
+
+
+
+    $('#btnSort').hover(function () {
+        mouse_is_inside_sort_clicked = true;
+    }, function () {
+        mouse_is_inside_sort_clicked = false;
+    });
+
+
+
+    $('#CategoriesBox').hover(function () {
+        mouse_is_inside_categories = true;
+    }, function () {
+        mouse_is_inside_categories = false;
+    });
+
+
+
+    $('#btnCategory').hover(function () {
+        mouse_is_inside_categories_clicked = true;
+    }, function () {
+        mouse_is_inside_categories_clicked = false;
+    });
+
+    $("body").mouseup(function () {
+        if (!mouse_is_inside && !mouse_is_clicked_inside) $('#MoreBox').hide();
+        if (!mouse_is_inside_categories && !mouse_is_inside_categories_clicked) $('#CategoriesBox').hide();
+        if (!mouse_is_inside_sort && !mouse_is_inside_sort_clicked) $('#SortBox').hide();
+        if (PopUpIsOpened && !mouse_is_inside_popup) ClosePopUp();
+    });
+
+    $(".MoreBox li").hover(function () {
+
+        $(this).css("background-color", "#57849d");
+        $(this).css("color", "#fefefd");
+
+    },
+        function () {
+            $(this).css("background-color", "");
+            $(this).css("color", "");
+        });
+
+
+
+
+
+
+
+    $("#btnMyPosts").click(function () {
+
+        //allowScrolling = true;
+        //ShowGeoHead();
+        if ($(this).hasClass("selected")) {
+            $(this).removeClass("selected");
+            $(this).html("My Posts");
+            isMine = 0;
+        }
+        else {
+            $(this).html("All Posts");
+            //CloseAllButtons();
+            $(this).addClass("selected");
+            if (currentUser != null) {
+                isMine = 1;
+            }
+        }
+        fromNumber = 0;
+        ZeroiseBoxes();
+        GetMessages();
+    });
+
+    function DisplayShortAddress(lat, lon, element) {
+
+
+        if (lat.length < 8 || lon.length < 8) {
+            $(element).text('');
+            return
+        }
+
+        var reverseGeocode = "";
+        var reverseGeocodeShort = "";
+        var geocoder = new GClientGeocoder();
+        var latlng = new GLatLng(lat, lon);
+
+
+        geocoder.getLocations(latlng, function (response) {
+            if (response && response.Status.code == 200) {
+
+                reverseGeocode = response.Placemark[0].address;
+                if (reverseGeocode.length > 32) {
+                    reverseGeocodeShort = reverseGeocode.substring(0, 30) + "..."
+                    $(element).text(reverseGeocodeShort);
+                } else {
+                    $(element).text(reverseGeocode);
+                }
+                $(element).parent().children("#FullAddress").text(reverseGeocode);
+
+            }
+
+
+
+        });
+
+
+    }
+
+
+    //    $("#btnSort").click(function () {
+
+    //        if ($("#SortBox").css("display") == "none") {
+    //            $("#SortBox").show();
+    //        } else {
+    //            $("#SortBox").hide();
+    //        }
+
+
+
+    //    });
+
+    //    $("#btnCategory").click(function () {
+    //        if ($("#CategoriesBox").css("display") == "none") {
+    //            $("#CategoriesBox").show();
+    //        } else {
+    //            $("#CategoriesBox").hide();
+    //        }
+    //    });
+
+    // 
+
+
+    //    function CloseAllButtons() {
+    //        if ($("#btnKeyword").hasClass("selected")) {
+    //            $("#btnKeyword").removeClass("selected");
+    //            HideMoreButtonsArea(67);
+    //        }
+    //        if ($("#btnCategory").hasClass("selected")) {
+    //            $("#btnCategory").removeClass("selected");
+    //            HideMoreButtonsArea(67);
+    //        }
+    //        if ($("#btnLocation").hasClass("selected")) {
+    //            $("#btnLocation").removeClass("selected");
+    //            HideMoreButtonsArea(40);
+    //        }
+    //        if ($("#btnMyPosts").hasClass("selected")) {
+    //            $("#btnMyPosts").removeClass("selected");
+    //        }
+    //        if ($("#btnDistance").hasClass("selected")) {
+    //            $("#btnDistance").removeClass("selected");
+    //            $("#SliderBar").hide();
+    //            HideMoreButtonsArea(40);
+    //        }
+
+    //    }
+
+
+
+
+
+    $('textarea[maxlength]').keydown(function () {
+        var max = parseInt($(this).attr('maxlength'));
+        if ($(this).val().length > max) {
+            $(this).val($(this).val().substr(0, $(this).attr('maxlength')));
+        }
+    });
+
+
+    //feedback
+
+    var feedbackTab = {
+
+        speed: 300,
+        containerWidth: $('.feedback-panel').outerWidth(),
+        containerHeight: $('.feedback-panel').outerHeight(),
+        tabWidth: $('.feedback-tab').outerWidth(),
+
+        init: function () {
+
+            $('.feedback-panel').css('height', feedbackTab.containerHeight + 'px');
+
+            $('a.feedback-tab').click(function (event) {
+
+                if ($('.feedback-panel').hasClass('open')) {
+
+                    $('#fuzz').fadeOut();
+                    $('#fuzz').css('z-index', '200');
+                    $('.feedback-panel').animate({ left: '-' + feedbackTab.containerWidth }, feedbackTab.speed)
+                        .removeClass('open');
+                } else {
+                    if (currentUser != null) {
+                        $('#txtFeedbackName').val(currentUser.FirstName + " " + currentUser.LastName);
+                    }
+
+                    $('#fuzz').fadeIn();
+                    $('#fuzz').css('z-index', '99');
+                    $('.feedback-panel').animate({ left: '0' }, feedbackTab.speed)
+                        .addClass('open');
+                }
+                event.preventDefault();
+            });
+        }
+    };
+
+    feedbackTab.init();
+
+
+
+    $("#PostFeedback").click(function () {
+
+        var email = $("input#email").val();
+        var message = $("textarea#message").val();
+        var response_message = "Thank you for your comment, see ya!"
+
+        var url = siteUrl + "/Handlers/SetFeedback.ashx";
+
+        var myJSON = {
+
+            "name": $("#txtFeedbackName").val(),
+            "email": $("#txtFeedbackEmail").val(),
+            "message": $("#txtFeedbackMessage").val()
+        };
+
+
+
+        var res = $.ajax({
+            type: 'POST',
+            url: url,
+            data: myJSON,
+            sync: false,
+            dataType: "json",
+            success: function () {
+                //$('#form-wrap').html("<div id='response-message'></div>");
+                //$('#response-message').html("<p>" + response_message + "</p>")
+                $('#feedbackForm').hide();
+                $('#response-message').show()
+
+            .hide()
+            .fadeIn(500)
+            .animate({ opacity: 1.0 }, 1000)
+            .fadeIn(0, function () {
+                $('.feedback-panel')
+                .animate({ left: '-' + (feedbackTab.containerWidth /*+ feedbackTab.tabWidth*/) },
+                (feedbackTab.speed))
+                .removeClass('open');
+
+                $('#fuzz').fadeOut();
+                $('#fuzz').css('z-index', '200');
+                $('#response-message').hide();
+                $("#txtFeedbackName").val('');
+                $("#txtFeedbackEmail").val('')
+                $("#txtFeedbackMessage").val('');
+                $('#feedbackForm').show();
+
+            })
+            }
+
+        });
+
+
+        return false;
+    });
+
+
+    // feedback end
+
+
+
+    $("#xbuttonAbout").click(function () {
+        $("#BottomTextBox").hide();
+    });
+
+
+    function CheckBrowserSupport() {
+        if (!Modernizr.geolocation) {
+            isBrowserSupportGeoocation = false;
+        }
+    }
+
+    function DisableAutoDiscoverForUnsupportedBrowsers() {
+        if (!isBrowserSupportGeoocation) {
+            $("#AutoDiscover").css("cursor", "default");
+            $("#AutoDiscover").unbind('click');
+            $("#AutoDiscover").unbind('hover');
+            $("#AutoDiscover").attr("title", "");
+            $("#AutoDiscover").css("background-position", "-1 -74px");
+            //$("#autoDiscoverText").hide();
+        }
+    }
+
+    if (isBrowserSupportGeoocation) {
+        $('#txtPopupDetails').autogrow();
+    }
+
+    function ManageBrowserSupport() {
+        if (!isBrowserSupportGeoocation) {
+            if (myLat == "" && myLon == "" && address == "") {
+                //-- yaniv radio
+                //$('label[for="radio1"]').addClass("ui-state-disabled");
+                //Radio2Click();
+                //setRadio('radio2');
+            }
+            else {
+                //-- radio
+                //$('label[for="radio1"]').removeClass("ui-state-disabled");
+            }
+        }
+
+    }
+
+
+
+
+    //---- ADD MESSAGE STUFF BEGIN
+
+    $("#addPostBtnCategory").click(function () {
+        if ($("#CategoriesBoxAddMessage").css("display") == "none") {
+            $("#CategoriesBoxAddMessage").show();
+        } else {
+            $("#CategoriesBoxAddMessage").hide();
+        }
+    });
+
+    $("#CategoriesBoxAddMessage li").click(function () {
+
+
+        currPostCategory = $(this).children("input").val();
+
+
+        $(this).css("background-color", "");
+        $(this).children().eq(2).css("color", "#3c3c3c");
+        $(this).children().eq(2).css("font-weight", "normal");
+        $(this).children().eq(1).show();
+
+        $("#addPostBtnCategoryText").html($(this).html())
+        mouse_is_inside_categories_clicked = false;
+        $("#CategoriesBoxAddMessage").hide();
+    });
+
+
+
+
+    $('#CategoriesBoxAddMessage').hover(function () {
+        mouse_is_inside_categories = true;
+    }, function () {
+        mouse_is_inside_categories = false;
+    });
+
+    $('#btnCategory').hover(function () {
+        mouse_is_inside_categories_clicked = true;
+    }, function () {
+        mouse_is_inside_categories_clicked = false;
+    });
+
+    $("#divAddressChange").click(function () {
+
+        ShowSearchLocationInAddMessage();
+
+    });
+
+
+
+
+
+
+
+
+
+
+    $("#ChkFacebook").mousedown(function () {
+        $(this).css("background-position", "-16px -61px");
+    });
+    $("#ChkFacebook").click(function () {
+
+
+
+
+
+        $(this).css("background-position", "0px -61px");
+        if ($("#chkFacebookTrue").css("display") == "none") {
+            AskForPermision();
+
+            $("#chkFacebookTrue").show();
+            $("#chkPostToWall").attr('checked', true);
+
+        } else {
+            $("#chkFacebookTrue").hide();
+            $("#chkPostToWall").attr('checked', false);
+        }
+
+    });
+
+    //---- ADD MESSAGE STUFF END
+
+    function PostToWall(message, title, caption, details, image, link) {
+
+        var hasProblem = false;
+        var params = {};
+        params['message'] = message;
+        params['name'] = title;
+        params['caption'] = caption;
+        params['description'] = details;
+        params['link'] = link;
+        if (image != "" && image != null) {
+            params['picture'] = 'http://www.postaround.me/UploadedResized/' + image;
+        }
+        else {
+            params['picture'] = 'http://www.postaround.me/images/pa_th2.png';
+        }
+
+
+        FB.api('/me/feed', 'post', params, function (response) {
+            if (!response || response.error) {
+            } else { }
+        });
+    }
+
+
+
+
+    function CloseThePopUp() {
+        $('#PopUp').hide();
+        $('#fuzz').hide();
+        $('#PopUp').empty();
+        PopUpIsOpened = false;
+        $('body').css("overflow", "scroll");
+        $('body').css("overflow-x", "hidden");
+        $('#zoomScroll').hide();
+    }
+
+    function ClosePopUp() {
+        CloseThePopUp();
+        history.back();
+        //ArrangeAll();
+    }
+
+
+
+    function ShowPopUp() {
+        PopUpIsOpened = true;
+        var href = $(this).attr("href");
+
+        var box = $(this).parents(".Box"); // box
+        var msgId = box.attr("box-id");
+
+        // not HTML 5 supported
+        if (!history.pushState) {
+            window.location.href = href;
+        } else {
+
+            var stateObj = { id: msgId };
+
+            history.pushState(stateObj, 'Viewing Post #' + msgId, rootDir + 'post/' + msgId);
+            var url = href + " #BigBoxContainer";
+            $('#PopUp').load(url);
+            $("#PopUp").show();
+            $('#zoomScroll').show();
+            $('body').css("overflow", "hidden");
+            //$("#fuzz").show();
+            //$('#fuzz').css('z-index', '100');
+            return false;
+        }
+
+
+
+    }
+
+
+
+    window.onpopstate = function (e) {
+
+
+        if (e.state !== null) { // state data available
+
+        } else { // no state data available
+
+            if (PopUpIsOpened)
+                CloseThePopUp();
+
+
+        }
+    }
+
+
+
+
+
+
+    $('#AddMessageAutoDiscover').click(function () {
+        RunAutoDicoverInAddMessage();
+    });
+
+    //------------------------LOCATION STUFF BEGIN
+
+    // Auto Discover on the homepage
+    function GetPosition() {
+        // if you have address already
+        if (address != "" && myLat != "" && myLon != "") {
+            //allowScrolling = true;
+            $('#moreButtonsText').html(address + " ");
+            $.when(ChangeToSmallHeader()).then(SetSlide());
+        } else {
+            //ShowMoreButtonsArea(40);
+            if (window.navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+		        showPosition, errorCallback, {
+		            enableHighAccuracy: true, maximumAge: 600000
+		        }
+        );
+            } else {
+                $('#moreButtonsText').html("<b>Your browser doesn't support it...</b> please type your address manually...");
+            }
+        }
+    }
+
+
+
+    function ShowLocationInAddMessgae() {
+        GetAddress(false);
+        $("#CurrLocation").show();
+        $("#divManualAddress").hide();
+    }
+
+
+    function HasAddress() {
+        if (address != "" && myLat != "" && myLon != "")
+            return true;
+        return false;
+    }
+
+    function RunAutoDicoverInAddMessage() {
+
+        GetAddress(true);
+        $("#CurrLocation").show();
+        $("#divManualAddress").hide();
+
+
+    };
+
+
+
+    function ShowSearchLocationInAddMessage() {
+
+        $("#txtAddMessageLat").val('');
+        $("#txtAddMessageLon").val('');
+
+        $("#CurrLocation").hide();
+        $("#divManualAddress").show();
+
+
+    };
+
+
+    function inverseOrder(marker, b) {
+        return -GOverlay.getZIndex(marker.getPoint().lat());
+    }
+
+
+    function importanceOrder(marker, b) {
+        return GOverlay.getZIndex(marker.getPoint().lat()) + marker.importance * 1000000;
+    }
+
+    function createMarker(latlng, markerOptions, importance) {
+        var marker = new GMarker(latlng, markerOptions);
+        marker.importance = importance;
+        GEvent.addListener(marker, "click", function () {
+            var myHtml = latlng.toString();
+            myMap.openInfoWindowHtml(latlng, myHtml);
+        });
+        return marker;
+    }
+
+    function AddMultipleMarkers(data) {
+
+        /// צריך להביא את כל המרקרים ולא רק את החבילה הנוכחית אחרת אל תציג את זה
+
+        var myData = eval(data);
+
+        // Create our "tiny" marker icon
+        var blueIcon = new GIcon(G_DEFAULT_ICON);
+        blueIcon.image = "http://gmaps-samples.googlecode.com/svn/trunk/markers/blue/blank.png";
+
+        // Set up our GMarkerOptions object
+        var markerOptions = { icon: blueIcon
+            , zIndexProcess: importanceOrder
+
+        };
+
+        var latlng;
+        var marker;
+        for (var i = 0; i < myData.length; i++) {
+            latlng = new GLatLng(myData[i].latitude, myData[i].longitude);
+            marker = createMarker(latlng, markerOptions, 0);
+            myMap.addOverlay(marker);
+        }
+    }
+
+
+    function GetMarker() {
+        var myIcon = new GIcon();
+        myIcon.image = 'images/markers/image.png';
+        myIcon.shadow = 'images/markers/shadow.png';
+        myIcon.iconSize = new GSize(24, 31);
+        myIcon.shadowSize = new GSize(40, 31);
+        myIcon.iconAnchor = new GPoint(12, 31);
+        myIcon.infoWindowAnchor = new GPoint(12, 0);
+        myIcon.printImage = 'images/markers/printImage.gif';
+        myIcon.mozPrintImage = 'images/markers/mozPrintImage.gif';
+        myIcon.printShadow = 'images/markers/printShadow.gif';
+        myIcon.transparent = 'images/markers/transparent.png';
+        myIcon.imageMap = [14, 0, 17, 1, 18, 2, 20, 3, 20, 4, 21, 5, 22, 6, 22, 7, 23, 8, 23, 9, 23, 10, 23, 11, 23, 12, 23, 13, 23, 14, 23, 15, 22, 16, 22, 17, 21, 18, 21, 19, 20, 20, 19, 21, 19, 22, 18, 23, 17, 24, 16, 25, 15, 26, 15, 27, 14, 28, 13, 29, 12, 30, 11, 30, 10, 29, 10, 28, 9, 27, 8, 26, 7, 25, 6, 24, 6, 23, 5, 22, 4, 21, 3, 20, 3, 19, 2, 18, 2, 17, 1, 16, 1, 15, 1, 14, 0, 13, 0, 12, 0, 11, 0, 10, 1, 9, 1, 8, 1, 7, 2, 6, 2, 5, 3, 4, 4, 3, 5, 2, 7, 1, 10, 0];
+        return myIcon;
+    }
+
+
+    function showMyLocation(lat, lng) {
+
+
+        var icon = GetMarker();
+        var markerOptions = { icon: icon
+            , zIndexProcess: importanceOrder
+
+        };
+
+        jsCenter = new GLatLng(lat, lng);
+        var marker = new GMarker(jsCenter, markerOptions);
+        marker.importance = 100;
+        var htmlMap = document.getElementById("MapReal");
+        if (htmlMap == null)
+            return;
+        myMap = new GMap2(htmlMap);
+
+        myMap.setCenter(jsCenter);
+        $("#MapReal").show();
+        myMap.addOverlay(marker);
+
+        ResizeMap(myMap);
+    }
+
+
+    function ShowLocationOnMap(lat, lng) {
+
+        var center = new GLatLng(lat, lng);
+
+        var icon = GetMarker();
+        var markerOptions = { icon: icon };
+
+        var marker = new GMarker(center, markerOptions);
+
+        var jsMap = new GMap2(document.getElementById("map_canvas"));
+        jsMap.setCenter(center, 15);
+        jsMap.setUIToDefault();
+
+        jsMap.setMapType(G_NORMAL_MAP);
+        jsMap.checkResize();
+        jsMap.addOverlay(marker);
+
+
+
+        //V3
+        //        var latlng = new google.maps.LatLng(lat, lng);
+        //        var myOptions = {
+        //            zoom: 15,
+        //            center: latlng,
+        //            mapTypeId: google.maps.MapTypeId.ROADMAP
+        //        };
+        //        var map = new google.maps.Map(document.getElementById("map_canvas"),
+        //        myOptions);
+
+        //        var marker = new google.maps.Marker({
+        //            position: latlng,
+        //            title: "Post Around Me !"
+        //        });
+
+        //        // To add the marker to the map, call setMap();
+        //        marker.setMap(map);
+
+
+
+        $("#Map").show();
+        $("#fuzz").show();
+        $('#fuzz').css('z-index', '100');
+        ResizeMap(jsMap);
+
+    }
+
+
+
+    function ResizeMap(jsMap) {
+        var center = jsMap.getCenter();
+        jsMap.checkResize();
+        jsMap.setCenter(center);
+    }
+
+    function SetZoom(zoomLevel) {
+        myMap.setCenter(jsCenter);
+        myMap.setZoom(zoomLevel);
     }
 
     function ShowAdressDetailsInAddMessage(address, myLat, myLon) {
@@ -494,7 +2429,7 @@ $(function () {
         });
     }
 
-    function showAddressInAddMessage(lat, lng) {
+    function showAddressInAddMessage(searchPhrase, lat, lng) {
 
         var center = new GLatLng(lat, lng);
         var geocoder = new GClientGeocoder();
@@ -506,7 +2441,7 @@ $(function () {
             if (response && response.Status.code == 200) {
                 address = response.Placemark[0].address;
             } else {
-                address = "My Location (" + myLat + ", " + myLon + ")";
+                address = searchPhrase;
             }
 
             $("#CurrLocation").show();
@@ -579,1130 +2514,6 @@ $(function () {
         $.when(ChangeToSmallHeader()).then(SetSlide());
     }
 
-
-
-
-
-    $('[placeholder]').focus(function () {
-        var input = $(this);
-        if (input.val() == input.attr('placeholder')) {
-            input.val('');
-            input.removeClass('placeholder');
-        }
-    }).blur(function () {
-        var input = $(this);
-        if (input.val() == '' || input.val() == input.attr('placeholder')) {
-            if (input.attr('id') != 'amount' && input.attr('id') != 'content') {
-                //this is protection for 'amount' and 'search location'
-                input.addClass('placeholder');
-                input.val(input.attr('placeholder'));
-            }
-        }
-    }).blur();
-
-
-    $('[placeholder]').parents('form').submit(function () {
-        $(this).find('[placeholder]').each(function () {
-            var input = $(this);
-            if (input.val() == input.attr('placeholder')) {
-                input.val('');
-            }
-        })
-    });
-
-
-
-    function hasPlaceholderSupport() {
-        var input = document.createElement('input');
-        return ('placeholder' in input);
-    }
-
-    //    if (!hasPlaceholderSupport()) {
-    //        $("#content").val($("#content").attr("placeholder"));
-    //    }
-
-    //    $("#content").focus(function () {
-    //        if (!hasValue) {
-    //            if (myLon == "" && myLat == "") {
-    //                $("#WelcomeBubble").hide();
-    //                if (isBrowserSupportGeoocation)
-    //                    $("#AutoDiscoverBubble").show();
-    //            }
-    //            //$(this).removeClass("BlackText");
-
-
-    //            //            //$(this).selectRange(0, 0);
-    //            //            if (!hasPlaceholderSupport()) {
-    //            //                $(this).val('');
-    //            //            }
-
-    //        }
-
-    //        return false;
-    //    });
-    $("#content").focus(function () {
-        $(this).css('background-position', '0px -35px');
-    });
-    $("#content").blur(function () {
-        if ($("#content").val() == '') {
-            //            if (myLon == "" && myLat == "") {
-            //                $("#WelcomeBubble").show();
-            //                $("#AutoDiscoverBubble").hide();
-            //            }
-            //$("#content").val('Street Address, City, State');
-            $(this).css("background", "#FFF url('images/locationInputBg.png') 0 0");
-        }
-        else {
-            hasValue = true;
-        }
-        return false;
-    });
-
-    function getGap(element) {
-        return calcDist(element.latitude, element.longitude, myLat, myLon)
-    }
-
-    function SetSlide() {
-
-        $("#slider").slider("value", 10000);
-        $("#amount").val("10KM");
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    //$("#amount").val($("#slider").slider("value") + "m");
-    //$("#amount").val("5km");
-
-
-    function ShowMessages(data) {
-
-        //$('#MessagesContainer').empty();
-
-        //show messages
-        var markup = unescape($("#TemplateBox").html());
-
-        /* Compile markup string as a named template */
-        $.template("MessageTemplate", markup)
-
-        var currColumn = $.tmpl("MessageTemplate", data);
-
-        $(currColumn).appendTo("#MessagesContainer");
-
-        //var h = parseInt($("#MessagesContainer").css("height").replace("px", "")) + 130;
-        //$("#MainDiv").css("height", h + "px");
-
-        ArrangeBoxes();
-
-    }
-
-
-
-
-    $("#bubbleOk").click(function () {
-
-        var url = siteUrl + "/Handlers/SaveLocation.ashx";
-
-        var myJSON = {
-            "dontShowMeAgainWelcome": "1"
-        };
-
-
-
-        $.ajax({
-            type: 'POST',
-            url: url,
-            data: myJSON,
-            sync: false,
-            dataType: "json",
-            success: function (data) { $("#WelcomeBubble").hide(); }
-        })
-
-
-
-    });
-
-    $(".TopButton").hover(function () {
-        $(this).css("background-position", "0px -143px");
-    }, function () {
-        $(this).css("background-position", "0px -111px");
-    });
-
-    function DoScroll() {
-        var scroll = document.body.scrollTop;
-        if (scroll < 150) {
-            $('html, body').animate({ scrollTop: 300 }, "slow");
-
-        }
-    }
-
-    $("#headerBtnAddPost").click(function () {
-        $(".TopButton").click();
-    });
-
-    $(".TopButton").click(function () {
-        $("#AddMessageWindow").css("margin-top", -300);
-        //if (currentUser != null) {
-        //$("#txtPopupDetails").val($(""#content").val());
-        if ($("#AddMessageWindow").css("display") == "none") {
-
-            // DO SCROLL IF NEEDED
-            //DoScroll();
-
-            ShowAddMessageWindow(true);
-
-
-        }
-        else {
-
-            HideAddMessageWindow();
-
-        }
-        //} else {
-        //alert("Please Log In");
-        //}
-
-
-    });
-
-    function HideAddMessageWindow() {
-        $('#txtPopupDetails1').show();
-        $("#AddMessageWindow").hide();
-        $('#fuzz').hide();
-    }
-
-    function ShowAddMessageWindow(isNewMessage) {
-        $('#txtPopupDetails1').hide();
-        //SetPostButtonState(true);
-
-        if (currentUser != null) {
-            ManageBrowserSupport();
-        }
-
-        if (isNewMessage) {
-            if (HasAddress())
-                ShowLocationInAddMessgae();
-            else
-                ShowSearchLocationInAddMessage();
-        }
-
-
-
-        $("#AddMessageWindow").show();
-        $('#txtPopupDetails').focus();
-        $('#fuzz').fadeIn();
-    }
-
-
-
-
-
-
-
-
-    $(".DropDown li").hover(function () {
-
-        $(this).addClass("DropDownBg");
-        $(this).css("background-color", $(this).children("span:first").css("background-color"));
-        $(this).children().eq(2).css("color", "#FFF");
-        $(this).children().eq(2).css("font-weight", "bold");
-        $(this).children().eq(1).hide();
-    }, function () {
-        $(this).removeClass("DropDownBg");
-        $(this).css("background-color", "");
-        $(this).children().eq(2).css("color", "#82898E");
-        $(this).children().eq(2).css("font-weight", "normal");
-        $(this).children().eq(1).show();
-    });
-
-    function FilterResultsByCategoryID(collection, catId) {
-
-        if (catId == 0)
-            currResults = collection;
-        else
-            currResults = jQuery.grep(collection, function (a) { return a.catID == catId });
-
-        if (currResults != null)
-            resultsNum = currResults.length;
-        else
-            resultsNum = 0;
-
-        ShowMessages(currResults);
-
-    }
-
-
-    $("#CategoriesBox li").click(function () {
-
-
-        currCatId = $(this).children("input").val();
-
-
-        maxYpos = 0;
-        $.when(ZeroiseBoxes()).then(GetMessages());
-
-        $(this).css("background-color", "");
-        $(this).children().eq(2).css("color", "#82898E");
-        $(this).children().eq(1).show();
-
-        $("#btnCategoryText").html($(this).html())
-
-        mouse_is_inside_categories_clicked = false;
-        $("#CategoriesBox").hide();
-    });
-
-
-    $("#SortBox li").click(function () {
-
-        sortBy = $(this).children("input").val();
-
-        if ((sortBy == 1) && (myLon == "" && myLat == ""))
-            alert("Please Insert Location");
-        else {
-            maxYpos = 0;
-            $.when(ZeroiseBoxes()).then(GetMessages());
-
-            $("#btnSortText").html($(this).html())
-        }
-
-
-
-        mouse_is_inside_sort_clicked = false;
-        $("#SortBox").hide();
-
-    });
-
-    function SortResultsBy(sortMethodId) {
-        if (sortMethodId == 1)
-            currResults = currResults.sort(DistanceComparator);
-        else
-            currResults = currResults.sort(DateComparator).reverse();
-
-        ShowMessages(currResults);
-    }
-
-    function DistanceComparator(a, b) {
-        return parseInt(a.Distance) - parseInt(b.Distance);
-
-    }
-
-    function DateComparator(a, b) {
-        return parseInt(a.msgId) - parseInt(b.msgId);
-
-    }
-
-
-    function FlushErrorMessages() {
-        errorText = "";
-        $("#ddlCategory").css("border-color", "#C8C8C8");
-        $("#txtPopupTitle").css("border-color", "#C8C8C8");
-        $("#txtPopupDetails").css("border-color", "#C8C8C8");
-        $(".ui-button").css("border-color", "#C8C8C8");
-        $('#addMessageAddressInput').css("border-color", "#C8C8C8");
-        $("#MandatoryFieldsMessage").hide();
-    }
-
-    var errorText;
-    function IsClientFieldsOfAddMessageHasError() {
-        var flag = false;
-        errorText = "";
-        if (currPostCategory == "") {
-            $("#ddlCategory").css("border-color", "#FF0000");
-            errorText = "Category"
-            flag = true;
-        } else {
-            $("#ddlCategory").css("border-color", "#C8C8C8");
-        }
-
-
-        if (($.trim($("#txtPopupTitle").val()) == '') || ($.trim($("#txtPopupTitle").val()) == 'Add Title...')) {
-            $("#txtPopupTitle").css("border-color", "#FF0000");
-            if (errorText != "")
-                errorText = errorText + ", ";
-            errorText = errorText + "Title";
-            flag = true;
-        } else {
-            $("#txtPopupTitle").css("border-color", "#C8C8C8");
-        }
-
-
-        if (($.trim($("#txtPopupDetails").val()) == '') || ($.trim($("#txtPopupDetails").val()) == "What's on your mind?")) {
-            $("#txtPopupDetails").css("border-color", "#FF0000");
-            if (errorText != "")
-                errorText = errorText + ", "
-            errorText = errorText + "Details";
-            flag = true;
-        } else {
-            $("#txtPopupDetails").css("border-color", "#C8C8C8");
-        }
-        if ($("#txtAddMessageLat").val() == "" || $("#txtAddMessageLon").val() == "") {
-            $(".ui-button").css("border-color", "#FF0000");
-            $('#addMessageAddressInput').css("border-color", "#FF0000");
-            //Radio2Click();
-            if (errorText != "")
-                errorText = errorText + ", "
-            errorText = errorText + "Location";
-            flag = true;
-        } else {
-            $(".ui-button").css("border-color", "#C8C8C8");
-        }
-
-
-        return flag;
-    }
-
-    function AskForPermision() {
-        FB.login(function (response) {
-            CheckPermission();
-        }, { scope: 'publish_stream' });
-    }
-
-
-
-    function CheckPermission() {
-        FB.api('/me/permissions', checkAppUserPermissions);
-
-        function checkAppUserPermissions(response) {
-            if (response.data[0].publish_stream != 1)
-                $("#ChkFacebook").click();
-        }
-    }
-
-
-
-    $("#PostButton").click(function () {
-
-
-
-        var hasProblem = IsClientFieldsOfAddMessageHasError();
-
-        if (hasProblem == true) {
-            $("#MandatoryFields").html(errorText);
-            $("#MandatoryFieldsMessage").show();
-            return false;
-        }
-
-        else {
-            SetPostButtonState(false);
-
-
-            $("#MandatoryFieldsMessage").hide();
-
-            if (address != "") {
-                // to avoid the problem with edit message without inserting location
-                $('#moreButtonsText').html(address + " ");
-                ChangeToSmallHeader();
-            }
-
-            //SetSlide();
-            SendPostToServer();
-
-        }
-
-    });
-
-
-
-
-
-
-    function InitLastCall() {
-        var lastCall1 = new Object();
-        lastCall1.myLat = myLat;
-        lastCall1.myLon = myLon;
-        lastCall1.uptoMeters = uptoMeters;
-        lastCall1.gmtHours = gmtHours;
-        lastCall1.fromNumber = fromNumber;
-        lastCall1.currCatId = currCatId;
-        lastCall1.sortBy = sortBy;
-        lastCall1.isMine = isMine;
-        lastCall1.maxMessagesPerScreen = maxMessagesPerScreen;
-        return lastCall1;
-    }
-
-    function CheckGetMessageParamsChange() {
-        if (lastCall == null)
-            return true;
-        else {
-            if (lastCall.myLat != myLat)
-                return true;
-            if (lastCall.myLon != myLon)
-                return true;
-            if (lastCall.uptoMeters != uptoMeters)
-                return true;
-            if (lastCall.gmtHours != gmtHours)
-                return true;
-            if (lastCall.fromNumber != fromNumber)
-                return true;
-            if (lastCall.currCatId != currCatId)
-                return true;
-            if (lastCall.sortBy != sortBy)
-                return true;
-            if (lastCall.isMine != isMine)
-                return true;
-            if (lastCall.maxMessagesPerScreen != maxMessagesPerScreen)
-                return true;
-        }
-
-        return false;
-    }
-
-
-    function SliderIsChanged() {
-        if (lastCall == null)
-            return true;
-        else if (lastCall.uptoMeters != uptoMeters)
-            return true;
-
-        return false;
-    }
-
-
-
-    function AssignAndWait() {
-        currSliderValue = uptoMeters;
-        setTimeout(function () {
-            if (currSliderValue == uptoMeters) {
-                if (singleton) {
-
-                    singleton = false; // to ignore slipped calls
-                    lastCall = InitLastCall();
-                    $.when(ZeroiseBoxes()).then(GetMessages());
-                }
-            }
-            else {
-
-
-                // if after 0.5 sec there was still change, wait and then re-call this function
-                AssignAndWait();
-
-            }
-        }, 500);
-    }
-
-    function StartTimerAndGetMessages(isUrgent) {
-
-        if (isUrgent) {
-            lastCall = InitLastCall();
-            $.when(ZeroiseBoxes()).then(GetMessages());
-            return;
-        }
-
-        // check if the slider is changed
-        // wait 0.5 second to see if there is no movement
-        // and then check the state
-        // if state == 0
-        // call the function
-
-
-
-
-        if (CheckGetMessageParamsChange()) {
-            if (SliderIsChanged()) {
-
-
-                // wait until there is no move for 0.5 second
-
-                AssignAndWait();
-
-
-            }
-            else {
-
-                $.when(ZeroiseBoxes()).then(GetMessages());
-            }
-        }
-
-
-
-
-
-
-
-    }
-
-
-
-
-
-
-    function GetMessages() {
-
-        if (getMessagesRunning) { // don't do anything if an AJAX request is pending
-            return;
-        }
-
-
-
-        var url = siteUrl + "/Handlers/GetMessages.ashx?currLat=" + myLat + "&currLon=" + myLon + "&uptoMeters=" + uptoMeters + "&timeZone=" + gmtHours + "&fromNumber=" + fromNumber + "&CategoryId=" + currCatId + "&SortBy=" + sortBy + "&IsMine=" + isMine + "&TakeNum=" + maxMessagesPerScreen;
-
-        $.ajax({
-            url: url,
-            sync: false,
-            error: function (xhr, ajaxOptions, thrownError) {
-
-                SetGetMessagesState(0);
-                singleton = true;
-            },
-            success: function (data) {
-
-
-
-                //AddMultipleMarkers(data);
-                SetGetMessagesState(0);
-                GetMessagesOnComplete(data);
-                //ShowGeoHead();
-                singleton = true;
-            },
-            complete: function () {
-                getMessagesRunning = false;
-                allowScrolling = true;
-            }
-        });
-
-        getMessagesRunning = true;
-    }
-
-    function GetMessagesOnComplete(data) {
-
-        //alert(getMessageState);
-        var myData = eval(data);
-
-        if (myData.length == 0 && fromNumber == 0) {
-            $('#NoPostsText').show();
-            $('#MessagesContainer').hide();
-
-        } else {
-
-            if ($('#MessagesContainer').css("display") == "none") {
-                $('#NoPostsText').hide();
-                $('#MessagesContainer').show();
-            }
-
-            stopLoadMore = false;
-            SetSomeResults(myData);
-            ShowMessages(myData);
-            SetColors();
-
-            if (myData.length < maxMessagesPerScreen)
-                stopLoadMore = true;
-
-        }
-
-    }
-
-
-    function SetSomeResults(data) {
-
-        if (fromNumber == 0) {
-            allResults = [];
-            $('#MessagesContainer').empty();
-            $('#BottomDiv').css("margin-top", "0px");
-
-        }
-
-
-        allResults += data;
-        resultsNum += data.length;
-
-        currResults = allResults;
-
-    }
-
-
-    function SetAllResults(data) {
-
-        $('#MessagesContainer').empty();
-        allResults = data;
-        resultsNum = data.length;
-
-        currResults = allResults;
-
-    }
-
-    function SetPaging(data, pageNum) {
-        //var str = "<b>[from]-[to] of [sum] posts around you !</b>"
-        var str = "<b>showing [sum] posts around you !</b>"
-        str = str.replace("[sum]", data.length);
-        var currPageFirstMessageNum = (pageNum - 1) * (numberOfColumns * itemsPerColumn) + 1;
-        var currPageLastMessageNum = (pageNum) * (numberOfColumns * itemsPerColumn);
-        if (currPageLastMessageNum > data.length)
-            currPageLastMessageNum = data.length;
-
-        //str = str.replace("[from]", currPageFirstMessageNum).replace("[to]", currPageLastMessageNum);
-
-        //$('#geoHeadText').html(str);
-
-    }
-
-    function SetAmountOfPosts(num) {
-        var str = "<b>showing [sum] posts around you !</b>"
-        str = str.replace("[sum]", num);
-        //$('#geoHeadText').html(str);
-    }
-
-
-    function SendPostToServer() {
-
-        if (requestRunning) { // don't do anything if an AJAX request is pending
-            return;
-        }
-
-        var url = siteUrl + "/Handlers/SetMessage.ashx";
-
-        var myJSON = {
-
-            //categorId
-            "catID": currPostCategory,
-
-            //Title
-            "title": $("#txtPopupTitle").val(),
-
-            //Details
-            "description": $("#txtPopupDetails").val(),
-
-            //Photo
-            "image": $("#txtImage").val(),
-
-            //Location: Latidute
-            "lat": $("#txtAddMessageLat").val(),
-
-            //Location: Longitude
-            "lon": $("#txtAddMessageLon").val(),
-
-            //Location: Address
-            "address": unescape($("#txtAddMessageAddress").val()),
-
-            //post to wall
-            "postToWall": $("#chkPostToWall").is(':checked'),
-
-            //message id - for edit posts
-            "msgId": $("#txtAddMessageMsgId").val(),
-
-            //messate type, not in use, just for future option
-            "type": "1"
-        };
-
-
-
-        var res = $.ajax({
-            type: 'POST',
-            url: url,
-            data: myJSON,
-            sync: false,
-            dataType: "json",
-            success: function (data) {
-
-                if (data > 0) {
-
-                    if ($("#chkPostToWall").is(':checked'))
-                        PostToWall(myJSON.description, myJSON.title, 'www.postaround.me', "Just posted around " + GetStatefromAddress(address), myJSON.image, 'http://www.postaround.me/post/' + data);
-
-
-                    HideAddMessageWindow();
-                    currCatId = 0;
-                    sortBy = 0;
-                    isMine = 0;
-                    ZeroiseBoxes();
-                    maxYpos = 0;
-
-                    FlushScreen();
-                    $("#txtAddMessageMsgId").val('')
-
-                    if (SliderIsChanged()) {
-                        $.when(ChangeToSmallHeader()).then(SetSlide());
-                    } else {
-                        // dont wait, just get messgaes
-                        StartTimerAndGetMessages(true);
-                    }
-
-                } else {
-
-                    $("#MandatoryFields").html("Server Returned Error. Try again");
-                    $("#MandatoryFieldsMessage").show();
-
-                }
-            },
-            complete: function () {
-                requestRunning = false;
-                SetPostButtonState(true);
-            }
-
-        }).responseText;
-
-        requestRunning = true;
-
-
-    }
-
-    function FlushScreen() {
-
-        //categorId
-        currPostCategory = "";
-        $("#addPostBtnCategoryText").html('<span style="margin-left:5px; padding-top:3px; float:left;">Choose Category...</span>');
-
-        //Title
-        $("#txtPopupTitle").val('');
-
-        //Details
-        $("#txtPopupDetails").val('');
-
-        //Photo
-        $("#RemoveImage").click();
-
-        //Location: Latidute
-        $("#txtAddMessageLat").val('');
-
-        //Location: Longitude
-        $("#txtAddMessageLon").val('');
-
-        //Location: Address
-        $("#txtAddMessageAddress").val('');
-        $("#divAddress").html('');
-        $("#divManualAddress").hide();
-        $("#CurrLocation").hide();
-        $("#addMessageAddressInput").val('');
-
-        //post to wall
-        $("#chkPostToWall").attr('checked', false);
-
-        //message id - for edit posts
-        $("#txtAddMessageMsgId").val('');
-
-        //set radio buttons off --yaniv radio
-        //setRadiosOff();
-
-        //show the placeholder in add messages fields
-        $('#PopupBox').children().find('[placeholder]').blur();
-
-        //flush error messages
-        FlushErrorMessages();
-
-
-
-
-    }
-
-
-
-    function showColumn(startIndex, collection) {
-
-
-        var res2 = [];
-        var i = 0;
-
-
-        for (i = startIndex; i < startIndex + itemsPerColumn && i < collection.length; i++) {
-            res2.push(collection[i]);
-
-        }
-        var markup = unescape($("#TemplateBox").html());
-
-        /* Compile markup string as a named template */
-        $.template("MessageTemplate", markup)
-
-        var container = $("#containerTemplate").clone();
-        var relNum = startIndex / itemsPerColumn;
-        $(container).attr("rel", relNum);
-        $(container).show().appendTo("#MessagesContainer");
-
-        var currColumn = $.tmpl("MessageTemplate", res2);
-
-        $(currColumn).appendTo(container);
-
-        SetColors();
-        SetWidth();
-
-    }
-
-    $('#content').keydown(function (e) {
-
-        $(this).css("background", "#FFF");
-
-        if (e.keyCode == 13) {
-            $('#SearchBtn').click();
-        } else {
-            if (!hasValue) {
-                $('#content').val('');
-                hasValue = true;
-            }
-        }
-
-
-    });
-
-    $('#txtAddressChange').keydown(function (e) {
-
-        if (e.keyCode == 13) {
-            $('#SearchBtn').click();
-        }
-
-
-    });
-
-    $('#addMessageAddressInput').keydown(function (e) {
-
-        if (e.keyCode == 13) {
-            $('#addMessageAddressSearchButton').click();
-        }
-
-
-    });
-
-    $('#addMessageAddressSearchButton').click(function () {
-
-        GetLatLngToAddMessage($('#addMessageAddressInput').val());
-    });
-
-    function GetLatLngToAddMessage(address) {
-
-        var geocoder = new GClientGeocoder();
-
-        geocoder.getLatLng(
-            address,
-            function (point) {
-                if (!point) {
-                    alert(address + " not found");
-                } else {
-
-                    var lat = point.lat();
-                    var lng = point.lng();
-
-                    showAddressInAddMessage(lat, lng);
-                }
-            }
-      );
-    }
-
-
-    $('#SearchBtn').click(function () {
-
-        var searchPhrase = $('#content').val();
-
-        if (searchPhrase == '') {
-            ClearPositionCookie()
-        } else {
-
-            MakeAddressLinkabilityDie();
-
-            //$('#MapBg').hide();
-            $("#WelcomeBubble").hide();
-            $("#AutoDiscoverBubble").hide();
-            GetLatLng(searchPhrase);
-        }
-    });
-
-
-    function ClearPositionCookie() {
-
-        //call ajax to save cookie
-
-        var url = siteUrl + "/Handlers/ClearLocationCookie.ashx";
-
-        $.ajax({
-            type: 'POST',
-            url: url,
-            sync: false,
-            dataType: "json",
-            success: function (data) { location.reload(true) }
-        });
-
-    }
-
-    function GetLatLng(address) {
-
-        var geocoder = new GClientGeocoder();
-
-        geocoder.getLatLng(
-            address,
-            function (point) {
-                if (!point) {
-                    alert("Location Not Found.\nEnter address or place around you, in any language");
-                } else {
-                    //allowScrolling = true;
-
-                    var lat = point.lat();
-                    var lng = point.lng();
-
-                    myLat = lat;
-                    myLon = lng;
-
-                    showAddressInBar(lat, lng, address);
-
-
-                }
-            }
-      );
-    }
-
-
-    $('#ChangeLocationAddMessage').click(function () {
-        $('#ChangeLocationAddMessage').hide();
-        $('#divManualAddress').show();
-        $('#divAddress').hide();
-
-
-    });
-
-    $('#ChangeLocationAddMessage').hover(function () {
-        $(this).addClass('underline pointer');
-    },
-
-        function () {
-            $(this).removeClass('underline pointer');
-        }
-    );
-
-    function SaveLocationInCookie() {
-        //call ajax to save cookie
-
-        var url = siteUrl + "/Handlers/SaveLocation.ashx";
-
-        var myJSON = {
-            "lat": myLat,
-            "lng": myLon,
-            "address": escape(address)
-        };
-
-
-
-        $.ajax({
-            type: 'POST',
-            url: url,
-            data: myJSON,
-            sync: false,
-            dataType: "json",
-            success: function (data) { /*$('#SaveLocation').hide(); $('#LocationSaved').show();*/ }
-        });
-
-
-    }
-
-
-
-    $('#AutoDiscover').hover(function () {
-        if (isBrowserSupportGeoocation)
-        { }
-        $('#autoDiscoverText').fadeIn();
-
-    },
-
-        function () {
-            if (isBrowserSupportGeoocation) { }
-            $('#autoDiscoverText').fadeOut();
-
-        }
-    );
-
-    $('#btnChangeLocation').click(function () {
-        MakeAddressLinkabilityDie();
-        $('#TopMessage').hide();
-        $('#SearchLocation').show();
-        if ($('#MapPas').css("display") == "none") {
-            //ToggleMapPanel();
-        }
-
-    });
-
-
-    $('#btnChangeLocationAddPost').click(function () {
-        $('#divManualAddress').show();
-        $('#TopMessageAddPost').hide();
-    });
-
-
-    function ToggleMapPanel() {
-
-        if ($('#MapPas').css("display") != "none") {
-
-            //it is open. then CLOSE
-            $('#MapPas').slideUp("slow", "easeInOutSine");
-            $('#MapReal').fadeOut();
-
-
-        }
-        else {
-
-
-
-            //it is closed. then OPEN
-            $('#MapPas').slideDown("slow", "easeInOutSine");
-            $('#MapReal').fadeIn();
-            ResizeMap(myMap);
-
-        }
-
-    }
-
-
-
-
-
-
-    $('.LocationLink').hover(function () {
-        $(this).css("text-decoration", "underline");
-    },
-
-        function () {
-            $(this).css("text-decoration", "none");
-
-        }
-    );
-
-    function ChangeToSmallHeader() {
-
-        $.when(ChangeToSmallHeaderStep1()).then(ChangeToSmallHeaderStep2());
-
-    }
-
-    function ChangeToSmallHeaderStep2() {
-        if ($('#MapPas').css("display") != "none") {
-            //$('#MapPas').slideUp("slow", "linear");
-            MakeAddressLinkability();
-
-        }
-
-    }
-
-    function ChangeToSmallHeaderStep1() {
-        showMyLocation(myLat, myLon);
-        if ($('#MapPas').css("display") != "none") {
-            $('#MapPasText').fadeOut();
-            $('#moreButtonsText').css("cursor", "pointer");
-            $('#LocationLinks').show();
-            $('#TopMessage').show();
-            $('#SearchLocation').hide();
-        }
-
-
-
-
-    }
-
-    function MakeAddressLinkabilityDie() {
-        $('#moreButtonsText').die('click');
-        $('#moreButtonsText').die('mouseover');
-        $('#moreButtonsText').die('mouseout');
-        $('#moreButtonsText').css("color", "#333");
-    }
-
-    function MakeAddressLinkability() {
-        MakeAddressLinkabilityDie();
-        //$('#moreButtonsText').css("color", "#6AA1BB");
-        $('#moreButtonsText').live('click', function () { ToggleMapPanel() });
-        $('#moreButtonsText').live('mouseover', function () { $(this).css("text-decoration", "underline"); });
-        $('#moreButtonsText').live('mouseout', function () { $(this).css("text-decoration", "none"); });
-    }
-
-
     $('#AutoDiscover').click(function () {
 
         //$('#MapBg').hide();
@@ -1733,245 +2544,72 @@ $(function () {
     });
 
 
-    $('#AutoDiscover').hover(function () {
-        $(this).addClass('underline pointer');
-    },
+    function GetLatLngToAddMessage(address) {
 
-        function () {
-            $(this).removeClass('underline pointer');
-        }
-    );
+        var geocoder = new GClientGeocoder();
 
-    $('#SaveLocation').hover(function () {
-        $(this).addClass('underline pointer');
-    },
+        geocoder.getLatLng(
+            address,
+            function (point) {
+                if (!point) {
+                    alert(address + " not found");
+                } else {
 
-        function () {
-            $(this).removeClass('underline pointer');
-        }
-    );
+                    var lat = point.lat();
+                    var lng = point.lng();
 
-
-
-    $('#addMessageAddressInput').click(function () {
-        if ($(this).val() == "Enter address, location, city or zipcode...") $(this).val('')
-    });
-
-    $('#addMessageAddressInput').blur(function () {
-        if ($(this).val() == '') $(this).val('Enter address, location, city or zipcode...')
-    });
-
-
-
-    $('#txtAddressChange').click(function () {
-        if ($(this).val() == "Enter address, location, city or zipcode...") $(this).val('')
-    });
-
-    $('#txtAddressChange').blur(function () {
-        if ($(this).val() == '') $(this).val('Enter address, location, city or zipcode...')
-    });
-
-    function RemoveAfter(msgId) {
-        var i = 0;
-        var j = 0;
-        var msgIndex = 0;
-
-        var array = $("#MessagesContainer").children();
-        var found = false;
-        while ((found == false) && (i < array.length)) {
-            if ($(array.eq(i)).attr("box-id") == msgId) {
-                msgIndex = i;
-                xpos = parseInt($(array.eq(i - 1)).css("left").replace("px", ""));
-                found = true;
-            }
-
-            i++;
-        }
-        if (i == array.length || found == true) {
-            fromNumber = msgIndex;
-            for (j = msgIndex; j < array.length; j++)
-                $(array.eq(j)).remove();
-        }
-    }
-
-
-    function ShowImmediateComment(id, body, msgId, box) {
-        // create json data with the comment details
-
-        var currCommentsContainer = $("#MessagesContainer").find('[box-id=' + msgId + ']').find("#currCommentsView");
-        var currCommentsContainerPopUp = $(box).find("#currCommentsView");
-
-
-
-        var currentTime = new Date();
-
-        var myJSON = {
-            "ID": id,
-            "Mine": true,
-            "avatarImageUrl": currentUser.Image,
-            "commentUserLink": currentUser.link,
-            "body": body,
-            "strDate": currentTime.format("d mmm yyyy"),
-            "strTime": currentTime.format("HH:MM"),
-            "name": currentUser.FirstName + " " + currentUser.LastName
-        };
-
-        // put the data in the template
-        var markup;
-        var currComment
-
-        if (PopUpIsOpened) {
-            markup = unescape($("#TemplateCommentBig").html());
-
-            /* Compile markup string as a named template */
-            $.template("CommentTemplate", markup)
-
-            currComment = $.tmpl("CommentTemplate", myJSON);
-
-            // push the template on comments area
-            $(currComment).appendTo(currCommentsContainerPopUp);
-        }
-        //            if (!isDirectLink) {
-        markup = unescape($("#TemplateComment").html());
-
-        /* Compile markup string as a named template */
-        $.template("CommentTemplate", markup)
-
-        currComment = $.tmpl("CommentTemplate", myJSON);
-
-        // push the template on comments area
-        $(currComment).appendTo(currCommentsContainer);
-        //            }
-
-
-
-
-
-    }
-
-
-    function PostComment(box, body) {
-
-        if (body == "")
-            return;
-
-        if (currentUser == null) {
-            if (!isDirectLink) {
-                if (PopUpIsOpened) {
-                    alert("Please Login");
-                }
-                else {
-                    ShowAddMessageWindow(true);
-                }
-            } else {
-                alert("Please Login");
-            }
-            return;
-        }
-
-        var msgId = $(box).attr("box-id");
-
-        var url = siteUrl + "/Handlers/InsertComment.ashx";
-
-        var myJSON = {
-            "messageID": msgId,
-            "body": body
-
-        };
-
-
-        $.ajax({
-            type: 'POST',
-            url: url,
-            data: myJSON,
-            sync: false,
-            dataType: "json",
-            success: function (data) {
-
-                ShowImmediateComment(data, body, msgId, box);
-                $(box).find("#Comment").val('').blur();
-
-                if (!isDirectLink) {
-                    arrangerRunning = true;
-                    IncreaseCommentsNum(box);
-                    $.when(ZeroiseBoxes()).then(ArrangeBoxes());
+                    showAddressInAddMessage(address, lat, lng);
                 }
             }
-        });
-
-    }
-
-    function IncreaseCommentsNum(box) {
-
-        var comments = $(box).find("#commentsNum");
-        var commentsNum = $(comments).html();
-        $(comments).html(++commentsNum);
-
+      );
     }
 
 
-    function DecreaseCommentsNum(box) {
+    $('#SearchBtn').click(function () {
 
-        var comments = $(box).find("#commentsNum");
-        var commentsNum = $(comments).html();
-        $(comments).html(--commentsNum);
+        var searchPhrase = $('#content').val();
 
+        if (searchPhrase == '') {
+            ClearPositionCookie()
+        } else {
+
+            MakeAddressLinkabilityDie();
+
+            //$('#MapBg').hide();
+            $("#WelcomeBubble").hide();
+            $("#AutoDiscoverBubble").hide();
+            GetLatLng(searchPhrase);
+        }
+    });
+
+
+
+
+    function GetLatLng(address) {
+
+        var geocoder = new GClientGeocoder();
+
+        geocoder.getLatLng(
+            address,
+            function (point) {
+                if (!point) {
+                    alert("Location Not Found.\nEnter address or place around you, in any language");
+                } else {
+                    //allowScrolling = true;
+
+                    var lat = point.lat();
+                    var lng = point.lng();
+
+                    myLat = lat;
+                    myLon = lng;
+
+                    showAddressInBar(lat, lng, address);
+
+
+                }
+            }
+      );
     }
-
-
-    $('.Border').live('mouseover', function () { $(this).css("border-color", "#6AA1BB"); ($(this).find('.ImageBox')).css('opacity', '0.5'); });
-    $('.Border').live('mouseout', function () { $(this).css("border-color", "#E2DDCF"); ($(this).find('.ImageBox')).css('opacity', '1'); });
-    $('.ImageBox').live('click', function () { ShowPopUp.apply(this); });
-
-    $('.zoomIn').live('click', function () { ShowPopUp.apply(this); });
-    $('.zoomIn').live('mouseover', function () { $(this).addClass('underline'); });
-    $('.zoomIn').live('mouseout', function () { $(this).removeClass('underline'); });
-
-    $('#CommentsWord').live('click', function () { ShowComments.apply(this); });
-    $('#CommentsWord').live('mouseover', function () { $(this).addClass('underline pointer'); });
-    $('#CommentsWord').live('mouseout', function () { $(this).removeClass('underline pointer'); });
-
-    $('#Comment').live('keyup', function (e) { if (e.keyCode != 13) return; PostComment($(this).parents('.Box'), $(this).val()) });
-    $('#Comment').live('keypress', function (e) {
-        if (e.keyCode != 13) return;
-        var msg = $(this).val().replace("\n", "");
-        return false;
-    });
-
-    $('#Comment').live('click', function () { if ($(this).val() == "Write a comment...") $(this).val('') });
-    $('#Comment').live('blur', function () { if ($(this).val() == "") $(this).val("Write a comment...") });
-
-    $('#HidePost').live('click', function () { DeletePost.apply(this); });
-    //$('#HidePost').live('mouseover', function () { $(this).addClass('pointer'); });
-    //$('#HidePost').live('mouseout', function () { $(this).removeClass('pointer'); });
-
-    $('#HideComment').live('click', function () { HideComment.apply(this); });
-
-    $('#EditPost').live('click', function () { EditPost.apply(this); });
-    //$('#EditPost').live('mouseover', function () { $(this).addClass('pointer'); });
-    //$('#EditPost').live('mouseout', function () { $(this).removeClass('pointer'); });
-
-
-    $('#Marker').live('mouseover', function () { $(this).parent().find("#ShowOnMap").addClass('underline'); });
-    $('#Marker').live('mouseout', function () { $(this).parent().find("#ShowOnMap").removeClass('underline'); });
-
-    $('#ShowOnMap').live('mouseover', function () { $(this).addClass('underline'); });
-    $('#ShowOnMap').live('mouseout', function () { $(this).removeClass('underline'); });
-
-    $(".MineButton").live('mouseover', function () { $(this).css("background-color", "#7ab5c4"); });
-    $(".MineButton").live('mouseout', function () { $(this).css("background-color", ""); });
-
-
-    $("#ShowOnMap").live("click",
-    function () {
-        DisplayMap.apply(this);
-        //ShowPopUp.apply(this);
-    });
-
-    $("#Marker").live("click",
-    function () {
-        $('#ShowOnMap').click();
-    });
 
     var currLat = "";
     var currLon = "";
@@ -2023,6 +2661,247 @@ $(function () {
 
     });
 
+
+
+    //------------------------END LOCATION STUFF
+
+
+
+    //----DATA START
+
+
+    $(window).scroll(function () {
+        if (isDirectLink || getMessagesRunning || arrangerRunning) {
+            // don't do anything in direct link
+            // don't do anything if an AJAX request is pending
+
+            return;
+        } else if (allowScrolling) {
+
+            if (($(window).scrollTop() > maxYpos / 2) && ($(window).scrollTop() - prevScrolling > 0)) {
+
+                if (!stopLoadMore) {
+                    stopLoadMore = true;
+                    fromNumber += maxMessagesPerScreen;
+                    prevScrolling = $(window).scrollTop();
+                    GetMessages();
+
+                } else { }
+
+            }
+        }
+    });
+    function ShowMessages(data) {
+
+        //show messages
+        var markup = unescape($("#TemplateBox").html());
+
+        /* Compile markup string as a named template */
+        $.template("MessageTemplate", markup)
+
+        var currColumn = $.tmpl("MessageTemplate", data);
+
+        $(currColumn).appendTo("#MessagesContainer");
+
+    }
+
+
+    function AssignAndWait() {
+        currSliderValue = uptoMeters;
+        setTimeout(function () {
+            if (currSliderValue == uptoMeters) {
+                if (singleton) {
+
+                    singleton = false; // to ignore slipped calls
+                    lastCall = InitLastCall();
+                    $.when(ZeroiseBoxes()).then(GetMessages());
+                }
+            }
+            else {
+
+
+                // if after 0.5 sec there was still change, wait and then re-call this function
+                AssignAndWait();
+
+            }
+        }, 500);
+    }
+
+    function StartTimerAndGetMessages(isUrgent) {
+
+        if (isUrgent) {
+            fromNumber = 0;
+            lastCall = InitLastCall();
+            $.when(ZeroiseBoxes()).then(GetMessages());
+            return;
+        }
+
+        // check if the slider is changed
+        // wait 0.5 second to see if there is no movement
+        // and then check the state
+        // if state == 0
+        // call the function
+
+
+
+
+        if (CheckGetMessageParamsChange()) {
+            if (SliderIsChanged()) {
+
+
+                // wait until there is no move for 0.5 second
+
+                AssignAndWait();
+
+
+            }
+            else {
+                fromNumber = 0;
+                $.when(ZeroiseBoxes()).then(GetMessages());
+            }
+        }
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+    function GetMessages() {
+
+        if (getMessagesRunning) { // don't do anything if an AJAX request is pending
+            return;
+        }
+
+
+
+        var url = siteUrl + "/Handlers/GetMessages.ashx?currLat=" + myLat + "&currLon=" + myLon + "&uptoMeters=" + uptoMeters + "&timeZone=" + gmtHours + "&fromNumber=" + fromNumber + "&CategoryId=" + currCatId + "&SortBy=" + sortBy + "&IsMine=" + isMine + "&TakeNum=" + maxMessagesPerScreen;
+
+        $.ajax({
+            url: url,
+            sync: false,
+            error: function (xhr, ajaxOptions, thrownError) {
+
+                SetGetMessagesState(0);
+                singleton = true;
+            },
+            beforeSend: function () {
+                getMessagesRunning = true;
+            },
+
+            success: function (data) {
+                //AddMultipleMarkers(data);
+                SetGetMessagesState(0);
+                GetMessagesOnComplete(data);
+                //ShowGeoHead();
+                singleton = true;
+            },
+            complete: function () {
+                getMessagesRunning = false;
+
+            }
+        });
+
+
+    }
+
+    function GetMessagesOnComplete(data) {
+
+        //alert(getMessageState);
+        var myData = eval(data);
+
+        if (myData.length == 0 && fromNumber == 0) {
+            $('#NoPostsText').show();
+            $('#MessagesContainer').hide();
+            allowScrolling = false;
+
+        } else {
+            allowScrolling = true;
+            if ($('#MessagesContainer').css("display") == "none") {
+                $('#NoPostsText').hide();
+                $('#MessagesContainer').show();
+            }
+
+            stopLoadMore = false;
+            if (fromNumber == 0) {
+                $('#MessagesContainer').empty();
+                $('#BottomDiv').css("margin-top", "0px");
+            }
+
+            resultsNum += myData.length;
+            $.when(ShowMessages(myData)).then(Organizer());
+            SetColors();
+
+            if (myData.length < maxMessagesPerScreen)
+                stopLoadMore = true;
+
+        }
+
+    }
+
+    function OrderElements() {
+        $("#fuzz").css("height", $(document).height());
+        //ArrangeBoxesInit();
+        ArrangeAll();
+    }
+
+    function PostComment(box, body) {
+
+        if (body == "")
+            return;
+
+        if (currentUser == null) {
+            if (!isDirectLink) {
+                if (PopUpIsOpened) {
+                    alert("Please Login");
+                }
+                else {
+                    ShowAddMessageWindow(true);
+                }
+            } else {
+                alert("Please Login");
+            }
+            return;
+        }
+
+        var msgId = $(box).attr("box-id");
+
+        var url = siteUrl + "/Handlers/InsertComment.ashx";
+
+        var myJSON = {
+            "messageID": msgId,
+            "body": body
+
+        };
+
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: myJSON,
+            sync: false,
+            dataType: "json",
+            success: function (data) {
+
+                ShowImmediateComment(data, body, msgId, box);
+                $(box).find("#Comment").val('').blur();
+
+                if (!isDirectLink) {
+                    arrangerRunning = true;
+                    IncreaseCommentsNum(box);
+                    ArrangeAll();
+                }
+            }
+        });
+
+    }
     function DeletePost() {
         var answer = confirm("Hide that post?")
         if (answer) {
@@ -2041,7 +2920,7 @@ $(function () {
                 data: myJSON,
                 sync: false,
                 dataType: "json",
-                success: function (data) { box.remove(); ZeroiseBoxes(); ArrangeBoxes(); }
+                success: function (data) { box.remove(); ZeroiseBoxes(); Organizer(); }
             })
         }
 
@@ -2083,7 +2962,7 @@ $(function () {
                 comment.hide();
                 if (!isDirectLink) {
 
-                    $.when(ZeroiseBoxes()).then(ArrangeBoxes());
+                    ArrangeAll();
                 }
             }
         })
@@ -2119,371 +2998,7 @@ $(function () {
 
     }
 
-    function ShowMessageForEdit(data) {
 
-
-
-
-
-        //categorId
-        currPostCategory = data.catID;
-        //ALSO IN FIELD
-        var inputField = $("#CategoriesBoxAddMessage").find('input[value="' + data.catID + '"]"');
-        $("#addPostBtnCategoryText").html(inputField.parent().html());
-
-        //Title
-        $("#txtPopupTitle").val(data.title);
-
-        //Details
-        $("#txtPopupDetails").val(data.description);
-
-        //Photo
-        $("#txtImage").val(data.image);
-        //ALSO IN FIELD
-        if (data.image != "") {
-            //show image path in fileuploader list
-            ShowImageInFileUploaderList(data.image);
-        }
-
-        //Location: Latidute
-        $("#txtAddMessageLat").val(data.latitude);
-
-        //Location: Longitude
-        $("#txtAddMessageLon").val(data.longitude);
-
-        //Location: Address
-        $("#txtAddMessageAddress").val(data.msgAddress);
-        //ALSO IN FIELD --yaniv radio
-        //setRadio('radio1');
-        $("#divAddress").html(data.msgAddress);
-        $("#CurrLocation").show();
-        $("#divManualAddress").hide();
-
-
-
-        //message id - for edit posts
-        $("#txtAddMessageMsgId").val(data.msgId);
-
-        // FINALLY - show the window
-        ShowAddMessageWindow(false);
-
-
-    }
-
-
-
-    function ShowImageInFileUploaderList(strImage) {
-        $(".qq-upload-list").empty();
-        var item = '<li><span class="qq-upload-file" style="font-size:10px">' + strImage + '</span></li>';
-
-        $(item).appendTo($(".qq-upload-list"));
-
-        $("#RemoveImage").show();
-
-    }
-
-
-
-
-
-
-
-    function ContractBoxLayout(box, commentsContainer) {
-
-        var currHeight = $(commentsContainer).css("height");
-
-        //$('#BottomDiv').animate({ "margin-top": "-=" + currHeight }, "normal");
-        var currContainer = $(box).parents('.Container').attr('rel');
-
-        ContractBottomDivMargin(parseInt(currHeight.replace("px", "")), currContainer);
-
-        //$(box).animate({ "height": "-=" + currHeight }, "normal");
-        $(box).parent().animate({ "height": "-=" + currHeight }, "normal");
-        commentsContainer.hide();
-    }
-
-    function ExpandBoxLayout(box, commentsContainer) {
-
-        var currHeight = $(commentsContainer).css("height");
-
-        $('#MainDiv').animate({ "height": "+=" + currHeight }, "normal");
-
-        commentsContainer.css("height", currHeight);
-        $(box).parent().animate({ "height": "+=" + currHeight }, "normal");
-        commentsContainer.show();
-    }
-
-
-
-
-
-
-
-    function SetAddressOnMessage() {
-
-
-        if ($(this).parent().find('.Location').css("display") == "none") {
-            //var reg = "^(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$";
-
-
-            var latlon = $(this).parent().find('.Location').text();
-
-            var box = $(this).parent().parent();
-
-            if (latlon.length < 10) {
-                $(box).find('.Location').text('');
-                return
-            }
-
-            var reverseGeocode = "";
-
-
-            var geocoder = new GClientGeocoder();
-            var latlng = new GLatLng(latlon.split(',')[0], latlon.split(',')[1], $(this).parent().parent().attr("id"));
-
-
-            geocoder.getLocations(latlng, function (response) {
-                if (response && response.Status.code == 200) {
-                    $(box).find('.Location').show();
-                    reverseGeocode = response.Placemark[0].address;
-                    $(box).find('.Location').text(reverseGeocode);
-                }
-
-
-
-            });
-
-
-        }
-    }
-
-
-
-
-
-
-
-
-
-
-
-    function SetColors() {
-
-        var currColor = "";
-        $('.Line').each(function () {
-            currColor = $(this).attr("color");
-            $(this).css("background-color", currColor);
-        });
-    }
-
-    function ExpandBottomDivMargin(height, rel) {
-
-
-        var myArray = [];
-
-        $("#MessagesContainer").children('.Container').each(function (index) {
-            myArray[index] = parseInt($(this).css('height').replace("px", ""));
-        });
-
-        prevHeight = myArray.max();
-
-        myArray[rel] += height;
-
-
-        currHeight = myArray.max() - prevHeight;
-        if (currHeight > 0) {
-            $('.MainDiv').animate({ "height": "+=" + currHeight + "px" }, "normal");
-            lastBottomMargin += currHeight;
-        }
-
-
-    }
-
-
-
-
-
-    function ContractBottomDivMargin(height, rel) {
-
-        var myArray = [];
-        $("#MessagesContainer").children('.Container').each(function (index) {
-            myArray[index] = parseInt($(this).css('height').replace("px", ""));
-        });
-
-        prevHeight = myArray.max();
-
-        myArray[rel] -= height;
-
-
-        currHeight = myArray.max() - prevHeight;
-        if (currHeight < 0) {
-            $('.MainDiv').animate({ "height": "+=" + currHeight + "px" }, "normal");
-            lastBottomMargin += currHeight;
-        }
-
-
-    }
-
-
-
-
-    $('#AboutArea').click(function () {
-        if ($("#AboutBox").css("display") == "none")
-            $("#AboutBox").show();
-        //$("#AboutBox").css("margin-left.show();
-        else
-            $("#AboutBox").hide();
-    });
-
-
-
-    $('#divLogin').hover(function () {
-        $(this).css("background-color", "#487690");
-        if (currentUser != null) {
-            $("#MoreBox").show();
-        }
-
-    }, function () {
-        $(this).css("background-color", "");
-        if (currentUser != null) {
-            $("#MoreBox").hide();
-        }
-    });
-
-
-    $('#liCategory').hover(function () {
-        $(this).css("background-color", "#487690");
-        $("#CategoriesBox").show();
-        //$("#SortBox").show();
-
-        //$('#topShpitz').animate({marginLeft: "300px"});
-
-    }, function () {
-        $(this).css("background-color", "");
-        $("#CategoriesBox").hide();
-        //$("#SortBox").hide();
-        //$('#topShpitz').animate({ marginLeft: "42px" });
-    });
-
-
-
-
-    $('#liSort').hover(function () {
-        $(this).css("background-color", "#487690");
-        $("#SortBox").show();
-        //$('#topShpitz').animate({marginLeft: "300px"});
-
-    }, function () {
-        $(this).css("background-color", "");
-        $("#SortBox").hide();
-        //$('#topShpitz').animate({ marginLeft: "42px" });
-    });
-
-    $('#divAbout').hover(function () {
-        $(this).css("background-color", "#487690");
-        $("#AboutBox").show();
-
-    }, function () {
-        $(this).css("background-color", "");
-        $("#AboutBox").hide();
-    });
-
-    var menuWidth = parseInt($('#divLogin').css('width').replace("px", ""));
-    $('#MoreBox').css("width", menuWidth + 34);
-    $('#MoreBox li').css("width", menuWidth + 24);
-
-    //    $('#UserArea').click(function () {
-    //        if ($("#MoreBox").css("display") == "none")
-    //            $("#MoreBox").show();
-    //        else
-    //            $("#MoreBox").hide();
-    //    });
-
-
-
-
-    //    $('#Header1_Facebook_divLogedIn').hover(function () {
-
-    //        $("#MoreBox").show();
-
-    //    }, function () {
-    //        $("#MoreBox").hide();
-    //    });
-
-    //    $("#UserSettings").click(function () {
-    //        if ($("#MoreBox").css("display") == "none")
-    //            $("#MoreBox").show();        
-    //        else
-    //            $("#MoreBox").hide();
-    //    });
-
-
-
-    $('#xbutton').click(function () {
-        $('#txtPopupDetails1').show();
-        $("#txtAddMessageMsgId").val('');
-        FlushScreen();
-        HideAddMessageWindow();
-    });
-
-    $('#xbuttonLoginMsg').click(function () {
-
-        HideAddMessageWindow();
-    });
-
-    $('#xbuttonPopUp').click(function () {
-        $(this).parents(".PopupBox").hide();
-        $('#fuzz').hide();
-    });
-
-
-
-    $('#xbuttonFeedback').click(function () {
-        $('a.feedback-tab').click();
-    });
-
-    $('#xbuttonMoreButtons').click(function () {
-        HideMoreButtonsArea(40);
-    });
-
-    //    $('#PopupBox').hover(function () {
-
-    //        mouse_is_inside = true;
-    //        $('#xbutton').hover(function () {
-    //            mouse_is_inside = false;
-    //        })
-    //    }, function () {
-    //        mouse_is_inside = false;
-    //    });
-
-
-
-    //    $("body").mouseup(function () {
-    //        if (mouse_is_inside)
-    //            mouse_is_clicked_inside = true;
-    //        else
-    //            mouse_is_clicked_inside = false;
-    //    });
-
-    //    $("body").mouseup(function () {
-    //        if ((!mouse_is_inside) && (!mouse_is_clicked_inside)) {
-    //            HideAddMessageWindow()
-    //        }
-    //    });
-
-
-
-    function ZeroiseBoxes() {
-
-        prevScrolling = 0;
-        $.when(ZeroiseVariables()).then(ArrangeBoxesInit());
-    }
-
-    function ZeroiseVariables() {
-        maxYpos = 0;
-        fromNumber = 0;
-        xpos = 0;
-    }
 
 
 
@@ -2516,254 +3031,36 @@ $(function () {
         winHeight = winNewHeight;
     });
 
-    function OrderElements() {
-        $("#fuzz").css("height", $(document).height());
-        //ArrangeBoxesInit();
-        $.when(ZeroiseBoxes()).then(ArrangeBoxes());
+
+    //----DATA END
+
+
+
+    //-- DATA ARRANGE START
+
+    var isArranging = false;
+
+    function ArrangeAll() {
+
+        $.when(ZeroiseBoxes()).then(Organizer());
     }
 
+    function ZeroiseBoxes() {
 
-    function GetMaxValue(collection) {
-        if (collection == null)
-            return 0;
-        var max = collection[0];
-        var i = 1;
-        for (i = 1; i < collection.length; i++) {
-            if (collection[i] > max)
-                max = collection[i];
-        }
-
-        return max;
-
+        prevScrolling = 0;
+        $.when(ZeroiseVariables()).then(ArrangeBoxesInit());
     }
 
+    function ZeroiseVariables() {
+        maxYpos = 0;
+        //fromNumber = 0;
 
-
-
-
-    //    $(".CommercialBox").click(function () {
-
-    //        SetSize.apply(this);
-    //    });
-
-    //    $(".BoxTest").click(function () {
-
-    //        SetSize.apply(this);
-    //    });
-
-    $('#MoreBox').hover(function () {
-        mouse_is_inside = true;
-    }, function () {
-        mouse_is_inside = false;
-    });
-
-    $('#PopUp').hover(function () {
-        mouse_is_inside_popup = true;
-    }, function () {
-        mouse_is_inside_popup = false;
-    });
-
-
-    $("#UserSettings").hover(function () {
-        mouse_is_clicked_inside = true;
-    }, function () {
-        mouse_is_clicked_inside = false;
-    });
-
-    $('#SortBox').hover(function () {
-        mouse_is_inside_sort = true;
-    }, function () {
-        mouse_is_inside_sort = false;
-    });
-
-
-
-    $('#btnSort').hover(function () {
-        mouse_is_inside_sort_clicked = true;
-    }, function () {
-        mouse_is_inside_sort_clicked = false;
-    });
-
-
-
-    $('#CategoriesBox').hover(function () {
-        mouse_is_inside_categories = true;
-    }, function () {
-        mouse_is_inside_categories = false;
-    });
-
-
-
-    $('#btnCategory').hover(function () {
-        mouse_is_inside_categories_clicked = true;
-    }, function () {
-        mouse_is_inside_categories_clicked = false;
-    });
-
-    $("body").mouseup(function () {
-        if (!mouse_is_inside && !mouse_is_clicked_inside) $('#MoreBox').hide();
-        if (!mouse_is_inside_categories && !mouse_is_inside_categories_clicked) $('#CategoriesBox').hide();
-        if (!mouse_is_inside_sort && !mouse_is_inside_sort_clicked) $('#SortBox').hide();
-        if (PopUpIsOpened && !mouse_is_inside_popup) ClosePopUp();
-    });
-
-    $(".MoreBox li").hover(function () {
-
-        $(this).css("background-color", "#76afc0");
-        $(this).css("color", "#fefefd");
-
-    },
-        function () {
-            $(this).css("background-color", "");
-            $(this).css("color", "");
-        });
-
-
-
-
-    //    $("#btnMyPosts").hover(function () {
-    //        $(this).css("background-color", "#daf0f8");
-    //    },
-    //        function () {
-    //            $(this).css("background-color", "");
-    //        });
-
-    //    $("#btnSettings").hover(function () {
-    //        $(this).css("background-color", "#daf0f8");
-    //    },
-    //        function () {
-    //            $(this).css("background-color", "");
-    //        });
-
-    //    $("#logoutLink").hover(function () {
-    //        $(this).css("background-color", "#daf0f8");
-    //    },
-    //        function () {
-    //            $(this).css("background-color", "");
-    //        });
-
-
-    $("#btnMyPosts").click(function () {
-
-        //allowScrolling = true;
-        //ShowGeoHead();
-        if ($(this).hasClass("selected")) {
-            $(this).removeClass("selected");
-            $(this).html("My Posts");
-            //fromNumber = 0;
-            isMine = 0;
-            //ArrangeBoxesInit();
-            ZeroiseBoxes();
-            maxYpos = 0;
-            GetMessages();
-        }
-        else {
-            $(this).html("All Posts");
-            //CloseAllButtons();
-            $(this).addClass("selected");
-            if (currentUser != null) {
-                isMine = 1;
-                //fromNumber = 0;
-                //ArrangeBoxesInit();
-                ZeroiseBoxes();
-                maxYpos = 0;
-                GetMessages();
-
-            }
-
-
-        }
-    });
-
-    //$("#moveRight").fadeTo("slow", 0.5);
-    $("#moveRight").hover(
-    function () {
-        $(this).fadeTo("slow", 1);
-        $(this).children('.bg').fadeTo("slow", 0.4);
-        //$("body").scrollTo($("#TopRight"), 10000);
-    },
-        function () {
-            //$(this).fadeTo("slow", 0.5);
-            $(this).children('.bg').fadeTo("slow", 0.01);
-
-            //  $("body").stop();
-
-
-        });
-
-    //$("#moveLeft").fadeTo("slow", 0.5);
-    $("#moveLeft").hover(function () {
-        $(this).fadeTo("slow", 1);
-        $(this).children('.bg').fadeTo("slow", 0.4);
-        //$("body").scrollTo($("#TopLeft"), 10000);
-    },
-    function () {
-        //$(this).fadeTo("slow", 0.5);
-        $(this).children('.bg').fadeTo("slow", 0.01);
-        //  $("body").stop();
-    });
-
-
-    //FittToSize();
-
-    function FittToSize() {
-
-        if ($(window).width() < 1050) {
-            //$("#divLogedIn").css("margin-right", "70px");
-        }
-        else {
-            //$("#divLogedIn").css("margin-right", "130px");
-        }
-        //$("#moreButtons").css("width", $(window).width() - 161);
     }
 
 
 
-    function DisplayShortAddress(lat, lon, element) {
 
-
-        if (lat.length < 8 || lon.length < 8) {
-            $(element).text('');
-            return
-        }
-
-        var reverseGeocode = "";
-        var reverseGeocodeShort = "";
-        var geocoder = new GClientGeocoder();
-        var latlng = new GLatLng(lat, lon);
-
-
-        geocoder.getLocations(latlng, function (response) {
-            if (response && response.Status.code == 200) {
-
-                reverseGeocode = response.Placemark[0].address;
-                if (reverseGeocode.length > 32) {
-                    reverseGeocodeShort = reverseGeocode.substring(0, 30) + "..."
-                    $(element).text(reverseGeocodeShort);
-                } else {
-                    $(element).text(reverseGeocode);
-                }
-                $(element).parent().children("#FullAddress").text(reverseGeocode);
-
-            }
-
-
-
-        });
-
-
-    }
-
-    //ArrangeBoxesInit();
     function ArrangeBoxesInit() {
-
-        xpos = 0;
-        //maxYpos = 0;
-        ArrangeBoxesInitWithoutXpos();
-
-    }
-
-    function ArrangeBoxesInitWithoutXpos() {
 
         screenWidth = $('html, body').width() - 40;
         if (screenWidth < 1025) {
@@ -2776,7 +3073,7 @@ $(function () {
             $('#AddMessageWindow').css("margin-left", "40px");
         }
 
-        msgsPerRow = Math.floor(screenWidth / 284) < 1 ? 1 : Math.floor(screenWidth / 284);
+        msgsPerRow = Math.floor(screenWidth / POST_WIDTH) < 1 ? 1 : Math.floor(screenWidth / POST_WIDTH);
         boxesHeightsInRow = new Array(msgsPerRow);
         for (i = 0; i < boxesHeightsInRow.length; i++) {
             boxesHeightsInRow[i] = 0;
@@ -2785,884 +3082,86 @@ $(function () {
 
 
 
-    function ArrangeBoxes() {
-
-
-
-        var array = $('#MessagesContainer').children();
-
-
-
-        var ypos = 0;
-        var i = 0;
-        var h = 0;
-        var t = 0;
-        var rowNum = 0;
-        var latlon = "";
-
-        var currHeight = 0;
-        var minHeight = 0;
-        var minIndex = 0;
-
+    function GetLowestColumn() {
         var j = 0;
+        var minColumnHeight = boxesHeightsInRow[0];
+        var minColumnIndex = 0;
 
-        //alert(maxYpos);
+        for (j = 1; j < msgsPerRow; j++) {
+            if (boxesHeightsInRow[j] + TRESHOLD < minColumnHeight) {
+                minColumnHeight = boxesHeightsInRow[j];
+                minColumnIndex = j;
+            }
+        }
+        var minColumn = { index: minColumnIndex, height: minColumnHeight };
+        return minColumn;
+    }
+
+    function Organizer() {
+
+        var posts = $('#MessagesContainer').children();
+        var postsLength = 0;
+        postsLength += $('#MessagesContainer').children().length;
+        var i = 0;
+        var currPostHeight = 0;
 
         var startIndex = 0;
         if (fromNumber != null && fromNumber != 'undefined' && fromNumber != "")
             startIndex = fromNumber;
 
-        if ((startIndex > 0) && boxesHeightsInRow != null && boxesHeightsInRow[0] == 0) {
-            // calc boxesHeightInRow
-            var index = 0;
-            for (i = 0; i < startIndex; i++) {
-                currHeight = parseInt($(array.eq(i)).css("height").replace("px", ""));
-                index = parseInt($(array.eq(i)).css("left").replace("px", "")) / 284;
-                boxesHeightsInRow[index] += currHeight + 2;
-            }
-            for (i = 0; i < startIndex; i++) {
-                //reduce last row of "7"
-                boxesHeightsInRow[i] -= 7;
-            }
-        }
+        //Edge condition: Erase/Add Comment
+        if (maxYpos == 0)
+            startIndex = 0;
 
-        for (i = startIndex; i < array.length; i++) {
 
-            //            latlon = array.eq(i).find(".addr").text();
-            //            if (latlon.split(",").length == 2) {
-            //                DisplayShortAddress(latlon.split(",")[0], latlon.split(",")[1], array.eq(i).find(".addr"));
-            //            }
 
-            currHeight = parseInt($(array.eq(i)).css("height").replace("px", ""));
-
+        for (i = startIndex; i < postsLength; i++) {
+            currPostHeight = parseInt($(posts.eq(i)).css("height").replace("px", ""));
 
             if (i < msgsPerRow) {
-                boxesHeightsInRow[i] += currHeight;
-                $(array.eq(i)).css("left", 284 * i + "px");
-                $(array.eq(i)).css("top", "0px");
+                $(posts.eq(i)).css("left", POST_WIDTH * i + "px");
+                $(posts.eq(i)).css("top", "0px");
+                boxesHeightsInRow[i] += currPostHeight;
 
-                if (currHeight > maxYpos)
-                    maxYpos = currHeight;
-            }
-            else {
+                if (currPostHeight > maxYpos)
+                    maxYpos = currPostHeight;
 
+            } else {
+                // find the lowest column
+                var minColumn = GetLowestColumn();
 
-                //rowNum = Math.floor(i / msgsPerRow);
+                // and put the next post there
+                $(posts.eq(i)).css("left", POST_WIDTH * minColumn.index + "px");
+                $(posts.eq(i)).css("top", minColumn.height + "px");
 
+                // increase the column height watcher
+                boxesHeightsInRow[minColumn.index] += currPostHeight;
 
-                minHeight = boxesHeightsInRow[0];
-                var minIndex = 0;
-                for (j = 1; j < msgsPerRow; j++) {
-                    if (boxesHeightsInRow[j] + 10 < minHeight) {
-                        minHeight = boxesHeightsInRow[j];
-                        minIndex = j;
-                    }
+                if (minColumn.height + currPostHeight > maxYpos) {
+                    maxYpos = minColumn.height + currPostHeight;
                 }
 
-
-                h = minHeight; //parseInt($(array.eq(i - msgsPerRow)).css("height").replace("px", ""));
-                //if ($(array.eq(i - msgsPerRow)).css("top") != null && $(array.eq(i - msgsPerRow)).css("top") != "" && $(array.eq(i - msgsPerRow)).css("top") != "auto") {
-                //    t = parseInt($(array.eq(i - msgsPerRow)).css("top").replace("px", ""));
-                //}
-
-                ypos = h + 2;
-                if (ypos + currHeight > maxYpos) {
-                    maxYpos = ypos + currHeight;
-                }
-
-
-                $(array.eq(i)).css("top", ypos + "px");
-
-
-
-                boxesHeightsInRow[minIndex] += currHeight + 2;
-
-                xpos = 284 * minIndex;
-
-                $(array.eq(i)).css("left", xpos + "px");
             }
-            $(array.eq(i)).show(); //.fadeIn("slow");
+
+            $(posts.eq(i)).fadeIn("slow");
         }
-        if (i == array.length) {
-
-            //var currMarginTop = $('#BottomDiv').css("margin-top").replace("px", "");
-            //if (maxYpos > currMarginTop) {
-            //    maxYpos += 32;
-            //    $('#BottomDiv').css("margin-top", maxYpos + "px");
-            //}
-
-            //Adjust height of overlay to fill screen when page loads
+        if (i == postsLength) {
             $("#fuzz").css("height", $(document).height());
             $("#fuzz").css("width", $(document).width());
             arrangerRunning = false;
-
+            isArranging = false;
         }
 
-        if (maxYpos > 500) {
-            $('#MessagesContainer').css("min-height", maxYpos);
-        }
-
-
-
-
-    }
-
-    var numOfColumns = Math.floor($(window).width() / 260);
-    var moveBy = numOfColumns * 260;
-    $("#moveRight").click(function () {
-        $('html, body').animate({ scrollLeft: '+=' + moveBy + '' }, "slow");
-
-    });
-
-
-    $("#moveLeft").click(function () {
-        $("html, body").animate({ scrollLeft: '-=' + moveBy + '' }, "slow");
-
-    });
-
-
-    $("#btnSort").click(function () {
-
-        if ($("#SortBox").css("display") == "none") {
-            $("#SortBox").show();
-        } else {
-            $("#SortBox").hide();
-        }
-
-
-
-    });
-
-    $("#btnCategory").click(function () {
-        if ($("#CategoriesBox").css("display") == "none") {
-            $("#CategoriesBox").show();
-        } else {
-            $("#CategoriesBox").hide();
-        }
-    });
-
-    //    $("#btnKeyword").click(function () {
-    //        if ($(this).hasClass("selected")) {
-    //            $(this).removeClass("selected");
-    //            HideMoreButtonsArea(67);
-
-    //        }
-    //        else {
-    //            CloseAllButtons();
-    //            $(this).addClass("selected");
-
-    //            ShowMoreButtonsArea(67);
-    //        }
-    //    });
-
-
-    function CloseAllButtons() {
-        if ($("#btnKeyword").hasClass("selected")) {
-            $("#btnKeyword").removeClass("selected");
-            HideMoreButtonsArea(67);
-        }
-        if ($("#btnCategory").hasClass("selected")) {
-            $("#btnCategory").removeClass("selected");
-            HideMoreButtonsArea(67);
-        }
-        if ($("#btnLocation").hasClass("selected")) {
-            $("#btnLocation").removeClass("selected");
-            HideMoreButtonsArea(40);
-        }
-        if ($("#btnMyPosts").hasClass("selected")) {
-            $("#btnMyPosts").removeClass("selected");
-        }
-        if ($("#btnDistance").hasClass("selected")) {
-            $("#btnDistance").removeClass("selected");
-            $("#SliderBar").hide();
-            HideMoreButtonsArea(40);
-        }
+        
+        $('#MessagesContainer').css("min-height", maxYpos);
+        
 
     }
 
 
 
-    //    function SetMap() {
-    //        
-    //        var jsCenter = new GLatLng(myLat, myLon);
 
-    //        var marker = new GMarker(jsCenter);
-    //        //$("#jsMap").removeClass("hidden");
-    //        var jsMap = new GMap2(document.getElementById("jsMap"));
-    //        jsMap.setCenter(jsCenter, 14);
-
-
-    //        jsMap.setMapType(G_NORMAL_MAP);
-    //        jsMap.addOverlay(marker);
-
-    //        $("#jsMap").show();
-
-
-    //        //        var latlng = new google.maps.LatLng(25.0214323, 121.5331363);
-    //        //        var myOptions = {
-    //        //            zoom: 15,
-    //        //            center: latlng,
-    //        //            mapTypeId: google.maps.MapTypeId.ROADMAP
-    //        //        };
-    //        //        var map = new google.maps.Map(document.getElementById("jsMap"),
-    //        //        myOptions);
-    //        //        
-    //        //        var marker = new google.maps.Marker({
-    //        //            position: latlng,
-    //        //            title: "Post Around Me !"
-    //        //        });
-
-    //        //        // To add the marker to the map, call setMap();
-    //        //        marker.setMap(map);
-
-
-    //    }
-
-
-    $('textarea[maxlength]').keydown(function () {
-        var max = parseInt($(this).attr('maxlength'));
-        if ($(this).val().length > max) {
-            $(this).val($(this).val().substr(0, $(this).attr('maxlength')));
-        }
-    });
-
-
-    //feedback
-
-    var feedbackTab = {
-
-        speed: 300,
-        containerWidth: $('.feedback-panel').outerWidth(),
-        containerHeight: $('.feedback-panel').outerHeight(),
-        tabWidth: $('.feedback-tab').outerWidth(),
-
-        init: function () {
-
-            $('.feedback-panel').css('height', feedbackTab.containerHeight + 'px');
-
-            $('a.feedback-tab').click(function (event) {
-
-                if ($('.feedback-panel').hasClass('open')) {
-
-                    $('#fuzz').fadeOut();
-                    $('#fuzz').css('z-index', '200');
-                    $('.feedback-panel').animate({ left: '-' + feedbackTab.containerWidth }, feedbackTab.speed)
-                        .removeClass('open');
-                } else {
-                    if (currentUser != null) {
-                        $('#txtFeedbackName').val(currentUser.FirstName + " " + currentUser.LastName);
-                    }
-
-                    $('#fuzz').fadeIn();
-                    $('#fuzz').css('z-index', '99');
-                    $('.feedback-panel').animate({ left: '0' }, feedbackTab.speed)
-                        .addClass('open');
-                }
-                event.preventDefault();
-            });
-        }
-    };
-
-    feedbackTab.init();
-
-
-
-    $("#PostFeedback").click(function () {
-
-        var email = $("input#email").val();
-        var message = $("textarea#message").val();
-        var response_message = "Thank you for your comment, see ya!"
-
-        var url = siteUrl + "/Handlers/SetFeedback.ashx";
-
-        var myJSON = {
-
-            "name": $("#txtFeedbackName").val(),
-            "email": $("#txtFeedbackEmail").val(),
-            "message": $("#txtFeedbackMessage").val()
-        };
-
-
-
-        var res = $.ajax({
-            type: 'POST',
-            url: url,
-            data: myJSON,
-            sync: false,
-            dataType: "json",
-            success: function () {
-                //$('#form-wrap').html("<div id='response-message'></div>");
-                //$('#response-message').html("<p>" + response_message + "</p>")
-                $('#feedbackForm').hide();
-                $('#response-message').show()
-
-            .hide()
-            .fadeIn(500)
-            .animate({ opacity: 1.0 }, 1000)
-            .fadeIn(0, function () {
-                $('.feedback-panel')
-                .animate({ left: '-' + (feedbackTab.containerWidth /*+ feedbackTab.tabWidth*/) },
-                (feedbackTab.speed))
-                .removeClass('open');
-
-                $('#fuzz').fadeOut();
-                $('#fuzz').css('z-index', '200');
-                $('#response-message').hide();
-                $("#txtFeedbackName").val('');
-                $("#txtFeedbackEmail").val('')
-                $("#txtFeedbackMessage").val('');
-                $('#feedbackForm').show();
-
-            })
-            }
-
-        });
-
-
-        return false;
-    });
-
-
-    // feedback end
-
-    function SetWidth() {
-        var count = $("#MessagesContainer").children().length;
-        var width = count * 260;
-        width = width + 156;
-        var widthExpand = width + 70;
-        $("#MessagesContainer").css("width", width);
-        $("#BottomDiv").css("width", widthExpand);
-        $(".HeadLine").css("width", widthExpand);
-        $(".HairHeadLine").css("width", width);
-        $("#MainDiv").css("width", widthExpand);
-        $("#TopRight").css("margin-left", widthExpand);
-        $("#fuzz").css("width", widthExpand);
-    }
-
-    $("#AboutLink").click(function () {
-
-        $("#BottomTextBoxTitle").html($(this).html());
-        $("#AboutText").show();
-        $("#TermsText").hide();
-        $("#PrivacyText").hide();
-        $("#BottomTextBox").show();
-        $('html, body').animate({ scrollTop: $("#BottomTextBox").offset().top }, "normal");
-
-
-    });
-
-
-    //send comment
-
-
-    //        $(window).scroll(function (event) {
-
-
-
-    //            
-    //            $("#AddMessageWindow").css("margin-top",  $(document).scrollTop() );
-    //            
-
-    //        });
-
-
-
-
-
-    $("#TermsLink").click(function () {
-
-        $("#BottomTextBoxTitle").html($(this).html());
-        $("#AboutText").hide();
-        $("#TermsText").show();
-        $("#PrivacyText").hide();
-        $("#BottomTextBox").show();
-        $('html, body').animate({ scrollTop: $("#BottomTextBox").offset().top }, "normal");
-
-
-
-    });
-
-    $("#PrivacyLink").click(function () {
-
-        $("#BottomTextBoxTitle").html($(this).html());
-        $("#AboutText").hide();
-        $("#TermsText").hide();
-        $("#PrivacyText").show();
-
-        $("#BottomTextBox").show();
-        $('html, body').animate({ scrollTop: $("#BottomTextBox").offset().top }, "normal");
-
-
-    });
-
-    $("#xbuttonAbout").click(function () {
-        $("#BottomTextBox").hide();
-    });
-
-
-    function inverseOrder(marker, b) {
-        return -GOverlay.getZIndex(marker.getPoint().lat());
-    }
-
-
-    function importanceOrder(marker, b) {
-        return GOverlay.getZIndex(marker.getPoint().lat()) + marker.importance * 1000000;
-    }
-
-    function createMarker(latlng, markerOptions, importance) {
-        var marker = new GMarker(latlng, markerOptions);
-        marker.importance = importance;
-        GEvent.addListener(marker, "click", function () {
-            var myHtml = latlng.toString();
-            myMap.openInfoWindowHtml(latlng, myHtml);
-        });
-        return marker;
-    }
-
-    function AddMultipleMarkers(data) {
-
-        /// צריך להביא את כל המרקרים ולא רק את החבילה הנוכחית אחרת אל תציג את זה
-
-        var myData = eval(data);
-
-        // Create our "tiny" marker icon
-        var blueIcon = new GIcon(G_DEFAULT_ICON);
-        blueIcon.image = "http://gmaps-samples.googlecode.com/svn/trunk/markers/blue/blank.png";
-
-        // Set up our GMarkerOptions object
-        var markerOptions = { icon: blueIcon
-            , zIndexProcess: importanceOrder
-
-        };
-
-        var latlng;
-        var marker;
-        for (var i = 0; i < myData.length; i++) {
-            latlng = new GLatLng(myData[i].latitude, myData[i].longitude);
-            marker = createMarker(latlng, markerOptions, 0);
-            myMap.addOverlay(marker);
-        }
-    }
-
-
-    function GetMarker() {
-        var myIcon = new GIcon();
-        myIcon.image = 'images/markers/image.png';
-        myIcon.shadow = 'images/markers/shadow.png';
-        myIcon.iconSize = new GSize(24, 31);
-        myIcon.shadowSize = new GSize(40, 31);
-        myIcon.iconAnchor = new GPoint(12, 31);
-        myIcon.infoWindowAnchor = new GPoint(12, 0);
-        myIcon.printImage = 'images/markers/printImage.gif';
-        myIcon.mozPrintImage = 'images/markers/mozPrintImage.gif';
-        myIcon.printShadow = 'images/markers/printShadow.gif';
-        myIcon.transparent = 'images/markers/transparent.png';
-        myIcon.imageMap = [14, 0, 17, 1, 18, 2, 20, 3, 20, 4, 21, 5, 22, 6, 22, 7, 23, 8, 23, 9, 23, 10, 23, 11, 23, 12, 23, 13, 23, 14, 23, 15, 22, 16, 22, 17, 21, 18, 21, 19, 20, 20, 19, 21, 19, 22, 18, 23, 17, 24, 16, 25, 15, 26, 15, 27, 14, 28, 13, 29, 12, 30, 11, 30, 10, 29, 10, 28, 9, 27, 8, 26, 7, 25, 6, 24, 6, 23, 5, 22, 4, 21, 3, 20, 3, 19, 2, 18, 2, 17, 1, 16, 1, 15, 1, 14, 0, 13, 0, 12, 0, 11, 0, 10, 1, 9, 1, 8, 1, 7, 2, 6, 2, 5, 3, 4, 4, 3, 5, 2, 7, 1, 10, 0];
-        return myIcon;
-    }
-
-
-    function showMyLocation(lat, lng) {
-
-
-        var icon = GetMarker();
-        var markerOptions = { icon: icon
-            , zIndexProcess: importanceOrder
-
-        };
-
-        jsCenter = new GLatLng(lat, lng);
-        var marker = new GMarker(jsCenter, markerOptions);
-        marker.importance = 100;
-        var htmlMap = document.getElementById("MapReal");
-        if (htmlMap == null)
-            return;
-        myMap = new GMap2(htmlMap);
-
-        myMap.setCenter(jsCenter);
-        $("#MapReal").show();
-        myMap.addOverlay(marker);
-
-        ResizeMap(myMap);
-    }
-
-
-    function ShowLocationOnMap(lat, lng) {
-
-        var center = new GLatLng(lat, lng);
-
-        var icon = GetMarker();
-        var markerOptions = { icon: icon };
-
-        var marker = new GMarker(center, markerOptions);
-
-        var jsMap = new GMap2(document.getElementById("map_canvas"));
-        jsMap.setCenter(center, 15);
-        jsMap.setUIToDefault();
-
-        jsMap.setMapType(G_NORMAL_MAP);
-        jsMap.checkResize();
-        jsMap.addOverlay(marker);
-
-
-
-        //V3
-        //        var latlng = new google.maps.LatLng(lat, lng);
-        //        var myOptions = {
-        //            zoom: 15,
-        //            center: latlng,
-        //            mapTypeId: google.maps.MapTypeId.ROADMAP
-        //        };
-        //        var map = new google.maps.Map(document.getElementById("map_canvas"),
-        //        myOptions);
-
-        //        var marker = new google.maps.Marker({
-        //            position: latlng,
-        //            title: "Post Around Me !"
-        //        });
-
-        //        // To add the marker to the map, call setMap();
-        //        marker.setMap(map);
-
-
-
-        $("#Map").show();
-        $("#fuzz").show();
-        $('#fuzz').css('z-index', '100');
-        ResizeMap(jsMap);
-
-    }
-
-
-
-    function ResizeMap(jsMap) {
-        var center = jsMap.getCenter();
-        jsMap.checkResize();
-        jsMap.setCenter(center);
-    }
-
-    function SetZoom(zoomLevel) {
-        myMap.setCenter(jsCenter);
-        myMap.setZoom(zoomLevel);
-    }
-
-
-
-    $(window).scroll(function () {
-        if (isDirectLink || getMessagesRunning || arrangerRunning) {
-            // don't do anything in direct link
-            // don't do anything if an AJAX request is pending
-
-            return;
-        } else if (allowScrolling) {
-
-            if (($(window).scrollTop() > maxYpos / 2) && ($(window).scrollTop() - prevScrolling > 0)) {
-
-                if (!stopLoadMore) {
-                    stopLoadMore = true;
-                    fromNumber += maxMessagesPerScreen;
-                    prevScrolling = $(window).scrollTop();
-                    GetMessages();
-
-                } else { }
-
-            }
-        }
-    });
-
-    // if not support in Geolocation
-    isBrowserSupportGeoocation = true;
-    CheckBrowserSupport();
-    DisableAutoDiscoverForUnsupportedBrowsers();
-
-    function CheckBrowserSupport() {
-        if (!Modernizr.geolocation) {
-            isBrowserSupportGeoocation = false;
-        }
-    }
-
-    function DisableAutoDiscoverForUnsupportedBrowsers() {
-        if (!isBrowserSupportGeoocation) {
-            $("#AutoDiscover").css("cursor", "default");
-            $("#AutoDiscover").unbind('click');
-            $("#AutoDiscover").unbind('hover');
-            $("#AutoDiscover").attr("title", "");
-            $("#AutoDiscover").css("background-position", "-1 -74px");
-            //$("#autoDiscoverText").hide();
-        }
-    }
-
-    if (isBrowserSupportGeoocation) {
-        $('#txtPopupDetails').autogrow();
-    }
-
-    function ManageBrowserSupport() {
-        if (!isBrowserSupportGeoocation) {
-            if (myLat == "" && myLon == "" && address == "") {
-                //-- yaniv radio
-                //$('label[for="radio1"]').addClass("ui-state-disabled");
-                //Radio2Click();
-                //setRadio('radio2');
-            }
-            else {
-                //-- radio
-                //$('label[for="radio1"]').removeClass("ui-state-disabled");
-            }
-        }
-
-    }
-    //add message
-
-
-
-
-
-
-
-    $("#addPostBtnCategory").click(function () {
-        if ($("#CategoriesBoxAddMessage").css("display") == "none") {
-            $("#CategoriesBoxAddMessage").show();
-        } else {
-            $("#CategoriesBoxAddMessage").hide();
-        }
-    });
-
-    $("#CategoriesBoxAddMessage li").click(function () {
-
-
-        currPostCategory = $(this).children("input").val();
-
-
-        $(this).css("background-color", "");
-        $(this).children().eq(2).css("color", "#3c3c3c");
-        $(this).children().eq(2).css("font-weight", "normal");
-        $(this).children().eq(1).show();
-
-        $("#addPostBtnCategoryText").html($(this).html())
-        mouse_is_inside_categories_clicked = false;
-        $("#CategoriesBoxAddMessage").hide();
-    });
-
-
-
-
-    $('#CategoriesBoxAddMessage').hover(function () {
-        mouse_is_inside_categories = true;
-    }, function () {
-        mouse_is_inside_categories = false;
-    });
-
-    $('#btnCategory').hover(function () {
-        mouse_is_inside_categories_clicked = true;
-    }, function () {
-        mouse_is_inside_categories_clicked = false;
-    });
-
-    $("#divAddressChange").click(function () {
-
-        ShowSearchLocationInAddMessage();
-
-    });
-
-
-
-    //    $('#radio1').click(function () {
-    //        Radio1Click();
-
-
-    //    });
-
-
-    //    $('#radio2').click(function () {
-    //        Radio2Click();
-
-    //    });
-
-
-
-    $('#AddMessageAutoDiscover').click(function () {
-        RunAutoDicoverInAddMessage();
-    });
-
-    function ShowLocationInAddMessgae() {
-        GetAddress(false);
-        $("#CurrLocation").show();
-        $("#divManualAddress").hide();
-    }
-
-
-    function HasAddress() {
-        if (address != "" && myLat != "" && myLon != "")
-            return true;
-        return false;
-    }
-
-    function RunAutoDicoverInAddMessage() {
-
-        GetAddress(true);
-        $("#CurrLocation").show();
-        $("#divManualAddress").hide();
-
-
-    };
-
-
-
-    function ShowSearchLocationInAddMessage() {
-
-        $("#txtAddMessageLat").val('');
-        $("#txtAddMessageLon").val('');
-
-        $("#CurrLocation").hide();
-        $("#divManualAddress").show();
-
-
-    };
-
-    //    function setRadio(id) {
-    //        var radio = $('#' + id);
-    //        radio[0].checked = true;
-    //        radio.button("refresh");
-    //    }
-
-    //    function setRadiosOff() {
-
-    //        var radio = $('#radio1');
-    //        radio[0].checked = false;
-    //        radio.button("refresh");
-
-    //        radio = $('#radio2');
-    //        radio[0].checked = false;
-    //        radio.button("refresh");
-
-
-    //    }
-
-
-
-    $("#ChkFacebook").mousedown(function () {
-        $(this).css("background-position", "-16px -61px");
-    });
-    $("#ChkFacebook").click(function () {
-
-
-
-
-
-        $(this).css("background-position", "0px -61px");
-        if ($("#chkFacebookTrue").css("display") == "none") {
-            AskForPermision();
-
-            $("#chkFacebookTrue").show();
-            $("#chkPostToWall").attr('checked', true);
-
-        } else {
-            $("#chkFacebookTrue").hide();
-            $("#chkPostToWall").attr('checked', false);
-        }
-
-    });
-
-
-
-
-
-
-    //end add message
-
-    function PostToWall(message, title, caption, details, image, link) {
-
-        var hasProblem = false;
-        var params = {};
-        params['message'] = message;
-        params['name'] = title;
-        params['caption'] = caption;
-        params['description'] = details;
-        params['link'] = link;
-        if (image != "" && image != null) {
-            params['picture'] = 'http://www.postaround.me/UploadedResized/' + image;
-        }
-        else {
-            params['picture'] = 'http://www.postaround.me/images/pa_th2.png';
-        }
-
-
-        FB.api('/me/feed', 'post', params, function (response) {
-            if (!response || response.error) {
-            } else { }
-        });
-    }
-
-
-
-
-    function CloseThePopUp() {
-        $('#PopUp').hide();
-        $('#fuzz').hide();
-        $('#PopUp').empty();
-        PopUpIsOpened = false;
-        $('body').css("overflow", "scroll");
-        $('body').css("overflow-x", "hidden");
-        $('#zoomScroll').hide();
-    }
-
-    function ClosePopUp() {
-        CloseThePopUp();
-        history.back();
-        $.when(ZeroiseBoxes()).then(ArrangeBoxes());
-    }
-
-
-
-    function ShowPopUp() {
-        PopUpIsOpened = true;
-        var href = $(this).attr("href");
-
-        var box = $(this).parents(".Box"); // box
-        var msgId = box.attr("box-id");
-
-        // not HTML 5 supported
-        if (!history.pushState) {
-            window.location.href = href;
-        } else {
-
-            var stateObj = { id: msgId };
-
-            history.pushState(stateObj, 'Viewing Post #' + msgId, rootDir + 'post/' + msgId);
-            var url = href + " #BigBoxContainer";
-            $('#PopUp').load(url);
-            $("#PopUp").show();
-            $('#zoomScroll').show();
-            $('body').css("overflow", "hidden");
-            //$("#fuzz").show();
-            //$('#fuzz').css('z-index', '100');
-            return false;
-        }
-
-
-
-    }
-
-
-
-
-
-
-
-
-    window.onpopstate = function (e) {
-
-
-        if (e.state !== null) { // state data available
-
-        } else { // no state data available
-
-            if (PopUpIsOpened)
-                CloseThePopUp();
-
-
-        }
-    }
+    //-- DATA ARRANGE END
 
 
 });
