@@ -2,7 +2,8 @@
 
 
 
-<script type="text/javascript" src="<%=homePage %>scripts/compress/plusone.js">
+
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js">
     { parsetags: 'explicit' }
 </script>
 

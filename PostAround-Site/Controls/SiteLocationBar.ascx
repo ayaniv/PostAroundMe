@@ -1,13 +1,20 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="SiteLocationBar.ascx.cs" Inherits="Controls_SiteLocationBar" %>
 
 
-       <%@ Register src="SocialLinks.ascx" tagname="SocialLinks" tagprefix="uc1" %>
 
-<div id="TopMessage" style="display:none; float:left;">
 
-<div id="SocialLinksWrapper" style="position:absolute; top:20px; float:right !important; right:0; margin-right:47px; ">
-    <uc1:SocialLinks ID="SocialLinks1" runat="server" />
-</div>
+<div id="TopMessage" style="display:none; ">
+
+<div id="SliderBar" class="Slider">
+                <div style="width:246px;">
+                    
+                    <label for="amount" style="float:left">Up to Distance:</label>
+	                <input readonly="readonly" value="ALL" type="text" id="amount" style="float:right; background:transparent; border:0; color:#666; font-weight:bold; font-size:16px; font-style:italic; width:50px; font-family:Calibri,Arial; text-align:right; padding:0px; margin:0px;  " />
+	            </div>
+	            <div style="width:244px; float:left; margin-top:2px;">
+                    <div id="slider"></div>
+                </div>
+            </div>
 
 <div id="moreButtons" style="float:left; margin-left:39px;">
 

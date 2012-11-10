@@ -1,7 +1,7 @@
 ﻿
 /* Page
 -------------------------------------------------------------- */
-html, body {height:100%; margin:0 0 0 0; font-family: Arial, Helvetica,  sans-serif; background: #fcfbf9 url('../images/bg.jpg');}
+html, body {height:100%; margin:0 0 0 0; font-family: Arial, Helvetica,  sans-serif; background: #fcfbf9 url('../images/bgg.png');}
 
 input, textarea, a:link, select { outline: none; }
 
@@ -139,12 +139,12 @@ h1 span
 .GeoHead .Text {font-size:15px; float:left; margin-top:4px; }
 .GeoHead .ChooseCategory { -moz-user-select: none;-webkit-user-select: none; width:189px; height:18px; border:1px solid #cad7dd; padding:6px; float:left; font-size:13px; background-color:#FFF; cursor:pointer; margin-left:10px; }
 .ChooseCategory { float:left; cursor:pointer; }
-.Slider { clear:both; width:246px; float:right; margin-right:30px; margin-top:3px; color:#666; font-size:12px;}
+.Slider { clear:both; width:246px; float:right; margin-right:30px; margin-top:13px; color:#666; font-size:12px;}
 .GeoHead .Buttons { float:left; width:450px;}
 .GeoHead .Buttons div { cursor:pointer; margin-left:5px; background-image: url('../images/filterButtonOff.png'); width:85px; height:18px; text-align:center; float:left; font-size:15px;  -moz-user-select: none;-webkit-user-select: none; }
 .GeoHead .Buttons .selected {background-image: url('../images/filterButtonOn.png'); color:#e0e5e7; float:left; font-size:14px; }
 
-.Content {clear:both; z-index:3; /*margin-top:120px;*/  margin-left:47px;  position:relative; top:0px;  font-size:13px; min-height:500px; }
+.Content {clear:both; z-index:3; /*margin-top:120px;*/  margin-left:47px;  position:relative; top:0px;  font-size:13px; min-height:200px; }
 .Content .Container {float:left; /*height:540px;*/ width:260px; background-color:Transparent;}
 
 @media screen and (max-width:1024px)
@@ -615,8 +615,8 @@ background: #f99e2b url('../images/bigBtns.png') no-repeat 0px -111px;
 .ui-buttonset .ui-button { width:166px !important; height:30px !important; background:#DBDBDB url("../images/grey.png") repeat-x  0 -3px !important; }
 .ui-buttonset .ui-state-active { background:#FFF !important; border:1px solid #f57311 !important; color:#f57311 !important; }
 .ui-button-text-only .ui-button-text { padding:0 !important; }
-.ui-slider-horizontal { height: 4px !important; border:1px solid #a9a9a9 !important; width:244px !important;   }
-.ui-slider-horizontal .ui-slider-handle { cursor:pointer !important; top: -7px !important; margin-left: -.6em !important;  background-color:Aqua !important; background:url('../images/icons.png') -152px -143px !important; width:16px !important; height:16px !important; border:0px !important;}
+.ui-slider-horizontal { height: 6px !important; border:1px solid #a9a9a9 !important; width:244px !important;   }
+.ui-slider-horizontal .ui-slider-handle { cursor:pointer !important; top: -6px !important; margin-left: -.6em !important;  background-color:Aqua !important; background:url('../images/icons.png') -152px -143px !important; width:16px !important; height:16px !important; border:0px !important;}
 .ui-slider-horizontal .ui-state-hover   { background-position: -168px -143px !important;}
 .ui-slider-horizontal .ui-state-active { background-position: -168px -143px !important;}
 /* End jQuery Edit */  

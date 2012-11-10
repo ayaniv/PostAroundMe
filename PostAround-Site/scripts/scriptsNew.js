@@ -191,14 +191,14 @@ $(function () {
 
 
     $("#slider").slider({
-        value: 20500,
+        value: 10500,
         range: "min",
         min: 0,
-        max: 21000,
+        max: 11000,
         step: 1000,
         change: function (event, ui) {
             fromNumber = 0;
-            if (ui.value > 20000) {
+            if (ui.value > 10000) {
                 // go to DB and bring all
                 uptoMeters = -1;
                 StartTimerAndGetMessages(false);
@@ -216,19 +216,27 @@ $(function () {
 
                     currZoomLevel = ui.value / 1000;
                     if (currZoomLevel > 10)
+                        SetZoom(9);
+                    else if (currZoomLevel == 10)
                         SetZoom(10);
-                    else if (currZoomLevel > 5)
+                    else if (currZoomLevel == 9)
                         SetZoom(11);
-                    else if (currZoomLevel > 2)
+                    else if (currZoomLevel == 8)
                         SetZoom(12);
-                    else if (currZoomLevel == 2)
+                    else if (currZoomLevel == 7)
                         SetZoom(13);
-                    else if (currZoomLevel > 1)
+                    else if (currZoomLevel == 6)
                         SetZoom(14);
-                    else if (currZoomLevel == 1)
+                    else if (currZoomLevel == 5)
+                        SetZoom(14);
+                    else if (currZoomLevel == 4)
                         SetZoom(15);
-                    else if (currZoomLevel > 0)
-                        SetZoom(16);
+                    else if (currZoomLevel == 3)
+                        SetZoom(15);
+                    else if (currZoomLevel == 2)
+                        SetZoom(15);
+                    else if (currZoomLevel == 1)
+                        SetZoom(17);
                     else if (currZoomLevel == 0)
                         SetZoom(19);
 
@@ -250,7 +258,7 @@ $(function () {
             //ShowMessages(currResults);
         },
         slide: function (event, ui) {
-            if (ui.value > 20000) {
+            if (ui.value > 10000) {
                 $("#amount").val("ALL");
             } else {
                 if (ui.value < 1000)
@@ -406,8 +414,8 @@ $(function () {
 
     function SetSlide() {
 
-        $("#slider").slider("value", 10000);
-        $("#amount").val("10KM");
+        $("#slider").slider("value", 2000);
+        $("#amount").val("2KM");
 
 
 
@@ -3152,9 +3160,9 @@ $(function () {
             isArranging = false;
         }
 
-        
+
         $('#MessagesContainer').css("min-height", maxYpos);
-        
+
 
     }
 

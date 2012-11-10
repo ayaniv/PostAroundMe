@@ -8,10 +8,10 @@ using System.Configuration;
 
 public partial class Controls_Footer2 : System.Web.UI.UserControl
 {
-    protected string homePage;
+    protected string siteUrl;
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        homePage = ConfigurationManager.AppSettings["HomePage"];
+        siteUrl = ConfigurationManager.AppSettings["HomePage"];
     }
 }

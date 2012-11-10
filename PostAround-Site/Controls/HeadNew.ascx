@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="HeadNew.ascx.cs" Inherits="Controls_Head" %>
+     
      <%@ Register src="GAC.ascx" tagname="GAC" tagprefix="uc1" %>
-
 
      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <!-- scripts -->
@@ -23,7 +23,7 @@
             
     </script>
 
-     <script src="<%=siteUrl %>scripts/compress/prototype.js?v07" type="text/javascript"></script>
+                     <script src="<%=siteUrl %>scripts/compress/prototype.js?v07" type="text/javascript"></script>
      
     <script type="text/javascript" src="http://www.google.com/jsapi?key=<%=ConfigurationManager.AppSettings["GoogleKey"] %>"></script>
     <%--<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=<%=ConfigurationManager.AppSettings["GoogleKeyV3"] %>&sensor=false"></script>--%>
@@ -40,9 +40,11 @@
     <%--<script type="text/javascript" src="<%=siteUrl %>scripts/jquery.smooth-scroll.min.js"></script>--%>
     <script src="<%=siteUrl %>scripts/scriptsNew.js" type="text/javascript"></script>
     
-    <!-- css -->
+ <!-- GAC -->
+    <uc1:GAC ID="GAC1" runat="server" />
+
+        <!-- css -->
     <link rel="stylesheet" href="<%=siteUrl %>/css/screenNew.css" type="text/css" media="screen" charset="utf-8" />
     <link rel="stylesheet" href="<%=siteUrl %>/css/jquery-ui-1.8.21.custom.css" type="text/css" media="screen" charset="utf-8"></link>
     <link rel="shortcut icon" href="<%=siteUrl %>images/favicon.png" />
-    <!-- GAC -->
-    <uc1:GAC ID="GAC1" runat="server" />
+
