@@ -2627,7 +2627,7 @@ $(function () {
         var box = $(this).parents(".Box"); // div 'Bottom'
 
 
-        $("#Map").css("margin-top", $(document).scrollTop() + 60);
+        $("#Map").css("margin-top", $(document).scrollTop() + 20);
         currLat = $(box).find("#CurrLat").html();
         currLon = $(box).find("#CurrLng").html();
         currAddress = $(box).find("#FullAddress").html();
