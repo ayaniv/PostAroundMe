@@ -414,8 +414,8 @@ $(function () {
 
     function SetSlide() {
 
-        $("#slider").slider("value", 2000);
-        $("#amount").val("2KM");
+        $("#slider").slider("value", 3000);
+        $("#amount").val("3KM");
 
 
 
