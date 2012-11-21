@@ -113,6 +113,10 @@ h1 span
 .PopupBox .Submit { cursor:pointer; height:17px; width:58px; background:#F99E2B url('../images/addmessageIcons.png') no-repeat 0px -76px; border:0px; float:left; color:#FFF; font-size:16px; font-weight:bold; padding:10px; padding-top:9px; text-align:center; }
 
 
+.Box a:link, .Box a:visited { color:#6AA1BB; text-decoration:none; font-family:Tahoma, Arial; }
+.Box a:hover { text-decoration:underline; }
+
+
 
 
 .PopupBox .Submit-Disable { cursor:default !important;  /*background-position:0px -112px !important;*/ border:1px solid #D8DFEA; background:#EAEDEE; }
@@ -172,9 +176,9 @@ h1 span
 
 .Content .Box .BoxBody .BoxImage .Border img { width:235px; border:3px solid #FFF; background-color:#EAEDEE; }
 .Content .Box .BoxBody .Text { margin-top:15px; float:left; width:243px; font-family:Tahoma,Arial;  }
-.Content .Box .BoxBody .MessageName { font-size:12px; color:#888888; margin-top:15px; float:left; width:100% }
+.Content .Box .BoxBody .MessageName { font-size:12px; color:#999; margin-top:15px; float:left; width:100% }
 									  
-.Content .Box .BoxBody .MessageName a {font-size:12px; color:#888888; font-weight:bold; text-decoration:none;}
+.Content .Box .BoxBody .MessageName a {font-size:12px; /*color:#888888;*/ font-weight:bold; /*text-decoration:none;*/}
 
 .Content .Box .BoxBody .MessageName .zoomIn { font-weight:normal; }
 
@@ -199,7 +203,7 @@ h1 span
 .Bottom .CommentsArea .SingleComment .CommentWrapper { width:219px; float:left; }
 .Bottom .CommentsArea .SingleComment .CommentWrapper #HideComment { margin-left:8px; margin-bottom:8px; cursor:pointer; background:url('../images/icons.png') -140px -143px; width:11px; height:14px; position:absulote; float:right; }
 .Bottom .CommentsArea .SingleComment .CommentWrapper #commentUserName { margin-right:5px; margin-left:5px; float:left; }
-.Bottom .CommentsArea .SingleComment .CommentWrapper #commentUserName a { font-family:Tahoma, Arial; color:#6AA1BB; font-size:12px; font-weight:bold; text-decoration:none; } 
+.Bottom .CommentsArea .SingleComment .CommentWrapper #commentUserName a { font-family:Tahoma, Arial; color:#6AA1BB; font-size:12px; font-weight:bold; } 
 .Bottom .CommentsArea .SingleComment .CommentWrapper #CommentText { font-family:Tahoma, Arial; text-align:left; color:#424E55; font-size:12px; margin-left:5px; }
 .Bottom .CommentsArea .SingleComment .CommentWrapper .CommentDate { color:#A3A3A3; font-size:11px; margin-left:5px; }
 .Bottom .CommentsArea .EndLine { height:1px;  width:100%; float:left; }
@@ -232,7 +236,7 @@ h1 span
 .Content .Box .Image {float:left; width:50px; margin-right:8px;}
 .Content .Box .Image img {width:50px; height:50px; float:right; cursor:pointer}
 
-.Content .Box .Text { color:#424e55; font-size:12px; word-wrap: break-word; }
+.Content .Box .Text { color:#424e55; font-size:13px; line-height:1.38; word-wrap: break-word; }
 
 .MoreInfo { /*margin-top:15px; margin-right:4px;*/ float:left; width:249px; /*position:absolute;*/ margin-left:5px; }
 .MoreInfo .TitleInfo {font-size:18px; color:#424e55; }

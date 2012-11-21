@@ -28,7 +28,7 @@ public partial class Pages_EmailTestPage : System.Web.UI.Page
         Mails.ReplyMailComposer mail = new Mails.ReplyMailComposer(data, template, "New Comment to your post around !");
         string body = mail.Compose();
         string title = mail.Title();
-        Tools.SendMailMessage("yaniv@postround.me", "ayaniv@gmail.com", null, null, title, body);
+        //Tools.SendMailMessage("yaniv@postround.me", "ayaniv@gmail.com", null, null, title, body);
         //}
         //catch (Exception ex) { Response.Write(ex.InnerException); Response.End(); }
     }

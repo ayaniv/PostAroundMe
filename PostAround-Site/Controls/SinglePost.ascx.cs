@@ -172,43 +172,29 @@ public partial class Controls_SinglePost : System.Web.UI.UserControl
 
     private string FormatText(string text) {
 
-        int posStart = text.IndexOf("http://") > 0 ? text.IndexOf("http://") : text.IndexOf("https://");
-        if (posStart >= 0) {
-            text = GetTextWithLink(posStart, text, false);
-        } else {
-            posStart = text.IndexOf("www");
-            if (posStart >= 0)
-                text = GetTextWithLink(posStart, text, true);
-        }
+
+        text = Linkify(text);
         text = text.Replace("\n", "<br/>");
         return text;
 
     }
 
 
-    private string GetTextWithLink(int posStart, string text, bool addHttp) {
-        string href = "<a style='color:#6AA1BB' href='[link]' target='_blank'>[title]</a>";
-        int posEnd = 0;
-        string link = "";
+    private string Linkify(string inputText) {
+        //URLs starting with http://, https://, or ftp://
+        string replacePattern1 = @"((http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?)";
+        string replacedText = Regex.Replace(inputText, replacePattern1, "<a target='_blank' href='$1'>$1</a>");
         
-        posEnd = text.IndexOf(' ', posStart);
-        if (posEnd < 0) {
-            posEnd = text.IndexOf("\n", posStart);
-            if (posEnd < 0)
-                posEnd = text.Length;
-        }
-        link = text.Substring(posStart, posEnd - posStart);
 
-        href = href.Replace("[title]", link);
+        //URLs starting with www. (without // before it, or it'd re-link the ones done above)
+        string replacePattern2 = @"(^|[^\/])(www\.[\S]+(\b|$))";
+        replacedText = Regex.Replace(replacedText, replacePattern2, "$1<a target='_blank' href='http://$2'>$2</a>");
         
-        if (addHttp)
-            href = href.Replace("[link]", "http://" + link);
-        else
-            href = href.Replace("[link]", link);
+        return replacedText;
 
-        text = text.Replace(link, href);
-        
-        return text;
     }
+
+
+
 
 }

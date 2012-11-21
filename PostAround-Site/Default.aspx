@@ -339,16 +339,9 @@
 
 
 
-    function FormatText(text) {
 
-        var posStart = text.indexOf('http://') > 0 ? text.indexOf('http://') : text.indexOf('https://');
-        if (posStart >= 0) {
-            text = GetTextWithLink(posStart, text, false);
-        } else {
-            posStart = text.indexOf('www');
-            if (posStart >= 0)
-                text = GetTextWithLink(posStart, text, true);
-        }
+    function FormatText(text) {
+        text = Linkify(text);
         text = text.ReplaceAll('\n', '<br/>');
         return text;
 

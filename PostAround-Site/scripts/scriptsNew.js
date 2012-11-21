@@ -11,31 +11,19 @@ function SetPostButtonState(on) {
 }
 
 
-function GetTextWithLink(posStart, text, addHttp) {
-    var href = "<a style='color:#6AA1BB; text-decoration:none;' href='[link]' target='_blank'>[title]</a>";
-    var posEnd = 0;
-    var link = "";
+function Linkify(inputText) {
+    //URLs starting with http://, https://, or ftp://
+    var replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+    var replacedText = inputText.replace(replacePattern1, '<a href="$1" target="_blank">$1</a>');
 
-    posEnd = text.indexOf(' ', posStart);
-    if (posEnd < 0) {
-        posEnd = text.indexOf('\n', posStart);
-        if (posEnd < 0)
-            posEnd = text.length;
-    }
-    link = text.substring(posStart, posEnd);
+    //URLs starting with www. (without // before it, or it'd re-link the ones done above)
+    var replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
+    replacedText = replacedText.replace(replacePattern2, '$1<a href="http://$2" target="_blank">$2</a>');
 
-    href = href.replace('[title]', link);
-
-    if (addHttp)
-        href = href.replace('[link]', "http://" + link);
-    else
-        href = href.replace('[link]', link);
-
-    text = text.replace(link, href);
-
-
-    return text;
+    return replacedText;
 }
+
+
 
 // load google maps v2
 google.load("maps", "2");
