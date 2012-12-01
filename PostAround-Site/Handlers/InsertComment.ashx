@@ -33,13 +33,14 @@ public class InsertComment : IHttpHandler {
 
             retVal = client.InsertComment(comment);
             client.Close();
-            if (retVal > 0)
+            
+            if ((retVal > 0))
             {
                 comment.ID = retVal;
                 comment.userID = userid;
                 
                 // In a new thread - send email on reply
-                System.Threading.ThreadPool.QueueUserWorkItem(delegate { SendMailOnReply(comment); });
+                System.Threading.ThreadPool.QueueUserWorkItem(delegate { SendMailOnReply(comment, comment.userID); });
             }
             
         }
@@ -58,17 +59,24 @@ public class InsertComment : IHttpHandler {
         }
     }
 
-    private void SendMailOnReply(Comment comment)
+    private void SendMailOnReply(Comment comment, int userId)
     {
+        
+        
         // add check if can send email
         // change the unsubsription to frienly-url
         PostAroundServiceClient client = new PostAroundServiceClient();
+
+        MyMessage mainMessage = client.GetMessageById(comment.messageID, "", "", 0, 0, 0);
+
+        if (mainMessage.userid == userId)
+            return;
         
         string mapPathHtmls = System.Configuration.ConfigurationManager.AppSettings["PhysicalPath"] + @"\htmls";
         string template = mapPathHtmls + "\\MailReply.htm";
         MailData data = new MailData();
         User senderUser = client.GetUserByID(comment.userID);
-        MyMessage mainMessage = client.GetMessageById(comment.messageID, "", "", 0, 0, 0);
+        
         User recipientUser = client.GetUserByID(mainMessage.userid);
         client.Close();
         data.recipientEmail = recipientUser.email;

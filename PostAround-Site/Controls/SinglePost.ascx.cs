@@ -35,8 +35,13 @@ public partial class Controls_SinglePost : System.Web.UI.UserControl
     protected void Page_Load(object sender, EventArgs e)
     {
         
+        
+        
         try
         {
+
+
+
             homePage = ConfigurationManager.AppSettings["HomePage"];
             string strMsgId = Request.QueryString["id"];
             
@@ -83,9 +88,11 @@ public partial class Controls_SinglePost : System.Web.UI.UserControl
                 rptComments.ItemCreated += new RepeaterItemEventHandler(rptComments_ItemCreated);
                 rptComments.DataSource = msg.comments;
                 rptComments.DataBind();
-                
 
 
+                ClientScriptManager cs = Page.ClientScript;
+                String cstext1 = "SetMapCanvas(" + BigBoxLat + ", " + BigBoxLon + ")";
+                cs.RegisterStartupScript(this.GetType(), "SetMapCanvas", cstext1, true);
 
 
             }
@@ -160,7 +167,7 @@ public partial class Controls_SinglePost : System.Web.UI.UserControl
             Comment item = (Comment)e.Item.DataItem;
             ((Literal)e.Item.FindControl("cmtUserImage")).Text = "<img src='" + item.avatarImageUrl +"' />";
             ((Literal)e.Item.FindControl("cmtUserName")).Text = "<a href='" + item.commentUserLink + "' target='_blank'>" + item.name + "</a>";
-            ((Literal)e.Item.FindControl("cmtBody")).Text = item.body;
+            ((Literal)e.Item.FindControl("cmtBody")).Text = FormatText(item.body);
             ((Literal)e.Item.FindControl("cmtDate")).Text = item.strDate + " at " + item.strTime;
             
             //((TextBox)e.Item.FindControl("txtDropDownCategoryId")).Text = item.ID.ToString();

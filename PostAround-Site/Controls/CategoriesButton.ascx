@@ -37,27 +37,7 @@
 
                 </asp:Repeater>
 
-               <asp:Repeater runat="server" ID="rptCategoriesColumn2">
-
-                <HeaderTemplate>
-                    <ul>
-                </HeaderTemplate>
-
-                <ItemTemplate>
-                    <li onselectstart='return false;'>
-                    <asp:TextBox runat="server" ID="txtDropDownCategoryId" type="text" style="display:none"></asp:TextBox>
-                    <asp:Label runat="server" ID="ltrlDropDownColor" CssClass="Color"></asp:Label>
-                    <asp:Label runat="server" ID="ltrlDropDownOption" CssClass="Option" ></asp:Label>
-                    </li>
-                </ItemTemplate>
-
-
-                <FooterTemplate>
-                    </ul>
-                </FooterTemplate>
-
-
-                </asp:Repeater>
+ 
        
        
     </div>

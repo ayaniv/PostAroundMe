@@ -1,4 +1,8 @@
-﻿--like button on box
+﻿--- static map in singlepost
+<img src="http://maps.googleapis.com/maps/api/staticmap?center=<%=BigBoxLat %>,<%=BigBoxLon %>&zoom=15&size=319x218&maptype=roadmap&sensor=true&markers=icon:http://postaround.me/images/markers/image.png%7C<%=BigBoxLat %>,<%=BigBoxLon %>" />
+
+
+--like button on box
 
 <div class="product" style="float:left;">
         <fb:like href="<%=siteUrl %>post/${msgId}" layout="button_count"

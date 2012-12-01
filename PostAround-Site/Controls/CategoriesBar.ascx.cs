@@ -4,45 +4,24 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using PostAround.Entities;
 using PostAroundService;
-using System.Configuration;
+using PostAround.Entities;
 
-public partial class Controls_Header : System.Web.UI.UserControl
+public partial class Controls_CategoriesBar : System.Web.UI.UserControl
 {
-
-
-    protected string homePage;
     protected void Page_Load(object sender, EventArgs e)
     {
-
-
-
-        homePage = ConfigurationManager.AppSettings["HomePage"];
-
 
         PostAroundServiceClient client = new PostAroundServiceClient();
         Category[] arrCategroies = client.GetListCategories();
         client.Close();
 
-
         List<Category> lstCategories = arrCategroies.ToList();
 
-        Category firstCategory = new Category();
-        firstCategory.ID = 0;
-        firstCategory.Name = "All Categories";
-        firstCategory.Color = "#e3e3e3";
-        lstCategories.Insert(0, firstCategory);
+        rptCategoriesBar.ItemCreated += new RepeaterItemEventHandler(rptCategories_ItemCreated);
 
-
-        rptCategoriesColumn1.ItemCreated += new RepeaterItemEventHandler(rptCategories_ItemCreated);
-
-        rptCategoriesColumn1.DataSource = lstCategories.Take(8);
-        rptCategoriesColumn1.DataBind();
-
-        rptCategoriesColumn2.ItemCreated += new RepeaterItemEventHandler(rptCategories_ItemCreated);
-        rptCategoriesColumn2.DataSource = lstCategories.Skip(8).Take(8);
-        rptCategoriesColumn2.DataBind();
+        rptCategoriesBar.DataSource = lstCategories;
+        rptCategoriesBar.DataBind();
 
     }
 
@@ -55,5 +34,5 @@ public partial class Controls_Header : System.Web.UI.UserControl
             ((Label)e.Item.FindControl("ltrlDropDownColor")).Style.Add("background-color", item.Color);
             ((Label)e.Item.FindControl("ltrlDropDownOption")).Text = item.Name;
         }
-    } 
+    }
 }

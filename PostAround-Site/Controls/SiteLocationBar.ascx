@@ -26,7 +26,7 @@
 
 
 
-<div style="float:left; padding:10px; padding-left:0; width:700px;" >
+<div style="float:left; padding:10px; padding-left:0; width:auto;" >
 
            
            

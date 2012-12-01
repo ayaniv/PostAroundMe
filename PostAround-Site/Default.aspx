@@ -26,10 +26,7 @@
     <uc1:Head runat="server" />
     
     
-    <script>
-        //window.history.pushState({ id: 393 }, 'Viewing item #393', 'post/393');
-        //window.history.pushState({ id: 393 }, 'Viewing item #393', '../');
-    </script>
+
 </head>
 <body>
 <uc1:MetaTags ID="MetaTags1" runat="server" />
@@ -63,11 +60,7 @@
 
 
                 
-        <div id="LineAbovePosts" style="position:relative; clear:both; display:none">
-            <div style="float:left; color:#7d7d7d; width:200px;  margin-bottom:10px; height:20px; background:url('images/bgWhite80.png'); font-weight:bold; font-family:Trebuchet MS, Arial; font-style:italic; padding:5px; padding-left:15px; padding-left:47px;">Latest 24 Posts...</div>
-            <uc1:SocialLinks ID="SocialLinks1" runat="server" />
-        
-        </div>
+
         <div id="NoPostsText" style="display:none;  min-height:500px; text-align:center; color:#505050; position:relative; clear:both; top:0;  width:862px; margin:0 auto; padding:25px 30px;">
         <img id="TextLinkAddPost" style="cursor:pointer" src="images/yet.png">
         
@@ -118,7 +111,7 @@
                                     <div id="commentUserName">
                                         <a href="${commentUserLink}" target="_blank">${name}</a>
                                     </div>
-                                    <div id="CommentText" style="direction:${GetLanguageDirection(body)}" >${body}</div>
+                                    <div id="CommentText" style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</div>
                                     <div class="CommentDate">${strDate} at ${strTime}</div>
 
                                 </div>
@@ -148,7 +141,7 @@
                                     <div id="commentUserName">
                                         <a href="${commentUserLink}" target="_blank">${name}</a>
                                     </div>
-                                    <div id="CommentText" style="direction:${GetLanguageDirection(body)}" >${body}</div>
+                                    <div id="CommentText" style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</div>
                                     <div class="CommentDate">${strDate} at ${strTime}</div>
 
                                 </div>
@@ -177,7 +170,8 @@
                             <div class="BoxCategory" style="color:#a3a3a3">${category}</div>
                             <div style="float:right">
                             <div id="Marker" title="Show On Map" ></div>
-                            <div id="ShowOnMap" title="Show On Map" class="Word">{{html ShowDistance(Distance, msgAddress)}}</div>
+                            <a href="<%=siteUrl %>post/${msgId}" onclick="return false;" id="ShowOnMap" title="Show On Map" class="Word">{{html ShowDistance(Distance, msgAddress)}}</a>
+                            
                             </div>
                         </div>
                             <div class="BoxHeader" style="direction:${GetLanguageDirection(title)}; text-align:left">${title}</div>
@@ -268,7 +262,7 @@
                                     <div id="commentUserName">
                                         <a href="${commentUserLink}" target="_blank">${name}</a>
                                     </div>
-                                    <div id="CommentText" style="direction:${GetLanguageDirection(body)}" >${body}</div>
+                                    <div id="CommentText" style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</div>
                                     <div class="CommentDate">${strDate} at ${strTime}</div>
 
                                 </div>

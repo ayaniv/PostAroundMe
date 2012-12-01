@@ -27,12 +27,12 @@ public partial class Controls_CategoriesButton : System.Web.UI.UserControl
 
         rptCategoriesColumn1.ItemCreated += new RepeaterItemEventHandler(rptCategories_ItemCreated);
 
-        rptCategoriesColumn1.DataSource = lstCategories.Take(8);
+        rptCategoriesColumn1.DataSource = lstCategories; //.Take(8);
         rptCategoriesColumn1.DataBind();
 
-        rptCategoriesColumn2.ItemCreated += new RepeaterItemEventHandler(rptCategories_ItemCreated);
-        rptCategoriesColumn2.DataSource = lstCategories.Skip(8).Take(8);
-        rptCategoriesColumn2.DataBind();
+        //rptCategoriesColumn2.ItemCreated += new RepeaterItemEventHandler(rptCategories_ItemCreated);
+        //rptCategoriesColumn2.DataSource = lstCategories.Skip(8).Take(8);
+        //rptCategoriesColumn2.DataBind();
     }
 
     void rptCategories_ItemCreated(object sender, RepeaterItemEventArgs e)

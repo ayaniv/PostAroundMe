@@ -21,7 +21,7 @@
                     <div style="position:relative; margin-bottom:6px; width:325px;">
                     
                     
-                    <textarea maxlength="400" id="txtPopupDetails" style="width:299px; height:70px; padding-right:20px; margin-top:0;" title="Details"  placeholder="What's on your mind?"></textarea>
+                    <textarea maxlength="400" id="txtPopupDetails" style="width:299px; height:70px; padding-right:20px; margin-top:0;" title="Details"  placeholder="Hang your post here..."></textarea>
                     
                              <div id="xbutton" style="width:14px; height:16px; clear:both; float: right; top:0; right:0; padding: 5px; padding-top: 4px; position:absolute; cursor: pointer;">
          <div style="margin-right:1px; background: url('images/icons.png') repeat scroll -140px -143px; float: right;
@@ -92,27 +92,7 @@
 
                 </asp:Repeater>
 
-               <asp:Repeater runat="server" ID="rptCategoriesColumn2">
 
-                <HeaderTemplate>
-                    <ul style="width:100%">
-                </HeaderTemplate>
-
-                <ItemTemplate>
-                    <li onselectstart='return false;'>
-                    <asp:TextBox runat="server" ID="txtDropDownCategoryId" type="text" style="display:none"></asp:TextBox>
-                    <asp:Label runat="server" ID="ltrlDropDownColor" CssClass="Color"></asp:Label>
-                    <asp:Label runat="server" ID="ltrlDropDownOption" CssClass="Option" ></asp:Label>
-                    </li>
-                </ItemTemplate>
-
-
-                <FooterTemplate>
-                    </ul>
-                </FooterTemplate>
-
-
-                </asp:Repeater>
        
        
     </div>
@@ -181,7 +161,7 @@
 
                              <a href="#">
              
-                              <div style="background: url('images/icons.png') no-repeat scroll -281px -3px; height: 20px;
+                              <div style="background: url('images/icons.png') no-repeat scroll -281px -4px; height: 20px;
                      width: 20px; margin-left: 6px; margin-top: 6px;">
                  </div>
 
@@ -206,9 +186,7 @@
 
                              <a href="#">
              
-                              <div style="background: url('images/icons.png') no-repeat scroll -252px -4px; height: 17px;
-                     width: 17px; margin-left: 14px; margin-top: -1px;">
-                 </div>
+                              <div style="height: 17px; width: auto; margin-left: auto; margin-top: -2px; font-size:16px !important; font-weight:bold;">Go</div>
 
              </a>
 
@@ -216,15 +194,14 @@
 
              </div>
              <div style="clear:both; float:left; font-size:11px; font-style:italic; padding:6px;">
-             e.g. Xinhai Rd. Taipei, Taiwan</div>
+             e.g. Xinhai Rd. Taipei, Taiwan.&nbsp; Then Click 'Go'</div>
          </div>
      </div>
      <div style="margin-top:10px;">
 
      
 
-         <div id="ChkFacebook" style="clear: both; float: left; background: url('images/addmessageIcons.png') no-repeat scroll 0px -61px;
-             height: 15px; width: 15px; position: relative;">
+         <div id="ChkFacebook" class="Checkbox" >
              <div id="chkFacebookTrue" style="display:none; background: url('images/icons.png') no-repeat scroll -270px -7px;
                  width: 10px; height: 9px; margin-top: 3px; margin-left: 3px; position: absolute;">
              </div>
@@ -249,9 +226,9 @@
             <div style="clear:both" >
 
 
-                <div style="margin-top:12px; float:left;">
+                <div style="margin-top:12px; float:right;">
 
-                <div id="MandatoryFieldsMessage" style="display:none; margin-left:10px; float:right; width:237px; color:#FF0000; font-size:13px; ">
+                <div id="MandatoryFieldsMessage" style="display:none; float:left; width:246px; color:#FF0000; font-size:13px; ">
                 Please fill the following fields:
                 <div id="MandatoryFields" style="font-weight:bold"></div>
                 

@@ -24,6 +24,41 @@ function Linkify(inputText) {
 }
 
 
+function SetMapCanvas(lat, lng) {
+    var center = new GLatLng(lat, lng);
+
+    var icon = GetMarker();
+    var markerOptions = { icon: icon };
+
+    var marker = new GMarker(center, markerOptions);
+
+    var jsMap = new GMap2(document.getElementById("map_canvas1"));
+    jsMap.setCenter(center, 15);
+    jsMap.setUIToDefault();
+
+    jsMap.setMapType(G_NORMAL_MAP);
+    jsMap.checkResize();
+    jsMap.addOverlay(marker);
+}
+
+
+function GetMarker() {
+    var myIcon = new GIcon();
+    myIcon.image = siteUrl + 'images/markers/image.png';
+    myIcon.shadow = siteUrl + 'images/markers/shadow.png';
+    myIcon.iconSize = new GSize(24, 31);
+    myIcon.shadowSize = new GSize(40, 31);
+    myIcon.iconAnchor = new GPoint(12, 31);
+    myIcon.infoWindowAnchor = new GPoint(12, 0);
+    myIcon.printImage = siteUrl + 'images/markers/printImage.gif';
+    myIcon.mozPrintImage = siteUrl + 'images/markers/mozPrintImage.gif';
+    myIcon.printShadow = siteUrl + 'images/markers/printShadow.gif';
+    myIcon.transparent = siteUrl + 'images/markers/transparent.png';
+    myIcon.imageMap = [14, 0, 17, 1, 18, 2, 20, 3, 20, 4, 21, 5, 22, 6, 22, 7, 23, 8, 23, 9, 23, 10, 23, 11, 23, 12, 23, 13, 23, 14, 23, 15, 22, 16, 22, 17, 21, 18, 21, 19, 20, 20, 19, 21, 19, 22, 18, 23, 17, 24, 16, 25, 15, 26, 15, 27, 14, 28, 13, 29, 12, 30, 11, 30, 10, 29, 10, 28, 9, 27, 8, 26, 7, 25, 6, 24, 6, 23, 5, 22, 4, 21, 3, 20, 3, 19, 2, 18, 2, 17, 1, 16, 1, 15, 1, 14, 0, 13, 0, 12, 0, 11, 0, 10, 1, 9, 1, 8, 1, 7, 2, 6, 2, 5, 3, 4, 4, 3, 5, 2, 7, 1, 10, 0];
+    return myIcon;
+}
+
+
 
 // load google maps v2
 google.load("maps", "2");
@@ -53,6 +88,7 @@ $(function () {
     var mouse_is_inside_categories_clicked = false;
     var mouse_is_inside_sort_clicked = false;
     var mouse_is_inside_sort = false;
+    var mouse_is_inside_addpost = false;
     var pageNum = 1;
     var maxPage = 1;
     var lastResults;
@@ -65,7 +101,7 @@ $(function () {
     var currCatId = 0;
     var sortBy = 0;
     var isMine = 0;
-
+    var lock_close_add_message_window = false;
     var maxYpos = 0;
     var boxesHeightsInRow;
     var screenWidth = 0;
@@ -106,6 +142,10 @@ $(function () {
 
             FB.XFBML.parse();
             gapi.plusone.go('GplusContainer', { "size": "medium" });
+
+            var tempLat = $('#BigBoxContainer').attr('box-lat');
+            var tempLon = $('#BigBoxContainer').attr('box-lon');
+            SetMapCanvas(tempLat, tempLon);
 
             //FixAddThisAjax();
 
@@ -483,6 +523,8 @@ $(function () {
     }
 
     function ShowAddMessageWindow(isNewMessage) {
+
+        $('.qq-upload-drop-area').hide();
         $('#txtPopupDetails1').hide();
         //SetPostButtonState(true);
 
@@ -491,6 +533,8 @@ $(function () {
         }
 
         if (isNewMessage) {
+            SetPostToFacebookCheckBoxIfPermissionAlreadyGranted();
+
             if (HasAddress())
                 ShowLocationInAddMessgae();
             else
@@ -543,13 +587,56 @@ $(function () {
 
     //    }
 
+    var convert = function (convert) {
+        return $("<span />", { html: convert }).text();
+    };
+
+
     function SetCategoryNameInButton(html) {
         var word = $(html).children("span:last").html();
+        word = convert(word);
         word = TruncString(word, 10);
-        $("#btnCategory").html(word);
+        $("#btnCategory").text(word);
 
     }
 
+    $("#catsBar li").hover(function () {
+        if ($(this).attr("isSelected") != "true") {
+            $(this).css("background-color", "#FCFCFC");
+            $(this).css("cursor", "pointer");
+        }
+    },
+    function () {
+        if ($(this).attr("isSelected") != "true") {
+            $(this).css("background-color", "#F0F0F0");
+            $(this).css("cursor", "default");
+        }
+    }
+
+    );
+
+
+
+    $("#catsBar li").click(function () {
+        if ($(this).attr("isSelected") != "true") {
+            currCatId = $(this).children("input").val();
+
+            fromNumber = 0;
+            $.when(ZeroiseBoxes()).then(GetMessages());
+
+
+
+            $(this).css("background-color", $(this).children("span:first").css("background-color"));
+            $(this).children().eq(2).css("color", "#FFF");
+            $(this).attr("isSelected", "true");
+
+        } else {
+            $(this).css("background-color", "#FCFCFC");
+            $(this).children().eq(2).css("color", "#82898E");
+            $(this).attr("isSelected", "false");
+        }
+
+    });
 
     $("#CategoriesBox li").click(function () {
 
@@ -647,7 +734,7 @@ $(function () {
         }
 
 
-        if (($.trim($("#txtPopupDetails").val()) == '') || ($.trim($("#txtPopupDetails").val()) == "What's on your mind?")) {
+        if (($.trim($("#txtPopupDetails").val()) == '') || ($.trim($("#txtPopupDetails").val()) == "Hang your post here...")) {
             $("#txtPopupDetails").css("border-color", "#FF0000");
             if (errorText != "")
                 errorText = errorText + ", "
@@ -686,6 +773,20 @@ $(function () {
         function checkAppUserPermissions(response) {
             if (response.data[0].publish_stream != 1)
                 $("#ChkFacebook").click();
+        }
+    }
+
+    function SetPostToFacebookCheckBoxIfPermissionAlreadyGranted() {
+
+        FB.api('/me/permissions', SetCheckBoxToTrue);
+
+        function SetCheckBoxToTrue(response) {
+
+            if (response.data[0].publish_stream == 1) {
+                $("#chkFacebookTrue").show();
+                $("#chkPostToWall").attr('checked', true);
+            }
+
         }
     }
 
@@ -857,9 +958,9 @@ $(function () {
             success: function (data) {
 
                 if (data > 0) {
-
+                    var latlon = myJSON.lat + "," + myJSON.lon;
                     if ($("#chkPostToWall").is(':checked'))
-                        PostToWall(myJSON.description, myJSON.title, 'www.postaround.me', "Just posted around " + GetStatefromAddress(address), myJSON.image, 'http://www.postaround.me/post/' + data);
+                        PostToWall(myJSON.description, myJSON.title, 'www.postaround.me', "Just posted around " + GetStatefromAddress(address), myJSON.image, 'http://www.postaround.me/post/' + data, latlon);
 
 
                     HideAddMessageWindow();
@@ -1364,8 +1465,9 @@ $(function () {
 
     $("#ShowOnMap").live("click",
     function () {
-        DisplayMap.apply(this);
-        //ShowPopUp.apply(this);
+
+        //DisplayMap.apply(this);
+        ShowPopUp.apply(this);
     });
 
     $("#Marker").live("click",
@@ -1600,6 +1702,8 @@ $(function () {
     }, function () {
         mouse_is_inside_categories_clicked = false;
     });
+
+
 
     $("body").mouseup(function () {
         if (!mouse_is_inside && !mouse_is_clicked_inside) $('#MoreBox').hide();
@@ -1943,15 +2047,13 @@ $(function () {
 
 
 
-    $("#ChkFacebook").mousedown(function () {
+    $(".Checkbox").hover(function () {
         $(this).css("background-position", "-16px -61px");
+    }, function () {
+        $(this).css("background-position", "0px -61px");
     });
+
     $("#ChkFacebook").click(function () {
-
-
-
-
-
         $(this).css("background-position", "0px -61px");
         if ($("#chkFacebookTrue").css("display") == "none") {
             AskForPermision();
@@ -1966,9 +2068,11 @@ $(function () {
 
     });
 
+
+
     //---- ADD MESSAGE STUFF END
 
-    function PostToWall(message, title, caption, details, image, link) {
+    function PostToWall(message, title, caption, details, image, link, latlon) {
 
         var hasProblem = false;
         var params = {};
@@ -1981,7 +2085,7 @@ $(function () {
             params['picture'] = 'http://www.postaround.me/UploadedResized/' + image;
         }
         else {
-            params['picture'] = 'http://www.postaround.me/images/pa_th2.png';
+            params['picture'] = image = "http://maps.googleapis.com/maps/api/staticmap?center=" + latlon + "&zoom=14&size=150x150&maptype=roadmap&sensor=true&markers=icon:http://postaround.me/images/markers/image.png%7C" + latlon;
         }
 
 
@@ -2027,11 +2131,15 @@ $(function () {
             var stateObj = { id: msgId };
 
             history.pushState(stateObj, 'Viewing Post #' + msgId, rootDir + 'post/' + msgId);
-            var url = href + " #BigBoxContainer";
+            var url = href + " #BigBoxContainer, script";
             $('#PopUp').load(url);
             $("#PopUp").show();
             $('#zoomScroll').show();
             $('body').css("overflow", "hidden");
+
+
+
+
             //$("#fuzz").show();
             //$('#fuzz').css('z-index', '100');
             return false;
@@ -2172,21 +2280,6 @@ $(function () {
     }
 
 
-    function GetMarker() {
-        var myIcon = new GIcon();
-        myIcon.image = 'images/markers/image.png';
-        myIcon.shadow = 'images/markers/shadow.png';
-        myIcon.iconSize = new GSize(24, 31);
-        myIcon.shadowSize = new GSize(40, 31);
-        myIcon.iconAnchor = new GPoint(12, 31);
-        myIcon.infoWindowAnchor = new GPoint(12, 0);
-        myIcon.printImage = 'images/markers/printImage.gif';
-        myIcon.mozPrintImage = 'images/markers/mozPrintImage.gif';
-        myIcon.printShadow = 'images/markers/printShadow.gif';
-        myIcon.transparent = 'images/markers/transparent.png';
-        myIcon.imageMap = [14, 0, 17, 1, 18, 2, 20, 3, 20, 4, 21, 5, 22, 6, 22, 7, 23, 8, 23, 9, 23, 10, 23, 11, 23, 12, 23, 13, 23, 14, 23, 15, 22, 16, 22, 17, 21, 18, 21, 19, 20, 20, 19, 21, 19, 22, 18, 23, 17, 24, 16, 25, 15, 26, 15, 27, 14, 28, 13, 29, 12, 30, 11, 30, 10, 29, 10, 28, 9, 27, 8, 26, 7, 25, 6, 24, 6, 23, 5, 22, 4, 21, 3, 20, 3, 19, 2, 18, 2, 17, 1, 16, 1, 15, 1, 14, 0, 13, 0, 12, 0, 11, 0, 10, 1, 9, 1, 8, 1, 7, 2, 6, 2, 5, 3, 4, 4, 3, 5, 2, 7, 1, 10, 0];
-        return myIcon;
-    }
 
 
     function showMyLocation(lat, lng) {
@@ -2612,6 +2705,7 @@ $(function () {
     var currAddress = "";
 
     function DisplayMap() {
+
         var box = $(this).parents(".Box"); // div 'Bottom'
 
 
@@ -3060,16 +3154,47 @@ $(function () {
 
         screenWidth = $('html, body').width() - 40;
         if (screenWidth < 1025) {
-            $('#LeftWing').css("margin-left", "20px");
-            $('#moreButtons').css("margin-left", "20px");
-            $('#AddMessageWindow').css("margin-left", "21px");
+            $('#LeftWing').css("margin-left", "15px");
+            $('#moreButtons').css("margin-left", "15px");
+            $('#AddMessageWindow').css("margin-left", "16px");
+            $('#CategoriesBar').css("display", "none");
+
+            //$('#MessagesContainer').css("margin-left", "85px");
         } else {
-            $('#LeftWing').css("margin-left", "39px");
-            $('#moreButtons').css("margin-left", "39px");
-            $('#AddMessageWindow').css("margin-left", "40px");
+            $('#CategoriesBar').css("display", "block");
+            if ((screenWidth == 1383) || (screenWidth == 1400)) {
+                $('#LeftWing').css("margin-left", "10px");
+                $('#moreButtons').css("margin-left", "10px");
+                $('#AddMessageWindow').css("margin-left", "11px");
+
+                //$('#MessagesContainer').css("margin-left", "7px");
+                screenWidth = 1420;
+            } else {
+                $('#LeftWing').css("margin-left", "39px");
+                $('#moreButtons').css("margin-left", "39px");
+                $('#AddMessageWindow').css("margin-left", "40px");
+
+                //                if (screenWidth == 1863) {
+                //                    $('#MessagesContainer').css("margin-left", "105px");
+                //                } else if (screenWidth == 1623) {
+                //                    $('#MessagesContainer').css("margin-left", "127px");
+                //                } else if (screenWidth == 1223) {
+                //                    $('#MessagesContainer').css("margin-left", "69px");
+                //                } else if (screenWidth == 1543) {
+                //                    $('#MessagesContainer').css("margin-left", "86px");
+                //                } else if (screenWidth == 1309) {
+                //                    $('#MessagesContainer').css("margin-left", "111px");
+                //                }
+            }
         }
 
         msgsPerRow = Math.floor(screenWidth / POST_WIDTH) < 1 ? 1 : Math.floor(screenWidth / POST_WIDTH);
+        var rowWidth = msgsPerRow * POST_WIDTH - 11 + "px";
+        $('#MessagesContainer').css("width", rowWidth);
+        $('#catsBar').css("width", rowWidth);
+
+        $('#MessagesContainer').css("margin-left", "auto");
+        $('#MessagesContainer').css("margin-right", "auto");
         boxesHeightsInRow = new Array(msgsPerRow);
         for (i = 0; i < boxesHeightsInRow.length; i++) {
             boxesHeightsInRow[i] = 0;
@@ -3158,6 +3283,9 @@ $(function () {
 
 
     //-- DATA ARRANGE END
+
+
+
 
 
 });

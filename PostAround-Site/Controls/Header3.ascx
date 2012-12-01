@@ -4,7 +4,7 @@
 
 <%@ Register src="SiteLocationBar.ascx" tagname="LocationBar" tagprefix="uc1" %>
 <%@ Register src="SearchLocation.ascx" tagname="SearchLocation" tagprefix="uc1" %>
-
+<%@ Register src="CategoriesBar.ascx" tagname="CategoriesBar" tagprefix="uc1" %>
 
 
 
@@ -150,7 +150,7 @@
 
         <div style="float:left; margin-top:3px; margin-left:8px; color:#666; font-size:12px;">
         
-        <textarea maxlength="400" id="txtPopupDetails1" style="margin-top:3px; width:315px; height:18px; color:#3c3c3c; border:solid 1px #b8b8b8; resize:none; overflow:auto; padding:4px; font-size:14px; font-family:Tahoma, Arial" title="Details"  placeholder="What's on your mind?"></textarea>
+        <textarea maxlength="400" id="txtPopupDetails1" style="margin-top:3px; width:315px; height:18px; color:#3c3c3c; border:solid 1px #b8b8b8; resize:none; overflow:auto; padding:4px; font-size:14px; font-family:Tahoma, Arial" title="Details"  placeholder="Hang your post here..."></textarea>
         </div>
         
         </div>
@@ -181,17 +181,24 @@
       <div id="MapReal" style="display:none; height:190px; width:100%;"></div>
       </div>
       
-      <div id="MapPasBottom" style="width:100%; min-width:910px; position:relative;  z-index:10; float:left; margin-bottom:11px; background-color:#fcfcfc; border-bottom:1px solid #e1dfdc; border-top:1px solid #e1dfdc;">
+      <div id="MapPasBottom" style="width:100%; min-width:910px; position:relative;  z-index:10; float:left; background-color:#fcfcfc; border-bottom:1px solid #e1dfdc; border-top:1px solid #e1dfdc;">
       <uc1:LocationBar ID="LocationBar" runat="server" />
       <uc1:SearchLocation ID="SearchLocation1" runat="server" />
 
       
       </div>
       
+      <div id="CategoriesBar">
+      <div style="float:left; width:100%; height:1px; background:url('images/cats_top.png');"></div>
+      <div style="float:left; width:100%; padding-bottom:6px; background:url('images/cats_bg.png'); ">
+<!-- Categories -->
+
+<uc1:CategoriesBar ID="CategoriesBar1" runat="server" />
+
+      </div>
+      </div>
+      <div style="float:left; width:100%; height:2px; background:url('images/cats_bottom.png'); margin-bottom:11px;"></div>
       
-      <%--<div style="width:765px; height:15px; text-align:center; position:fixed; z-index:10; left:50%; margin-left:-382px; margin-top:80px; top:0;"><img src="images/headerShadow.png" style="height:15px; width:765px"></div>--%>
-
-
 
     
 

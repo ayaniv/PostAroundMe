@@ -13,7 +13,7 @@
 
 
 <div id="MessagesContainer">
-<div id="BigBoxContainer">
+<div id="BigBoxContainer" box-lat="<%=BigBoxLat %>" box-lon="<%=BigBoxLon %>">
 
 
 <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
@@ -24,6 +24,9 @@
     <script type="text/javascript">
         FB.XFBML.parse();
         gapi.plusone.go('GplusContainer', { "size": "medium" });
+
+        
+
     </script>
 
 <div class="Line" style="background-color:<%=bigBoxLineColor %> ; width:895px; "></div>
@@ -31,13 +34,15 @@
                      
     <div id="BigBoxLeft" style="width:319px; float:left;">
 
-        <a href="<%=mapUrl %>" target="_blank" title="Open With Google Maps"><div id="BigBoxMap" style="width:319px; background-color:#EAEDEE; height:218px;">
-        <img src="http://maps.googleapis.com/maps/api/staticmap?center=<%=BigBoxLat %>,<%=BigBoxLon %>&zoom=15&size=319x218&maptype=roadmap&sensor=true&markers=icon:http://postaround.me/images/markers/image.png%7C<%=BigBoxLat %>,<%=BigBoxLon %>" />
+        <div id="map_canvas1" style="width:319px; background-color:#EAEDEE; height:256px;">
         
-        </div></a>
+        
+        </div>
         <div id="BigBoxAddress" style="background-color:#f4f2ee; margin-top:10px; width:307px; color:#333; font-size:14px; padding: 3px 6px 6px 6px;">
-        <div style="float:left;"><img src="<%=homePage %>images/markers/image.png" style="width:12px; height:15px; margin:0 6px 0 6px;" /></div>
-        <div style="margin-left:24px"><asp:Literal runat="server" ID="ltrlAddress"></asp:Literal></div>
+        <div style="float:left;">
+        
+        <img src="<%=homePage %>images/markers/image.png" style="width:12px; height:15px; margin:0 6px 0 6px;" /></div>
+        <div style="margin-left:24px"><a href="<%=mapUrl %>" target="_blank" title="Open Google Map"><asp:Literal runat="server" ID="ltrlAddress"></asp:Literal></a></div>
         
         </div>
         <div class="GeneralLink" style="background-color:#f4f2ee; margin-top:3px; width:307px; color:#6AA1BB; font-size:14px; padding: 3px 6px 6px 6px;"><img src="<%=homePage %>images/pin3.png" style="width:13px; height:14px; margin:0 6px 0 6px;" /><a href="<%=homePage %>?lat=<%=BigBoxLat %>&lon=<%=BigBoxLon %>&address=<%=BigBoxAddress %>">See more posts around this location</a></div>

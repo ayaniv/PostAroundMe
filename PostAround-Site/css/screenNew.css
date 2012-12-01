@@ -150,7 +150,7 @@ h1 span
 .GeoHead .Buttons div { cursor:pointer; margin-left:5px; background-image: url('../images/filterButtonOff.png'); width:85px; height:18px; text-align:center; float:left; font-size:15px;  -moz-user-select: none;-webkit-user-select: none; }
 .GeoHead .Buttons .selected {background-image: url('../images/filterButtonOn.png'); color:#e0e5e7; float:left; font-size:14px; }
 
-.Content {clear:both; z-index:3; /*margin-top:120px;*/  margin-left:47px;  position:relative; top:0px;  font-size:13px; min-height:200px; }
+.Content {clear:both; z-index:3; /*margin-top:120px;  margin-left:47px; */ position:relative; top:0px;  font-size:13px; min-height:200px; }
 .Content .Container {float:left; /*height:540px;*/ width:260px; background-color:Transparent;}
 
 @media screen and (max-width:1024px)
@@ -169,7 +169,7 @@ h1 span
 .Content .Box .BoxBody .BoxHead  .BoxCategory { margin-top:0px; float:left; color:#424e55; font-size:12px; }
 .Content .Box .BoxBody .BoxHead  .BoxHeader { margin-top:0px; float:left; text-transform: uppercase; width:100%; color:#424e55; font-size:18px; }
 .Content .Box .BoxBody .BoxHead .BoxDistance { width:64px; float:right; height:27px }
-.Content .Box .BoxBody .BoxHead .Word { cursor:pointer; text-decoration:none; float:left; margin-top:0px; float:right;  color:#666; font-size:12px; font-style:italic; text-align:right;  }
+.Content .Box .BoxBody .BoxHead .Word { font-family:Arial; cursor:pointer; text-decoration:none; float:left; margin-top:0px; float:right;  color:#666; font-size:12px; font-style:italic; text-align:right;  }
 .Content .Box .BoxBody .BoxHead .BoxDistance .Meters { float:left; margin-top:-2px; float:right;  font-family:Calibri, Arial; width:100%; text-align:right; font-weight:bold; font-style:italic; font-size:16px; color:#6aa1bb }
 .Content .Box .BoxBody .BoxImage { float:left; margin-top:15px; }
 .Content .Box .BoxBody .BoxImage .Border { border:1px solid #E2DDCF; /*cursor:pointer;*/ }
@@ -197,7 +197,7 @@ h1 span
 .Bottom { background-color:#F2F2F2;  }
 .Bottom .BottomLine { height:1px; background-color:#FFF; }
 .Bottom .CommentsArea { background-color:#F2F2F2; }
-.Bottom .CommentsArea .SingleComment { float:left; margin-left:15px; margin-right:15px; width:243px;padding-bottom:5px; margin-top:5px; }
+.Bottom .CommentsArea .SingleComment { word-wrap:break-word; float:left; margin-left:15px; margin-right:15px; width:243px;padding-bottom:5px; margin-top:5px; }
 .Bottom .CommentsArea .SingleComment .CommentImage { float:left; }
 .Bottom .CommentsArea .SingleComment .CommentImage img { width:24px; height:24px; } 
 .Bottom .CommentsArea .SingleComment .CommentWrapper { width:219px; float:left; }
@@ -215,7 +215,7 @@ h1 span
 
 
 
-
+.Checkbox { clear: both; float: left; background: url('../images/addmessageIcons.png') no-repeat scroll 0px -61px; height: 15px; width: 15px; position: relative; }
 
  
 
@@ -228,7 +228,7 @@ h1 span
 
 
 
-.Line { width:100%; height:3px; background-color:#f57311; }
+.Line { width:100%; height:4px; background-color:#f57311; }
 
 
 
