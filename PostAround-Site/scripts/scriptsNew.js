@@ -64,6 +64,7 @@ function GetMarker() {
 google.load("maps", "2");
 $(function () {
 
+
     //variable declaration
     // save the current slider uptoMeters value
     var TRESHOLD = 10;
@@ -98,7 +99,7 @@ $(function () {
     var allowScrolling = false;
     var fromNumber = 0;
     var stopLoadMore = false;
-    var currCatId = 0;
+    var arrayCurrCategoriesID = [];
     var sortBy = 0;
     var isMine = 0;
     var lock_close_add_message_window = false;
@@ -603,36 +604,68 @@ $(function () {
     $("#catsBar li").hover(function () {
         if ($(this).attr("isSelected") != "true") {
             $(this).css("background-color", "#FCFCFC");
-            $(this).css("cursor", "pointer");
+
         }
     },
     function () {
         if ($(this).attr("isSelected") != "true") {
             $(this).css("background-color", "#F0F0F0");
-            $(this).css("cursor", "default");
+
         }
     }
 
     );
 
 
+    function HighlightCategoryInBar(catId) {
 
+        //turn off everything
+        var childs = $('#catsBar').children("li");
+        for (var i = 0; i < childs.length; i++) {
+            $(childs[i]).children(".SelectedCategoryInBar").hide();
+            $(childs[i]).css("background-color", "#F0F0F0");
+            $(childs[i]).children().eq(3).css("color", "#82898E");
+            $(childs[i]).attr("isSelected", "false");
+        }
+
+        //turn on specific category
+        if (catId > 0) {
+            var categoryLI = $("#catsBar").find('input[value="' + catId + '"]"').parent();
+
+            categoryLI.children(".SelectedCategoryInBar").show();
+            categoryLI.css("background-color", categoryLI.children(".Color").css("background-color"));
+            categoryLI.children().eq(3).css("color", "#FFF");
+            categoryLI.attr("isSelected", "true");
+        }
+
+    }
+
+    var tempIndex;
     $("#catsBar li").click(function () {
         if ($(this).attr("isSelected") != "true") {
-            currCatId = $(this).children("input").val();
+            arrayCurrCategoriesID.push($(this).children("input").val());
+
+            fromNumber = 0;
+            $.when(ZeroiseBoxes()).then(GetMessages());
+
+            $(this).children(".SelectedCategoryInBar").show();
+            $(this).css("background-color", $(this).children(".Color").css("background-color"));
+            $(this).children().eq(3).css("color", "#FFF");
+            $(this).attr("isSelected", "true");
+
+        } else {
+
+            tempIndex = arrayCurrCategoriesID.indexOf($(this).children("input").val());
+            arrayCurrCategoriesID.splice(tempIndex, 1);
+
 
             fromNumber = 0;
             $.when(ZeroiseBoxes()).then(GetMessages());
 
 
-
-            $(this).css("background-color", $(this).children("span:first").css("background-color"));
-            $(this).children().eq(2).css("color", "#FFF");
-            $(this).attr("isSelected", "true");
-
-        } else {
+            $(this).children(".SelectedCategoryInBar").hide();
             $(this).css("background-color", "#FCFCFC");
-            $(this).children().eq(2).css("color", "#82898E");
+            $(this).children().eq(3).css("color", "#82898E");
             $(this).attr("isSelected", "false");
         }
 
@@ -640,9 +673,13 @@ $(function () {
 
     $("#CategoriesBox li").click(function () {
 
-
-        currCatId = $(this).children("input").val();
-
+        var catId = $(this).children("input").val();
+        arrayCurrCategoriesID = [];
+        if (catId > 0) {
+            arrayCurrCategoriesID.push(catId);
+        }
+        HighlightCategoryInBar(catId);
+        
 
         fromNumber = 0;
         $.when(ZeroiseBoxes()).then(GetMessages());
@@ -651,7 +688,7 @@ $(function () {
         $(this).children().eq(2).css("color", "#82898E");
         $(this).children().eq(1).show();
 
-        SetCategoryNameInButton($(this))
+        //SetCategoryNameInButton($(this))
 
         mouse_is_inside_categories_clicked = false;
         $("#CategoriesBox").hide();
@@ -836,7 +873,7 @@ $(function () {
         lastCall1.uptoMeters = uptoMeters;
         lastCall1.gmtHours = gmtHours;
         lastCall1.fromNumber = fromNumber;
-        lastCall1.currCatId = currCatId;
+        lastCall1.currCatId = arrayCurrCategoriesID;
         lastCall1.sortBy = sortBy;
         lastCall1.isMine = isMine;
         lastCall1.maxMessagesPerScreen = maxMessagesPerScreen;
@@ -857,7 +894,7 @@ $(function () {
                 return true;
             if (lastCall.fromNumber != fromNumber)
                 return true;
-            if (lastCall.currCatId != currCatId)
+            if (lastCall.currCatId != arrayCurrCategoriesID)
                 return true;
             if (lastCall.sortBy != sortBy)
                 return true;
@@ -964,7 +1001,7 @@ $(function () {
 
 
                     HideAddMessageWindow();
-                    currCatId = 0;
+                    arrayCurrCategoriesID = [];
                     sortBy = 0;
                     isMine = 0;
                     ZeroiseBoxes();
@@ -2872,7 +2909,7 @@ $(function () {
 
 
 
-        var url = siteUrl + "/Handlers/GetMessages.ashx?currLat=" + myLat + "&currLon=" + myLon + "&uptoMeters=" + uptoMeters + "&timeZone=" + gmtHours + "&fromNumber=" + fromNumber + "&CategoryId=" + currCatId + "&SortBy=" + sortBy + "&IsMine=" + isMine + "&TakeNum=" + maxMessagesPerScreen;
+        var url = siteUrl + "/Handlers/GetMessages.ashx?currLat=" + myLat + "&currLon=" + myLon + "&uptoMeters=" + uptoMeters + "&timeZone=" + gmtHours + "&fromNumber=" + fromNumber + "&CategoryId=" + arrayCurrCategoriesID + "&SortBy=" + sortBy + "&IsMine=" + isMine + "&TakeNum=" + maxMessagesPerScreen;
 
         $.ajax({
             url: url,

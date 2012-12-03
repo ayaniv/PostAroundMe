@@ -286,7 +286,7 @@ public class PostAroundService : IPostAroundService
     }
 
 
-    public List<MyMessage> GetMessages(string currLat, string currLon, int userId, int skipNum, int takeNum, int isMine, int catID, int sotyBy, int timeZone = 0, int uptoMeters = -1, int regionId = 0)
+    public List<MyMessage> GetMessages(string currLat, string currLon, int userId, int skipNum, int takeNum, int isMine, List<int> lstCatID, int sotyBy, int timeZone = 0, int uptoMeters = -1, int regionId = 0)
     {
         
         PostAroundMeDataSet.GetAllMessagesDataTable dtResult = new PostAroundMeDataSet.GetAllMessagesDataTable();
@@ -323,9 +323,9 @@ public class PostAroundService : IPostAroundService
         else
         {
             // filter by category
-            if (catID > 0)
+            if (lstCatID != null && lstCatID.Count > 0)
             {
-                filteredResults = filteredResults.Where(m => m.catID == catID).ToList();
+                filteredResults = filteredResults.Where(m => lstCatID.Contains(m.catID)).ToList();
             }
 
             //sort by distance

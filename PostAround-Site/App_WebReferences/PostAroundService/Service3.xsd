@@ -40,7 +40,7 @@
         <xs:element minOccurs="0" name="skipNum" type="xs:int" />
         <xs:element minOccurs="0" name="takeNum" type="xs:int" />
         <xs:element minOccurs="0" name="isMine" type="xs:int" />
-        <xs:element minOccurs="0" name="catID" type="xs:int" />
+        <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="lstCatID" nillable="true" type="q2:ArrayOfint" />
         <xs:element minOccurs="0" name="sotyBy" type="xs:int" />
         <xs:element minOccurs="0" name="timeZone" type="xs:int" />
         <xs:element minOccurs="0" name="uptoMeters" type="xs:int" />
@@ -51,7 +51,7 @@
   <xs:element name="GetMessagesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/PostAround.Entities" minOccurs="0" name="GetMessagesResult" nillable="true" type="q2:ArrayOfMyMessage" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/PostAround.Entities" minOccurs="0" name="GetMessagesResult" nillable="true" type="q3:ArrayOfMyMessage" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -63,7 +63,7 @@
   <xs:element name="GetAllBriefMessagesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/PostAround.Entities" minOccurs="0" name="GetAllBriefMessagesResult" nillable="true" type="q3:ArrayOfBriefMessage" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/PostAround.Entities" minOccurs="0" name="GetAllBriefMessagesResult" nillable="true" type="q4:ArrayOfBriefMessage" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -82,7 +82,7 @@
   <xs:element name="GetMessageByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/PostAround.Entities" minOccurs="0" name="GetMessageByIdResult" nillable="true" type="q4:MyMessage" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/PostAround.Entities" minOccurs="0" name="GetMessageByIdResult" nillable="true" type="q5:MyMessage" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -100,14 +100,14 @@
   <xs:element name="GetMessagesByUserIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/PostAround.Entities" minOccurs="0" name="GetMessagesByUserIdResult" nillable="true" type="q5:ArrayOfMyMessage" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/PostAround.Entities" minOccurs="0" name="GetMessagesByUserIdResult" nillable="true" type="q6:ArrayOfMyMessage" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="InsertMessage">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/PostAround.Entities" minOccurs="0" name="msg" nillable="true" type="q6:MyMessage" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/PostAround.Entities" minOccurs="0" name="msg" nillable="true" type="q7:MyMessage" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -128,7 +128,7 @@
   <xs:element name="GetCurrentUserResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/PostAround.Entities" minOccurs="0" name="GetCurrentUserResult" nillable="true" type="q7:User" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/PostAround.Entities" minOccurs="0" name="GetCurrentUserResult" nillable="true" type="q8:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -142,14 +142,14 @@
   <xs:element name="GetUserByIDResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/PostAround.Entities" minOccurs="0" name="GetUserByIDResult" nillable="true" type="q8:User" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/PostAround.Entities" minOccurs="0" name="GetUserByIDResult" nillable="true" type="q9:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="InsertUpdateUser">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/PostAround.Entities" minOccurs="0" name="user" nillable="true" type="q9:User" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/PostAround.Entities" minOccurs="0" name="user" nillable="true" type="q10:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -163,7 +163,7 @@
   <xs:element name="SetFeedback">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/PostAround.Entities" minOccurs="0" name="feedback" nillable="true" type="q10:Feedback" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/PostAround.Entities" minOccurs="0" name="feedback" nillable="true" type="q11:Feedback" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -182,7 +182,7 @@
   <xs:element name="GetAllCategoriesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetAllCategoriesResult" nillable="true" type="q11:ArrayOfKeyValueOfintstring" />
+        <xs:element xmlns:q12="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetAllCategoriesResult" nillable="true" type="q12:ArrayOfKeyValueOfintstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -194,14 +194,14 @@
   <xs:element name="GetListCategoriesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/PostAround.Entities" minOccurs="0" name="GetListCategoriesResult" nillable="true" type="q12:ArrayOfCategory" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/PostAround.Entities" minOccurs="0" name="GetListCategoriesResult" nillable="true" type="q13:ArrayOfCategory" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="InsertComment">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/PostAround.Entities" minOccurs="0" name="comment" nillable="true" type="q13:Comment" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/PostAround.Entities" minOccurs="0" name="comment" nillable="true" type="q14:Comment" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -224,7 +224,7 @@
   <xs:element name="GetCommentsByMessageIDResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/PostAround.Entities" minOccurs="0" name="GetCommentsByMessageIDResult" nillable="true" type="q14:ArrayOfComment" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/PostAround.Entities" minOccurs="0" name="GetCommentsByMessageIDResult" nillable="true" type="q15:ArrayOfComment" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -239,7 +239,7 @@
   <xs:element name="GetAllCommentsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/PostAround.Entities" minOccurs="0" name="GetAllCommentsResult" nillable="true" type="q15:ArrayOfComment" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/PostAround.Entities" minOccurs="0" name="GetAllCommentsResult" nillable="true" type="q16:ArrayOfComment" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

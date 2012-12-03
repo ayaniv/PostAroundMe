@@ -160,6 +160,9 @@ h1 span
      #AddMessageWindow {margin-left: 1px}
 }
 
+#catsBar li { cursor:pointer; position:relative; margin-right:6px; margin-top:6px; height:10px; padding:10px; background-color:#f0f0f0; float:left; color:#82898e; font-family:Arial; font-size:14px; }
+
+.SelectedCategoryInBar { display:none; position:absolute; width:15px; height:14px; background:url('../images/icons.png') -315px -7px; margin-top:-4px; }
 
 .Content .Box {  position:absolute; width:273px; float:left; /*box-shadow: 1px 1px 1px #c0bcb1; -moz-box-shadow: 1px 1px 1px #c0bcb1; -webkit-box-shadow: 1px 1px 1px #c0bcb1; */ }
 .Content .Box .BoxBody {  float:left; width:100%; /* border-right:1px solid #cbcac9; border-bottom:1px solid #cbcac9 ; border-left:1px solid #E2DDCF;*/    }

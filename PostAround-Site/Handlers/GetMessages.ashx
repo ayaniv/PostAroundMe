@@ -28,14 +28,26 @@ public class GetMessages : IHttpHandler {
 
 
         int intSortBy = 0;
-        int intCatId = 0;
+        List<int> lstCatId = new List<int>();
+        int[] catIds = null;
         int isMine = 0;
         int lastBoxNumber = 0;
 
 
         Int32.TryParse(context.Request["TakeNum"], out takeNum);
+
+        string[] arrCategories = context.Request["CategoryId"].Split(',');
+        int tempCatId;
+        for (int i = 0; i < arrCategories.Length; i++)
+        {
+            if (Int32.TryParse(arrCategories[i], out tempCatId))
+                lstCatId.Add(tempCatId);
+        }
+        if (lstCatId != null && lstCatId.Count > 0)
+        {
+            catIds = lstCatId.ToArray<int>();
+        }
         
-        Int32.TryParse(context.Request["CategoryId"], out intCatId);
         Int32.TryParse(context.Request["SortBy"], out intSortBy);
         Int32.TryParse(context.Request["IsMine"], out isMine);
 
@@ -48,7 +60,7 @@ public class GetMessages : IHttpHandler {
 
         PostAroundServiceClient client = new PostAroundServiceClient();
 
-        PostAround.Entities.MyMessage[] messages = client.GetMessages(currLat, currLon, userid, lastBoxNumber, takeNum, isMine, intCatId, intSortBy, timeZone, uptoMeters, regionId);
+        PostAround.Entities.MyMessage[] messages = client.GetMessages(currLat, currLon, userid, lastBoxNumber, takeNum, isMine, catIds, intSortBy, timeZone, uptoMeters, regionId);
         //PostAround.Entities.Comment[] comments = client.GetAllComments(userid, timeZone);
         
 

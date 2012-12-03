@@ -21,7 +21,7 @@ namespace PostAround.ServiceContracts
         int SetUserPermission(UserPermission up);
 
         [OperationContract]
-        List<MyMessage> GetMessages(string currLat, string currLon, int userId, int skipNum, int takeNum, int isMine, int catID, int sotyBy, int timeZone, int uptoMeters, int regionID);
+        List<MyMessage> GetMessages(string currLat, string currLon, int userId, int skipNum, int takeNum, int isMine, List<int> lstCatID, int sotyBy, int timeZone, int uptoMeters, int regionID);
 
         [OperationContract]
         List<BriefMessage> GetAllBriefMessages();
