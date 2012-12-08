@@ -200,17 +200,22 @@ public static class Tools
 
     public static string DecodeFrom64(string encodedData)
     {
+        try
+        {
+            byte[] encodedDataAsBytes
 
-        byte[] encodedDataAsBytes
+                = System.Convert.FromBase64String(encodedData);
 
-            = System.Convert.FromBase64String(encodedData);
+            string returnValue =
 
-        string returnValue =
+               System.Text.Encoding.UTF8.GetString(encodedDataAsBytes);
 
-           System.Text.Encoding.UTF8.GetString(encodedDataAsBytes);
-
-        return returnValue;
-
+            return returnValue;
+        }
+        catch (Exception ex)
+        {
+            return "";
+        }
     }
 
 

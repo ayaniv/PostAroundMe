@@ -11,6 +11,9 @@ function SetPostButtonState(on) {
 }
 
 
+
+
+
 function Linkify(inputText) {
     //URLs starting with http://, https://, or ftp://
     var replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
@@ -63,6 +66,50 @@ function GetMarker() {
 // load google maps v2
 google.load("maps", "2");
 $(function () {
+    function GetAddressFromLatLon() {
+
+
+
+        var center = new GLatLng(myLat, myLon);
+        var geocoder = new GClientGeocoder();
+        geocoder.getLocations(center, function (response) {
+
+            if (response && response.Status.code == 200) {
+                address = response.Placemark[0].address;
+                ShowPosts();
+            }
+        });
+
+    }
+
+    GetDataFromQueryString();
+    function GetDataFromQueryString() {
+        if (getParameterByName("lat") != "" && getParameterByName("lon") != "") {
+            myLat = getParameterByName("lat");
+            myLon = getParameterByName("lon");
+            GetAddressFromLatLon();
+        } else if (getParameterByName("address") != "")
+        {
+            PerformGoToLocation(getParameterByName("address"))
+        }
+
+
+
+    }
+
+
+
+
+    function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+        var regexS = "[\\?&]" + name + "=([^&#]*)";
+        var regex = new RegExp(regexS);
+        var results = regex.exec(window.location.search);
+        if (results == null)
+            return "";
+        else
+            return decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
 
 
     //variable declaration
@@ -312,12 +359,10 @@ $(function () {
 
     ShowPosts();
     function ShowPosts() {
+
         // If has location data in cookies, display shows in that location
         if (address != "" && myLat != "" && myLon != "") {
             address = address.ReplaceAll("+", " ");
-
-            //ShowMoreButtonsArea(40);
-            //uptoMeters = 5000;
             GetPosition();
         } else {
             // fresh new user - if it's not a direct link, means it's homepage - show all posts
@@ -679,7 +724,7 @@ $(function () {
             arrayCurrCategoriesID.push(catId);
         }
         HighlightCategoryInBar(catId);
-        
+
 
         fromNumber = 0;
         $.when(ZeroiseBoxes()).then(GetMessages());
@@ -2213,6 +2258,8 @@ $(function () {
 
     //------------------------LOCATION STUFF BEGIN
 
+
+
     // Auto Discover on the homepage
     function GetPosition() {
         // if you have address already
@@ -2690,14 +2737,9 @@ $(function () {
       );
     }
 
+    function PerformGoToLocation(searchPhrase) {
 
-    $('#SearchBtn').click(function () {
-
-        var searchPhrase = $('#content').val();
-
-        if (searchPhrase == '') {
-            ClearPositionCookie()
-        } else {
+      
 
             MakeAddressLinkabilityDie();
 
@@ -2705,7 +2747,17 @@ $(function () {
             $("#WelcomeBubble").hide();
             $("#AutoDiscoverBubble").hide();
             GetLatLng(searchPhrase);
-        }
+        
+
+    }
+
+    $('#SearchBtn').click(function () {
+        var searchPhrase = $('#content').val();
+          if (searchPhrase == '') {
+            ClearPositionCookie()
+          } else {
+            PerformGoToLocation(searchPhrase);
+          }
     });
 
 

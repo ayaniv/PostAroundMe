@@ -39,9 +39,9 @@
 
 
     
-    Winning numbers for months <asp:TextBox ID="txtMonth" runat="server"></asp:TextBox>
+    Winning numbers for months <asp:DropDownList ID="ddMonth" OnSelectedIndexChanged="Index_Changed" AutoPostBack="true" runat="server"></asp:DropDownList>
     
-    as can be shown <a href="http://english.etax.nat.gov.tw/wSite/lp?ctNode=11647&CtUnit=1746&BaseDSD=7" target="_blank">here</a>
+    as can be shown <a href="http://www.etax.nat.gov.tw/etwmain?site=en" target="_blank">here</a>
     <br /><br />
     <table style="wdith:800">
     <tr>
@@ -89,21 +89,23 @@
     <asp:TextBox ID="txtResults" Enabled="false" style="width:800px" runat="server" TextMode="MultiLine"></asp:TextBox>
     <br />
     <hr />
-    sponsored by:
-    <div style="border:1px solid; width:780px; height:102px; padding:10px; background-color:#fffe89">
+    Brought to you by:
+    
+    <div style="border:1px solid; background-color:#fff947; width:780px; height:50px; padding:10px; ">
         <div style="float:left; padding-right:10px;">
-    <a href="http://postaround.me"><img border="0" src="../images/pam_map.png" alt="Local Pinboard" width="364" height="102" style="border:none" /></a>
+    <a href="http://postaround.me"><img border="0" src="../images/logo_neto.png" alt="Local Pinboard" width="258" height="50" style="border:none" /></a>
     </div>
-    <div class="Text"  style="font-style:normal; color:#424E55; font-size:13px;  >
-    This serive is free of charge. sponsored and hosted by
-    <br />
-    <a href="http://postaround.me"><b>Postaround.me | Local Pinboard</b></a>
-    <br /><br />
-    The easiest way to talk with your neighborhood
-    <br />
-    and post anything you like among your neighbors.
-    <br />
-    <a href="http://postaround.me">Check this out !</a>
+    <div class="Text" style="margin-top:7px; text-align:center; ">
+    
+    
+    
+    <a href="http://postaround.me" style="font-style:normal; text-decoration:none;  color:#424E55; font-weight:bold; text-transform:uppercase;  font-family:Trebuchet MS, Arial; font-size:14px;">
+    READ <span style="font-family:Helvetica">&</span> SHARE POSTS IN YOUR OWN NEIGHBORHOOD
+    <br />ON A PINBOARD BASED ON YOUR LOCATION
+    </a>
+    
+    
+    
     </div>
     <br />
     </div>

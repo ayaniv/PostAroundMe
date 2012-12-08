@@ -18,6 +18,7 @@ public partial class Controls_Head : System.Web.UI.UserControl
     protected string lat = "";
     protected string lng = "";
     protected string address = "";
+    protected string location = "";
     protected string dontShowMeAgainWelcome = "";
     protected bool isMobile;
     protected bool isDirectLink;
@@ -42,7 +43,7 @@ public partial class Controls_Head : System.Web.UI.UserControl
             siteUrl = siteUrl.Replace("www.", "");
         
         SetCookieData();
-        SetQueryStringData();
+        //SetQueryStringData();
     }
 
     
@@ -85,9 +86,27 @@ public partial class Controls_Head : System.Web.UI.UserControl
             lat = Request.QueryString["lat"];
         if (!string.IsNullOrWhiteSpace(Request.QueryString["lon"]))
             lng = Request.QueryString["lon"];
-        if (!string.IsNullOrEmpty(Request.QueryString["address"]))
-            address = HttpUtility.HtmlEncode(Tools.DecodeFrom64(Request.QueryString["address"].Trim('\0')));
+        //if (!string.IsNullOrEmpty(Request.QueryString["address"]))
+        //    location = HttpUtility.HtmlEncode(Request.QueryString["address"].Trim('\0'));
 
+
+
+        //String csname1 = "GetAddressFromLatLon";
+        //String csname2 = "GetAddressFromLocation";
+
+        //Type cstype = this.GetType();
+        //ClientScriptManager cs = Page.ClientScript;
+        // Check to see if the startup script is already registered.
+        //if (!cs.IsStartupScriptRegistered(cstype, csname1))
+        //{
+        //    cs.RegisterStartupScript(cstype, csname1, "GetAddressFromLatLon()", true);
+        //}
+
+        //if (!cs.IsStartupScriptRegistered(cstype, csname1))
+        //{
+            
+        //    cs.RegisterStartupScript(cstype, csname1, cstext2, true);
+        //}
 
     }
 

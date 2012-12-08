@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Lottery>
+
+
+  <Results Date="09-10/2012">
+    <Special>15719324</Special>
+    <Grand>11661657</Grand>
+    <First1>64718986</First1>
+    <First2>49313179</First2>
+    <First3>29736314</First3>
+    <Additional1>843</Additional1>
+    <Additional2>927</Additional2>
+  </Results>
+  
+  
+
+  <Results Date="07-08/2012">
+    <Special>64291909</Special>
+    <Grand>90961128</Grand>
+    <First1>96250863</First1>
+    <First2>50493330</First2>
+    <First3>28795588</First3>
+    <Additional1>266</Additional1>
+    <Additional2>045</Additional2>
+  </Results>
+
+
+  <Results Date="05-06/2012">
+    <Special>29734661</Special>
+    <Grand>99028391</Grand>
+    <First1>91180939</First1>
+    <First2>12753377</First2>
+    <First3>22638178</First3>
+    <Additional1>258</Additional1>
+    <Additional2>066</Additional2>
+  </Results>
+
+
+  
+  <Results Date="03-04/2012">
+    <Special>80314984</Special>
+    <Grand>86954229</Grand>
+    <First1>74114860</First1>
+    <First2>94758021</First2>
+    <First3>56857905</First3>
+    <Additional1>597</Additional1>
+    <Additional2>815</Additional2>
+</Results>
+  
+
+
+  <Results Date="01-02/2012">
+    <Special>59609701</Special>
+    <Grand>07063353</Grand>
+    <First1>33640895</First1>
+    <First2>67996436</First2>
+    <First3>35573745</First3>
+    <Additional1>144</Additional1>
+    <Additional2>598</Additional2>
+  </Results>
+
+  <Results Date="11-12/2011">
+  <Special>38032017</Special>
+  <Grand>38095343</Grand>
+  <First1>38583186</First1>
+  <First2>87541883</First2>
+  <First3>03658286</First3>
+  <Additional1>680</Additional1>
+  <Additional2>618</Additional2>
+</Results>
+  
+
+  <Results Date="09-10/2011">
+    <Special>71524465</Special>
+    <Grand>57659487</Grand>
+    <First1>46345106</First1>
+    <First2>86062929</First2>
+    <First3>29207557</First3>
+    <Additional1>572</Additional1>
+    <Additional2>779</Additional2>
+  </Results>
+  
+
+</Lottery>
+
+
+  

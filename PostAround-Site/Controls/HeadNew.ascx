@@ -15,6 +15,7 @@
             
             var myLat = '<%=lat %>';
             var myLon = '<%=lng %>';
+            //var location = unescape("<%=location %>");
             var address = unescape("<%=address %>");
             var dontShowMeAgainWelcome = "<%=dontShowMeAgainWelcome %>";
             var isMobile = <%=isMobile.ToString().ToLower() %>;

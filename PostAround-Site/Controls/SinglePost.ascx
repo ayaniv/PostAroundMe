@@ -45,7 +45,7 @@
         <div style="margin-left:24px"><a href="<%=mapUrl %>" target="_blank" title="Open Google Map"><asp:Literal runat="server" ID="ltrlAddress"></asp:Literal></a></div>
         
         </div>
-        <div class="GeneralLink" style="background-color:#f4f2ee; margin-top:3px; width:307px; color:#6AA1BB; font-size:14px; padding: 3px 6px 6px 6px;"><img src="<%=homePage %>images/pin3.png" style="width:13px; height:14px; margin:0 6px 0 6px;" /><a href="<%=homePage %>?lat=<%=BigBoxLat %>&lon=<%=BigBoxLon %>&address=<%=BigBoxAddress %>">See more posts around this location</a></div>
+        <div class="GeneralLink" style="background-color:#f4f2ee; margin-top:3px; width:307px; color:#6AA1BB; font-size:14px; padding: 3px 6px 6px 6px;"><img src="<%=homePage %>images/pin3.png" style="width:13px; height:14px; margin:0 6px 0 6px;" /><a href="<%=homePage %>?lat=<%=BigBoxLat %>&lon=<%=BigBoxLon %>">See more posts around this location</a></div>
         <div id="BigBoxSocial" style="margin-top:10px; width:100%; height:20px">
         <%--<div style="float:left; width:155px; margin-top:2px;">
         <uc1:AddThis ID="AddThis1" runat="server" />

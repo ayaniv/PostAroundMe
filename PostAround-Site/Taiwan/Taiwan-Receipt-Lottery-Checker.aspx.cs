@@ -5,12 +5,53 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Configuration;
+using System.Xml.Linq;
 
 public partial class Taiwan_Taiwan_Receipt_Lottery_Checker : System.Web.UI.Page
 {
+
+    private void SetTextBoxesByValue(string date)
+    {
+        string fileName = ConfigurationManager.AppSettings["PhysicalPath"] + @"\Taiwan\Invoice\" + "Results.xml";
+        var xmlDocument = XDocument.Load(fileName);
+        List<XElement> lstCombo = xmlDocument.Descendants("Results").ToList<XElement>();
+        List<XElement> lst = (from a in lstCombo where a.Attribute("Date").Value == date select a).Elements().ToList<XElement>();
+
+
+        txtSpecial.Text = lst[0].Value;
+        txtGrand.Text = lst[1].Value;
+        txtFirst1.Text = lst[2].Value;
+        txtFirst2.Text = lst[3].Value;
+        txtFirst3.Text = lst[4].Value;
+        txtAdd1.Text = lst[5].Value;
+        txtAdd2.Text = lst[6].Value;
+    }
+
+    protected void Index_Changed(Object sender, EventArgs e)
+    {
+
+
+        SetTextBoxesByValue(ddMonth.SelectedItem.Text);
+
+    }
+
+
     protected void Page_Load(object sender, EventArgs e)
     {
-        string text = System.IO.File.ReadAllText(ConfigurationManager.AppSettings["PhysicalPath"] + @"\Taiwan\Invoice\" + "Taiwan-Results.txt");
+        if (!IsPostBack)
+        {
+            string fileName = ConfigurationManager.AppSettings["PhysicalPath"] + @"\Taiwan\Invoice\" + "Results.xml";
+            var xmlDocument = XDocument.Load(fileName);
+            List<XElement> lstCombo = xmlDocument.Descendants("Results").ToList<XElement>();//convert to listid
+
+            ddMonth.DataSource = lstCombo.Select(x => x.Attribute("Date").Value);
+            ddMonth.DataBind();
+            SetTextBoxesByValue(lstCombo.First().Attribute("Date").Value);
+        }
+        
+
+        /*
+        //string text = System.IO.File.ReadAllText();
         text = text.Trim(' ');
         string[] array = text.Split(',');
         txtSpecial.Text = array[0];
@@ -21,6 +62,7 @@ public partial class Taiwan_Taiwan_Receipt_Lottery_Checker : System.Web.UI.Page
         txtAdd1.Text = array[5];
         txtAdd2.Text = array[6];
         txtMonth.Text = array[7];
+         */
     }
 
     private int GetResultByNumber(string currNum)
