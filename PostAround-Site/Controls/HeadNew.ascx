@@ -29,7 +29,9 @@
     <script type="text/javascript" src="http://www.google.com/jsapi?key=<%=ConfigurationManager.AppSettings["GoogleKey"] %>"></script>
     <%--<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=<%=ConfigurationManager.AppSettings["GoogleKeyV3"] %>&sensor=false"></script>--%>
     <script src="<%=siteUrl %>scripts/compress/jquery.js" type="text/javascript"></script>
-    <script src="<%=siteUrl %>scripts/compress/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
+    <%--<script src="<%=siteUrl %>scripts/compress/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>--%>
+    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js" type="text/javascript"></script>
+
     <script src="<%=siteUrl %>scripts/compress/modernizr.custom.43477.js" type="text/javascript"></script>
     <%--<link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin" rel="stylesheet">--%>
     
@@ -46,6 +48,8 @@
 
         <!-- css -->
     <link rel="stylesheet" href="<%=siteUrl %>/css/screenNew.css" type="text/css" media="screen" charset="utf-8" />
-    <link rel="stylesheet" href="<%=siteUrl %>/css/jquery-ui-1.8.21.custom.css" type="text/css" media="screen" charset="utf-8"></link>
+    
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" type="text/css" media="screen" charset="utf-8"></link>
+    <%--<link rel="stylesheet" href="<%=siteUrl %>/css/jquery-ui-1.8.21.custom.css" type="text/css" media="screen" charset="utf-8"></link>--%>
     <link rel="shortcut icon" href="<%=siteUrl %>images/favicon.png" />
 

@@ -58,7 +58,7 @@ public partial class Controls_MetaTags : System.Web.UI.UserControl
         
         Dictionary<string, string> metaAttributes = new Dictionary<string, string>();
         metaAttributes.Add("description", description);
-        metaAttributes.Add("keywords", "Location Based Social Network, Location Based Bulletin Board,  Pinboard, posterboard, bulletin board, billboard, neighborhood, my hood, hood, people around, nearby, nearbyme, bulletin, board, location, geolocation, postaround, posting, based, area, Location Based Bulletin Board, Location Based Pinboard, aroundme, post around me, postaroundme, postaround, לוח מודעות, לוח מודעות מבוסס מיקום");
+        metaAttributes.Add("keywords", "Location Based Social Network, places, locations, local, hyperlocal, geo-tagging, geo-community, listener, broadcast, local feed, local recommendations, local restaurants, local message board, local community, local issues, Location Based Bulletin Board,  Pinboard, posterboard, bulletin board, billboard, neighborhood, myhood, hood, people around, nearby, nearbyme, bulletin, board, location, geolocation, postaround, posting, based, area, Location Based Bulletin Board, Location Based Pinboard, aroundme, post around me, postaroundme, postaround, לוח מודעות, לוח מודעות מבוסס מיקום");
         metaAttributes.Add("author", "Yaniv Aharon");
         
         HtmlMeta tag;

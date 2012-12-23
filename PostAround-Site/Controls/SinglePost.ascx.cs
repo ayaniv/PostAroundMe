@@ -106,29 +106,7 @@ public partial class Controls_SinglePost : System.Web.UI.UserControl
     }
 
 
-     protected string GetLanguageDirection(string str)
-     {
-         //english
-         string direction = "ltr";
-
-         if (str == null)
-             return direction;
-
-         str = Regex.Replace(str, @"[\d-]", string.Empty);
-         str = str.Trim();
-         
-
-        //hebrew
-        if ((str[0] > 0x590) && (str[0] < 0x5FF))
-            direction = "rtl";
-
-        //arabic
-        else if ((str[0] > 0x600) && (str[0] < 0x6FF))
-            direction = "rtl";
-
-        return direction;
-
-    }
+     
 
     private PostAround.Entities.MyMessage GetMessageByID(int msgId)
     {
@@ -169,6 +147,9 @@ public partial class Controls_SinglePost : System.Web.UI.UserControl
             ((Literal)e.Item.FindControl("cmtUserName")).Text = "<a href='" + item.commentUserLink + "' target='_blank'>" + item.name + "</a>";
             ((Literal)e.Item.FindControl("cmtBody")).Text = FormatText(item.body);
             ((Literal)e.Item.FindControl("cmtDate")).Text = item.strDate + " at " + item.strTime;
+
+            ((HtmlGenericControl)e.Item.FindControl("CommentText")).Style.Add("direction", GetLanguageDirection(item.body));
+            
             
             //((TextBox)e.Item.FindControl("txtDropDownCategoryId")).Text = item.ID.ToString();
             //((Label)e.Item.FindControl("ltrlDropDownColor")).Style.Add("background-color", item.Color);
@@ -186,6 +167,29 @@ public partial class Controls_SinglePost : System.Web.UI.UserControl
 
     }
 
+    protected string GetLanguageDirection(string str)
+    {
+        //english
+        string direction = "ltr";
+
+        if (str == null)
+            return direction;
+
+        str = Regex.Replace(str, @"[\d-]", string.Empty);
+        str = str.Trim();
+
+
+        //hebrew
+        if ((str[0] > 0x590) && (str[0] < 0x5FF))
+            direction = "rtl";
+
+        //arabic
+        else if ((str[0] > 0x600) && (str[0] < 0x6FF))
+            direction = "rtl";
+
+        return direction;
+
+    }
 
     private string Linkify(string inputText) {
         //URLs starting with http://, https://, or ftp://

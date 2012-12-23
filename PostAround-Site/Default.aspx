@@ -111,7 +111,7 @@
                                     <div id="commentUserName">
                                         <a href="${commentUserLink}" target="_blank">${name}</a>
                                     </div>
-                                    <div id="CommentText" style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</div>
+                                    <div id="CommentText" class="CommentText" style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</div>
                                     <div class="CommentDate">${strDate} at ${strTime}</div>
 
                                 </div>
@@ -141,7 +141,7 @@
                                     <div id="commentUserName">
                                         <a href="${commentUserLink}" target="_blank">${name}</a>
                                     </div>
-                                    <div id="CommentText" style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</div>
+                                    <div id="CommentText" class="CommentText" style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</div>
                                     <div class="CommentDate">${strDate} at ${strTime}</div>
 
                                 </div>
@@ -163,14 +163,19 @@
                 <div id="BoxLine" class="Line" color="${catColor}" style="background-color:${catColor}">
                 </div>
                 <div class="TextArea">
+                
                     <div class="BoxHead">
-                        
-                        
+                
+                <div class="FullAddress">
+                <div class="Arrow"></div>       
+                <div class="TextAddress">${msgAddress}</div>        
+                </div>
                         <div>
                             <div class="BoxCategory" style="color:#a3a3a3">${category}</div>
-                            <div style="float:right">
-                            <div id="Marker" title="Show On Map" ></div>
-                            <a href="<%=siteUrl %>post/${msgId}" onclick="return false;" id="ShowOnMap" title="Show On Map" class="Word">{{html ShowDistance(Distance, msgAddress)}}</a>
+                            <div style="float:right" id="locationWrapper">
+                            
+                            <div id="Marker"></div>
+                            <a href="<%=siteUrl %>post/${msgId}" onclick="return false;" id="ShowOnMap" class="Word">{{html ShowDistance(Distance, msgAddress)}}</a>
                             
                             </div>
                         </div>
@@ -262,7 +267,7 @@
                                     <div id="commentUserName">
                                         <a href="${commentUserLink}" target="_blank">${name}</a>
                                     </div>
-                                    <div id="CommentText" style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</div>
+                                    <div id="CommentText" class="CommentText" style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</div>
                                     <div class="CommentDate">${strDate} at ${strTime}</div>
 
                                 </div>
@@ -276,7 +281,7 @@
 
                     </div>
                     
-                    <div class="AddComment"><textarea  maxlength="500" id="Comment" cols"1" rows="1">Write a comment...</textarea></div>
+                    <div class="AddComment"><textarea  maxlength="500" id="Comment" cols"1" rows="1" placeholder="Write a comment...">Write a comment...</textarea></div>
                 </div>
                 
                 </div>

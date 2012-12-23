@@ -22,14 +22,16 @@
             <span><a href="<%=siteUrl %>Pages/Privacy.aspx" target="_blank">privacy</a></span>
         </div>
 
-                <div class="Text" style="clear:both; padding-top:20px; color:#dfdfdf; width:400px;">
+                <div class="Text" style="clear:both; float:left; padding-top:20px; color:#dfdfdf; width:400px;">
                 
     <a href="<%=siteUrl %>" style="color:#dfdfdf; font-style:normal; font-size:12px; font-weight:bold;">Post Around Me</a> is fun and easy way to share with your neighbors. <br />
     Know a good restarurant around? Need a ladder to borrow? Want to sell your sofa? Looking for a babysitter? Anything you want to share with your neighborhood,
-    just post it around in public and find out what's good in your hood !
+    just post it around in public and find out1 what's good in your hood !
                     
 
             </div>
+
+            <div style="float:right; margin-right:47px; margin-top:14px;"><img style="width:144px; height:85px" src="images/madeintlv.png" /></div>
 
 
             </div>

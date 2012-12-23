@@ -96,7 +96,7 @@
         <div id="BigBoxMedia" style="width:100%; background-color:#EAEDEE; margin-top:10px;">
         <asp:Literal ID="ltrlMedia" runat="server"></asp:Literal>
         </div>
-        <div id="BigBoxText" style="width:100%; margin-top:10px; direction:<%=directionDescription%>; color:#3b3b3d; font-size:14px;">
+        <div id="BigBoxText" style="width:100%; margin-top:10px; direction:<%=directionDescription%>; color:#3b3b3d; font-size:22px;">
         <asp:Literal ID="ltrlText" runat="server"></asp:Literal>
         </div>
 
@@ -133,7 +133,7 @@
                                         <asp:Literal ID="cmtUserName" runat="server"></asp:Literal>
                                         
                                     </div>
-                                    <div id="CommentText">
+                                    <div id="CommentText" class="CommentText" runat="server" >
                                     <asp:Literal ID="cmtBody" runat="server"></asp:Literal>
                                     </div>
                                     <div class="CommentDate">
@@ -194,7 +194,7 @@
                                     <div id="commentUserName">
                                         <a href="${commentUserLink}" target="_blank">${name}</a>
                                     </div>
-                                    <div id="CommentText" style="direction:${GetLanguageDirection(body)}" >${body}</div>
+                                    <div id="CommentText" class="CommentText" style="direction:${GetLanguageDirection(body)}" >${body}</div>
                                     <div class="CommentDate">${strDate} at ${strTime}</div>
 
                                 </div>

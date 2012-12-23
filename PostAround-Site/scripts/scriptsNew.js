@@ -66,52 +66,7 @@ function GetMarker() {
 // load google maps v2
 google.load("maps", "2");
 $(function () {
-    function GetAddressFromLatLon() {
-
-
-
-        var center = new GLatLng(myLat, myLon);
-        var geocoder = new GClientGeocoder();
-        geocoder.getLocations(center, function (response) {
-
-            if (response && response.Status.code == 200) {
-                address = response.Placemark[0].address;
-                ShowPosts();
-            }
-        });
-
-    }
-
-    GetDataFromQueryString();
-    function GetDataFromQueryString() {
-        if (getParameterByName("lat") != "" && getParameterByName("lon") != "") {
-            myLat = getParameterByName("lat");
-            myLon = getParameterByName("lon");
-            GetAddressFromLatLon();
-        } else if (getParameterByName("address") != "")
-        {
-            PerformGoToLocation(getParameterByName("address"))
-        }
-
-
-
-    }
-
-
-
-
-    function getParameterByName(name) {
-        name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-        var regexS = "[\\?&]" + name + "=([^&#]*)";
-        var regex = new RegExp(regexS);
-        var results = regex.exec(window.location.search);
-        if (results == null)
-            return "";
-        else
-            return decodeURIComponent(results[1].replace(/\+/g, " "));
-    }
-
-
+    
     //variable declaration
     // save the current slider uptoMeters value
     var TRESHOLD = 10;
@@ -208,6 +163,52 @@ $(function () {
     });
 
 
+    function GetAddressFromLatLon() {
+
+
+
+        var center = new GLatLng(myLat, myLon);
+        var geocoder = new GClientGeocoder();
+        geocoder.getLocations(center, function (response) {
+
+            if (response && response.Status.code == 200) {
+                address = response.Placemark[0].address;
+                ShowPosts();
+            }
+        });
+
+    }
+
+    GetDataFromQueryString();
+    function GetDataFromQueryString() {
+        if (getParameterByName("lat") != "" && getParameterByName("lon") != "") {
+            myLat = getParameterByName("lat");
+            myLon = getParameterByName("lon");
+            GetAddressFromLatLon();
+        } else if (getParameterByName("address") != "") {
+            PerformGoToLocation(getParameterByName("address"))
+        }
+
+
+
+    }
+
+
+
+
+    function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+        var regexS = "[\\?&]" + name + "=([^&#]*)";
+        var regex = new RegExp(regexS);
+        var results = regex.exec(window.location.search);
+        if (results == null)
+            return "";
+        else
+            return decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+
+
+
     function FixAddThisAjax() {
 
         var script = 'http://s7.addthis.com/js/250/addthis_widget.js#domready=1';
@@ -266,7 +267,11 @@ $(function () {
     }
 
 
+    
+
+
     $("#slider").slider({
+    
         value: 10500,
         range: "min",
         min: 0,
@@ -359,6 +364,12 @@ $(function () {
 
     ShowPosts();
     function ShowPosts() {
+
+        if (getParameterByName("isMine") == "1") {
+            $("#btnMyPosts").html("All Posts");
+            $("#btnMyPosts").addClass("selected")
+            isMine = 1;
+        }
 
         // If has location data in cookies, display shows in that location
         if (address != "" && myLat != "" && myLon != "") {
@@ -570,22 +581,25 @@ $(function () {
 
     function ShowAddMessageWindow(isNewMessage) {
 
-        $('.qq-upload-drop-area').hide();
         $('#txtPopupDetails1').hide();
         //SetPostButtonState(true);
 
         if (currentUser != null) {
             ManageBrowserSupport();
+            $('.qq-upload-drop-area').hide();
+
+            if (isNewMessage) {
+                SetPostToFacebookCheckBoxIfPermissionAlreadyGranted();
+
+                if (HasAddress())
+                    ShowLocationInAddMessgae();
+                else
+                    ShowSearchLocationInAddMessage();
+            }
+
         }
 
-        if (isNewMessage) {
-            SetPostToFacebookCheckBoxIfPermissionAlreadyGranted();
 
-            if (HasAddress())
-                ShowLocationInAddMessgae();
-            else
-                ShowSearchLocationInAddMessage();
-        }
 
 
 
@@ -816,7 +830,7 @@ $(function () {
         }
 
 
-        if (($.trim($("#txtPopupDetails").val()) == '') || ($.trim($("#txtPopupDetails").val()) == "Hang your post here...")) {
+        if (($.trim($("#txtPopupDetails").val()) == '') || ($.trim($("#txtPopupDetails").val()) == "Tell your neighbors about...")) {
             $("#txtPopupDetails").css("border-color", "#FF0000");
             if (errorText != "")
                 errorText = errorText + ", "
@@ -1179,7 +1193,7 @@ $(function () {
             url: url,
             sync: false,
             dataType: "json",
-            success: function (data) { location.reload(true) }
+            success: function (data) { window.location.href = siteUrl; }
         });
 
     }
@@ -1513,13 +1527,13 @@ $(function () {
 
     $('#Comment').live('focus', function () {
         if ($(this).val() == "Write a comment...") {
-            $(this).addClass('TextColorBlack');
+            $(this).removeClass('TextColorBlack');
             $(this).val('')
         }
     });
     $('#Comment').live('blur', function () {
         if ($(this).val() == "") {
-            $(this).removeClass('TextColorBlack');
+            $(this).addClass('TextColorBlack');
             $(this).val("Write a comment...")
         }
     });
@@ -1534,12 +1548,11 @@ $(function () {
     //$('#EditPost').live('mouseover', function () { $(this).addClass('pointer'); });
     //$('#EditPost').live('mouseout', function () { $(this).removeClass('pointer'); });
 
+    
+    $('#locationWrapper').live('mouseover', function () { $(this).parents(".BoxHead").find(".FullAddress").show(); });
+    $('#locationWrapper').live('mouseout', function () { $(this).parents(".BoxHead").find(".FullAddress").hide(); });
 
-    $('#Marker').live('mouseover', function () { $(this).parent().find("#ShowOnMap").addClass('underline'); });
-    $('#Marker').live('mouseout', function () { $(this).parent().find("#ShowOnMap").removeClass('underline'); });
-
-    $('#ShowOnMap').live('mouseover', function () { $(this).addClass('underline'); });
-    $('#ShowOnMap').live('mouseout', function () { $(this).removeClass('underline'); });
+    
 
     $(".MineButton").live('mouseover', function () { $(this).css("background-color", "#7ab5c4"); });
     $(".MineButton").live('mouseout', function () { $(this).css("background-color", ""); });
@@ -1828,9 +1841,14 @@ $(function () {
                 isMine = 1;
             }
         }
-        fromNumber = 0;
-        ZeroiseBoxes();
-        GetMessages();
+        if (!isDirectLink) {
+            fromNumber = 0;
+            ZeroiseBoxes();
+            GetMessages();
+        } else {
+            window.location = siteUrl + "?isMine=1";
+        }
+
     });
 
     function DisplayShortAddress(lat, lon, element) {
@@ -2598,6 +2616,7 @@ $(function () {
             }
 
             ShowAdressDetailsInAddMessage(address, myLat, myLon);
+            showAddressInBar(myLat, myLon, address);
 
         });
     }
@@ -2732,6 +2751,7 @@ $(function () {
                     var lng = point.lng();
 
                     showAddressInAddMessage(address, lat, lng);
+                    showAddressInBar(lat, lng, address);
                 }
             }
       );
@@ -2739,25 +2759,25 @@ $(function () {
 
     function PerformGoToLocation(searchPhrase) {
 
-      
 
-            MakeAddressLinkabilityDie();
 
-            //$('#MapBg').hide();
-            $("#WelcomeBubble").hide();
-            $("#AutoDiscoverBubble").hide();
-            GetLatLng(searchPhrase);
-        
+        MakeAddressLinkabilityDie();
+
+        //$('#MapBg').hide();
+        $("#WelcomeBubble").hide();
+        $("#AutoDiscoverBubble").hide();
+        GetLatLng(searchPhrase);
+
 
     }
 
     $('#SearchBtn').click(function () {
         var searchPhrase = $('#content').val();
-          if (searchPhrase == '') {
+        if (searchPhrase == '') {
             ClearPositionCookie()
-          } else {
+        } else {
             PerformGoToLocation(searchPhrase);
-          }
+        }
     });
 
 
@@ -3372,8 +3392,11 @@ $(function () {
 
 
     //-- DATA ARRANGE END
+   
+    
 
 
+    
 
 
 
