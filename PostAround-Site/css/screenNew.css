@@ -184,7 +184,7 @@ h1 span
 
 .Content .Box .BoxBody .BoxImage .Border img { width:235px; border:3px solid #FFF; background-color:#EAEDEE; }
 .Content .Box .BoxBody .Text { margin-top:15px; float:left; width:243px; font-family:Tahoma,Arial;  }
-.Content .Box .BoxBody .MessageName { font-size:12px; color:#999; margin-top:15px; float:left; width:100% }
+.Content .Box .BoxBody .MessageName { font-size:12px; color:#b2b2b2; margin-top:15px; float:left; width:100% }
 									  
 .Content .Box .BoxBody .MessageName a {font-size:12px; /*color:#888888;*/ font-weight:bold; /*text-decoration:none;*/}
 
@@ -286,6 +286,7 @@ h1 span
     width:200px;
 	height:25px;
 	margin-top:4px;
+	border: 1px solid #7D90BA;
 	
 	
 }
@@ -571,7 +572,7 @@ textarea {
  
 
  
- .MessageName  { color:#6aa1bb; font-size:11px; margin-top:0px; padding-top:0px;  }
+ .MessageName  { color:#b2b2b2; font-size:11px; margin-top:0px; padding-top:0px;  }
  
  .AddressTextBox{ margin-bottom: 0px; margin-top: 0px; margin-left:0px; height:21px; padding-left:10px; padding-top:2px; font-weight:bold; padding-right:3px; width:450px; font-size:13px; color:#858c90; border-style:solid; border-width:1px; border-color:#cbcecf; font-family:Arial; }
  

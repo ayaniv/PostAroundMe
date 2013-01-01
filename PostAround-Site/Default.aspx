@@ -221,11 +221,27 @@
 
                 <div class="MessageName">
                     <a href="${link}" target="_blank"><img src="${userImage}" style="border:0; float:left; width:45px; height:45px; margin-right:6px" /></a> 
-                    <a href="${link}" target="_blank">${Name}</a>
+                    <a href="${link}" target="_blank" style="float:left; margin-top:-2px">${Name}</a>
                     <br />
-                    <span style="clear:both">Posted on ${Date} at ${Time}</span>
+                    <span style="float:left; margin-top:-2px;">Posted on ${Date}</span>
                     <br />
-                    <a href="<%=siteUrl %>post/${msgId}" onclick="return false;" class="zoomIn">Link</a> · <span>${GetLengh(comments)}</span> comments
+                    
+                    <div style="margin-top:-3px; float:left;">
+                    <span style="background:url('images/icons.png') -331px 0px; width:22px; height:18px; float:left;"></span>
+                    <div style="margin-top:2px; float:left;">
+                    <span style="color:#333; font-weight:bold;">88</span>&nbsp;Share · Follow · Comment
+                    </div>
+                    </div>
+
+<div style="height:20px; display:none;">
+<div class="addthis_toolbox addthis_default_style" addthis:url="http://postaround.me/post/553">
+<a class="addthis_button_preferred_1" style="margin-top:2px;"></a>
+<a class="addthis_button_preferred_2" style="margin-top:2px;"></a>
+<a class="addthis_button_preferred_3" style="margin-top:2px;"></a>
+<a class="addthis_button_preferred_4" style="margin-top:2px;"></a>
+<a class="addthis_button_preferred_5" style="margin-top:2px;"></a>
+</div>
+</div>
 
                 </div>
                 
@@ -281,7 +297,7 @@
 
                     </div>
                     
-                    <div class="AddComment"><textarea  maxlength="500" id="Comment" cols"1" rows="1" placeholder="Write a comment...">Write a comment...</textarea></div>
+                    <div class="AddComment"><textarea  maxlength="500" id="Comment" cols"1" rows="1" placeholder="Post a comment...">Post a comment...</textarea></div>
                 </div>
                 
                 </div>

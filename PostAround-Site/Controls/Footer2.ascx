@@ -31,7 +31,7 @@
 
             </div>
 
-            <div style="float:right; margin-right:47px; margin-top:14px;"><img style="width:144px; height:85px" src="images/madeintlv.png" /></div>
+            <div style="float:right; margin-right:47px; margin-top:14px;"><a href="http://madeintlv.org" title="Made in TLV" style="border=0" target="_blank"><img style="width:100px; height:30px; border=0" src="images/madeintlv.png" /></a></div>
 
 
             </div>

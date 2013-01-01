@@ -17,18 +17,26 @@
      <div style="background-color:#EAEDEE;">
          <div style="text-align:center; padding:20px;">
              
-              <div>
-             <uc1:FacebookLoginButton ID="FacebookLoginButton1" runat="server" />
-             </div>
-             <div style="margin-top:10px; color:#424E55; font-family:Trebuchet MS, Arial, Sans-Serif; text-align:left;">
-             We just ask for your basic details:
-             <ul style="text-align:left; font-size:12px; margin-left:16px;">
-             <li style="list-style-type:square">Name, Profile picture, Gender, User ID</li>
-             <li  style="list-style-type:square">Your email address</li>
-             <li  style="list-style-type:square">Your birthday</li>
+             <span style="font-weight:bold; font-family:Trebuchet MS, Arial, Sans-Serif; font-size:20px">Please Sign Up First.</span>
+             <div style="color:#5f676c; margin-left:20px; width:250px; font-family:Trebuchet MS, Arial, Sans-Serif; text-align:left;">
+             <ul>
+             <li>We just ask for your basic details.</li>
+             <li>We don't store your password.</li>
+             <li>We will never post ANYTHING on your behalf, unless you ask for it.</li>
+             <li>Sign Up NOW it's fun and easy :)</li>
              </ul>
-             We will never post ANYTHING on your behalf, unless you ask for it.
-             Sign Up NOW it's fun and easy :)
+             
+             
+             
+             </div>
+
+         </div>
+         
+         <div style="background-color:#5c74a9;">
+         <div style="width:16px; margin:auto; height:8px; background:url('images/icons.png') -132px -76px"></div>
+
+          <div style="text-align:center; padding:12px 20px 20px 20px;">
+             <uc1:FacebookLoginButton ID="FacebookLoginButton1" runat="server" />
              </div>
 
          </div>

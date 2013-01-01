@@ -157,7 +157,7 @@
 
                     
                     
-                    <div class="AddComment" style="margin-top:0"><textarea style="width:495px"  maxlength="500" id="Comment" cols"1" rows="1">Write a comment...</textarea></div>
+                    <div class="AddComment" style="margin-top:0"><textarea style="width:495px"  maxlength="500" id="Comment" cols"1" rows="1">Post a comment...</textarea></div>
                 </div>
 
         </div>

@@ -26,24 +26,29 @@
 
 
 
-<div style="float:left; padding:10px; padding-left:0; width:auto;" >
+<div style="float:left; padding:5px 10px 10px 0; width:auto;" >
 
            
            
            
-           <div style="float:left; color:#333; font-size:18px; font-weight:bold; font-family:Trebuchet MS, Arial, Sans-Serif; text-transform:uppercase;">showing posts around</div>
+
            <div style="clear:both">
-           <div style="float:left; color:#333; font-family:Georgia, Calibri, Arial; display:block; font-size:14px; cursor:pointer" title="Show/Hide location on map"  id="moreButtonsText"></div>
+           <div style="float:left; color:#333; font-family:Georgia, Calibri, Arial; display:block; font-size:24px; font-style:italic; cursor:pointer" title="Show/Hide location on map"  id="moreButtonsText"></div>
+           </div>
+           <div style="float:left; color:#333; font-size:12px; font-weight:bold; font-family:Trebuchet MS, Arial, Sans-Serif; text-transform:uppercase;">Showing posts around here</div>
            <div id="LocationLinks" style="float:left;">
-           <div style="float:left; margin-left:10px; color:#6AA1BB; font-family:Georgia, Calibri, Arial; font-size:14px; ">|</div>
-           <div class="LocationLink" style="float:left; margin-left:10px; color:#6AA1BB; font-family:Georgia, Calibri, Arial; font-size:14px; "  id="btnChangeLocation">Change</div>
+           <div style="float:left; margin-left:10px; color:#6AA1BB; font-family:Trebuchet MS, Arial, Sans-Serif; font-size:14px; ">|</div>
+           <div class="LocationLink" style="float:left; margin-left:10px; color:#6AA1BB; font-family:Trebuchet MS, Arial, Sans-Serif; font-size:14px; "  id="btnChangeLocation">Change</div>
+           <div style="float:left; margin-left:10px; color:#6AA1BB; font-family:Trebuchet MS, Arial, Sans-Serif; font-size:14px; ">|</div>
+           <div class="LocationLink" style="float:left; margin-left:10px; color:#6AA1BB; font-family:Trebuchet MS, Arial, Sans-Serif; font-size:14px; "  id="btnShowMap">Map</div>
+
            </div>
            <div id="TryAgainWrapper" style="float:left; display:none;">
            <div style="float:left; margin-left:10px; color:#6AA1BB; font-family:Georgia, Calibri, Arial; font-size:14px; ">|</div>
            <div id="TryAgain" class="LocationLink" style="float:left; margin-left:10px; color:#6AA1BB; font-family:Georgia, Calibri, Arial; font-size:14px; ">Try Again</div>
            </div>
 
-           </div>
+           
            
            
 </div>

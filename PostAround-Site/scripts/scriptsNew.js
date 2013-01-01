@@ -141,6 +141,7 @@ $(function () {
     })
     .ajaxComplete(function () {
         $(this).hide();
+        
         if (PopUpIsOpened) {
 
             FB.XFBML.parse();
@@ -150,8 +151,8 @@ $(function () {
             var tempLon = $('#BigBoxContainer').attr('box-lon');
             SetMapCanvas(tempLat, tempLon);
 
-            //FixAddThisAjax();
-
+            //
+            
 
         }
 
@@ -161,6 +162,8 @@ $(function () {
 
 
     });
+
+
 
 
     function GetAddressFromLatLon() {
@@ -211,9 +214,11 @@ $(function () {
 
     function FixAddThisAjax() {
 
-        var script = 'http://s7.addthis.com/js/250/addthis_widget.js#domready=1';
+        var script = 'http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4fdef26e46826d05';
         if (window.addthis) {
             window.addthis = null;
+            //window.addthis.ost = 0;
+            //window.addthis.ready();
 
             //fix for blank counter
             window._adr = null;
@@ -225,6 +230,8 @@ $(function () {
         }
         $.getScript(script);
     }
+
+
 
 
 
@@ -830,7 +837,7 @@ $(function () {
         }
 
 
-        if (($.trim($("#txtPopupDetails").val()) == '') || ($.trim($("#txtPopupDetails").val()) == "Tell your neighbors about...")) {
+        if (($.trim($("#txtPopupDetails").val()) == '') || ($.trim($("#txtPopupDetails").val()) == "Add your post here !")) {
             $("#txtPopupDetails").css("border-color", "#FF0000");
             if (errorText != "")
                 errorText = errorText + ", "
@@ -1110,6 +1117,7 @@ $(function () {
 
         //Details
         $("#txtPopupDetails").val('');
+        $("#txtPopupDetails").height(70);
         $("#txtPopupDetails1").blur();
 
         //Photo
@@ -1276,6 +1284,12 @@ $(function () {
     });
 
 
+    $('#btnShowMap').click(function () {
+        ToggleMapPanel(true)
+
+    });
+
+
     $('#btnChangeLocationAddPost').click(function () {
         $('#divManualAddress').show();
         $('#TopMessageAddPost').hide();
@@ -1328,7 +1342,7 @@ $(function () {
 
     function ChangeToSmallHeaderStep2() {
         if ($('#MapPas').css("display") != "none") {
-            //$('#MapPas').slideUp("slow", "linear");
+            $('#MapPas').slideUp("slow", "linear");
             MakeAddressLinkability();
 
         }
@@ -1526,7 +1540,7 @@ $(function () {
     });
 
     $('#Comment').live('focus', function () {
-        if ($(this).val() == "Write a comment...") {
+        if ($(this).val() == "Post a comment...") {
             $(this).removeClass('TextColorBlack');
             $(this).val('')
         }
@@ -1534,7 +1548,7 @@ $(function () {
     $('#Comment').live('blur', function () {
         if ($(this).val() == "") {
             $(this).addClass('TextColorBlack');
-            $(this).val("Write a comment...")
+            $(this).val("Post a comment...")
         }
     });
 
@@ -1717,7 +1731,10 @@ $(function () {
         $("#AboutBox").hide();
     });
 
-    var menuWidth = parseInt($('#divLogin').css('width').replace("px", ""));
+    var menuWidth = 0;
+    if ($('#divLogin').css('width'))
+        menuWidth = parseInt($('#divLogin').css('width').replace("px", ""));
+
     $('#MoreBox').css("width", menuWidth + 34);
     $('#MoreBox li').css("width", menuWidth + 24);
 
@@ -3004,6 +3021,7 @@ $(function () {
             },
             complete: function () {
                 getMessagesRunning = false;
+                //FixAddThisAjax();
 
             }
         });

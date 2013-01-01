@@ -21,7 +21,7 @@
                     <div style="position:relative; margin-bottom:6px; width:325px;">
                     
                     
-                    <textarea maxlength="400" id="txtPopupDetails" style="width:299px; height:70px; padding-right:20px; margin-top:0;" title="Details"  placeholder="Tell your neighbors about..."></textarea>
+                    <textarea maxlength="400" id="txtPopupDetails" style="width:299px; height:70px; padding-right:20px; margin-top:0;" title="Details"  placeholder="Add your post here !"></textarea>
                     
                              <div id="xbutton" style="width:14px; height:16px; clear:both; float: right; top:0; right:0; padding: 5px; padding-top: 4px; position:absolute; cursor: pointer;">
          <div style="margin-right:1px; background: url('images/icons.png') repeat scroll -140px -143px; float: right;
@@ -127,10 +127,10 @@
              font-size: 14px;">
              Please click <b>'Allow'</b> above to <b>Share Location</b>...</div>
          <div id="divAddressContainer" style="margin-bottom:6px; width:380; " >
-             <div class="Marker"></div>
-             <div style="float:left; padding-left: 6px; font-size:12px; color:#333;">Post Around:</div>
+             <div class="Marker" style="margin-top:2px"></div>
+             <div style="float:left; padding-left: 6px; font-size:16px; font-family:Calibri, Arial; font-style:italic; color:#57849D;">Post around:</div>
              <div  id="divAddress" style="clear:both; padding-left: 15px; width:310px; color: #82898e;
-                 font-size: 11px;">
+                 font-size: 15px;">
                  </div>
                  <div id="divAddressChange" style="width:44px; margin-left:14px; font-size:11px; color:#6fa6b8; text-decoration:underline; cursor:pointer;">(change)</div>
          </div>

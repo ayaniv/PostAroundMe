@@ -15,6 +15,16 @@
 <uc1:MetaTags ID="MetaTags1" runat="server" />
 
     <form id="form1" runat="server">
+
+
+
+<script type="text/javascript">
+    //alert($('.addthis_button_expanded').text());
+    //https: //api.facebook.com/method/fql.query?query=select+total_count+from+link_stat+where+url=%22postaround.me/post/553%22
+</script>
+
+
+
     <div style="width:500px; height:400px; padding:50px; background:url('http://postaround.me/images/bgWhite80.png') repeat scroll 0 0 transparent; margin-left:auto; margin-right:auto; margin-top:50px;">
     <a href="http://postaround.me">
     <img alt="Post Around Me | Local Pinboard" style="border:0; width:246px; height:43px; border:0" title="PostAround.Me | Local Pinboard" src="http://postaround.me/images/logoHead.png" />
