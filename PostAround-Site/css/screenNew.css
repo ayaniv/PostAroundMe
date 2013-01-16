@@ -200,8 +200,8 @@ h1 span
 
 .AddMessage {  }
 
-
-.Content .Box .BoxBody .MineButton { font-size:11px; color:#989898; float:right; margin-left:5px; margin-top:10px; background-color:#57849d; cursor:pointer; padding-left:12px;padding-right:12px; padding-top:4px; padding-bottom:4px; color:#FFF; }
+.BlueButton {  background-color:#6AA1BB;  cursor:pointer; color:#FFF; }
+.Content .Box .BoxBody .MineButton { font-size:11px; float:right; margin-left:5px; margin-top:10px;  padding-left:12px;padding-right:12px; padding-top:4px; padding-bottom:4px; }
 .Bottom { background-color:#F2F2F2; float:left; width:273px;  }
 .Bottom .BottomLine { height:1px; background-color:#FFF; }
 .Bottom .CommentsArea { background-color:#F2F2F2; }
@@ -216,13 +216,14 @@ h1 span
 .Bottom .CommentsArea .SingleComment .CommentWrapper .CommentDate { color:#A3A3A3; font-size:11px; margin-left:5px; }
 .Bottom .CommentsArea .EndLine { height:1px;  width:100%; float:left; }
 .Bottom .AddComment { margin-left:15px; margin-right:15px; } 
-.Bottom .AddComment textarea { margin-top:5px; margin-bottom:5px; font-size:12px; width:236px; height:14px; border:solid 1px #cbd2d4; color:#3C3C3C; padding:3px; background-color:#FFF; font-family:Arial; overflow:hidden; resize:none; } 
-
+.Bottom .AddComment textarea { float:left; margin-top:5px; margin-bottom:5px; font-size:12px; width:236px; height:14px; border:solid 1px #cbd2d4; color:#3C3C3C; padding:3px; background-color:#FFF; font-family:Arial; overflow:hidden; resize:none; } 
+.Bottom .AddComment .Buttons { width:100%; position:relative; margin-bottom:5px; font-size:11px; color:#666; float:right; display:none; } 
+.SlimDropDown { cursor:pointer; background-color:#dee2e3; padding:1px 6px 1px 6px; float:left; border:1px solid #c0c0c0;  }
 
 .TextColorBlack { color:#3C3C3C !important; }
 
 
-#SingleCommentView { float:left; background-color: #f9f9f9; border: 2px dashed #6AA1BB; width: 269px; height: 36px;  }
+.PrivateComment { float:left; background-color: #f9f9f9; border: 2px dashed #6AA1BB; width: 269px; height: 36px;  }
 .Checkbox { clear: both; float: left; background: url('../images/addmessageIcons.png') no-repeat scroll 0px -61px; height: 15px; width: 15px; position: relative; }
 
  

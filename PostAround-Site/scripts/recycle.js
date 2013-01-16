@@ -1,4 +1,20 @@
-﻿--- static map in singlepost
+﻿-- void enter
+    $('#Comment').live('keypress', function (e) {
+        if (e.keyCode != 13)
+        {
+            return;
+        }
+        var msg = $(this).val().replace("\n", "");
+        
+        
+        return false;
+    });
+
+
+-- poster only icon on textarea
+<div style="width:9px; height:11px; background:url('images/icons.png') -352px -2px; position:absolute; right:0; bottom:0; margin-bottom:10px; margin-right:10px"></div>
+
+--- static map in singlepost
 <img src="http://maps.googleapis.com/maps/api/staticmap?center=<%=BigBoxLat %>,<%=BigBoxLon %>&zoom=15&size=319x218&maptype=roadmap&sensor=true&markers=icon:http://postaround.me/images/markers/image.png%7C<%=BigBoxLat %>,<%=BigBoxLon %>" />
 
 

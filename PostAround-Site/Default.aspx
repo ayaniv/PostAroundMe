@@ -249,8 +249,8 @@
                 
 
                 {{if Mine}}
-                <div id="EditPost" class="MineButton">Edit</div>
-                <div id="HidePost" class="MineButton">Hide</div>
+                <div id="EditPost" class="BlueButton MineButton">Edit</div>
+                <div id="HidePost" class="BlueButton MineButton">Hide</div>
                     
                 {{/if}}
                 
@@ -284,7 +284,12 @@
                                         <a href="${commentUserLink}" target="_blank">${name}</a>
                                     </div>
                                     <div id="CommentText" class="CommentText" style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</div>
-                                    <div class="CommentDate">${strDate} at ${strTime}</div>
+                                    <div class="CommentDate" style="float:left">${strDate} at ${strTime}</div>
+                                    
+                                    
+                                    <div id="PosterOnly" class="CommentDate" style="float:left; display:none;">· Poster Only&nbsp;·&nbsp;<span style="width:9px; height:11px; background:url('images/icons.png') -352px -2px; float:right; margin-top:1px;"></span></div>
+                                    
+                                    
 
                                 </div>
 
@@ -297,7 +302,37 @@
 
                     </div>
                     
-                    <div class="AddComment"><textarea  maxlength="500" id="Comment" cols"1" rows="1" placeholder="Post a comment...">Post a comment...</textarea></div>
+                    <div class="AddComment"  style="float:left;">
+                        
+                        
+                        
+                        <textarea maxlength="500" id="Comment" placeholder="Post a comment...">Post a comment...</textarea>
+                        
+                        <div class="Buttons">
+                        <div style="position:absolute; left:0; float:left;">
+                            <div style="float:left; padding:2px 4px 2px 0px;">Visible to</div>
+
+
+
+
+                            <div class="SlimDropDown">
+                            
+                                
+                                <span class="PublicCommentIcon" style="background:url('images/icons.png') -380px -2px; float:left; width:11px; height:11px; margin-top:1px; margin-right:5px; float:left"></span>
+                                <span class="PrivateCommentIcon" style="display:none; float:left; background:url('images/icons.png') -352px -2px; float:left; width:9px; height:11px; margin-top:1px; margin-right:5px;"></span>
+                            
+                                <span style="float:left" class="InlineText">Everyone</span>
+                            
+                                <span style="margin:5px 0 0 5px; background:url('images/icons.png') -116px -24px; width:7px; height:4px; float:right;"></span>
+
+                            </div>
+                        </div>
+
+     
+
+                        <div id="BtnPostComment" class="BlueButton" title="Post Comment" style="float:right; padding:2px 12px 2px 12px;">Post</div>
+                        </div>
+                    </div>
                 </div>
                 
                 </div>

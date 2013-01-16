@@ -33,16 +33,21 @@
     <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js" type="text/javascript"></script>
 
     <script src="<%=siteUrl %>scripts/compress/modernizr.custom.43477.js" type="text/javascript"></script>
-    <%--<link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin" rel="stylesheet">--%>
+    
     
     
     <script src="<%=siteUrl %>scripts/compress/jquery.tmpl.min.js" type="text/javascript"></script>
     <script src="<%=siteUrl %>scripts/compress/date.format.js" type="text/javascript"></script>
     <script type='text/javascript' src='<%=siteUrl %>scripts/compress/jquery.autogrow-textarea.js'></script>
     
-    <%--<script type="text/javascript" src="<%=siteUrl %>scripts/jquery.smooth-scroll.min.js"></script>--%>
+    
     <script src="<%=siteUrl %>scripts/scriptsNew.js" type="text/javascript"></script>
     
+
+    <script type="text/javascript" src="scripts/jquery.shiftenter.js"></script>
+    <link href="css/jquery.shiftenter.css" rel="stylesheet" type="text/css" />
+
+
  <!-- GAC -->
     <uc1:GAC ID="GAC1" runat="server" />
 
