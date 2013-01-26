@@ -661,7 +661,7 @@ SELECT UserID, PermissionID, Date, status FROM UserPermissions WHERE (Permission
               <Mapping SourceColumn="status" DataSetColumn="status" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="PostAroundConnectionString (Settings)" DbObjectName="PostAround.dbo.GetUserPermission" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="GetUserPermission" Modifier="Public" Name="GetUserPermission" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="GetUserPermission">
+              <DbSource ConnectionRef="PostAroundConnectionString (Settings)" DbObjectName="PostAround.dbo.GetUserPermission" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="GetUserPermission" Modifier="Public" Name="GetUserPermission" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="GetUserPermission">
                 <SelectCommand>
                   <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
                     <CommandText>dbo.GetUserPermission</CommandText>
@@ -673,7 +673,7 @@ SELECT UserID, PermissionID, Date, status FROM UserPermissions WHERE (Permission
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="PostAroundConnectionString (Settings)" DbObjectName="PostAround.dbo.SetUserPermission" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="SetUserPermission" Modifier="Public" Name="SetUserPermission" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="SetUserPermission">
+              <DbSource ConnectionRef="PostAroundConnectionString (Settings)" DbObjectName="PostAround.dbo.SetUserPermission" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="SetUserPermission" Modifier="Public" Name="SetUserPermission" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="SetUserPermission">
                 <SelectCommand>
                   <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
                     <CommandText>dbo.SetUserPermission</CommandText>
@@ -696,7 +696,7 @@ SELECT UserID, PermissionID, Date, status FROM UserPermissions WHERE (Permission
   <xs:element name="PostAroundMeDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="PostAroundMeDataSet" msprop:Generator_UserDSName="PostAroundMeDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Messages" msprop:Generator_TableClassName="MessagesDataTable" msprop:Generator_TableVarName="tableMessages" msprop:Generator_TablePropName="Messages" msprop:Generator_RowDeletingName="MessagesRowDeleting" msprop:Generator_UserTableName="Messages" msprop:Generator_RowChangingName="MessagesRowChanging" msprop:Generator_RowEvHandlerName="MessagesRowChangeEventHandler" msprop:Generator_RowDeletedName="MessagesRowDeleted" msprop:Generator_RowEvArgName="MessagesRowChangeEvent" msprop:Generator_RowChangedName="MessagesRowChanged" msprop:Generator_RowClassName="MessagesRow">
+        <xs:element name="Messages" msprop:Generator_TableClassName="MessagesDataTable" msprop:Generator_TableVarName="tableMessages" msprop:Generator_RowChangedName="MessagesRowChanged" msprop:Generator_TablePropName="Messages" msprop:Generator_RowDeletingName="MessagesRowDeleting" msprop:Generator_RowChangingName="MessagesRowChanging" msprop:Generator_RowEvHandlerName="MessagesRowChangeEventHandler" msprop:Generator_RowDeletedName="MessagesRowDeleted" msprop:Generator_RowClassName="MessagesRow" msprop:Generator_UserTableName="Messages" msprop:Generator_RowEvArgName="MessagesRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:decimal" />
@@ -751,7 +751,7 @@ SELECT UserID, PermissionID, Date, status FROM UserPermissions WHERE (Permission
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="GetAllMessages" msprop:Generator_TableClassName="GetAllMessagesDataTable" msprop:Generator_TableVarName="tableGetAllMessages" msprop:Generator_TablePropName="GetAllMessages" msprop:Generator_RowDeletingName="GetAllMessagesRowDeleting" msprop:Generator_UserTableName="GetAllMessages" msprop:Generator_RowChangingName="GetAllMessagesRowChanging" msprop:Generator_RowEvHandlerName="GetAllMessagesRowChangeEventHandler" msprop:Generator_RowDeletedName="GetAllMessagesRowDeleted" msprop:Generator_RowEvArgName="GetAllMessagesRowChangeEvent" msprop:Generator_RowChangedName="GetAllMessagesRowChanged" msprop:Generator_RowClassName="GetAllMessagesRow">
+        <xs:element name="GetAllMessages" msprop:Generator_TableClassName="GetAllMessagesDataTable" msprop:Generator_TableVarName="tableGetAllMessages" msprop:Generator_RowChangedName="GetAllMessagesRowChanged" msprop:Generator_TablePropName="GetAllMessages" msprop:Generator_RowDeletingName="GetAllMessagesRowDeleting" msprop:Generator_RowChangingName="GetAllMessagesRowChanging" msprop:Generator_RowEvHandlerName="GetAllMessagesRowChangeEventHandler" msprop:Generator_RowDeletedName="GetAllMessagesRowDeleted" msprop:Generator_RowClassName="GetAllMessagesRow" msprop:Generator_UserTableName="GetAllMessages" msprop:Generator_RowEvArgName="GetAllMessagesRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:decimal" />
@@ -861,7 +861,7 @@ SELECT UserID, PermissionID, Date, status FROM UserPermissions WHERE (Permission
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Users" msprop:Generator_TableClassName="UsersDataTable" msprop:Generator_TableVarName="tableUsers" msprop:Generator_TablePropName="Users" msprop:Generator_RowDeletingName="UsersRowDeleting" msprop:Generator_UserTableName="Users" msprop:Generator_RowChangingName="UsersRowChanging" msprop:Generator_RowEvHandlerName="UsersRowChangeEventHandler" msprop:Generator_RowDeletedName="UsersRowDeleted" msprop:Generator_RowEvArgName="UsersRowChangeEvent" msprop:Generator_RowChangedName="UsersRowChanged" msprop:Generator_RowClassName="UsersRow">
+        <xs:element name="Users" msprop:Generator_TableClassName="UsersDataTable" msprop:Generator_TableVarName="tableUsers" msprop:Generator_RowChangedName="UsersRowChanged" msprop:Generator_TablePropName="Users" msprop:Generator_RowDeletingName="UsersRowDeleting" msprop:Generator_RowChangingName="UsersRowChanging" msprop:Generator_RowEvHandlerName="UsersRowChangeEventHandler" msprop:Generator_RowDeletedName="UsersRowDeleted" msprop:Generator_RowClassName="UsersRow" msprop:Generator_UserTableName="Users" msprop:Generator_RowEvArgName="UsersRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
@@ -963,7 +963,7 @@ SELECT UserID, PermissionID, Date, status FROM UserPermissions WHERE (Permission
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Feedback" msprop:Generator_TableClassName="FeedbackDataTable" msprop:Generator_TableVarName="tableFeedback" msprop:Generator_TablePropName="Feedback" msprop:Generator_RowDeletingName="FeedbackRowDeleting" msprop:Generator_UserTableName="Feedback" msprop:Generator_RowChangingName="FeedbackRowChanging" msprop:Generator_RowEvHandlerName="FeedbackRowChangeEventHandler" msprop:Generator_RowDeletedName="FeedbackRowDeleted" msprop:Generator_RowEvArgName="FeedbackRowChangeEvent" msprop:Generator_RowChangedName="FeedbackRowChanged" msprop:Generator_RowClassName="FeedbackRow">
+        <xs:element name="Feedback" msprop:Generator_TableClassName="FeedbackDataTable" msprop:Generator_TableVarName="tableFeedback" msprop:Generator_RowChangedName="FeedbackRowChanged" msprop:Generator_TablePropName="Feedback" msprop:Generator_RowDeletingName="FeedbackRowDeleting" msprop:Generator_RowChangingName="FeedbackRowChanging" msprop:Generator_RowEvHandlerName="FeedbackRowChangeEventHandler" msprop:Generator_RowDeletedName="FeedbackRowDeleted" msprop:Generator_RowClassName="FeedbackRow" msprop:Generator_UserTableName="Feedback" msprop:Generator_RowEvArgName="FeedbackRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
@@ -993,7 +993,7 @@ SELECT UserID, PermissionID, Date, status FROM UserPermissions WHERE (Permission
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Categories" msprop:Generator_TableClassName="CategoriesDataTable" msprop:Generator_TableVarName="tableCategories" msprop:Generator_TablePropName="Categories" msprop:Generator_RowDeletingName="CategoriesRowDeleting" msprop:Generator_UserTableName="Categories" msprop:Generator_RowChangingName="CategoriesRowChanging" msprop:Generator_RowEvHandlerName="CategoriesRowChangeEventHandler" msprop:Generator_RowDeletedName="CategoriesRowDeleted" msprop:Generator_RowEvArgName="CategoriesRowChangeEvent" msprop:Generator_RowChangedName="CategoriesRowChanged" msprop:Generator_RowClassName="CategoriesRow">
+        <xs:element name="Categories" msprop:Generator_TableClassName="CategoriesDataTable" msprop:Generator_TableVarName="tableCategories" msprop:Generator_RowChangedName="CategoriesRowChanged" msprop:Generator_TablePropName="Categories" msprop:Generator_RowDeletingName="CategoriesRowDeleting" msprop:Generator_RowChangingName="CategoriesRowChanging" msprop:Generator_RowEvHandlerName="CategoriesRowChangeEventHandler" msprop:Generator_RowDeletedName="CategoriesRowDeleted" msprop:Generator_RowClassName="CategoriesRow" msprop:Generator_UserTableName="Categories" msprop:Generator_RowEvArgName="CategoriesRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
@@ -1016,7 +1016,7 @@ SELECT UserID, PermissionID, Date, status FROM UserPermissions WHERE (Permission
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Comments" msprop:Generator_TableClassName="CommentsDataTable" msprop:Generator_TableVarName="tableComments" msprop:Generator_TablePropName="Comments" msprop:Generator_RowDeletingName="CommentsRowDeleting" msprop:Generator_UserTableName="Comments" msprop:Generator_RowChangingName="CommentsRowChanging" msprop:Generator_RowEvHandlerName="CommentsRowChangeEventHandler" msprop:Generator_RowDeletedName="CommentsRowDeleted" msprop:Generator_RowEvArgName="CommentsRowChangeEvent" msprop:Generator_RowChangedName="CommentsRowChanged" msprop:Generator_RowClassName="CommentsRow">
+        <xs:element name="Comments" msprop:Generator_TableClassName="CommentsDataTable" msprop:Generator_TableVarName="tableComments" msprop:Generator_RowChangedName="CommentsRowChanged" msprop:Generator_TablePropName="Comments" msprop:Generator_RowDeletingName="CommentsRowDeleting" msprop:Generator_RowChangingName="CommentsRowChanging" msprop:Generator_RowEvHandlerName="CommentsRowChangeEventHandler" msprop:Generator_RowDeletedName="CommentsRowDeleted" msprop:Generator_RowClassName="CommentsRow" msprop:Generator_UserTableName="Comments" msprop:Generator_RowEvArgName="CommentsRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
@@ -1055,7 +1055,7 @@ SELECT UserID, PermissionID, Date, status FROM UserPermissions WHERE (Permission
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="UserPermissions" msprop:Generator_TableClassName="UserPermissionsDataTable" msprop:Generator_TableVarName="tableUserPermissions" msprop:Generator_TablePropName="UserPermissions" msprop:Generator_RowDeletingName="UserPermissionsRowDeleting" msprop:Generator_UserTableName="UserPermissions" msprop:Generator_RowChangingName="UserPermissionsRowChanging" msprop:Generator_RowEvHandlerName="UserPermissionsRowChangeEventHandler" msprop:Generator_RowDeletedName="UserPermissionsRowDeleted" msprop:Generator_RowEvArgName="UserPermissionsRowChangeEvent" msprop:Generator_RowChangedName="UserPermissionsRowChanged" msprop:Generator_RowClassName="UserPermissionsRow">
+        <xs:element name="UserPermissions" msprop:Generator_TableClassName="UserPermissionsDataTable" msprop:Generator_TableVarName="tableUserPermissions" msprop:Generator_RowChangedName="UserPermissionsRowChanged" msprop:Generator_TablePropName="UserPermissions" msprop:Generator_RowDeletingName="UserPermissionsRowDeleting" msprop:Generator_RowChangingName="UserPermissionsRowChanging" msprop:Generator_RowEvHandlerName="UserPermissionsRowChangeEventHandler" msprop:Generator_RowDeletedName="UserPermissionsRowDeleted" msprop:Generator_RowClassName="UserPermissionsRow" msprop:Generator_UserTableName="UserPermissions" msprop:Generator_RowEvArgName="UserPermissionsRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="UserID" msprop:Generator_ColumnVarNameInTable="columnUserID" msprop:Generator_ColumnPropNameInRow="UserID" msprop:Generator_ColumnPropNameInTable="UserIDColumn" msprop:Generator_UserColumnName="UserID" type="xs:int" />
