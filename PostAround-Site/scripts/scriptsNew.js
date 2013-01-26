@@ -1382,6 +1382,26 @@ $(function () {
 
 
 
+    $('.slider-button-off').live('click', function () {
+        if ($(this).parents('.slider-frame').attr("IsPrivate") != "true") {
+                $(this).parents('.slider-frame').children('.slider-button').addClass('on').html('<span class="PrivateIcon PrivateIconOn"></span>Private');
+                $(this).parents('.slider-frame').children('.slider-button').css("background-position", "0px 0px");
+                $(this).css("display", "none").css("left", "0").fadeIn().html('<span class="PublicIcon"></span>Public');
+                $(this).parents('.slider-frame').attr("IsPrivate", "true");
+            } else {
+                $(this).parents('.slider-frame').children('.slider-button').removeClass('on').html('<span class="PublicIcon PublicIconOn"></span>Public');
+                $(this).parents('.slider-frame').children('.slider-button').css("background-position", "-8px 0px");
+                $(this).css("display", "none").css("left", "50%").fadeIn().html('<span class="PrivateIcon"></span>Private');
+                $(this).parents('.slider-frame').attr("IsPrivate", "false");
+            }
+            });
+
+            $('.slider-button').live('click', function () {
+                $(this).parents('.slider-frame').children('.slider-button-off').click();
+            });
+
+
+
 
 
     $('#AutoDiscover').hover(function () {
@@ -1563,7 +1583,7 @@ $(function () {
     $('#HideComment').live('click', function () { HideComment.apply(this); });
 
     $('#EditPost').live('click', function () { EditPost.apply(this); });
-    $('#Comment').live('focus', function () { SetAutoGrow.apply(this); CommentTextAreaEventFucus.apply(this); });
+    $('#Comment').live('focus', function () { if (IsLoggedIn()) { SetAutoGrow.apply(this); CommentTextAreaEventFucus.apply(this); } });
     $('#Comment').live('blur', function () { CommentTextAreaEventBlur.apply(this); });
     //$('#EditPost').live('mouseover', function () { $(this).addClass('pointer'); });
     //$('#EditPost').live('mouseout', function () { $(this).removeClass('pointer'); });
@@ -1592,8 +1612,8 @@ $(function () {
                 
                 });
 
-    $(".BlueButton").live('mouseover', function () { $(this).css("background-color", "#7ab5c4"); });
-    $(".BlueButton").live('mouseout', function () { $(this).css("background-color", "#6AA1BB"); });
+    $(".MyButton").live('mouseover', function () { $(this).addClass("Hover"); });
+    $(".MyButton").live('mouseout', function () { $(this).removeClass("Hover"); });
 
 
     $("#ShowOnMap").live("click",
@@ -3223,10 +3243,24 @@ $(function () {
 
     }
     
+    function IsLoggedIn() 
+    {
+        if (currentUser == null)
+        {
+            $('#fuzz').show();
+            $('#fuzz').css("z-index", 2000);
+            $('#PleaseLogin').show();
+            return false;
+        } else 
+        {
+            return true;
+        }
+    }
 
     function CommentTextAreaEventFucus() {
         //$(this).shiftenter();
         //$(this).height(34);
+        
         $(this).parents(".AddComment").children('.Buttons').show();
         OrderElements();
     }

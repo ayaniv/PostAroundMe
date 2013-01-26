@@ -81,6 +81,17 @@
  <div id="fuzz" class="fuzz" style="filter:alpha(opacity=20); display:none">
 </div>
 
+
+<div id="PleaseLogin" style="display:none; z-index:10001; background-color:#FFF; border:2px solid #CCC; width:300px; height:120px; top:25%; left:50%; margin-left:-152px; position:fixed; ">
+	Hello
+</div>
+
+
+
+
+
+
+
         
 
 
@@ -249,8 +260,10 @@
                 
 
                 {{if Mine}}
-                <div id="EditPost" class="BlueButton MineButton">Edit</div>
-                <div id="HidePost" class="BlueButton MineButton">Hide</div>
+                <div class="Grey">
+                <div id="EditPost" class="MyButton MineButton">Edit</div>
+                <div id="HidePost" class="MyButton MineButton">Hide</div>
+                </div>
                     
                 {{/if}}
                 
@@ -310,27 +323,20 @@
                         
                         <div class="Buttons">
                         <div style="position:absolute; left:0; float:left;">
-                            <div style="float:left; padding:2px 4px 2px 0px;">Visible to</div>
-
-
-
-
-                            <div class="SlimDropDown">
                             
-                                
-                                <span class="PublicCommentIcon" style="background:url('images/icons.png') -380px -2px; float:left; width:11px; height:11px; margin-top:1px; margin-right:5px; float:left"></span>
-                                <span class="PrivateCommentIcon" style="display:none; float:left; background:url('images/icons.png') -352px -2px; float:left; width:9px; height:11px; margin-top:1px; margin-right:5px;"></span>
-                            
-                                <span style="float:left" class="InlineText">Everyone</span>
-                            
-                                <span style="margin:5px 0 0 5px; background:url('images/icons.png') -116px -24px; width:7px; height:4px; float:right;"></span>
-
+                            {{if !Mine}}
+                            <div class="slider-frame">
+                                <span class="slider-button"><span class="PublicIcon PublicIconOn"></span>Public</span>
+                                <span class="slider-button-off"><span class="PrivateIcon"></span>Private</span>
                             </div>
+                            {{/if}}
+
                         </div>
 
      
-
-                        <div id="BtnPostComment" class="BlueButton" title="Post Comment" style="float:right; padding:2px 12px 2px 12px;">Post</div>
+                        <div class="Orange">
+                        <div id="BtnPostComment" class="MyButton" title="Post Comment" style="float:right; padding:2px 12px 2px 12px;">Post</div>
+                        </div>
                         </div>
                     </div>
                 </div>
