@@ -46,7 +46,7 @@
 
     <script type="text/javascript" src="scripts/jquery.shiftenter.js"></script>
     <link href="css/jquery.shiftenter.css" rel="stylesheet" type="text/css" />
-
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4fdef26e46826d05"></script>
 
  <!-- GAC -->
     <uc1:GAC ID="GAC1" runat="server" />
@@ -54,7 +54,7 @@
         <!-- css -->
     <link rel="stylesheet" href="<%=siteUrl %>/css/screenNew.css" type="text/css" media="screen" charset="utf-8" />
     
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" type="text/css" media="screen" charset="utf-8"></link>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" type="text/css" media="screen" charset="utf-8" />
     <%--<link rel="stylesheet" href="<%=siteUrl %>/css/jquery-ui-1.8.21.custom.css" type="text/css" media="screen" charset="utf-8"></link>--%>
     <link rel="shortcut icon" href="<%=siteUrl %>images/favicon.png" />
 

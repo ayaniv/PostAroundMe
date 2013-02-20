@@ -11,7 +11,7 @@
                     <label for="amount" style="float:left">Up to Distance:</label>
 	                <input readonly="readonly" value="ALL" type="text" id="amount" style="float:right; background:transparent; border:0; color:#666; font-weight:bold; font-size:16px; font-style:italic; width:50px; font-family:Calibri,Arial; text-align:right; padding:0px; margin:0px;  " />
 	            </div>
-	            <div style="width:244px; float:left; margin-top:2px;">
+	            <div style="width:244px; float:left; margin-top:4px;">
                     <div id="slider"></div>
                 </div>
             </div>

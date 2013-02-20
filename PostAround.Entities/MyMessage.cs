@@ -67,6 +67,8 @@ namespace PostAround.Entities
         public bool Mine { get; set; }
         [DataMember]
         public string link { get; set; }
+        [DataMember]
+        public int totalShares { get; set; }
          
         
         

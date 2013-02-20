@@ -17,8 +17,8 @@ input, textarea, a:link, select { outline: none; }
 .HeadLine {min-width:100%; height:6px; background-color:#848b8f; position:fixed;}
 .HairHeadLine {min-width:100%; height:1px; background-color:#FFF;  position:fixed; margin-top:6px;}
 
-.FullAddress { position:absolute; margin-top:15px; margin-left:10px; right:10px; display:none; }
-.FullAddress .TextAddress { background-color:#666; color:#FFF; padding:5px; margin-top:5px; border-radius: 1px 1px 1px 1px; }
+.FullAddress { z-index:10; position:absolute; margin-top:15px; margin-left:10px; right:10px; display:none; }
+.FullAddress .TextAddress { background-color:#666; color:#FFF; padding:5px; margin-top:4px; border-radius: 1px 1px 1px 1px; }
 .FullAddress .Arrow { float:right; width:7px; height:4px; background:url('../images/icons.png') -116px -20px; margin-right:20px; }
 
 
@@ -76,7 +76,7 @@ h1 span
              border:1px solid #c0c0c0;
              
           }
-.LogoBg {background-image:url('../images/logo_bg.png'); width:523px; height:313px; margin-left:-65px; z-index:1px; position:fixed; margin-top:6px; }
+.LogoBg {background-image:url('../images/logo_bg.png'); width:523px; height:313px; margin-left:-65px; z-index:1; position:fixed; margin-top:6px; }
 
 .LogoClear { float:left; margin-top:11px; margin-left:11px;  }
 .LogoText {  font-style:italic; color:#a4a8ab; font-size:20px; font-family:Georgia, Arial, Calibri, Arial;  }
@@ -117,8 +117,11 @@ h1 span
 .PopupBox .Cancel { cursor:pointer; height:17px; width:57px; background:#c0c0c0 url('../images/addmessageIcons.png') no-repeat 0px -114px; border:0px; float:left; color:#FFF; font-size:16px; font-weight:bold;  padding:10px; font-style:italic; padding-left:13px; }
 .PopupBox .Submit { cursor:pointer; height:17px; width:58px; background:#F99E2B url('../images/addmessageIcons.png') no-repeat 0px -76px; border:0px; float:left; color:#FFF; font-size:16px; font-weight:bold; padding:10px; padding-top:9px; text-align:center; }
 
-
-.Box a:link, .Box a:visited { color:#6AA1BB; text-decoration:none; font-family:Tahoma, Arial; }
+.Box a {
+    text-decoration: none;
+    font-family: Tahoma, Arial;
+}
+.Box a:link, .Box a:visited { color:#6AA1BB;  }
 .Box a:hover { text-decoration:underline; }
 
 
@@ -155,7 +158,7 @@ h1 span
 .GeoHead .Buttons div { cursor:pointer; margin-left:5px; background-image: url('../images/filterButtonOff.png'); width:85px; height:18px; text-align:center; float:left; font-size:15px;  -moz-user-select: none;-webkit-user-select: none; }
 .GeoHead .Buttons .selected {background-image: url('../images/filterButtonOn.png'); color:#e0e5e7; float:left; font-size:14px; }
 
-.Content {clear:both; z-index:3; /*margin-top:120px;  margin-left:47px; */ position:relative; top:0px;  font-size:13px; min-height:200px; }
+.Content {clear:both; z-index:3; /*margin-top:120px;  margin-left:47px; */ position:relative; top:0px;  font-size:13px; min-height:500px; }
 .Content .Container {float:left; /*height:540px;*/ width:260px; background-color:Transparent;}
 
 @media screen and (max-width:1024px)
@@ -170,7 +173,7 @@ h1 span
 .SelectedCategoryInBar { display:none; position:absolute; width:15px; height:14px; background:url('../images/icons.png') -315px -7px; margin-top:-4px; }
 
 .Content .Box {  position:absolute; width:273px; float:left; /*box-shadow: 1px 1px 1px #c0bcb1; -moz-box-shadow: 1px 1px 1px #c0bcb1; -webkit-box-shadow: 1px 1px 1px #c0bcb1; */ }
-.Content .Box .BoxBody {  float:left; width:100%; /* border-right:1px solid #cbcac9; border-bottom:1px solid #cbcac9 ; border-left:1px solid #E2DDCF;*/    }
+.Content .Box .BoxBody {  float:left; width:100%; position:relative; /* border-right:1px solid #cbcac9; border-bottom:1px solid #cbcac9 ; border-left:1px solid #E2DDCF;*/    }
 .Content .Box .BoxBody .TextArea { width:243px; padding-left:15px; float:left; background-color:#FDFDFD; padding-right:15px; padding-bottom:15px; padding-top:4px; }
 .Content .Box .BoxBody .BoxHead { width:243px; height:27px; /*overflow:hidden;*/ }
 .Content .Box .BoxBody .BoxHead .BoxTitle { /*width:176px;*/ height:27px; float:left }
@@ -207,23 +210,61 @@ h1 span
 .Blue .MyButton {  background-color:#6AA1BB; }
 .Blue .Hover { background-color:#7ab5c4; }
 
+
 .Grey .MyButton {  background-color:#A4A8AB; }
 .Grey .Hover { background-color:#babfc3; }
 
+.TransparentGrey .MyButton { border:1px solid #c0c0c0; background-color: #e8e8e8; color:#666; }
+.TransparentGrey .Hover { border:1px solid #c0c0c0; background-color:#babfc3; color:#FFF !important; }
 
-.Content .Box .BoxBody .MineButton { font-size:11px; float:right; margin-left:5px; margin-top:10px;  padding-left:12px;padding-right:12px; padding-top:4px; padding-bottom:4px; }
-.Bottom { background-color:#F2F2F2; float:left; width:273px;  }
+.TransparentGrey .LeftButton { border-bottom-left-radius:6px; border-top-left-radius:6px;
+}
+
+.TransparentGrey .RightButton { border-bottom-right-radius:6px; border-top-right-radius:6px;
+}
+
+.OnPostButtons {
+    display:none;
+    position: absolute;
+    right: 13px;
+    top: 0;
+    margin-top: 18px;
+    z-index:1;
+}
+
+.SharingDiv {
+
+    height:22px;
+    display:none;
+
+}
+
+.ShareIcon {
+     width:19px; height:12px; background:url('../images/icons.png') -404px -16px; float:left; cursor:pointer;
+}
+
+.ShareIcon:hover {
+     background-position:-422px -16px;
+}
+
+.SharingArea {
+    overflow:hidden;
+    float:left;
+}
+
+.Content .Box .BoxBody .MineButton { font-size:11px; float:right; margin-left:1px; margin-top:10px;  padding-left:12px;padding-right:12px; padding-top:4px; padding-bottom:4px; }
+.Bottom { background-color:#f5f3eb; float:left; /*width:273px;*/  }
 .Bottom .BottomLine { height:1px; background-color:#FFF; }
 .Bottom .CommentsArea { background-color:#F2F2F2; }
-.Bottom .CommentsArea .SingleComment { word-wrap:break-word; float:left; margin-left:15px; margin-right:15px; width:243px;padding-bottom:5px; margin-top:5px; }
+.Bottom .CommentsArea .SingleComment { word-wrap:break-word; float:left; padding-left:15px; padding-right:15px; width:239px;padding-bottom:5px; padding-top:5px; }
 .Bottom .CommentsArea .SingleComment .CommentImage { float:left; }
 .Bottom .CommentsArea .SingleComment .CommentImage img { width:24px; height:24px; } 
-.Bottom .CommentsArea .SingleComment .CommentWrapper { width:219px; float:left; }
-.Bottom .CommentsArea .SingleComment .CommentWrapper #HideComment { margin-left:8px; margin-bottom:8px; cursor:pointer; background:url('../images/icons.png') -140px -143px; width:11px; height:14px; position:absulote; float:right; }
-.Bottom .CommentsArea .SingleComment .CommentWrapper #commentUserName { margin-right:5px; margin-left:5px; float:left; }
+.Bottom .CommentsArea .SingleComment .CommentWrapper { width:215px; float:left; }
+.Bottom .CommentsArea .SingleComment .CommentWrapper #HideComment { display:none; cursor:pointer; background:url('../images/icons.png') -140px -4px; width:11px; height:14px; position:absolute; right:8px; float:right; }
+.Bottom .CommentsArea .SingleComment .CommentWrapper #commentUserName { height:14px; margin-right:5px; margin-left:5px; float:left; }
 .Bottom .CommentsArea .SingleComment .CommentWrapper #commentUserName a { font-family:Tahoma, Arial; color:#6AA1BB; font-size:12px; font-weight:bold; } 
-.Bottom .CommentsArea .SingleComment .CommentWrapper .CommentText { font-family:Tahoma, Arial; text-align:left; color:#424E55; font-size:12px; margin-left:5px; }
-.Bottom .CommentsArea .SingleComment .CommentWrapper .CommentDate { color:#A3A3A3; font-size:11px; margin-left:5px; }
+.Bottom .CommentsArea .SingleComment .CommentWrapper .CommentText { line-height:16px; font-family:Tahoma, Arial; text-align:left; color:#424E55; font-size:12px; margin-left:5px; }
+.Bottom .CommentsArea .SingleComment .CommentWrapper .CommentDate { color:#A3A3A3; font-size:11px; margin-left:5px; float:left; }
 .Bottom .CommentsArea .EndLine { height:1px;  width:100%; float:left; }
 .Bottom .AddComment { margin-left:15px; margin-right:15px; } 
 .Bottom .AddComment textarea { float:left; margin-top:5px; margin-bottom:5px; font-size:12px; width:236px; height:14px; border:solid 1px #cbd2d4; color:#3C3C3C; padding:3px; background-color:#FFF; font-family:Arial; overflow:hidden; resize:none; } 
@@ -235,7 +276,7 @@ h1 span
 .TextColorBlack { color:#3C3C3C !important; }
 
 
-.PrivateComment { float:left; background-color: #f9f9f9; border: 2px dashed #6AA1BB; width: 269px; height: 36px;  }
+.PrivateComment { background-color: #FFF; border:2px dashed #6AA1BB; }
 .Checkbox { clear: both; float: left; background: url('../images/addmessageIcons.png') no-repeat scroll 0px -61px; height: 15px; width: 15px; position: relative; }
 
  
@@ -360,7 +401,10 @@ h1 span
 
 .BottomDiv .Logo { margin-left:47px;  }
 .BottomDiv .Text { margin-left:47px;  font-size:13px; color:#FFF;   }
-.BottomDiv .Text a:link, .BottomDiv .Text a:visited {text-decoration:none; font-style:italic; color:#FFF; font-size:14px; }
+    .BottomDiv .Text a {
+        text-decoration:none; font-style:italic; font-size:14px;
+    }
+.BottomDiv .Text a:link, .BottomDiv .Text a:visited { color:#FFF;  }
 .BottomDiv .Text a:hover {text-decoration:underline;}
 
  
@@ -713,9 +757,9 @@ background: #f99e2b url('../images/bigBtns.png') no-repeat 0px -111px;
 .ui-buttonset .ui-button { width:166px !important; height:30px !important; background:#DBDBDB url("../images/grey.png") repeat-x  0 -3px !important; }
 .ui-buttonset .ui-state-active { background:#FFF !important; border:1px solid #f57311 !important; color:#f57311 !important; }
 .ui-button-text-only .ui-button-text { padding:0 !important; }
-.ui-slider-horizontal { height: 6px !important; border:1px solid #a9a9a9 !important; width:244px !important;   }
-.ui-slider-horizontal .ui-slider-handle { cursor:pointer !important; top: -6px !important; margin-left: -.6em !important;  background-color:Aqua !important; background:url('../images/icons.png') -152px -143px !important; width:16px !important; height:16px !important; border:0px !important;}
+.ui-slider-horizontal { height: 6px !important; border:1px solid #a9a9a9 !important; width:244px !important; background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,#c8c9ca),color-stop(1,#e2e3e5)) !important; -webkit-border-radius:0 !important; border-radius:0 !important;   }
+.ui-slider-horizontal .ui-slider-handle { cursor:pointer !important; top: -8px !important; margin-left: -.6em !important;  width:7px !important; height:20px !important; border:1px solid #777 !important; border-radius:4px !important;}
 .ui-slider-horizontal .ui-state-hover   { background-position: -168px -143px !important;}
 .ui-slider-horizontal .ui-state-active { background-position: -168px -143px !important;}
-.ui-widget-header { background:#F6A828 url('images/ui-bg_gloss-wave_35_f6a828_500x100.png') 50% 50% repeat-x !important; }
+.ui-widget-header { -webkit-border-radius:0 !important; border-radius:0 !important; background:#F6A828 url('images/ui-bg_gloss-wave_35_f6a828_500x100.png') 50% 50% repeat-x !important; }
 /* End jQuery Edit */  

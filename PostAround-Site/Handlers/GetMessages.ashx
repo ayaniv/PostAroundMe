@@ -65,13 +65,16 @@ public class GetMessages : IHttpHandler {
         
 
         string mapPathResized = System.Configuration.ConfigurationManager.AppSettings["PhysicalPath"] + @"\UploadedResized";
-        
+        int currMsgId;
         for (int i = 0; i < messages.Length; i++)
         {
+            currMsgId = messages[i].msgId;
+            
+            
             //attach comments
             if (messages[i].CommentsNumber > 0)
             {
-                messages[i].comments = client.GetCommentsByMessageID(messages[i].msgId, userid, timeZone);
+                messages[i].comments = client.GetCommentsByMessageID(currMsgId, userid, timeZone);
             }
                 //messages[i].comments =  comments.Where(c => c.messageID == messages[i].msgId).ToArray();
                                         
@@ -105,12 +108,16 @@ public class GetMessages : IHttpHandler {
     }
 
 
+   
 
- 
-    public bool IsReusable {
-        get {
+
+    public bool IsReusable
+    {
+        get
+        {
             return false;
         }
     }
+
 
 }

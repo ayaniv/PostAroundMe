@@ -18,9 +18,9 @@
 
 <%@ Import Namespace="System.Data" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://ogp.me/ns/fb#" xml:lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://ogp.me/ns/fb#" xml:lang="en"  xmlns:addthis="http://www.addthis.com/help/api-spec">
 <head runat="server">
     <title>Post Around Me | Local Pinboard</title>
     <uc1:Head runat="server" />
@@ -82,8 +82,11 @@
 </div>
 
 
-<div id="PleaseLogin" style="display:none; z-index:10001; background-color:#FFF; border:2px solid #CCC; width:300px; height:120px; top:25%; left:50%; margin-left:-152px; position:fixed; ">
-	Hello
+<div id="PleaseLogin" style="display:none; float:left; border:6px solid #fff; border-right:8px solid #FFF; z-index:10001; background-color:#FFF; width:320px; top:25%; left:50%; margin-left:-160px; position:fixed;
+box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-shadow: 0px 6px 6px #666; 
+
+ ">
+	
 </div>
 
 
@@ -124,7 +127,7 @@
                                     </div>
                                     <div id="CommentText" class="CommentText" style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</div>
                                     <div class="CommentDate">${strDate} at ${strTime}</div>
-
+                                    <div class="CommentDate PosterOnly" style="display:none;">· Poster Only&nbsp;·&nbsp;<span style="width:9px; height:11px; background:url('images/icons.png') -352px -2px; float:right; margin-top:1px;"></span></div>
                                 </div>
 
                             </div>
@@ -154,7 +157,7 @@
                                     </div>
                                     <div id="CommentText" class="CommentText" style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</div>
                                     <div class="CommentDate">${strDate} at ${strTime}</div>
-
+                                    <div class="CommentDate PosterOnly" style="display:none;">· Poster Only&nbsp;·&nbsp;<span style="width:9px; height:11px; background:url('images/icons.png') -352px -2px; float:right; margin-top:1px;"></span></div>
                                 </div>
 
                             </div>
@@ -237,32 +240,42 @@
                     <span style="float:left; margin-top:-2px;">Posted on ${Date}</span>
                     <br />
                     
-                    <div style="margin-top:-3px; float:left;">
-                    <span style="background:url('images/icons.png') -331px 0px; width:22px; height:18px; float:left;"></span>
-                    <div style="margin-top:2px; float:left;">
-                    <span style="color:#333; font-weight:bold;">88</span>&nbsp;Share · Follow · Comment
-                    </div>
-                    </div>
 
-<div style="height:20px; display:none;">
-<div class="addthis_toolbox addthis_default_style" addthis:url="http://postaround.me/post/553">
-<a class="addthis_button_preferred_1" style="margin-top:2px;"></a>
-<a class="addthis_button_preferred_2" style="margin-top:2px;"></a>
-<a class="addthis_button_preferred_3" style="margin-top:2px;"></a>
-<a class="addthis_button_preferred_4" style="margin-top:2px;"></a>
-<a class="addthis_button_preferred_5" style="margin-top:2px;"></a>
-</div>
-</div>
+                    
+                    <div style="height:22px" class="SharingArea">
+                            <div class="ShareButton" style="width:192px; background-color:#FFF; height:22px; font-size:13px; font-family:Tahoma, Verdana, Arial;  color:#666; float:left;">
+                                <span class="ShareIcon"></span>
+                                <span style="margin-left:4px; font-weight:bold; float:left;">${totalShares}</span>
+                                <span style="margin-left:4px; float:left; text-transform:uppercase">Shares</span>
+                            
 
+                                        </div>
+
+                                            <div class="SharingDiv">
+                                            <div class="addthis_toolbox addthis_default_style " addthis:url="http://postaround.me/post/${msgId}">
+                                            <div style="float:left; margin-top:2px;">
+                                            <a class="addthis_button_preferred_1"></a>
+                                                <a class="addthis_button_preferred_2"></a>
+                                            <a class="addthis_button_email"></a>
+                                                
+
+                                                </div>
+                                                <a class="addthis_button_google_plusone"  <%="g:plusone:size"%>="medium" <%="g:plusone:count"%>="false"></a>
+                                            <a class="addthis_button_facebook_like" <%="fb:like:layout"%>="button_count"></a>
+
+
+                                            </div>
+                                            </div>
+                </div>
                 </div>
                 
 
                 
 
                 {{if Mine}}
-                <div class="Grey">
-                <div id="EditPost" class="MyButton MineButton">Edit</div>
-                <div id="HidePost" class="MyButton MineButton">Hide</div>
+                <div class="TransparentGrey OnPostButtons">
+                <div id="EditPost" class="MyButton MineButton RightButton">Edit</div>
+                <div id="HidePost" class="MyButton MineButton LeftButton">Hide</div>
                 </div>
                     
                 {{/if}}
@@ -297,10 +310,8 @@
                                         <a href="${commentUserLink}" target="_blank">${name}</a>
                                     </div>
                                     <div id="CommentText" class="CommentText" style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</div>
-                                    <div class="CommentDate" style="float:left">${strDate} at ${strTime}</div>
-                                    
-                                    
-                                    <div id="PosterOnly" class="CommentDate" style="float:left; display:none;">· Poster Only&nbsp;·&nbsp;<span style="width:9px; height:11px; background:url('images/icons.png') -352px -2px; float:right; margin-top:1px;"></span></div>
+                                    <div class="CommentDate">${strDate} at ${strTime}</div>
+                                    <div class="CommentDate PosterOnly" style="display:none;">· Poster Only&nbsp;·&nbsp;<span style="width:9px; height:11px; background:url('images/icons.png') -352px -2px; float:right; margin-top:1px;"></span></div>
                                     
                                     
 

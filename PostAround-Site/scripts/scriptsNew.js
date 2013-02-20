@@ -210,10 +210,13 @@ $(function () {
             return decodeURIComponent(results[1].replace(/\+/g, " "));
     }
 
-
+    function RenderAddThis() {
+        addthis.toolbox('.addthis_toolbox');
+    }
 
     function FixAddThisAjax() {
 
+        
         var script = 'http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4fdef26e46826d05';
         if (window.addthis) {
             window.addthis = null;
@@ -584,6 +587,7 @@ $(function () {
         $('#txtPopupDetails1').show();
         $("#AddMessageWindow").hide();
         $('#fuzz').hide();
+        $('#PleaseLogin').hide();
     }
 
     function ShowAddMessageWindow(isNewMessage) {
@@ -837,7 +841,7 @@ $(function () {
         }
 
 
-        if (($.trim($("#txtPopupDetails").val()) == '') || ($.trim($("#txtPopupDetails").val()) == "Add your post here !")) {
+        if (($.trim($("#txtPopupDetails").val()) == '') || ($.trim($("#txtPopupDetails").val()) == "Post to your neighbors here !")) {
             $("#txtPopupDetails").css("border-color", "#FF0000");
             if (errorText != "")
                 errorText = errorText + ", "
@@ -1388,12 +1392,17 @@ $(function () {
                 $(this).parents('.slider-frame').children('.slider-button').css("background-position", "0px 0px");
                 $(this).css("display", "none").css("left", "0").fadeIn().html('<span class="PublicIcon"></span>Public');
                 $(this).parents('.slider-frame').attr("IsPrivate", "true");
+                $(this).parents('.AddComment').children('#Comment').css('border', "1px dashed #6AA1BB");
+                $(this).parents('.AddComment').children('#Comment').attr('placeholder', 'Reply to poster only...');
             } else {
                 $(this).parents('.slider-frame').children('.slider-button').removeClass('on').html('<span class="PublicIcon PublicIconOn"></span>Public');
                 $(this).parents('.slider-frame').children('.slider-button').css("background-position", "-8px 0px");
                 $(this).css("display", "none").css("left", "50%").fadeIn().html('<span class="PrivateIcon"></span>Private');
                 $(this).parents('.slider-frame').attr("IsPrivate", "false");
-            }
+                $(this).parents('.AddComment').children('#Comment').css('border', "solid 1px #cbd2d4");
+                $(this).parents('.AddComment').children('#Comment').attr('placeholder', 'Post a comment...');
+        }
+        $(this).parents('.AddComment').children('#Comment').focus();
             });
 
             $('.slider-button').live('click', function () {
@@ -1465,7 +1474,7 @@ $(function () {
     }
 
 
-    function ShowImmediateComment(id, body, msgId, box) {
+    function ShowImmediateComment(id, body, msgId, box, isPrivate) {
         // create json data with the comment details
 
         var currCommentsContainer = $("#MessagesContainer").find('[box-id=' + msgId + ']').find("#currCommentsView");
@@ -1509,11 +1518,18 @@ $(function () {
 
         currComment = $.tmpl("CommentTemplate", myJSON);
 
+
+        //alert(isPrivate);
+        if (isPrivate == 'true') {
+            $(currComment).find('.SingleComment').addClass('PrivateComment');
+            $(currComment).find('.PosterOnly').show();
+        }
+
+
         // push the template on comments area
         $(currComment).appendTo(currCommentsContainer);
-        //            }
-
-
+        
+        
 
 
 
@@ -1539,6 +1555,65 @@ $(function () {
 
     }
 
+    $('.SingleComment').live('mouseover', function () { var element = $(this).find('#HideComment'); if (element != "") { $(element).show(); } });
+    $('.SingleComment').live('mouseout', function () { var element = $(this).find('#HideComment'); if (element != "") { $(element).hide(); } })
+    
+    $('.Box').live('mouseover', function () { var element = $(this).find('.OnPostButtons'); if (element != "") { $(element).show(); } });
+    $('.Box').live('mouseout', function () { var element = $(this).find('.OnPostButtons'); if (element != "") { $(element).hide(); } })
+
+    $('.ShareButton').live('click', function () { ShowSharingButtons.apply(this); });
+    //$('.SharingArea').live('mouseout', function () { HideSharingButtons.apply(this); });
+
+    function HideSharingButtons() {
+        var sharing_button = $(this).find('.ShareButton');
+        var sharing_div = $(this).find('.SharingDiv');
+        var sharing_area = $(this);
+
+        if ($(sharing_area).attr('open')) {
+            $(sharing_area).removeAttr('open');
+            $(sharing_button).show();
+            $(sharing_div).hide();
+            
+        }
+    }
+
+
+    function RenderAndShowButtons(sharing_button, sharing_div, func) {
+        
+        if (typeof func === 'function') { //check if b is a function
+            func(); //invoke
+
+        RenderAddThis();
+        $(sharing_button).fadeOut('fast', function () {
+            $(sharing_div).show();
+           
+        });
+
+        }
+    }
+
+    function AddAttribute(to, name, value) {
+        $(to).attr(name, value);
+    }
+
+    function ShowSharingButtons() {
+
+        var sharing_button = $(this).parents('.MessageName').find('.ShareButton');
+        var sharing_div = $(this).parents('.MessageName').find('.SharingDiv');
+        var sharing_area = $(this).parents('.SharingArea');
+        if (!$(this).parents('.SharingArea').attr('open')) {
+            
+            RenderAndShowButtons(sharing_button, sharing_div, function () {
+                AddAttribute(sharing_area, 'open', 'true');
+            });
+        }
+    }
+
+
+
+    
+
+
 
     $('.Border').live('mouseover', function () { $(this).css("border-color", "#6AA1BB"); ($(this).find('.ImageBox')).css('opacity', '0.5'); });
     $('.Border').live('mouseout', function () { $(this).css("border-color", "#E2DDCF"); ($(this).find('.ImageBox')).css('opacity', '1'); });
@@ -1553,15 +1628,11 @@ $(function () {
     //    $('#CommentsWord').live('mouseout', function () { $(this).removeClass('underline pointer'); });
 
     //$('#Comment').live('keyup', function (e) { if (e.keyCode != 13) return;  });
-    $('#Comment').live('keypress', function (e) {
-            if ($(this).height() > 14)
-            {
-                OrderElements();
-                
-            }
+    $('#Comment').live('keyup', function (e) {
+        OrderElements();
     });
 
-    $('#BtnPostComment').live('click', function() { PostComment($(this).parents('.Box'), $(this).parents('.AddComment').children('textarea').val()) });
+    $('#BtnPostComment').live('click', function () { PostComment($(this).parents('.Box'), $(this).parents('.AddComment').children('textarea').val(), $(this).parents('.Buttons').find('.slider-frame')) });
 
     $('#Comment').live('focus', function () {
         if ($(this).val() == "Post a comment...") {
@@ -1581,6 +1652,8 @@ $(function () {
     //$('#HidePost').live('mouseout', function () { $(this).removeClass('pointer'); });
 
     $('#HideComment').live('click', function () { HideComment.apply(this); });
+    $('#HideComment').live('mouseover', function () { $(this).css('background-position-x', '-393px'); });
+    $('#HideComment').live('mouseout', function () { $(this).css('background-position-x', '-140px'); });
 
     $('#EditPost').live('click', function () { EditPost.apply(this); });
     $('#Comment').live('focus', function () { if (IsLoggedIn()) { SetAutoGrow.apply(this); CommentTextAreaEventFucus.apply(this); } });
@@ -3075,12 +3148,30 @@ $(function () {
             },
             complete: function () {
                 getMessagesRunning = false;
-                //FixAddThisAjax();
-
+                //RenderAddThis();
+                //addthis.counter('.addthis_counter');
             }
         });
 
 
+    }
+
+    function GetTotalShares(url)
+    {
+        //facebook
+        var fb_url = 'http://graph.facebook.com/?id=' + url;
+
+        //twitter
+        var tw_url = 'http://cdn.api.twitter.com/1/urls/count.json?url=' + url;
+
+        //pinterest
+        var pin_url = 'http://api.pinterest.com/v1/urls/count.json?callback=&url=' + url;
+
+        //linkedin
+        var ln_url = 'http://www.linkedin.com/countserv/count/share?url=' + url + '&format=json';
+
+        //stumble
+        var su = 'http://www.stumbleupon.com/services/1.01/badge.getinfo?url=' + url;
     }
 
     function GetMessagesOnComplete(data) {
@@ -3123,7 +3214,7 @@ $(function () {
         ArrangeAll();
     }
 
-    function PostComment(box, body) {
+    function PostComment(box, body, sliderframe) {
 
         if (body == "")
             return;
@@ -3140,6 +3231,11 @@ $(function () {
                 alert("Please Login");
             }
             return;
+        }
+        
+        var isPrivate = 'false'
+        if (sliderframe != null && isPrivate != 'undefined') {
+            isPrivate = sliderframe.attr('isprivate');
         }
 
         var msgId = $(box).attr("box-id");
@@ -3161,7 +3257,7 @@ $(function () {
             dataType: "json",
             success: function (data) {
 
-                ShowImmediateComment(data, body, msgId, box);
+                ShowImmediateComment(data, body, msgId, box, isPrivate);
                 $(box).find("#Comment").val('').blur();
                 $(box).find("#Comment").height(14);
                 $(box).find(".Buttons").hide();
@@ -3248,8 +3344,14 @@ $(function () {
         if (currentUser == null)
         {
             $('#fuzz').show();
-            $('#fuzz').css("z-index", 2000);
+            //$('#fuzz').css("z-index", 2000);
             $('#PleaseLogin').show();
+
+           
+
+
+            $('#PleaseLogin').html($('#PopupBox').html());
+            $('#xbuttonLoginMsg').live('click', function () { HideAddMessageWindow() });
             return false;
         } else 
         {
@@ -3486,9 +3588,9 @@ $(function () {
             isArranging = false;
         }
 
-
-        $('#MessagesContainer').css("min-height", maxYpos);
-
+        if (maxYpos > 500) {
+            $('#MessagesContainer').css("min-height", maxYpos);
+        }
 
     }
 

@@ -1,0 +1,30 @@
+$ git checkout master > checkout.txt
+error: Your local changes to the following files would be overwritten by checkou
+t:
+        PostAround.DAL/Properties/Settings.Designer.cs
+Please, commit your changes or stash them before you can switch branches.
+error: Your local changes to the following files would be overwritten by checkou
+t:
+        PostAround-Site/App_WebReferences/PostAroundService/Reference.svcmap
+        PostAround-Site/App_WebReferences/PostAroundService/Service.xsd
+        PostAround-Site/App_WebReferences/PostAroundService/configuration.svcinf
+o
+        PostAround-Site/App_WebReferences/PostAroundService/configuration91.svci
+nfo
+        PostAround-Site/Default.aspx
+        PostAround-Site/Web.config
+        PostAround-Site/css/screenNew.css
+        PostAround-Site/images/icons.png
+        PostAround-Site/scripts/scriptsNew.js
+        PostAround.DAL/PostAroundMeDataSet.Designer.cs
+        PostAround.DAL/PostAroundMeDataSet.xsd
+        PostAround.DAL/PostAroundMeDataSet.xss
+        PostAround.DAL/Properties/Settings.settings
+        PostAround.DAL/app.config
+        PostAround.Logic/PostAroundMeDataSet.Dataset.Designer.cs
+Please, commit your changes or stash them before you can switch branches.
+error: The following untracked working tree files would be overwritten by checko
+ut:
+        PostAround-Site/App_WebReferences/PostAroundService/service2.xsd
+Please move or remove them before you can switch branches.
+Aborting

@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Web.Caching;
+using System.Text;
 
 /// <summary>
 /// Summary description for ServiceImplementation
@@ -178,7 +179,21 @@ public class PostAroundService : IPostAroundService
             //msg.ClassName = "CommercialBox";
         }
 
+        
+        msg.totalShares = dr.TotalShares;
+
         return msg;
+    }
+
+   
+
+
+    public bool IsReusable
+    {
+        get
+        {
+            return false;
+        }
     }
 
 
@@ -197,12 +212,12 @@ public class PostAroundService : IPostAroundService
     }
 
 
-    private List<BriefMessage> BriefMessagesTranslator(PostAroundMeDataSet.MessagesDataTable dt)
+    private List<BriefMessage> BriefMessagesTranslator(PostAroundMeDataSet.GetAllBriefMessagesDataTable dt)
     {
         List<BriefMessage> lstResult = new List<BriefMessage>();
         BriefMessage msg;
 
-        foreach (PostAroundMeDataSet.MessagesRow dr in dt)
+        foreach (PostAroundMeDataSet.GetAllBriefMessagesRow dr in dt)
         {
             msg = BriefMessageTranslator(dr);
             lstResult.Add(msg);
@@ -210,14 +225,16 @@ public class PostAroundService : IPostAroundService
         return lstResult;
     }
 
-    private BriefMessage BriefMessageTranslator(PostAroundMeDataSet.MessagesRow dr)
+
+
+    private BriefMessage BriefMessageTranslator(PostAroundMeDataSet.GetAllBriefMessagesRow dr)
     {
         BriefMessage msg = new BriefMessage();
 
         msg.msgId = Convert.ToInt32(dr.ID);
         msg.latitude = dr.Latitude;
         msg.longitude = dr.Longitude;
-        msg.catID =  Convert.ToInt32(dr.CategoryID);
+        msg.catID =  Convert.ToInt32(dr.CategoryId);
         msg.FullDate = dr.PostDate;
         msg.Title = dr.Title;
 
@@ -269,6 +286,20 @@ public class PostAroundService : IPostAroundService
             msg = MessageTranslator(dr, currLat, currLon, regionId, timeZone, userId);
         }
         return msg;
+    }
+
+
+    public int UpdateMessageSharesByID(int msgId, int totalShares)
+    {
+        int res = 0;
+        MessagesTableAdapter messagesAdapter = new MessagesTableAdapter();
+        object obj = messagesAdapter.UpdateMessageSharesByID(msgId, totalShares);
+        if (obj != null)
+        {
+            res = Convert.ToInt32(obj);
+        }
+
+        return res;
     }
 
 
@@ -588,28 +619,130 @@ public class PostAroundService : IPostAroundService
 
     }
 
-    public List<BriefMessage> GetAllBriefMessages()
+    public int CreateXmlSiteMap()
+    {
+        List<BriefMessage> bMessages = GetAllBriefMessages();
+
+        CreateXmlFileFromStaticPages();
+        int retVal = CreateXmlFile(bMessages);
+        return retVal;
+
+    }
+
+    public void CreateJsonPostsDigest()
+    {
+        List<BriefMessage> bMessages = GetAllBriefMessages();
+        string path = ConfigurationManager.AppSettings["PhysicalPath"];
+
+        System.Web.Script.Serialization.JavaScriptSerializer oSerializer =
+        new System.Web.Script.Serialization.JavaScriptSerializer();
+        string sJSON = oSerializer.Serialize(bMessages);
+        
+
+        System.IO.File.WriteAllText(path + @"\Pages\json.txt", sJSON);
+    }
+
+    private List<BriefMessage> GetAllBriefMessages()
     {
         List<BriefMessage> bMessages = new List<BriefMessage>();
-        MessagesTableAdapter adapter = new MessagesTableAdapter();
+        GetAllBriefMessagesTableAdapter adapter = new GetAllBriefMessagesTableAdapter();
 
-        PostAroundMeDataSet.MessagesDataTable dt = new PostAroundMeDataSet.MessagesDataTable();
+        PostAroundMeDataSet.GetAllBriefMessagesDataTable dt = new PostAroundMeDataSet.GetAllBriefMessagesDataTable();
 
 
         if (System.Web.HttpRuntime.Cache["BriefMessages"] == null)
         {
-            dt = adapter.GetAllBriefMessages();
+            dt = adapter.GetData();
             System.Web.HttpRuntime.Cache.Insert("BriefMessages", dt, null, System.Web.Caching.Cache.NoAbsoluteExpiration, TimeSpan.FromMinutes(10));
         }
         else
         {
-            dt = System.Web.HttpRuntime.Cache["BriefMessages"] as PostAroundMeDataSet.MessagesDataTable;
+            dt = System.Web.HttpRuntime.Cache["BriefMessages"] as PostAroundMeDataSet.GetAllBriefMessagesDataTable;
         }
 
         bMessages = BriefMessagesTranslator(dt);
-
         return bMessages;
 
+
+    }
+
+    private void CreateXmlFileFromStaticPages()
+    {
+
+        string path = ConfigurationManager.AppSettings["PhysicalPath"];
+
+        string SiteUrl = ConfigurationManager.AppSettings["SiteUrl"];
+        string xmlns = "http://www.sitemaps.org/schemas/sitemap/0.9";
+
+
+        XNamespace ns = XNamespace.Get(xmlns);
+        XElement xml = new XElement(ns + "urlset",
+
+                            new XElement(ns + "url",
+                                      new XElement(ns + "loc", SiteUrl),
+                                      new XElement(ns + "lastmod", DateTime.Now.ToString("yyyy-MM-ddThh:mm:sszzz")),
+                                      new XElement(ns + "changefreq", "daily"),
+                                      new XElement(ns + "priority", "1.0")),
+                            new XElement(ns + "url",
+                                      new XElement(ns + "loc", SiteUrl + "Pages/Terms.aspx"),
+                                      new XElement(ns + "lastmod", "2012-01-12"),
+                                      new XElement(ns + "changefreq", "yearly"),
+                                      new XElement(ns + "priority", "0.1")),
+                            new XElement(ns + "url",
+                                      new XElement(ns + "loc", SiteUrl + "Pages/Privacy.aspx"),
+                                      new XElement(ns + "lastmod", "2012-01-12"),
+                                      new XElement(ns + "changefreq", "yearly"),
+                                      new XElement(ns + "priority", "0.1")),
+                            new XElement(ns + "url",
+                                      new XElement(ns + "loc", SiteUrl + "Taiwan/Taiwan-Receipt-Lottery-Checker.aspx"),
+                                      new XElement(ns + "lastmod", "2012-05-25"),
+                                      new XElement(ns + "changefreq", "monthly"),
+                                      new XElement(ns + "priority", "0.2")),
+                            new XElement(ns + "url",
+                                      new XElement(ns + "loc", SiteUrl + "Sitelinks.aspx"),
+                                      new XElement(ns + "lastmod", DateTime.Now.ToString("yyyy-MM-ddThh:mm:sszzz")),
+                                      new XElement(ns + "changefreq", "daily"),
+                                      new XElement(ns + "priority", "0.1"))
+                                      );
+
+
+        xml.Save(path + @"\XML\sitemap0.xml");
+    }
+
+    private int CreateXmlFile(List<BriefMessage> list)
+    {
+        int siteMapSize = 50000;
+        int listCount = list.Count();
+        int iterationsNum = Convert.ToInt32(Math.Ceiling((decimal)listCount / (decimal)siteMapSize));
+        string SiteUrl = ConfigurationManager.AppSettings["SiteUrl"];
+        string xmlns = "http://www.sitemaps.org/schemas/sitemap/0.9";
+        int retVal = 1;
+        string path = ConfigurationManager.AppSettings["PhysicalPath"];
+
+        for (int i = 1; i <= iterationsNum; i++)
+        {
+            retVal = i;
+            list.Take(siteMapSize * i);
+
+
+            XNamespace ns = XNamespace.Get(xmlns);
+
+
+            XElement xml = new XElement(ns + "urlset",
+                                from p in list
+                                select new XElement(ns + "url",
+                                          new XElement(ns + "loc", SiteUrl + "post/" + p.msgId),
+                                          new XElement(ns + "lastmod", p.FullDate.ToString("yyyy-MM-ddThh:mm:sszzz")),
+                                          new XElement(ns + "changefreq", "weekly"),
+                                          new XElement(ns + "priority", "0.8")
+
+                                )
+
+                        );
+
+            xml.Save(string.Format(path + @"\XML\sitemap{0}.xml", i.ToString()));
+        }
+        return retVal;
     }
 
 

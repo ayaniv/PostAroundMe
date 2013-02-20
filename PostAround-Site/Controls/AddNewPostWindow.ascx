@@ -21,7 +21,7 @@
                     <div style="position:relative; margin-bottom:6px; width:325px;">
                     
                     
-                    <textarea maxlength="400" id="txtPopupDetails" style="width:299px; height:70px; padding-right:20px; margin-top:0;" title="Details"  placeholder="Add your post here !"></textarea>
+                    <textarea maxlength="400" id="txtPopupDetails" style="width:299px; height:70px; padding-right:20px; margin-top:0;" title="Details"  placeholder="Post to your neighbors here !"></textarea>
                     
                              <div id="xbutton" style="width:14px; height:16px; clear:both; float: right; top:0; right:0; padding: 5px; padding-top: 4px; position:absolute; cursor: pointer;">
          <div style="margin-right:1px; background: url('images/icons.png') repeat scroll -140px -143px; float: right;

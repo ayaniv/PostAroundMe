@@ -24,7 +24,10 @@ namespace PostAround.ServiceContracts
         List<MyMessage> GetMessages(string currLat, string currLon, int userId, int skipNum, int takeNum, int isMine, List<int> lstCatID, int sotyBy, int timeZone, int uptoMeters, int regionID);
 
         [OperationContract]
-        List<BriefMessage> GetAllBriefMessages();
+        int CreateXmlSiteMap();
+
+        [OperationContract]
+        void CreateJsonPostsDigest();
 
         [OperationContract]
         MyMessage GetMessageById(int msgId, string currLat, string currLon, int regionId, int timeZone, int userId);
@@ -54,6 +57,9 @@ namespace PostAround.ServiceContracts
 
         [OperationContract]
         List<Category> GetListCategories();
+
+        [OperationContract]
+        int UpdateMessageSharesByID(int msgId, int totalShares);
 
         [OperationContract]
         int InsertComment(Comment comment);
