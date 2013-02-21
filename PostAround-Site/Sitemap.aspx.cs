@@ -19,7 +19,7 @@ public partial class Pages_Sitemap : System.Web.UI.Page
     {
 
         PostAroundServiceClient client = new PostAroundServiceClient();
-        int siteMapsCount = client.GetAllBriefMessages();
+        int siteMapsCount = client.CreateXmlSiteMap();
         client.Close();
         List<int> lstIndexes = new List<int>();
 
