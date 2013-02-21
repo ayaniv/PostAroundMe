@@ -3488,18 +3488,6 @@ $(function () {
                 $('#LeftWing').css("margin-left", "39px");
                 $('#moreButtons').css("margin-left", "39px");
                 $('#AddMessageWindow').css("margin-left", "40px");
-
-                //                if (screenWidth == 1863) {
-                //                    $('#MessagesContainer').css("margin-left", "105px");
-                //                } else if (screenWidth == 1623) {
-                //                    $('#MessagesContainer').css("margin-left", "127px");
-                //                } else if (screenWidth == 1223) {
-                //                    $('#MessagesContainer').css("margin-left", "69px");
-                //                } else if (screenWidth == 1543) {
-                //                    $('#MessagesContainer').css("margin-left", "86px");
-                //                } else if (screenWidth == 1309) {
-                //                    $('#MessagesContainer').css("margin-left", "111px");
-                //                }
             }
         }
 
