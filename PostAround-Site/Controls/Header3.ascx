@@ -26,9 +26,9 @@
         
 
 
+<div id="TopHeader">
 
-
-      <div id="MainHeader" class="FixedHeader" style="border-bottom:1px solid #e2ddcf; min-width:910px; height:80px; background:#FCFCFC url('<%=homePage%>images/bgtop2.png'); width:100%;">
+      <div id="MainHeader" class="FixedHeader" style="border-bottom:1px solid #e2ddcf; /*min-width:910px;*/ height:80px; background:#FCFCFC url('<%=homePage%>images/bgtop2.png'); width:100%;">
         <div style="margin:0 auto; padding:0">
 
         <div id="LogoHeader" style="width:270px; height:90px; background:url('<%=homePage%>images/bgtop2.png') repeat-x; position:absolute; left:50%; margin-left:-135px;">
@@ -84,7 +84,7 @@
         </div>
         <div id="LeftWing" style="float:left; height:80px; width:400px; margin-left:39px; ">
         <ul class="HeaderList">
-        <li style="width:90px;" id="liAddPost"><span style="background:url('<%=homePage%>images/icons.png'); float:left; background-position:-184px -143px; margin-right:7px; width:24px; height:18px;"></span>Add Post
+        <li style="width:90px;" id="liAddPost"><span class="AddPostIcon"></span>Add Post
         <%--<div style="background:url('images/icons.png');  background-position:-100px -156px; margin-left:7px; z-index:1; position:absolute; margin-top:8px; width:10px; clear:both; height:6px;" ></div>--%>
         </li>
         <li id="liCategory">
@@ -181,7 +181,7 @@
       <div id="MapReal" style="display:none; height:190px; width:100%;"></div>
       </div>
       
-      <div id="MapPasBottom" style="width:100%; min-width:910px; position:relative;  z-index:10; float:left; background-color:#fcfcfc; border-bottom:1px solid #e1dfdc; border-top:1px solid #e1dfdc;">
+      <div id="MapPasBottom" style="width:100%; /*min-width:910px;*/ position:relative;  z-index:10; float:left; background-color:#fcfcfc; border-bottom:1px solid #e1dfdc; border-top:1px solid #e1dfdc;">
       <uc1:LocationBar ID="LocationBar" runat="server" />
       <uc1:SearchLocation ID="SearchLocation1" runat="server" />
 
@@ -199,7 +199,7 @@
       </div>
       <div style="float:left; width:100%; height:2px; background:url('images/cats_bottom.png'); margin-bottom:11px;"></div>
       
-
+    </div>
     
 
 

@@ -487,7 +487,7 @@ qq.FileUploader = function(o){
         listElement: null,
 
         template: '<div title="Add Photo" class="qq-uploader">' + 
-                '<div class="qq-upload-drop-area"><span>Drop photo here to upload</span></div>' +
+                '<div class="qq-upload-drop-area"><span>Drop photo here</span></div>' +
                 '<div class="qq-upload-button">Browse...</div>' +
                 '<ul class="qq-upload-list" style="position:absolute; margin-left:110px; margin-top:7px; width:188px; overflow:hidden; padding-right:2px;color:#424E55;"><li>Browse or drag photo...</li></ul>' +
              '</div>',

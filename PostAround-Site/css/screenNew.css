@@ -78,7 +78,7 @@ h1 span
           }
 .LogoBg {background-image:url('../images/logo_bg.png'); width:523px; height:313px; margin-left:-65px; z-index:1; position:fixed; margin-top:6px; }
 
-.LogoClear { float:left; margin-top:11px; margin-left:11px;  }
+.LogoClear { float:left; margin-top:11px; margin-left:11px; height:43px;  }
 .LogoText {  font-style:italic; color:#a4a8ab; font-size:20px; font-family:Georgia, Arial, Calibri, Arial;  }
 
 
@@ -267,7 +267,7 @@ h1 span
 .Bottom .CommentsArea .SingleComment .CommentWrapper .CommentDate { color:#A3A3A3; font-size:11px; margin-left:5px; float:left; }
 .Bottom .CommentsArea .EndLine { height:1px;  width:100%; float:left; }
 .Bottom .AddComment { margin-left:15px; margin-right:15px; } 
-.Bottom .AddComment textarea { float:left; margin-top:5px; margin-bottom:5px; font-size:12px; width:236px; height:14px; border:solid 1px #cbd2d4; color:#3C3C3C; padding:3px; background-color:#FFF; font-family:Arial; overflow:hidden; resize:none; } 
+.Bottom .AddComment textarea { float:left; margin-top:5px; margin-bottom:5px; font-size:12px; width:235px; height:14px; border:solid 1px #cbd2d4; color:#3C3C3C; padding:3px; background-color:#FFF; font-family:Arial; overflow:hidden; resize:none; } 
 .Bottom .AddComment .Buttons { width:100%; position:relative; margin-bottom:5px; font-size:12px; color:#666; float:right; display:none; } 
 .SlimDropDown { cursor:pointer; background-color:#dee2e3; padding:1px 6px 1px 6px; float:left; border:1px solid #c0c0c0; 
                 
@@ -671,8 +671,172 @@ height:32px;
 width:147px;
 background: #f99e2b url('../images/bigBtns.png') no-repeat 0px -111px;
      	
-}      
+}
 
+.AddPostIcon {
+
+    background:url('../images/icons.png'); float:left; background-position:-184px -143px; margin-right:7px; width:24px; height:18px;
+
+
+}
+
+.MobileTop {
+    position:fixed; z-index:2000000;
+    width:100%; height:86px; background-color:#fff; border-bottom:1px solid #96b1c0; 
+
+}
+
+
+.NoMargin { margin:0 !important;
+}
+.MobileBottom {
+    position:fixed;
+    bottom:0; z-index:2000000;
+    background:#55819b url('../images/mobile_bottom_bg.png') repeat-x;
+    height:98px;
+    width:100%;
+    
+}
+
+    .Wrapper {
+        margin:0 auto;
+        width:640px;
+    }
+
+.MobileBottom  .MobileButton {
+    float:left;
+    margin:15px;
+    margin-right:7px;
+    height:66px;
+   /* width:219px; */
+    border:1px solid #56839c;
+    border-radius:20px;
+    box-shadow:inset 0 0 15px #000;
+    cursor:pointer;
+}
+
+
+.MobileBottom   .MobileButton .Entry{
+ 
+    margin:16px;
+ 
+ 
+}
+
+.WhiteBlue {
+        background-color:#819fb1;
+   
+}
+
+.DarkBlue {
+    background-color:#3d5b6e;
+}
+
+
+.MobileBottom  .MobileBottomPas {
+    float:left;
+}
+.MobileBottom  .MobileBottomPas .Line {
+
+    width:2px;
+    height:98px;
+    float:left;
+}
+
+
+.MobileBottom  .MobileButton .Entry .AddPostIconBig {
+    width:49px;
+    height:34px;
+    background:url('../images/icons_mobile.png') no-repeat;
+    float:left;
+    margin-left:7px;
+}
+
+
+
+.MobileBottom  .AddPostText {
+font-family:Arial;
+color:#fff;
+font-size:30px;
+text-shadow: 0.05em 0.05em 0.05em #333;
+margin-left:15px;
+margin-right:5px;
+float:left;
+ 
+}
+
+.MobileTopSecondary {
+    /*position:fixed; padding-top:86px;  margin-bottom:1000px; */
+    position:relative; padding-top:100px;
+    width:100%; height:59px; background-color:#f6f6f6; border-bottom:1px solid #96b1c0;
+    margin-bottom:10px;
+}
+
+.MobileTopSecondary .MobileTopSecondaryText {
+    color:#949ba1;
+    font-family:Arial;
+    font-size:30px;
+    float:left;
+    
+}
+
+.MobileTopSecondary .Selected {
+    background:url('../images/icons_mobile.png') -49px 0px;
+    width:24px;
+    height:12px;
+    bottom:0;
+    position:absolute;
+    left:50%;
+    margin-left:-12px;
+
+}
+
+
+.MobileLocation {
+    /*
+    background:url('../images/icons_mobile.png') -49px -14px;
+    background-repeat:no-repeat;
+    min-height:19px;
+    padding-left:22px;
+        */
+    float:left;    
+    font-family:Arial;
+    font-size:18px;
+    color:#666666;
+    width:100%;
+    text-align:center;
+    margin-bottom:10px;
+}
+
+
+
+
+.MobileTop .MobileLogo {
+   
+    width:325px;
+    height:57px;
+    padding:15px 30px 19px 0;
+    float:right;
+}
+
+.MobileTop .MobileSettings {
+    
+    height:34px;
+    border-right:1px solid #96b1c0;
+    width:38px;
+    padding:27px 24px 25px 24px;
+    float:left;
+    cursor:pointer;
+    
+}
+
+    .MobileTop .MobileSettingsLine {
+        width:38px;
+        height:6px;
+        background-color:#d3d3d3;
+        border-top:2px solid #a2a2a2;
+        margin-bottom:4px;
+    }
 
 
              .OnOffButtons { background-color:#e4e4e4; color:#999999; float:left; height:19px; position:relative; width:132px; z-index:1;  }
@@ -691,9 +855,10 @@ background: #f99e2b url('../images/bigBtns.png') no-repeat 0px -111px;
   margin: 0;
   padding: 0;
   margin: 0 auto;
-  width: 130px;
+  width: 133px;
+  border: 1px #c0c0c0 solid;
   height: 19px;
-  background-color: #E4E4E4;
+  /*background-color: #E4E4E4;*/
   background-repeat: no-repeat;
   position:relative;
   z-index:1;

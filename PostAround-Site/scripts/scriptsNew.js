@@ -414,6 +414,7 @@ $(function () {
 
 
 
+
     $('#TryAgain').click(function () {
         GetPosition();
     });
@@ -3012,8 +3013,28 @@ $(function () {
 
     //----DATA START
 
-
+    var st;
+    var lastScrollTop = 0;
     $(window).scroll(function () {
+        if (isMobile) {
+
+
+            st = $(this).scrollTop();
+            if (st > lastScrollTop) {
+                // downscroll code
+                //$('.MobileTopSecondary').fadeOut('slow');
+                $('.MobileBottom').slideUp('fast');
+                
+            } else {
+                // upscroll code
+                //$('.MobileTopSecondary').fadeIn('fast');
+                $('.MobileBottom').slideDown('fast');
+            }
+            lastScrollTop = st;
+
+
+            
+        }
         if (isDirectLink || getMessagesRunning || arrangerRunning) {
             // don't do anything in direct link
             // don't do anything if an AJAX request is pending
@@ -3463,7 +3484,7 @@ $(function () {
     }
 
 
-
+    
 
     function ArrangeBoxesInit() {
 
@@ -3473,6 +3494,14 @@ $(function () {
             $('#moreButtons').css("margin-left", "15px");
             $('#AddMessageWindow').css("margin-left", "16px");
             $('#CategoriesBar').css("display", "none");
+
+            //iphone   
+            isMobile = true;
+            
+            $("#mobileHeader").show();
+            $("#TopHeader").hide();
+            $("#BottomDiv").hide();
+            $(".feedback-panel").hide();
 
             //$('#MessagesContainer').css("margin-left", "85px");
         } else {
