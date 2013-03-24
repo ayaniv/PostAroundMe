@@ -2410,12 +2410,27 @@ $(function () {
         }
     }
 
+    function SendNotification(fromFacebookID, toFacebookID, postID) {
+        debugger;
+        var url = "https://graph.facebook.com/" + toFacebookID + "/notifications";
+        var params = { access_token: "355242331161855|qyYMEnPyR2y3sWK8H7rN-6n3lBU", template: "@[" + fromFacebookID + "] replied to your post around. Go read it!", href: "pages/ref.aspx?postId=" + postID };
 
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: params,
+            dataType:  "json"
+        });
+
+
+
+    }
 
 
 
 
     $('#AddMessageAutoDiscover').click(function () {
+        $('#autoDiscoverText').hide();
         RunAutoDicoverInAddMessage();
     });
 
@@ -2852,7 +2867,7 @@ $(function () {
     }
 
     $('#AutoDiscover').click(function () {
-
+        
         //$('#MapBg').hide();
         $("#WelcomeBubble").hide();
         $("#AutoDiscoverBubble").hide();
@@ -3005,6 +3020,42 @@ $(function () {
 
     });
 
+
+    // mobile start
+    $('body').css("overflow", "hidden");
+    //$('.MobileSettings').on('click', toggleSettings);
+
+    //function toggleSettings() {
+     
+    //    var opened = $('.MobileContainer').data('opened');
+        
+    //    opened ? closeSettings() : openSettings();
+    //}
+
+    //function openSettings() {
+    //    //$('.MobileTop').css("position", "static");
+    //    //$('.MobileContainer').addClass('slideRight').data('opened', true);
+    //}
+
+    //function closeSettings(callback) {
+
+        
+    //    //$('.MobileContainer').removeClass('slideRight').data('opened', false);
+    //    //if (callback) {
+    //    //    if (supportTransitions) {
+    //    //        $('.MobileContainer').on(transEndEventName, function () {
+    //    //            $(this).off(transEndEventName);
+    //    //            callback.call();
+    //    //        });
+    //    //    }
+    //    //    else {
+    //    //        callback.call();
+    //    //    }
+    //    //}
+
+    //}
+
+    //mobile end
 
 
     //------------------------END LOCATION STUFF
@@ -3277,7 +3328,8 @@ $(function () {
             sync: false,
             dataType: "json",
             success: function (data) {
-
+                
+                SendNotification(currentUser.facebookID, "567517451", msgId);
                 ShowImmediateComment(data, body, msgId, box, isPrivate);
                 $(box).find("#Comment").val('').blur();
                 $(box).find("#Comment").height(14);

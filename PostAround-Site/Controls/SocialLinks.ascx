@@ -11,7 +11,7 @@
             </div>
 
 
-                       <div style="float:right; width:100px; height:20px;">
+                       <div style="float:left; width:100px; height:20px;">
                 <uc1:FacebookLike ID="FacebookLike" runat="server" />
             </div>
            

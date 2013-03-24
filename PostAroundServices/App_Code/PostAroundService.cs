@@ -263,6 +263,7 @@ public class PostAroundService : IPostAroundService
             user.phone2 = dr.phone2;
             user.userID = dr.ID;
             user.link = dr.link;
+            user.facebookID = dr.facebookID;
             
             lstUsers.Add(user);
         }

@@ -264,6 +264,8 @@ public partial class Controls_LoginPanel : System.Web.UI.UserControl
             resp.FirstName = user.firstName;
             resp.LastName = user.lastName;
             resp.Image = user.avatarImageUrl;
+            resp.facebookID = user.facebookID;
+            
             //resp.userID = encUserId;
             resp.link = user.link;
 

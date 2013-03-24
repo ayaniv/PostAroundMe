@@ -76,7 +76,7 @@
 
 
         <%@ Register src="SocialLinks.ascx" tagname="SocialLinks" tagprefix="uc1" %>
-<div id="SocialLinksWrapper" style="float:right !important; right:0; margin-right:30px; clear:both; margin-top:10px; ">
+<div id="SocialLinksWrapper" style="float:right !important; right:0; margin-right:30px; clear:both; padding-top:10px;">
     <uc1:SocialLinks ID="SocialLinks1" runat="server" />
 </div>
         
