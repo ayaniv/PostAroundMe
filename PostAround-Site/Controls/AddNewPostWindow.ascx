@@ -30,7 +30,7 @@
     </div>
 
                                 
-                    <div style="margin-bottom:6px; width:325px;"><input maxlength="18" type="text" name="txtTitle" id="txtPopupTitle" style="font-family:Arial; font-size:14px; color:#3c3c3c; width:315px; border:solid 1px #c8c8c8; height:19px; padding:4px; padding-top:6px" title="Title" placeholder="Add Title..." /></div>
+                    <div style="margin-bottom:6px; width:325px;"><input maxlength="50" type="text" name="txtTitle" id="txtPopupTitle" style="font-family:Arial; font-size:14px; color:#3c3c3c; width:315px; border:solid 1px #c8c8c8; height:19px; padding:4px; padding-top:6px" title="Title" placeholder="Add Title..." /></div>
                 
 
 
