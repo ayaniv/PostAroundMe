@@ -20,6 +20,7 @@ public partial class Controls_SinglePost : System.Web.UI.UserControl
     protected string BigBoxAddress;
 
     protected string directionDescription;
+    protected string alignDescription;
     protected string directionAddress;
     protected string directionTitle;
 
@@ -28,6 +29,7 @@ public partial class Controls_SinglePost : System.Web.UI.UserControl
 
     protected int msgId;
     protected string bigBoxLineColor;
+    protected string facebookID;
   
 
     public string PageTitle { get; set; }
@@ -58,8 +60,8 @@ public partial class Controls_SinglePost : System.Web.UI.UserControl
                 if (!msg.Mine)
                     ltrlButtons.Text = @"<div class=""slider-frame""><span class=""slider-button""><span class=""PublicIcon PublicIconOn""></span>Public</span><span class=""slider-button-off""><span class=""PrivateIcon""></span>Private</span></div>";
 
-                this.Page.Title = msg.title + " : Post Around Me";
-
+                this.Page.Title = msg.title + " Around " + msg.msgAddress + " ::PostAroundMe";
+                facebookID = msg.facebookID;
                 ltrlAddress.Text = msg.msgAddress;
                 directionAddress = GetLanguageDirection(ltrlAddress.Text);
                 BigBoxAddress = Tools.EncodeTo64(ltrlAddress.Text);
@@ -71,6 +73,7 @@ public partial class Controls_SinglePost : System.Web.UI.UserControl
                 ltrlTitle.Text = msg.title;
                 ltrlText.Text = FormatText(msg.description);
                 directionDescription = GetLanguageDirection(ltrlText.Text);
+                alignDescription = directionDescription == "ltr" ? "left" : "right";
                 bigBoxLineColor = msg.catColor;
 
                 directionTitle = GetLanguageDirection(ltrlTitle.Text);

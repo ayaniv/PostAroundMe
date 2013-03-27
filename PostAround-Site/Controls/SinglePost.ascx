@@ -13,7 +13,7 @@
 
 
 <div id="MessagesContainer">
-<div id="BigBoxContainer" box-lat="<%=BigBoxLat %>" box-lon="<%=BigBoxLon %>">
+<div id="BigBoxContainer" box-lat="<%=BigBoxLat %>" box-lon="<%=BigBoxLon %>" box-fuid="">
 
 
 <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
@@ -32,7 +32,7 @@
 
 <div class="Line" style="background-color:<%=bigBoxLineColor %> ; width:895px; "></div>
 <div id="BigBoxWrapper" class="Box" box-id="<%=msgId %>" style="width:865px; padding:15px; background-color:#FFF; float:left;">
-                     
+    <div id="FacebookID" style="display:none"><%=facebookID %></div>         
     <div id="BigBoxLeft" style="width:319px; float:left;">
 
         <div id="map_canvas1" style="width:319px; background-color:#EAEDEE; height:256px;">
@@ -90,14 +90,14 @@
             </div>
             <div style="float:right;">
                 <div style="clear:both; font-size:14px; color:#3b3b3d; float:right;"><asp:Literal ID="ltrlCategory" runat="server"></asp:Literal></div>
-                <div style="clear:both; direction:<%=directionTitle %>; text-transform:uppercase; color:#3b3b3d; font-size:24px;  float:right;"><asp:Literal ID="ltrlTitle" runat="server"></asp:Literal></div>
+                <div style="clear:both; width:300px; direction:<%=directionTitle %>; text-transform:uppercase; color:#3b3b3d; font-size:24px; text-align:right;  float:right;"><asp:Literal ID="ltrlTitle" runat="server"></asp:Literal></div>
             </div>
         
         </div>
         <div id="BigBoxMedia" class="BigBoxMedia">
         <asp:Literal ID="ltrlMedia" runat="server"></asp:Literal>
         </div>
-        <div id="BigBoxText" style="margin-top:10px; margin-bottom:10px; padding:0 15px 0 15px; float:left; direction:<%=directionDescription%>; color:#3b3b3d; font-size:22px;">
+        <div id="BigBoxText" style="margin-top:10px; margin-bottom:10px; padding:0 15px 0 15px; float:<%=alignDescription %>; direction:<%=directionDescription%>; color:#3b3b3d; font-size:16px;">
         <asp:Literal ID="ltrlText" runat="server"></asp:Literal>
         </div>
 

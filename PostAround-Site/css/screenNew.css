@@ -230,12 +230,16 @@ h1 span
 .TransparentGrey .RightButton { border-bottom-right-radius:6px; border-top-right-radius:6px;
 }
 
+.PrivateComment {
+    padding-right:11px !important;
+}
+
 .OnPostButtons {
     display:none;
     position: absolute;
     right: 13px;
     bottom: 0;
-    margin-bottom: 8px;
+    margin-bottom: 57px;
     z-index:1;
 }
 

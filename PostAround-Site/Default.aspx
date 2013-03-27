@@ -205,7 +205,7 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
                                     </div>
                                     <div id="CommentText" class="CommentText" style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</div>
                                     <div class="CommentDate">${strDate} at ${strTime}</div>
-                                    <div class="CommentDate PosterOnly" style="display:none;">· Poster Only&nbsp;·&nbsp;<span style="width:9px; height:11px; background:url('images/icons.png') -352px -2px; float:right; margin-top:1px;"></span></div>
+                                    <div class="CommentDate PosterOnly" style="display:none;">· Poster Only&nbsp;·&nbsp;<span class="Locker"></span></div>
                                 </div>
 
                             </div>
@@ -235,7 +235,7 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
                                     </div>
                                     <div id="CommentText" class="CommentText" style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</div>
                                     <div class="CommentDate">${strDate} at ${strTime}</div>
-                                    <div class="CommentDate PosterOnly" style="display:none;">· Poster Only&nbsp;·&nbsp;<span style="width:9px; height:11px; background:url('images/icons.png') -352px -2px; float:right; margin-top:1px;"></span></div>
+                                    <div class="CommentDate PosterOnly" style="display:none;">· Poster Only&nbsp;·&nbsp;<span class="Locker"></span></div>
                                 </div>
 
                             </div>

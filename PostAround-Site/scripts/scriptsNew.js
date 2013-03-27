@@ -1478,7 +1478,7 @@ $(function () {
 
     function ShowImmediateComment(id, body, msgId, box, isPrivate) {
         // create json data with the comment details
-
+        debugger;
         var currCommentsContainer = $("#MessagesContainer").find('[box-id=' + msgId + ']').find("#currCommentsView");
         var currCommentsContainerPopUp = $(box).find("#currCommentsView");
 
@@ -1508,6 +1508,12 @@ $(function () {
             $.template("CommentTemplate", markup)
 
             currComment = $.tmpl("CommentTemplate", myJSON);
+
+            //alert(isPrivate);
+            if (isPrivate == 'true') {
+                $(currComment).find('.SingleComment').addClass('PrivateComment');
+                $(currComment).find('.PosterOnly').show();
+            }
 
             // push the template on comments area
             $(currComment).appendTo(currCommentsContainerPopUp);
@@ -3303,7 +3309,7 @@ $(function () {
     }
 
     function PostComment(box, body, sliderframe) {
-
+        
         if (body == "")
             return;
 
