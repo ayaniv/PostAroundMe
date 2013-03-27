@@ -18,9 +18,9 @@ public partial class Controls_MetaTags : System.Web.UI.UserControl
         siteUrl = ConfigurationManager.AppSettings["SiteUrl"];
 
         string title = "Post Around Me | Local Pinboard";
-        string description = "Post Around Me makes sharing with your neighbors easier. By posting on a pinboard based on your location, you can interact with people around you, read and share messages in your own neighborhood and find out what's good in the hood";
+        string description = "Turn your Facebook into a bulletin board that finds you what closest to you !";
         string url = siteUrl.TrimEnd('/');
-        string image = siteUrl + "images/facebook_like.png";
+        string image = siteUrl + "images/facebook_ogimage.png";
 
         int msgId;
         string strMsgId = Request.QueryString["id"];

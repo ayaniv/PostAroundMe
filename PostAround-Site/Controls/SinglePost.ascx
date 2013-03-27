@@ -22,8 +22,9 @@
 
 <link rel="canonical" href="<%=pageUrl %>" />    
     <script type="text/javascript">
-        FB.XFBML.parse();
-        gapi.plusone.go('GplusContainer', { "size": "medium" });
+
+        //FB.XFBML.parse();
+        //gapi.plusone.go('GplusContainer', { "size": "medium" });
 
         
 
@@ -93,10 +94,10 @@
             </div>
         
         </div>
-        <div id="BigBoxMedia" style="width:100%; background-color:#EAEDEE; margin-top:10px;">
+        <div id="BigBoxMedia" class="BigBoxMedia">
         <asp:Literal ID="ltrlMedia" runat="server"></asp:Literal>
         </div>
-        <div id="BigBoxText" style="width:100%; margin-top:10px; direction:<%=directionDescription%>; color:#3b3b3d; font-size:22px;">
+        <div id="BigBoxText" style="margin-top:10px; margin-bottom:10px; padding:0 15px 0 15px; float:left; direction:<%=directionDescription%>; color:#3b3b3d; font-size:22px;">
         <asp:Literal ID="ltrlText" runat="server"></asp:Literal>
         </div>
 
@@ -117,7 +118,7 @@
                         
 
                          <div id="SingleCommentView" comment-id="<%#  ((Comment)Container.DataItem).ID %>">
-                            <div class="SingleComment" style="width:503px" >
+                            <div class="SingleComment <%# ((Comment)Container.DataItem).isPrivate ? "PrivateComment" : ""  %>" style="width:503px" >
                                 <div id="commentImage" class="CommentImage">
                                 <asp:Literal ID="cmtUserImage" runat="server"></asp:Literal>
                                     
@@ -125,8 +126,9 @@
                                 
                                 <div class="CommentWrapper" style="width:476px">
                                 
+
                                     
-                                    <div id="HideComment" style="display:<%#  (((Comment)Container.DataItem).Mine == true)? "block" : "none" %>"></div>
+                                    <asp:Literal runat="server" ID="ltrlCommentXButton"></asp:Literal>
                                     
 
                                     <div id="commentUserName">
@@ -139,6 +141,10 @@
                                     <div class="CommentDate">
                                     <asp:Literal ID="cmtDate" runat="server"></asp:Literal>
                                     </div>
+                                    <%# ((Comment)Container.DataItem).isPrivate ? @"<div class=""CommentDate PosterOnly"">· Poster Only&nbsp;·&nbsp;<span class=""Locker""></span></div>" : ""  %>
+                                    
+                                    
+                                    
 
                                 </div>
 
@@ -156,8 +162,28 @@
                         </asp:Repeater>
 
                     
-                    
-                    <div class="AddComment" style="margin-top:0"><textarea style="width:495px"  maxlength="500" id="Comment" cols"1" rows="1">Post a comment...</textarea></div>
+                    <asp:Panel runat="server" ID="AddCommentPanel">
+                        <div class="AddComment" style="margin-top:0">
+                            <textarea style="width:495px"  maxlength="500" id="Comment" cols"1" rows="1">Post a comment...</textarea>
+
+                            <div class="Buttons">
+                            <div style="position:absolute; left:0; float:left;">
+                            
+                                <asp:Literal runat="server" ID="ltrlButtons"></asp:Literal>
+ 
+
+
+                            </div>
+
+     
+                            <div class="Orange">
+                            <div id="BtnPostComment" class="MyButton" title="Post Comment" style="float:right; padding:2px 12px 2px 12px;">Post</div>
+                            </div>
+                            </div>
+
+                        </div>
+                    </asp:Panel>
+
                 </div>
 
         </div>

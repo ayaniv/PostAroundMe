@@ -111,7 +111,7 @@ public partial class Taiwan_Taiwan_Receipt_Lottery_Checker : System.Web.UI.Page
     protected void btnCheck_Click(object sender, EventArgs e)
     {
         string text = txtNumbers.Text;
-        text = text.Trim(' ');
+        text = text.Replace(" ", "");
         string[] array = text.Split(',');
         long wonPrizeSum = 0;
         bool hasPotentionWinningBigPrize = false;
@@ -120,48 +120,50 @@ public partial class Taiwan_Taiwan_Receipt_Lottery_Checker : System.Web.UI.Page
         List<int> arrayIndexPotential = new List<int>();
         for (int i = 0; i < array.Length; i++)
         {
-
-            int res = GetResultByNumber(array[i]);
-            if (res == 11)
+            if (!string.IsNullOrWhiteSpace(array[i]))
             {
-                hasPotentionWinningBigPrize = true;
-                arrayIndexPotential.Add(i + 1);
-            }
-            else if (res > 2)
-            {
-                arrayIndex.Add(i + 1);
-                switch (res)
+                int res = GetResultByNumber(array[i]);
+                if (res == 11)
                 {
-                    case 10:
-                        wonPrizeSum += 10000000;
-                        break;
-                    case 9:
-                        wonPrizeSum += 2000000;
-                        break;
-                    case 8:
-                        wonPrizeSum += 200000;
-                        break;
-                    case 7:
-                        wonPrizeSum += 40000;
-                        break;
-                    case 6:
-                        wonPrizeSum += 10000;
+                    hasPotentionWinningBigPrize = true;
+                    arrayIndexPotential.Add(i + 1);
+                }
+                else if (res > 2)
+                {
+                    arrayIndex.Add(i + 1);
+                    switch (res)
+                    {
+                        case 10:
+                            wonPrizeSum += 10000000;
+                            break;
+                        case 9:
+                            wonPrizeSum += 2000000;
+                            break;
+                        case 8:
+                            wonPrizeSum += 200000;
+                            break;
+                        case 7:
+                            wonPrizeSum += 40000;
+                            break;
+                        case 6:
+                            wonPrizeSum += 10000;
 
-                        break;
-                    case 5:
-                        wonPrizeSum += 4000;
+                            break;
+                        case 5:
+                            wonPrizeSum += 4000;
 
-                        break;
-                    case 4:
-                        wonPrizeSum += 1000;
+                            break;
+                        case 4:
+                            wonPrizeSum += 1000;
 
-                        break;
-                    case 3:
-                        wonPrizeSum += 200;
-                        break;
-                    default:
-                        wonPrizeSum += 0;
-                        break;
+                            break;
+                        case 3:
+                            wonPrizeSum += 200;
+                            break;
+                        default:
+                            wonPrizeSum += 0;
+                            break;
+                    }
                 }
             }
         }

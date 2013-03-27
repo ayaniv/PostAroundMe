@@ -6,7 +6,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <title>Taiwan Receipt Lottery | Uniform Invoice Lottery Checker</title>
+    <title>Taiwan Receipt Lottery | Uniform Invoice Lottery Online Checker</title>
     <link rel="stylesheet" href="../css/screen.css" type="text/css" media="screen" charset="utf-8" />
 </head>
 <body>
@@ -27,10 +27,10 @@
     <div class="HairHeadLine"></div>
         <div class="BottomDiv" id="BottomDiv" style="background:none">
         <div class="Logo">
-        <h1>Taiwan Receipt Lottery Checker</h1>
+        <h1>Taiwan Receipt Lottery Online Checker</h1>
         Check if you won Taiwan Receipts Lottery
         <br />
-        with Uniform-Invoice Winning Numbers web checker
+        with Uniform-Invoice Winning Numbers online web checker
         
 
                 </div>  
@@ -41,7 +41,8 @@
     
     Winning numbers for months <asp:DropDownList ID="ddMonth" OnSelectedIndexChanged="Index_Changed" AutoPostBack="true" runat="server"></asp:DropDownList>
     
-    as can be shown <a href="http://www.etax.nat.gov.tw/etwmain?site=en" target="_blank">here</a>
+    as can be shown <a href="http://service.etax.nat.gov.tw/etwmain/front/ETW183W6" target="_blank">here</a>
+
     <br /><br />
     <table style="wdith:800">
     <tr>

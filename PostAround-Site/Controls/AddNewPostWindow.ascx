@@ -17,18 +17,17 @@
 
                 <input type="checkbox" id="chkPostToWall" style="display:none;" />
 
-            
-                    <div style="position:relative; margin-bottom:6px; width:325px;">
-                    
-                    
-                    <textarea maxlength="400" id="txtPopupDetails" style="width:299px; height:70px; padding-right:20px; margin-top:0;" title="Details"  placeholder="Post to your neighbors here !"></textarea>
-                    
-                             <div id="xbutton" style="width:14px; height:16px; clear:both; float: right; top:0; right:0; padding: 5px; padding-top: 4px; position:absolute; cursor: pointer;">
-         <div style="margin-right:1px; background: url('images/icons.png') repeat scroll -140px -143px; float: right;
-             height: 14px; width: 11px;">
-         </div>
-     </div>
-                    </div>
+
+    <div style="position: relative;">
+
+
+        <textarea maxlength="400" id="txtPopupDetails" style="width: 299px; height: 70px; padding-right: 20px; margin-top: 0; float: left; margin-bottom: 6px;" title="Details" placeholder="Post to your neighbors here !"></textarea>
+
+        <div id="xbutton" style="width: 14px; height: 16px; clear: both; float: right; top: 0; right: 0; padding: 5px; padding-top: 4px; position: absolute; cursor: pointer;">
+            <div class="SmallXButton" style="display: block;">
+            </div>
+        </div>
+    </div>
 
                                 
                     <div style="margin-bottom:6px; width:325px;"><input maxlength="18" type="text" name="txtTitle" id="txtPopupTitle" style="font-family:Arial; font-size:14px; color:#3c3c3c; width:315px; border:solid 1px #c8c8c8; height:19px; padding:4px; padding-top:6px" title="Title" placeholder="Add Title..." /></div>

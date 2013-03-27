@@ -20,6 +20,8 @@
             var dontShowMeAgainWelcome = "<%=dontShowMeAgainWelcome %>";
             var isMobile = <%=isMobile.ToString().ToLower() %>;
             var isDirectLink = <%=isDirectLink.ToString().ToLower() %>;
+            var accessToken = '<%=accessToken %>';
+            var sendFacebookNotifications = '<%=sendFacebookNotifications %>';
             
             
     </script>
@@ -44,8 +46,8 @@
     <script src="<%=siteUrl %>scripts/scriptsNew.js" type="text/javascript"></script>
     
 
-    <script type="text/javascript" src="scripts/jquery.shiftenter.js"></script>
-    <link href="css/jquery.shiftenter.css" rel="stylesheet" type="text/css" />
+ 
+
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4fdef26e46826d05"></script>
 
  <!-- GAC -->

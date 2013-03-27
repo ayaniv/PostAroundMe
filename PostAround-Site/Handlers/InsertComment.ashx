@@ -27,6 +27,7 @@ public class InsertComment : IHttpHandler {
             comment.body = context.Request.Params["body"];
             comment.messageID = Convert.ToInt32(context.Request.Params["messageID"]);
             comment.userID = userid;
+            comment.isPrivate = Convert.ToBoolean(context.Request.Params["isPrivate"]);
 
 
             PostAroundServiceClient client = new PostAroundServiceClient();
@@ -60,17 +61,28 @@ public class InsertComment : IHttpHandler {
         }
     }
 
+
+    private bool UserIsGrantPermission(int userId, int permissionId)
+    {
+        PostAroundServiceClient client = new PostAroundServiceClient();
+        bool response = client.GetUserPermission(userId, permissionId);
+        client.Close();
+        return response;
+    }
+
     private void SendMailOnReply(Comment comment, int userId)
     {
         if (System.Configuration.ConfigurationManager.AppSettings["SendMails"].Equals("True"))
         {
-            // add check if can send email
-            // change the unsubsription to frienly-url
             PostAroundServiceClient client = new PostAroundServiceClient();
 
             MyMessage mainMessage = client.GetMessageById(comment.messageID, "", "", 0, 0, 0);
 
             if (mainMessage.userid == userId)
+                return;
+
+            // add check if can send email
+            if (!UserIsGrantPermission(mainMessage.userid, (int)Enums.Permissions.EmailPermission))
                 return;
 
             string mapPathHtmls = System.Configuration.ConfigurationManager.AppSettings["PhysicalPath"] + @"\htmls";

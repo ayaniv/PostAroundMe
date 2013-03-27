@@ -8,11 +8,11 @@ input, textarea, a:link, select { outline: none; }
 
 .arrow{ display:none; margin-top:300px; position:absolute; top:0; padding:10px; cursor:pointer}
 
-.FixedHeader { position:fixed !important; top:0; left:0; z-index:1000;  }
+.FixedHeader { position:fixed !important; top:0; left:0; z-index:400;  }
 
 .floatRight { right:90px;}
 
- .fuzz{ position:absolute; top:0; left:0; height:100%; width:100%; z-index:100; background-color:#000; opacity:0.2;  text-align:left; }
+ .fuzz{ position:absolute; top:0; left:0; height:100%; width:100%; z-index:1000; background-color:#000; opacity:0.2;  text-align:left; }
 
 .HeadLine {min-width:100%; height:6px; background-color:#848b8f; position:fixed;}
 .HairHeadLine {min-width:100%; height:1px; background-color:#FFF;  position:fixed; margin-top:6px;}
@@ -175,9 +175,10 @@ h1 span
 .Content .Box {  position:absolute; width:273px; float:left; /*box-shadow: 1px 1px 1px #c0bcb1; -moz-box-shadow: 1px 1px 1px #c0bcb1; -webkit-box-shadow: 1px 1px 1px #c0bcb1; */ }
 .Content .Box .BoxBody {  float:left; width:100%; position:relative; /* border-right:1px solid #cbcac9; border-bottom:1px solid #cbcac9 ; border-left:1px solid #E2DDCF;*/    }
 .Content .Box .BoxBody .TextArea { width:243px; padding-left:15px; float:left; background-color:#FDFDFD; padding-right:15px; padding-bottom:15px; padding-top:4px; }
-.Content .Box .BoxBody .BoxHead { width:243px; height:27px; /*overflow:hidden;*/ }
+.Content .Box .BoxBody .BoxHead { width:243px; float:left; }
 .Content .Box .BoxBody .BoxHead .BoxTitle { /*width:176px;*/ height:27px; float:left }
-.Content .Box .BoxBody .BoxHead  .BoxCategory { margin-top:0px; float:left; color:#424e55; font-size:12px; }
+.Content .Box .BoxBody .BoxHead  .BoxCategory { margin-top:0px; float:left; color:#a3a3a3; font-size:12px; }
+.Content .Box .BoxBody .BoxHead  .BoxLocation { float:right }
 .Content .Box .BoxBody .BoxHead  .BoxHeader { margin-top:0px; float:left; text-transform: uppercase; width:100%; color:#424e55; font-size:18px; }
 .Content .Box .BoxBody .BoxHead .BoxDistance { width:64px; float:right; height:27px }
 .Content .Box .BoxBody .BoxHead .Word { font-family:Arial; cursor:pointer; text-decoration:none; float:left; margin-top:0px; float:right;  color:#666; font-size:12px; font-style:italic; text-align:right;  }
@@ -266,7 +267,11 @@ h1 span
 .Bottom .CommentsArea .SingleComment .CommentImage { float:left; }
 .Bottom .CommentsArea .SingleComment .CommentImage img { width:24px; height:24px; } 
 .Bottom .CommentsArea .SingleComment .CommentWrapper { width:215px; float:left; }
-.Bottom .CommentsArea .SingleComment .CommentWrapper #HideComment { display:none; cursor:pointer; background:url('../images/icons.png') -140px -4px; width:11px; height:14px; position:absolute; right:8px; float:right; }
+
+.SmallXButton { display:none; cursor:pointer; background:url('../images/icons.png') -140px -4px; width:11px; height:14px; position:absolute; right:8px; float:right; }
+.SmallXButtonWrapper {
+     width: 14px; height: 16px; clear: both; float: right; top: 0; right: 0; padding: 5px; padding-top: 4px; position: absolute; cursor: pointer;
+}
 .Bottom .CommentsArea .SingleComment .CommentWrapper #commentUserName { height:14px; margin-right:5px; margin-left:5px; float:left; }
 .Bottom .CommentsArea .SingleComment .CommentWrapper #commentUserName a { font-family:Tahoma, Arial; color:#6AA1BB; font-size:12px; font-weight:bold; } 
 .Bottom .CommentsArea .SingleComment .CommentWrapper .CommentText { line-height:16px; font-family:Tahoma, Arial; text-align:left; color:#424E55; font-size:12px; margin-left:5px; }
@@ -492,7 +497,13 @@ li .Option {
 #btnCategory li .Option {}
 #btnCategory li .Color {margin:4px;}
 
+.Locker {
+    width:9px; height:11px; background:url('../images/icons.png') -352px -2px; float:right; margin-top:1px;
+}
 
+.BigBoxMedia {
+    background-color:#EAEDEE; float:left; margin-top:10px;
+}
 
 
 .feedback-panel {
@@ -503,7 +514,7 @@ li .Option {
     position:fixed;
     top:213px;
     left:-312px;
-    z-index:100;
+    z-index:1100;
     height:350px;
 }
 
@@ -820,6 +831,12 @@ background: #f99e2b url('../images/bigBtns.png') no-repeat 0px -111px;
 	transition: left 0.3s ease-in-out;
 }
 
+.slider-button {
+    	-webkit-transition: left 0.3s ease-in-out;
+	-o-transition: left 0.3s ease-in-out;
+	transition: left 0.3s ease-in-out;
+}
+
 .MobileBottom   .MobileButton .Entry{
  
     margin:16px;
@@ -961,9 +978,9 @@ float:left;
   padding: 0;
   margin: 0 auto;
   width: 133px;
-  border: 1px #c0c0c0 solid;
+  
   height: 19px;
-  /*background-color: #E4E4E4;*/
+  background-color: #fcfbf9;
   background-repeat: no-repeat;
   position:relative;
   z-index:1;

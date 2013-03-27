@@ -197,7 +197,7 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
                                 <div class="CommentWrapper" style="width:476px">
                                 
                                     {{if Mine}}
-                                    <div id="HideComment"></div>
+                                    <div id="HideComment" class="SmallXButton"></div>
                                     {{/if}}
 
                                     <div id="commentUserName">
@@ -227,7 +227,7 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
                                 <div class="CommentWrapper">
                                 
                                     {{if Mine}}
-                                    <div id="HideComment"></div>
+                                    <div id="HideComment" class="SmallXButton"></div>
                                     {{/if}}
 
                                     <div id="commentUserName">
@@ -263,15 +263,15 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
                 <div class="TextAddress">${msgAddress}</div>        
                 </div>
                         <div>
-                            <div class="BoxCategory" style="color:#a3a3a3">${category}</div>
-                            <div style="float:right" id="locationWrapper">
+                            <div class="BoxCategory">${category}</div>
+                            <div class="BoxLocation">
                             
                             <div id="Marker"></div>
                             <a href="<%=siteUrl %>post/${msgId}" onclick="return false;" id="ShowOnMap" class="Word">{{html ShowDistance(Distance, msgAddress)}}</a>
                             
                             </div>
                         </div>
-                            <div class="BoxHeader" style="direction:${GetLanguageDirection(title)}; text-align:left">${title}</div>
+                            <div class="BoxHeader" style="direction:${GetLanguageDirection(title)}; text-align:${GetLanguageDirection(title)};">${title}</div>
 
 
 
@@ -306,6 +306,8 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
                     <div id="CurrLat" style="display:none">${latitude}</div>
                     <div id="CurrLng" style="display:none">${longitude}</div>
                     <div id="FullAddress" style="display:none">${msgAddress}</div>
+                    <div id="FacebookID" style="display:none">${facebookID}</div>
+                    <div id="UserID" style="display:none">${userid}</div>
                 
                     
                 
@@ -373,7 +375,13 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
 
                         {{each comments}}
                          <div id="SingleCommentView" comment-id="${ID}">
-                            <div class="SingleComment" >
+                            
+                                {{if isPrivate}}
+                                <div class="SingleComment PrivateComment" >
+                                {{else}}
+                                <div class="SingleComment" >
+                                {{/if}}
+                                
                                 <div id="commentImage" class="CommentImage">
                                     <img src="${avatarImageUrl}" />
                                 </div>
@@ -381,16 +389,17 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
                                 <div class="CommentWrapper">
                                 
                                     {{if Mine}}
-                                    <div id="HideComment"></div>
+                                    <div id="HideComment" class="SmallXButton"></div>
                                     {{/if}}
 
                                     <div id="commentUserName">
                                         <a href="${commentUserLink}" target="_blank">${name}</a>
                                     </div>
-                                    <div id="CommentText" class="CommentText" style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</div>
+                                    <div id="CommentText" class="CommentText" style="direction:${GetLanguageDirection(body)}" ><span>{{html FormatText(body)}}</span></div>
                                     <div class="CommentDate">${strDate} at ${strTime}</div>
-                                    <div class="CommentDate PosterOnly" style="display:none;">· Poster Only&nbsp;·&nbsp;<span style="width:9px; height:11px; background:url('images/icons.png') -352px -2px; float:right; margin-top:1px;"></span></div>
-                                    
+                                    {{if isPrivate}}
+                                    <div class="CommentDate PosterOnly">· Poster Only&nbsp;·&nbsp;<span class="Locker"></span></div>
+                                    {{/if}}
                                     
 
                                 </div>
@@ -607,14 +616,23 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
         str = str.trim();
 
         //hebrew
-        if ((str.charCodeAt(0) > 0x590) && (str.charCodeAt(0) < 0x5FF))
+        if ((str != "") &&  (str.charCodeAt(0) > 0x590) && (str.charCodeAt(0) < 0x5FF))
             direction = "rtl";
 
         //arabic
-        else if ((str.charCodeAt(0) > 0x600) && (str.charCodeAt(0) < 0x6FF))
+        else if ((str != "") && (str.charCodeAt(0) > 0x600) && (str.charCodeAt(0) < 0x6FF))
             direction = "rtl";
 
         return direction;
+
+    }
+
+    function GetLanguageAlign(str) {
+        var direction = GetLanguageDirection(str);
+        if (direction == "rtl")
+            return "right";
+        return "left"
+
 
     }
 
@@ -631,6 +649,7 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
     
     <link rel="canonical" href="<%=siteUrl %>" />
     
+
     
 
     

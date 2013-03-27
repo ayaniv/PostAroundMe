@@ -47,6 +47,9 @@ namespace PostAround.ServiceContracts
         User GetUserByID(int ID);
 
         [OperationContract]
+        int GetUserIdByFacebookId(string fid);
+
+        [OperationContract]
         int InsertUpdateUser(User user);
 
         [OperationContract]

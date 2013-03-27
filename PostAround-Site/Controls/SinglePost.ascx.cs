@@ -28,7 +28,7 @@ public partial class Controls_SinglePost : System.Web.UI.UserControl
 
     protected int msgId;
     protected string bigBoxLineColor;
-
+  
 
     public string PageTitle { get; set; }
 
@@ -53,6 +53,10 @@ public partial class Controls_SinglePost : System.Web.UI.UserControl
                 MyMessage msg = GetMessageByID(msgId);
                 if (msg == null)
                     throw new Exception();
+
+                
+                if (!msg.Mine)
+                    ltrlButtons.Text = @"<div class=""slider-frame""><span class=""slider-button""><span class=""PublicIcon PublicIconOn""></span>Public</span><span class=""slider-button-off""><span class=""PrivateIcon""></span>Private</span></div>";
 
                 this.Page.Title = msg.title + " : Post Around Me";
 
@@ -82,7 +86,7 @@ public partial class Controls_SinglePost : System.Web.UI.UserControl
                     // attach image height
                     System.Drawing.Image objImage = System.Drawing.Image.FromFile(mapPathResized + "\\" + msg.image);
                     msg.ImageHeight = objImage.Height;
-                    ltrlMedia.Text = "<img src=" + homePage + "/UploadedResizedBig/" + msg.image + " style='height:" + msg.ImageHeight + "px;" + " width:533px; border:0;' />";
+                    ltrlMedia.Text = "<img src=" + homePage + "/UploadedResizedBig/" + msg.image + " style='height:" + msg.ImageHeight + "px;" + " width:533px; float:left; border:0;' />";
                 }
 
                 rptComments.ItemCreated += new RepeaterItemEventHandler(rptComments_ItemCreated);
@@ -117,6 +121,10 @@ public partial class Controls_SinglePost : System.Web.UI.UserControl
         int userId = 0;
 
         userId = Tools.GetUserIdFromCookie(Context);
+        if (userId <= 0)
+        {
+            AddCommentPanel.Visible = false;
+        }
         
         PostAroundServiceClient client = new PostAroundServiceClient();
 
@@ -144,11 +152,17 @@ public partial class Controls_SinglePost : System.Web.UI.UserControl
 
             Comment item = (Comment)e.Item.DataItem;
             ((Literal)e.Item.FindControl("cmtUserImage")).Text = "<img src='" + item.avatarImageUrl +"' />";
-            ((Literal)e.Item.FindControl("cmtUserName")).Text = "<a href='" + item.commentUserLink + "' target='_blank'>" + item.name + "</a>";
+            ((Literal)e.Item.FindControl("cmtUserName")).Text = "<a href='" + item.commentUserLink + "' target='_blank' style='font-size:13px'>" + item.name + "</a>";
             ((Literal)e.Item.FindControl("cmtBody")).Text = FormatText(item.body);
             ((Literal)e.Item.FindControl("cmtDate")).Text = item.strDate + " at " + item.strTime;
 
             ((HtmlGenericControl)e.Item.FindControl("CommentText")).Style.Add("direction", GetLanguageDirection(item.body));
+            string strComment = @"<div id=""HideComment"" class=""SmallXButton""></div>";
+            if (item.Mine == true)
+            {
+                ((Literal)e.Item.FindControl("ltrlCommentXButton")).Text = strComment;
+                
+            }
             
             
             //((TextBox)e.Item.FindControl("txtDropDownCategoryId")).Text = item.ID.ToString();
@@ -167,6 +181,16 @@ public partial class Controls_SinglePost : System.Web.UI.UserControl
 
     }
 
+
+    protected string GetLanguageAlign(string str)
+    {
+        string direction = GetLanguageDirection(str);
+        if (direction == "rtl")
+            return "right";
+        return "left";
+
+    }
+
     protected string GetLanguageDirection(string str)
     {
         //english
@@ -180,11 +204,11 @@ public partial class Controls_SinglePost : System.Web.UI.UserControl
 
 
         //hebrew
-        if ((str[0] > 0x590) && (str[0] < 0x5FF))
+        if ((!string.IsNullOrWhiteSpace(str)) && (str[0] > 0x590) && (str[0] < 0x5FF))
             direction = "rtl";
 
         //arabic
-        else if ((str[0] > 0x600) && (str[0] < 0x6FF))
+        else if ((!string.IsNullOrWhiteSpace(str)) &&  (str[0] > 0x600) && (str[0] < 0x6FF))
             direction = "rtl";
 
         return direction;

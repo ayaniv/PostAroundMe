@@ -20,11 +20,9 @@
     display:block; position:absolute; top: 50%; width:100%; margin-top:-15px; font-size:26px; color:#c0c0c0;
 }
 
-.qq-upload-drop-area span:hover {
-    color:#666;
-}
 
 .qq-upload-drop-area-active {border-color:#666;}
+.qq-upload-drop-area-active span {color:#666;}
 
 .qq-upload-list {float:left; margin-left: 20px; padding:0; list-style:disc; height:17px; overflow:hidden}
 .qq-upload-list li { margin:0; padding:0; line-height:15px; font-size:12px; float:left; width:190px; color:#3c3c3c; font-size:14px;}

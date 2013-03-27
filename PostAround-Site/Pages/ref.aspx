@@ -9,6 +9,7 @@
 <body>
     <form id="form1" runat="server">
     <div>
+        Redirect...
     <script type="text/javascript">
 
         function getParameterByName(name) {

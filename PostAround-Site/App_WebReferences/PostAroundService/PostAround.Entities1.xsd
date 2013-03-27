@@ -34,6 +34,7 @@
       <xs:element minOccurs="0" name="category" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="comments" nillable="true" type="tns:ArrayOfComment" />
       <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="facebookID" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="image" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="latitude" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="link" nillable="true" type="xs:string" />
@@ -64,6 +65,7 @@
       <xs:element minOccurs="0" name="body" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="commentUserLink" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="isPrivate" type="xs:boolean" />
       <xs:element minOccurs="0" name="messageID" type="xs:int" />
       <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="strDate" nillable="true" type="xs:string" />

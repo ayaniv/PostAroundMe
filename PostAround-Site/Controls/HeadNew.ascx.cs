@@ -23,7 +23,8 @@ public partial class Controls_Head : System.Web.UI.UserControl
     protected bool isMobile;
     protected bool isDirectLink;
     protected string rootDir;
-
+    protected string accessToken;
+    protected string sendFacebookNotifications;
 
 
     protected void Page_Load(object sender, EventArgs e)
@@ -43,6 +44,8 @@ public partial class Controls_Head : System.Web.UI.UserControl
             siteUrl = siteUrl.Replace("www.", "");
         
         SetCookieData();
+        accessToken = ConfigurationManager.AppSettings["facebookAppAccessToken"];
+        sendFacebookNotifications = ConfigurationManager.AppSettings["SendFacebookNotifications"];
         //SetQueryStringData();
     }
 

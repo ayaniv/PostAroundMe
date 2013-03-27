@@ -2,6 +2,28 @@
 <Lottery>
 
 
+  <Results Date="01-02/2013">
+    <Special>18623268</Special>
+    <Grand>23322026</Grand>
+    <First1>55296725</First1>
+    <First2>65713406</First2>
+    <First3>44395947</First3>
+    <Additional1>436</Additional1>
+    <Additional1></Additional1>
+  </Results>
+
+
+  <Results Date="11-12/2012">
+    <Special>87165494</Special>
+    <Grand>02818106</Grand>
+    <First1>59105591</First1>
+    <First2>35149832</First2>
+    <First3>40131517</First3>
+    <Additional1>653</Additional1>
+    <Additional2>106</Additional2>
+  </Results>
+
+
   <Results Date="09-10/2012">
     <Special>15719324</Special>
     <Grand>11661657</Grand>

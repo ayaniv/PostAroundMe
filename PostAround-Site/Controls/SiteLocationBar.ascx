@@ -38,9 +38,9 @@
            <div style="float:left; color:#333; font-size:12px; font-weight:bold; font-family:Trebuchet MS, Arial, Sans-Serif; text-transform:uppercase;">Showing posts around here</div>
            <div id="LocationLinks" style="float:left;">
            <div style="float:left; margin-left:10px; color:#6AA1BB; font-family:Trebuchet MS, Arial, Sans-Serif; font-size:14px; ">|</div>
-           <div class="LocationLink" style="float:left; margin-left:10px; color:#6AA1BB; font-family:Trebuchet MS, Arial, Sans-Serif; font-size:14px; "  id="btnChangeLocation">Change</div>
-           <div style="float:left; margin-left:10px; color:#6AA1BB; font-family:Trebuchet MS, Arial, Sans-Serif; font-size:14px; ">|</div>
            <div class="LocationLink" style="float:left; margin-left:10px; color:#6AA1BB; font-family:Trebuchet MS, Arial, Sans-Serif; font-size:14px; "  id="btnShowMap">Map</div>
+           <div style="float:left; margin-left:10px; color:#6AA1BB; font-family:Trebuchet MS, Arial, Sans-Serif; font-size:14px; ">|</div>
+           <div class="LocationLink" style="float:left; margin-left:10px; color:#6AA1BB; font-family:Trebuchet MS, Arial, Sans-Serif; font-size:14px; "  id="btnChangeLocation">Change</div>
 
            </div>
            <div id="TryAgainWrapper" style="float:left; display:none;">

@@ -69,6 +69,8 @@ namespace PostAround.Entities
         public string link { get; set; }
         [DataMember]
         public int totalShares { get; set; }
+        [DataMember]
+        public string facebookID { get; set; }
          
         
         

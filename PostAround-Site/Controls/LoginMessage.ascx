@@ -8,11 +8,14 @@
       
 
 
-     <div id="xbuttonLoginMsg" style="width:14px; height:16px; clear:both; float: right; top:0; right:0; padding: 10px; position:absolute; cursor: pointer;">
-         <div style="margin-right:1px; background: url('images/icons.png') repeat scroll -140px -143px; float: right;
-             height: 14px; width: 11px;">
-         </div>
-     </div>
+
+
+                   <div id="xbuttonLoginMsg"class="SmallXButtonWrapper" style="padding:10px">
+            <div class="SmallXButton" style="display: block;">
+            </div>
+        </div>
+
+
 
      <div style="background-color:#EAEDEE;">
          <div style="text-align:center; padding:20px;">

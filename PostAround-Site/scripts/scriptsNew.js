@@ -1313,12 +1313,13 @@ $(function () {
         }
         else {
 
-
+            
 
             //it is closed. then OPEN
             $('#MapPas').slideDown("slow", "easeInOutSine");
             $('#MapReal').fadeIn();
             ResizeMap(myMap);
+            
 
         }
 
@@ -1653,8 +1654,8 @@ $(function () {
     //$('#HidePost').live('mouseout', function () { $(this).removeClass('pointer'); });
 
     $('#HideComment').live('click', function () { HideComment.apply(this); });
-    $('#HideComment').live('mouseover', function () { $(this).css('background-position-x', '-393px'); });
-    $('#HideComment').live('mouseout', function () { $(this).css('background-position-x', '-140px'); });
+    $('.SmallXButton').live('mouseover', function () { $(this).css('background-position-x', '-393px'); });
+    $('.SmallXButton').live('mouseout', function () { $(this).css('background-position-x', '-140px'); });
 
     $('#EditPost').live('click', function () { EditPost.apply(this); });
     $('#Comment').live('focus', function () { if (IsLoggedIn()) { SetAutoGrow.apply(this); CommentTextAreaEventFucus.apply(this); } });
@@ -1663,8 +1664,8 @@ $(function () {
     //$('#EditPost').live('mouseout', function () { $(this).removeClass('pointer'); });
 
     
-    $('#locationWrapper').live('mouseover', function () { $(this).parents(".BoxHead").find(".FullAddress").show(); });
-    $('#locationWrapper').live('mouseout', function () { $(this).parents(".BoxHead").find(".FullAddress").hide(); });
+    $('.BoxLocation').live('mouseover', function () { $(this).parents(".BoxHead").find(".FullAddress").show(); });
+    $('.BoxLocation').live('mouseout', function () { $(this).parents(".BoxHead").find(".FullAddress").hide(); });
 
     
     
@@ -1940,6 +1941,7 @@ $(function () {
         if (!mouse_is_inside_categories && !mouse_is_inside_categories_clicked) $('#CategoriesBox').hide();
         if (!mouse_is_inside_sort && !mouse_is_inside_sort_clicked) $('#SortBox').hide();
         if (PopUpIsOpened && !mouse_is_inside_popup) ClosePopUp();
+        
     });
 
     $(".MoreBox li").hover(function () {
@@ -2101,7 +2103,7 @@ $(function () {
                 if ($('.feedback-panel').hasClass('open')) {
 
                     $('#fuzz').fadeOut();
-                    $('#fuzz').css('z-index', '200');
+                    //$('#fuzz').css('z-index', '200');
                     $('.feedback-panel').animate({ left: '-' + feedbackTab.containerWidth }, feedbackTab.speed)
                         .removeClass('open');
                 } else {
@@ -2110,7 +2112,7 @@ $(function () {
                     }
 
                     $('#fuzz').fadeIn();
-                    $('#fuzz').css('z-index', '99');
+                    //$('#fuzz').css('z-index', '99');
                     $('.feedback-panel').animate({ left: '0' }, feedbackTab.speed)
                         .addClass('open');
                 }
@@ -2410,17 +2412,21 @@ $(function () {
         }
     }
 
-    function SendNotification(fromFacebookID, toFacebookID, postID) {
-        debugger;
-        var url = "https://graph.facebook.com/" + toFacebookID + "/notifications";
-        var params = { access_token: "355242331161855|qyYMEnPyR2y3sWK8H7rN-6n3lBU", template: "@[" + fromFacebookID + "] replied to your post around. Go read it!", href: "pages/ref.aspx?postId=" + postID };
+    function SendNotification(fromFacebookID, toFacebookID, postID, toUserID) {
+        if (sendFacebookNotifications == "True") {
+            if (fromFacebookID == toFacebookID)
+                return;
 
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: params,
-            dataType:  "json"
-        });
+            var url = "https://graph.facebook.com/" + toFacebookID + "/notifications";
+            var params = { access_token: accessToken, template: "@[" + fromFacebookID + "] replied to your post around. Go read it!", href: "pages/ref.aspx?postId=" + postID + "&uid=" + toUserID };
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: params,
+                dataType: "json"
+            });
+        }
 
 
 
@@ -2618,9 +2624,11 @@ $(function () {
 
 
     function ResizeMap(jsMap) {
-        var center = jsMap.getCenter();
-        jsMap.checkResize();
-        jsMap.setCenter(center);
+        try {
+            var center = jsMap.getCenter();
+            jsMap.checkResize();
+            jsMap.setCenter(center);
+        } catch (err) { }
     }
 
     function SetZoom(zoomLevel) {
@@ -2805,6 +2813,11 @@ $(function () {
 
     }
 
+    function HideWrittenTextInSearchBox() {
+        $('#content').val('');
+        $('#content').blur();
+    }
+
     function showAddressInBar(lat, lng, searchPhrase) {
         //MakeAddressLinkability();
         var center = new GLatLng(lat, lng);
@@ -2822,6 +2835,7 @@ $(function () {
 
 
             $('#moreButtonsText').html(address + " ");
+
 
 
             $('#moreButtonsText').show();
@@ -3022,7 +3036,9 @@ $(function () {
 
 
     // mobile start
-    $('body').css("overflow", "hidden");
+    //$('body').css("overflow", "hidden");
+
+
     //$('.MobileSettings').on('click', toggleSettings);
 
     //function toggleSettings() {
@@ -3311,15 +3327,17 @@ $(function () {
         }
 
         var msgId = $(box).attr("box-id");
+        var toFacebookID = $(box).find("#FacebookID").html();
+        var toUserID = $(box).find("#UserID").html(); 
 
         var url = siteUrl + "/Handlers/InsertComment.ashx";
 
         var myJSON = {
             "messageID": msgId,
-            "body": body
+            "body": body,
+            "isPrivate": isPrivate
 
         };
-
 
         $.ajax({
             type: 'POST',
@@ -3329,7 +3347,7 @@ $(function () {
             dataType: "json",
             success: function (data) {
                 
-                SendNotification(currentUser.facebookID, "567517451", msgId);
+                
                 ShowImmediateComment(data, body, msgId, box, isPrivate);
                 $(box).find("#Comment").val('').blur();
                 $(box).find("#Comment").height(14);
@@ -3339,6 +3357,11 @@ $(function () {
                     arrangerRunning = true;
                     IncreaseCommentsNum(box);
                     ArrangeAll();
+                }
+                try
+                {
+                    SendNotification(currentUser.facebookID, toFacebookID, msgId, toUserID);
+                } catch(err) {
                 }
             }
         });

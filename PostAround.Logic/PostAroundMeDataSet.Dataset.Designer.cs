@@ -1023,6 +1023,8 @@ namespace PostAround.Logic {
             
             private global::System.Data.DataColumn columnTotalShares;
             
+            private global::System.Data.DataColumn columnfacebookID;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public GetAllMessagesDataTable() {
@@ -1226,6 +1228,14 @@ namespace PostAround.Logic {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn facebookIDColumn {
+                get {
+                    return this.columnfacebookID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1280,7 +1290,8 @@ namespace PostAround.Logic {
                         string ImageUrl, 
                         string address, 
                         string link, 
-                        int TotalShares) {
+                        int TotalShares, 
+                        string facebookID) {
                 GetAllMessagesRow rowGetAllMessagesRow = ((GetAllMessagesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -1303,7 +1314,8 @@ namespace PostAround.Logic {
                         ImageUrl,
                         address,
                         link,
-                        TotalShares};
+                        TotalShares,
+                        facebookID};
                 rowGetAllMessagesRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowGetAllMessagesRow);
                 return rowGetAllMessagesRow;
@@ -1354,6 +1366,7 @@ namespace PostAround.Logic {
                 this.columnaddress = base.Columns["address"];
                 this.columnlink = base.Columns["link"];
                 this.columnTotalShares = base.Columns["TotalShares"];
+                this.columnfacebookID = base.Columns["facebookID"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1401,6 +1414,8 @@ namespace PostAround.Logic {
                 base.Columns.Add(this.columnlink);
                 this.columnTotalShares = new global::System.Data.DataColumn("TotalShares", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTotalShares);
+                this.columnfacebookID = new global::System.Data.DataColumn("facebookID", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfacebookID);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnID}, true));
                 this.columnID.AutoIncrement = true;
@@ -1430,6 +1445,7 @@ namespace PostAround.Logic {
                 this.columnImageUrl.MaxLength = 400;
                 this.columnaddress.MaxLength = 100;
                 this.columnlink.MaxLength = 100;
+                this.columnfacebookID.MaxLength = 50;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2756,6 +2772,8 @@ namespace PostAround.Logic {
             
             private global::System.Data.DataColumn columnlink;
             
+            private global::System.Data.DataColumn columnisPrivate;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public CommentsDataTable() {
@@ -2863,6 +2881,14 @@ namespace PostAround.Logic {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn isPrivateColumn {
+                get {
+                    return this.columnisPrivate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2898,7 +2924,7 @@ namespace PostAround.Logic {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public CommentsRow AddCommentsRow(int MessageID, int UserID, string Body, System.DateTime Date, string Name, string avatarImageUrl, int Status, string link) {
+            public CommentsRow AddCommentsRow(int MessageID, int UserID, string Body, System.DateTime Date, string Name, string avatarImageUrl, int Status, string link, bool isPrivate) {
                 CommentsRow rowCommentsRow = ((CommentsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -2909,7 +2935,8 @@ namespace PostAround.Logic {
                         Name,
                         avatarImageUrl,
                         Status,
-                        link};
+                        link,
+                        isPrivate};
                 rowCommentsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowCommentsRow);
                 return rowCommentsRow;
@@ -2948,6 +2975,7 @@ namespace PostAround.Logic {
                 this.columnavatarImageUrl = base.Columns["avatarImageUrl"];
                 this.columnStatus = base.Columns["Status"];
                 this.columnlink = base.Columns["link"];
+                this.columnisPrivate = base.Columns["isPrivate"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2971,6 +2999,8 @@ namespace PostAround.Logic {
                 base.Columns.Add(this.columnStatus);
                 this.columnlink = new global::System.Data.DataColumn("link", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnlink);
+                this.columnisPrivate = new global::System.Data.DataColumn("isPrivate", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnisPrivate);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnID}, true));
                 this.columnID.AutoIncrement = true;
@@ -4465,6 +4495,22 @@ namespace PostAround.Logic {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string facebookID {
+                get {
+                    try {
+                        return ((string)(this[this.tableGetAllMessages.facebookIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'facebookID\' in table \'GetAllMessages\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableGetAllMessages.facebookIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsLatitudeNull() {
                 return this.IsNull(this.tableGetAllMessages.LatitudeColumn);
             }
@@ -4689,6 +4735,18 @@ namespace PostAround.Logic {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetTotalSharesNull() {
                 this[this.tableGetAllMessages.TotalSharesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsfacebookIDNull() {
+                return this.IsNull(this.tableGetAllMessages.facebookIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetfacebookIDNull() {
+                this[this.tableGetAllMessages.facebookIDColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -5587,6 +5645,22 @@ namespace PostAround.Logic {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool isPrivate {
+                get {
+                    try {
+                        return ((bool)(this[this.tableComments.isPrivateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'isPrivate\' in table \'Comments\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableComments.isPrivateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsBodyNull() {
                 return this.IsNull(this.tableComments.BodyColumn);
             }
@@ -5643,6 +5717,18 @@ namespace PostAround.Logic {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetlinkNull() {
                 this[this.tableComments.linkColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsisPrivateNull() {
+                return this.IsNull(this.tableComments.isPrivateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetisPrivateNull() {
+                this[this.tableComments.isPrivateColumn] = global::System.Convert.DBNull;
             }
         }
         

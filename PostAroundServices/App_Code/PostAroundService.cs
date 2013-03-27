@@ -108,6 +108,31 @@ public class PostAroundService : IPostAroundService
         {
 
             commentDate = dr.Date.AddHours(timeZone);
+            bool isPosterOrReplier = false;
+            bool isPrivateComment = false;
+            if (dr.isPrivate.Equals(true))
+            {
+                if (dr.UserID == userId)
+                    isPosterOrReplier = true;
+                else
+                {
+                    //Get PosterUserID
+                    MyMessage mainMessage = GetMessageById(dr.MessageID, "", "", 0, 0, 0);
+                    if (mainMessage.userid == userId)
+                        isPosterOrReplier = true;
+                }
+            }
+            if (dr.isPrivate.Equals(true) && !isPosterOrReplier)
+            {
+                // if it's a private message but the current user is not the poster or the replier - then skip this row.
+                continue;
+            }
+            else if (dr.isPrivate.Equals(true) && isPosterOrReplier)
+            {
+                // if it's a private message AND the current user IS the poster or the replier - then Set this comment as private
+                isPrivateComment = true;
+            }
+
 
             comment = new Comment();
 
@@ -122,8 +147,13 @@ public class PostAroundService : IPostAroundService
             comment.commentUserLink = dr.link;
             comment.avatarImageUrl = dr.avatarImageUrl;
             comment.Mine = false;
+
             if (comment.userID == userId)
                 comment.Mine = true;
+
+
+            comment.isPrivate = isPrivateComment;
+
 
             lstResults.Add(comment);
         }
@@ -166,6 +196,7 @@ public class PostAroundService : IPostAroundService
         msg.ClassName = "";
         msg.image = dr.ImageUrl;
         msg.msgAddress = dr.address;
+        msg.facebookID = dr.facebookID; // need to pull this from db
 
         msg.link = dr.link;
         msg.Mine = false;
@@ -433,6 +464,16 @@ public class PostAroundService : IPostAroundService
         return res;
     }
 
+    public int GetUserIdByFacebookId(string fid)
+    {
+        int retVal = 0;
+        UsersTableAdapter usersAdapter = new UsersTableAdapter();
+        Object obj = usersAdapter.GetUserIdByFacebookId(fid);
+        if (obj != null)
+            retVal = Convert.ToInt32(obj);
+        return retVal;
+    }
+
     public User GetUserByID(int ID)
     {
         List<User> lstUsers = new List<User>();
@@ -570,7 +611,7 @@ public class PostAroundService : IPostAroundService
 
         CommentsTableAdapter adapter = new CommentsTableAdapter();
         comment.date = DateTime.UtcNow;
-        Object obj = adapter.InsertComment(comment.messageID, comment.userID, comment.body, comment.date);
+        Object obj = adapter.InsertComment(comment.messageID, comment.userID, comment.body, comment.date, comment.isPrivate);
         if (obj != null)
         {
             System.Web.HttpRuntime.Cache.Remove("Comments");
