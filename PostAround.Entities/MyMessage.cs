@@ -71,6 +71,8 @@ namespace PostAround.Entities
         public int totalShares { get; set; }
         [DataMember]
         public string facebookID { get; set; }
+        [DataMember]
+        public string secret { get; set; }
          
         
         

@@ -409,7 +409,19 @@ $(function () {
             $(".feedback-panel").hide();
             GetPosition();
 
+            ApplyMobileUI();
+
+
+
         }
+    }
+
+    function ApplyMobileUI() {
+        $('body').css("overflow", "hidden");
+        $("#mobileHeader").show();
+        $("#TopHeader").hide();
+        $("#BottomDiv").hide();
+        $(".feedback-panel").hide();
     }
 
 
@@ -1371,6 +1383,9 @@ $(function () {
 
     }
 
+
+
+
     function MakeAddressLinkabilityDie() {
         $('#moreButtonsText').die('click');
         $('#moreButtonsText').die('mouseover');
@@ -1508,8 +1523,7 @@ $(function () {
             $.template("CommentTemplate", markup)
 
             currComment = $.tmpl("CommentTemplate", myJSON);
-
-            //alert(isPrivate);
+ 
             if (isPrivate == 'true') {
                 $(currComment).find('.SingleComment').addClass('PrivateComment');
                 $(currComment).find('.PosterOnly').show();
@@ -1526,8 +1540,7 @@ $(function () {
 
         currComment = $.tmpl("CommentTemplate", myJSON);
 
-
-        //alert(isPrivate);
+ 
         if (isPrivate == 'true') {
             $(currComment).find('.SingleComment').addClass('PrivateComment');
             $(currComment).find('.PosterOnly').show();
@@ -3042,7 +3055,7 @@ $(function () {
 
 
     // mobile start
-    //$('body').css("overflow", "hidden");
+    
 
 
     //$('.MobileSettings').on('click', toggleSettings);
@@ -3577,12 +3590,10 @@ $(function () {
             $('#CategoriesBar').css("display", "none");
 
             //iphone   
-            isMobile = true;
+            //isMobile = true;
+            //ApplyMobilePhoneRules();
             
-            $("#mobileHeader").show();
-            $("#TopHeader").hide();
-            $("#BottomDiv").hide();
-            $(".feedback-panel").hide();
+          
 
             //$('#MessagesContainer').css("margin-left", "85px");
         } else {

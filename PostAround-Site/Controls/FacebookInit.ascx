@@ -13,13 +13,22 @@
         });
 
         // Additional initialization code here
+
+
+ 
     };
 
-    // Load the SDK Asynchronously
+    // Load the SDK's source Asynchronously
+    // Note that the debug version is being actively developed and might 
+    // contain some type checks that are overly strict. 
+    // Please report such bugs using the bugs tool.
     (function (d) {
-        var js, id = 'facebook-jssdk'; if (d.getElementById(id)) { return; }
+        var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+        if (d.getElementById(id)) { return; }
         js = d.createElement('script'); js.id = id; js.async = true;
         js.src = "//connect.facebook.net/en_US/all.js";
-        d.getElementsByTagName('head')[0].appendChild(js);
-    } (document));
+        ref.parentNode.insertBefore(js, ref);
+    }(document));
+
+
 </script>

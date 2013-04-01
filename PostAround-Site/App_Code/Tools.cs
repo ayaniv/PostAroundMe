@@ -173,12 +173,18 @@ public static class Tools
 
     public static string SetUserIdInCookie(int userId, HttpContext context)
     {
-        string encUserId = Tools.Encrypt(userId.ToString(), true).Replace('+', '$');
-        // save encrypted userid in cookie
-        HttpCookie userCookie = new HttpCookie("UserLogin");
-        userCookie["userId"] = encUserId;
-        userCookie.Expires = DateTime.Now.AddDays(7);
-        context.Response.Cookies.Add(userCookie);
+        string encUserId = null;
+        try
+        {
+            encUserId = Tools.Encrypt(userId.ToString(), true).Replace('+', '$');
+            // save encrypted userid in cookie
+            HttpCookie userCookie = new HttpCookie("UserLogin");
+            userCookie["userId"] = encUserId;
+            userCookie.Expires = DateTime.Now.AddDays(7);
+            context.Response.Cookies.Add(userCookie);
+        }
+        catch (Exception ex) { }
+
         return encUserId;
 
     }
