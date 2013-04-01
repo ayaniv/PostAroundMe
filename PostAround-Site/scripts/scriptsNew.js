@@ -2437,7 +2437,7 @@ $(function () {
                 return;
 
             var url = "https://graph.facebook.com/" + toFacebookID + "/notifications";
-            var params = { access_token: accessToken, template: "@[" + fromFacebookID + "] replied to your post around. Go read it!", href: "pages/ref.aspx?postId=" + postID + "&uid=" + toUserID };
+            var params = { access_token: accessToken, template: "@[" + fromFacebookID + "] replied to your post around. Go read it!", href: "pages/ref.aspx?postId=" + postID};
 
             $.ajax({
                 type: "POST",
