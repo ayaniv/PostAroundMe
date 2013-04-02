@@ -1,6 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://localhost/PostAround/post/10420</loc>
+    <lastmod>2013-03-27T04:59:57+02:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://localhost/PostAround/post/10419</loc>
+    <lastmod>2013-03-27T03:42:07+02:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://localhost/PostAround/post/10418</loc>
+    <lastmod>2013-03-27T12:06:28+02:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://localhost/PostAround/post/421</loc>
+    <lastmod>2013-02-21T11:24:16+02:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://localhost/PostAround/post/420</loc>
+    <lastmod>2013-02-21T11:08:13+02:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>http://localhost/PostAround/post/419</loc>
     <lastmod>2013-02-17T10:44:46+02:00</lastmod>
     <changefreq>weekly</changefreq>

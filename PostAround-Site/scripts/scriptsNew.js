@@ -1493,7 +1493,6 @@ $(function () {
 
     function ShowImmediateComment(id, body, msgId, box, isPrivate) {
         // create json data with the comment details
-        debugger;
         var currCommentsContainer = $("#MessagesContainer").find('[box-id=' + msgId + ']').find("#currCommentsView");
         var currCommentsContainerPopUp = $(box).find("#currCommentsView");
 

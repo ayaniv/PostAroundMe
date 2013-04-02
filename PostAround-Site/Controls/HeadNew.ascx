@@ -43,7 +43,7 @@
     <script type='text/javascript' src='<%=siteUrl %>scripts/compress/jquery.autogrow-textarea.js'></script>
     
     
-    <script src="<%=siteUrl %>scripts/scriptsNew.js" type="text/javascript"></script>
+    <script src="<%=siteUrl %>scripts/compress/scriptsNew.js" type="text/javascript"></script>
     
 
  

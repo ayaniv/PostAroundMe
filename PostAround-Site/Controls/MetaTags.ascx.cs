@@ -18,7 +18,7 @@ public partial class Controls_MetaTags : System.Web.UI.UserControl
         siteUrl = ConfigurationManager.AppSettings["SiteUrl"];
 
         string title = "Post Around Me | Local Pinboard";
-        string description = "Turn your Facebook into a bulletin board that finds you what closest to you !";
+        string description = "Turn your Facebook into a bulletin board based on your locaion, that finds you what closest to you !";
         string url = siteUrl.TrimEnd('/');
         string image = siteUrl + "images/facebook_ogimage.png";
 
