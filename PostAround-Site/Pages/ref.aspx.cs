@@ -27,6 +27,11 @@ public partial class Pages_ref : System.Web.UI.Page
        
         secretCode = Tools.Encrypt(DateTime.Now.ToString(), true).Replace('+', '$');
         siteUrl = ConfigurationManager.AppSettings["SiteUrl"];
+        if (Tools.GetProtocol(HttpContext.Current).Equals("https"))
+        {
+            siteUrl = siteUrl.Replace("http://", "https://");
+            siteUrlSecured = siteUrl;
+        }
         siteUrlSecured = ConfigurationManager.AppSettings["SiteUrlSecured"];
         FaceBookAppKey = ConfigurationManager.AppSettings["facebookAppKey"];
 

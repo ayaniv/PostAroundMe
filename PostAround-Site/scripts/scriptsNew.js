@@ -399,6 +399,10 @@ $(function () {
     ApplyMobilePhoneRules();
     function ApplyMobilePhoneRules() {
         if (isMobile) {
+            ZeroiseBoxes();
+            
+            ApplyMobileUI();
+
             //user on mobile phone
             // auto ask for auto-detact
             // hide feedback panel
@@ -408,8 +412,10 @@ $(function () {
             $("#MapSpacing").hide();
             $(".feedback-panel").hide();
             GetPosition();
+           
+            
 
-            ApplyMobileUI();
+          
 
 
 
@@ -417,6 +423,7 @@ $(function () {
     }
 
     function ApplyMobileUI() {
+        
         $('body').css("overflow", "hidden");
         $("#mobileHeader").show();
         $("#TopHeader").hide();

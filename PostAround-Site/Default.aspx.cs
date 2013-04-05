@@ -23,6 +23,10 @@ public partial class _Default : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         siteUrl = ConfigurationManager.AppSettings["SiteUrl"];
+        if (Tools.GetProtocol(HttpContext.Current).Equals("https"))
+        {
+            siteUrl = siteUrl.Replace("http://", "https://");
+        }
         //homePage = ConfigurationManager.AppSettings["HomePage"];
 
         //int ID = 1;

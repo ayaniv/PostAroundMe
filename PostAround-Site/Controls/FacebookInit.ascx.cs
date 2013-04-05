@@ -14,5 +14,9 @@ public partial class Controls_FacebookInit : System.Web.UI.UserControl
     {
         FaceBookAppKey = ConfigurationManager.AppSettings["facebookAppKey"];
         siteUrl = ConfigurationManager.AppSettings["SiteUrl"];
+        if (Tools.GetProtocol(HttpContext.Current).Equals("https"))
+        {
+            siteUrl = siteUrl.Replace("http://", "https://");
+        }
     }
 }

@@ -21,6 +21,10 @@ public partial class Controls_LoginPanel : System.Web.UI.UserControl
     {
         FaceBookAppKey = ConfigurationManager.AppSettings["facebookAppKey"];
         siteUrl = ConfigurationManager.AppSettings["SiteUrl"];
+        if (Tools.GetProtocol(HttpContext.Current).Equals("https"))
+        {
+            siteUrl = siteUrl.Replace("http://", "https://");
+        }
 
         int userId = Tools.GetUserIdFromCookie(Context);
         User user = null;

@@ -29,8 +29,13 @@ public partial class Controls_Head : System.Web.UI.UserControl
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        
         siteUrl = ConfigurationManager.AppSettings["SiteUrl"];
+        if (Tools.GetProtocol(HttpContext.Current).Equals("https"))
+        {
+            siteUrl = siteUrl.Replace("http://", "https://");
+        }
+
+        
         rootDir = ConfigurationManager.AppSettings["Root"];
         if (Request.Url.ToString().Contains("postaroundme.com"))
             Response.Redirect(siteUrl);

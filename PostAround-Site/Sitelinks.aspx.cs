@@ -16,6 +16,10 @@ public partial class Sitelinks : System.Web.UI.Page
     {
 
         SiteUrl = ConfigurationManager.AppSettings["SiteUrl"];
+        if (Tools.GetProtocol(HttpContext.Current).Equals("https"))
+        {
+            SiteUrl = SiteUrl.Replace("http://", "https://");
+        }
         PostAroundServiceClient client = new PostAroundServiceClient();
         client.CreateJsonPostsDigest();
         client.Close();

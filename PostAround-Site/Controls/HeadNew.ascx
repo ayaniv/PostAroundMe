@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="HeadNew.ascx.cs" Inherits="Controls_Head" %>
      
      <%@ Register src="GAC.ascx" tagname="GAC" tagprefix="uc1" %>
-
+<meta name="viewport" content="width=device-width,initial-scale=0.5,maximum-scale=1" />
      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <!-- scripts -->
 

@@ -17,6 +17,10 @@ public partial class Pages_SetUserPermission : System.Web.UI.Page
     {
         
         siteUrl = ConfigurationManager.AppSettings["SiteUrl"];
+        if (Tools.GetProtocol(HttpContext.Current).Equals("https"))
+        {
+            siteUrl = siteUrl.Replace("http://", "https://");
+        }
         
         try
         {

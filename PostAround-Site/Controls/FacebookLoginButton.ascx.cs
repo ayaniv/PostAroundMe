@@ -16,6 +16,10 @@ public partial class Controls_FacebookLoginButton : System.Web.UI.UserControl
 
         FaceBookAppKey = ConfigurationManager.AppSettings["facebookAppKey"];
         siteUrl = ConfigurationManager.AppSettings["SiteUrl"];
+        if (Tools.GetProtocol(HttpContext.Current).Equals("https"))
+        {
+            siteUrl = siteUrl.Replace("http://", "https://");
+        }
     }
 
     protected void btnFacebook_Click(object sender, EventArgs e)

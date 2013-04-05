@@ -13,6 +13,10 @@ public partial class Pages_TestLogin : System.Web.UI.Page
     {
         FaceBookAppKey = "301703623203131"; //ConfigurationManager.AppSettings["facebookAppKey"];
         siteUrl = ConfigurationManager.AppSettings["SiteUrl"];
+        if (Tools.GetProtocol(HttpContext.Current).Equals("https"))
+        {
+            siteUrl = siteUrl.Replace("http://", "https://");
+        }
 
 
         string encodedGabi = "4hhhRMBh6ujYMXHBo1fm7BjZjqWsziyj7GuFcQ$TuZ2Ge9n2$623QVVhyTHF7tUZt0WKKbYyROAVqitvTv0p9HfHIbcXcvoRrH1hiyX7AwQwWF0CZsLBLnr7o4OEpLA2WrqLirgeLBGlafWJMWmxvMzCnEJjj6nqjQvAmlo59lorhF21g533tADFnY7WYkSFwHVJyESxFgOkHWgyjTMUdlq8P44Zqg40/tYYr60BdPHWYTm9UIv8F9gmj$35rr7NPrv6VjhQma9iYRRFYJ6p6fKoeb9C3SFb2C$jBWV9Rd4="; //

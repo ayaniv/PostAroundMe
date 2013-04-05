@@ -35,6 +35,10 @@ public partial class Pages_Sitemap : System.Web.UI.Page
     {
 
         string SiteUrl = ConfigurationManager.AppSettings["SiteUrl"];
+        if (Tools.GetProtocol(HttpContext.Current).Equals("https"))
+        {
+            SiteUrl = SiteUrl.Replace("http://", "https://");
+        }
         string strXmlTag = @"<?xml version=""1.0"" encoding=""utf-8"" ?>";
         string xmlns = "http://www.sitemaps.org/schemas/sitemap/0.9";
 

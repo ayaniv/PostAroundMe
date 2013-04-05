@@ -171,6 +171,13 @@ public static class Tools
         return (context.Request.QueryString["id"] != null);
     }
 
+    public static string GetProtocol(HttpContext context)
+    {
+        Uri uri  = new Uri(context.Request.Url.AbsoluteUri);
+        string protocol = uri.Scheme;
+        return protocol;
+    }
+
     public static string SetUserIdInCookie(int userId, HttpContext context)
     {
         string encUserId = null;
