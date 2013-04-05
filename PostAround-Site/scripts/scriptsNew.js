@@ -191,9 +191,6 @@ $(function () {
         } else if (getParameterByName("address") != "") {
             PerformGoToLocation(getParameterByName("address"))
         }
-
-
-
     }
 
 

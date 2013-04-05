@@ -8,6 +8,27 @@
     <title>Post Around Me | Local Pinboard</title>
     <uc1:Head runat="server" />
     
+    <script type="text/javascript">
+        
+        function OpenUrl() {
+            var param = getParameterByName("aspxerrorpath");
+            var url = siteUrl + param;
+            window.location = url;
+        }
+
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+            var regexS = "[\\?&]" + name + "=([^&#]*)";
+            var regex = new RegExp(regexS);
+            var results = regex.exec(window.location.search);
+            if (results == null)
+                return "";
+            else
+                return decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+
+       
+    </script>
     
 
 </head>
@@ -27,7 +48,7 @@
 <br /><br /><br />
 
 <span style="font-family:Georgia, Arial, Sans-Serif; color:#424E55; margin-top:20px; float:left; font-size:16px;">
-Try to <a title="Refresh" style="color:#6AA1BB;" href="http://postaround.me">reload</a> the page. Or visit our <a style="color:#6AA1BB;" href="http://www.facebook.com/postaround">Facebook Page</a>. Facebook servers might be more reliable <span style="font-size:24px;">;)</span>
+Try to <a title="Refresh" style="color:#6AA1BB;" onclick="OpenUrl()" href="#">reload</a> the page. Or visit our <a style="color:#6AA1BB;" href="http://www.facebook.com/postaround">Facebook Page</a>. Facebook servers might be more reliable <span style="font-size:24px;">;)</span>
 </span>
     </div>
     </form>
