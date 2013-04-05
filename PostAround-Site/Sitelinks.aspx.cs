@@ -18,7 +18,7 @@ public partial class Sitelinks : System.Web.UI.Page
         SiteUrl = ConfigurationManager.AppSettings["SiteUrl"];
         PostAroundServiceClient client = new PostAroundServiceClient();
         client.CreateJsonPostsDigest();
-
+        client.Close();
         WebClient webclient = new WebClient();
 
         webclient.Encoding = System.Text.Encoding.UTF8; 

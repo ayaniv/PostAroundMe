@@ -36,15 +36,13 @@
                   FB.api('/me', function (response) {
 
                       userID = GetUserIdByFacebookID(response.id);
-                     
+
                   });
 
 
-                 
-              } else if (response.status === 'not_authorized') {
-                  //alert("not_authorized");
+
               } else {
-                  //alert("not connected");
+                  Redirect();
               }
           });
       };

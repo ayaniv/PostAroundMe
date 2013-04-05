@@ -8,7 +8,7 @@
             <div style="margin-top:8px;">
             
             <div class="Text" style="float:left;">
-            Copyright © 2011-2012 PostAround.me. All Rights Reserved.
+            Copyright © 2011-2013 PostAround.me. All Rights Reserved.
             </div>
                   <div class="Text" style="float:right; margin-right:47px;">
             <span><a href="<%=siteUrl %>Sitelinks.aspx" target="_blank">site links</a></span>
