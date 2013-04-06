@@ -25,6 +25,7 @@ namespace Mails
             body = body.Replace("[PostID]", m_credentials.MsgID.ToString());
             body = body.Replace("[UnSubscribeCode]", m_credentials.UnsubscribeCode);
             body = body.Replace("[SenderImage]", m_credentials.SenderImage);
+            body = body.Replace("[PostHeader]", m_credentials.postHeader);
 
             return body;
         }

@@ -65,10 +65,13 @@ namespace PostAround.ServiceContracts
         int UpdateMessageSharesByID(int msgId, int totalShares);
 
         [OperationContract]
-        int InsertComment(Comment comment);
+        CommentResult InsertComment(Comment comment);
 
         [OperationContract]
         List<Comment> GetCommentsByMessageID(int id, int userId, int timeZone);
+
+        [OperationContract]
+        Comment GetCommentByID(int id);
 
         [OperationContract]
         List<Comment> GetAllComments(int userId, int timeZone);

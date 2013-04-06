@@ -97,7 +97,7 @@
         <div id="BigBoxMedia" class="BigBoxMedia">
         <asp:Literal ID="ltrlMedia" runat="server"></asp:Literal>
         </div>
-        <div id="BigBoxText" style="margin-top:10px; margin-bottom:10px; padding:0 15px 0 15px; float:<%=alignDescription %>; direction:<%=directionDescription%>; color:#3b3b3d; font-size:16px;">
+        <div id="BigBoxText" class="BigBoxText" style="float:<%=alignDescription %>; direction:<%=directionDescription%>;">
         <asp:Literal ID="ltrlText" runat="server"></asp:Literal>
         </div>
 

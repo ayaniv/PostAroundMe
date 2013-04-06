@@ -18,6 +18,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Web.Caching;
 using System.Text;
+using System.Security.Cryptography;
 
 /// <summary>
 /// Summary description for ServiceImplementation
@@ -93,21 +94,39 @@ public class PostAroundService : IPostAroundService
         return string.Format("{0}...", input.Substring(0, (iNextSpace > 0) ? iNextSpace : length).Trim());
     }
 
-    
+    private Comment CommentTranslator(PostAroundMeDataSet.CommentsRow dr)
+    {
+        Comment comment = new Comment();
+        
+        comment.ID = dr.ID;
+        comment.body = dr.Body;
+        comment.date =  dr.Date;
+        comment.strDate = comment.date.ToString("d MMM yyyy", new CultureInfo("en-us"));
+        comment.strTime = comment.date.ToString("HH:mm", new CultureInfo("en-us"));
+        comment.messageID = dr.MessageID;
+        comment.userID = dr.UserID;
+        comment.name = dr.Name;
+        comment.commentUserLink = dr.link;
+        comment.avatarImageUrl = dr.avatarImageUrl;
+        comment.Mine = false;
 
+        return comment;
+    }
+
+   
     private List<Comment> CommentsDtToList(PostAroundMeDataSet.CommentsDataTable dt, int userId, int timeZone)
     {
         //TimeZoneInfo pacificZone = TimeZoneInfo.Local; //.FindSystemTimeZoneById("Pacific Standard Time");
         //int UsTimeZone = pacificZone.BaseUtcOffset.Hours * -1;
 
-        DateTime commentDate;
+        
 
         List<Comment> lstResults = new List<Comment>();
         Comment comment;
         foreach (PostAroundMeDataSet.CommentsRow dr in dt)
         {
 
-            commentDate = dr.Date.AddHours(timeZone);
+            
             bool isPosterOrReplier = false;
             bool isPrivateComment = false;
             if (dr.isPrivate.Equals(true))
@@ -133,20 +152,13 @@ public class PostAroundService : IPostAroundService
                 isPrivateComment = true;
             }
 
+            comment = CommentTranslator(dr);
 
-            comment = new Comment();
-
-            comment.ID = dr.ID;
-            comment.body = dr.Body;
+            DateTime commentDate;
+            commentDate = dr.Date.AddHours(timeZone);
             comment.date = commentDate;
-            comment.strDate = commentDate.ToString("d MMM yyyy", new CultureInfo("en-us"));
-            comment.strTime = commentDate.ToString("HH:mm", new CultureInfo("en-us"));
-            comment.messageID = dr.MessageID;
-            comment.userID = dr.UserID;
-            comment.name = dr.Name;
-            comment.commentUserLink = dr.link;
-            comment.avatarImageUrl = dr.avatarImageUrl;
-            comment.Mine = false;
+            comment.strDate = comment.date.ToString("d MMM yyyy", new CultureInfo("en-us"));
+            comment.strTime = comment.date.ToString("HH:mm", new CultureInfo("en-us"));
 
             if (comment.userID == userId)
                 comment.Mine = true;
@@ -605,22 +617,84 @@ public class PostAroundService : IPostAroundService
         return retVal;
     }
 
-    public int InsertComment(Comment comment)
-    {
-        int result = 0;
 
+    public static string Encrypt(string toEncrypt, bool useHashing)
+    {
+        byte[] keyArray;
+        byte[] toEncryptArray = UTF8Encoding.UTF8.GetBytes(toEncrypt);
+
+        string key = ConfigurationManager.AppSettings["EncryptKey"];
+        //System.Windows.Forms.MessageBox.Show(key);
+        //If hashing use get hashcode regards to your key
+        if (useHashing)
+        {
+            MD5CryptoServiceProvider hashmd5 = new MD5CryptoServiceProvider();
+            keyArray = hashmd5.ComputeHash(UTF8Encoding.UTF8.GetBytes(key));
+            //Always release the resources and flush data
+            // of the Cryptographic service provide. Best Practice
+
+            hashmd5.Clear();
+        }
+        else
+            keyArray = UTF8Encoding.UTF8.GetBytes(key);
+
+        TripleDESCryptoServiceProvider tdes = new TripleDESCryptoServiceProvider();
+        //set the secret key for the tripleDES algorithm
+        tdes.Key = keyArray;
+        //mode of operation. there are other 4 modes.
+        //We choose ECB(Electronic code Book)
+        tdes.Mode = CipherMode.ECB;
+        //padding mode(if any extra byte added)
+
+        tdes.Padding = PaddingMode.PKCS7;
+
+        ICryptoTransform cTransform = tdes.CreateEncryptor();
+        //transform the specified region of bytes array to resultArray
+        byte[] resultArray =
+            cTransform.TransformFinalBlock(toEncryptArray, 0,
+            toEncryptArray.Length);
+        //Release resources held by TripleDes Encryptor
+        tdes.Clear();
+        //Return the encrypted data into unreadable string format
+        return Convert.ToBase64String(resultArray, 0, resultArray.Length);
+    }
+
+
+    public CommentResult InsertComment(Comment comment)
+    {
+        CommentResult cr = new CommentResult();
+        
         CommentsTableAdapter adapter = new CommentsTableAdapter();
         comment.date = DateTime.UtcNow;
         Object obj = adapter.InsertComment(comment.messageID, comment.userID, comment.body, comment.date, comment.isPrivate);
         if (obj != null)
         {
+          
             System.Web.HttpRuntime.Cache.Remove("Comments");
             System.Web.HttpRuntime.Cache.Remove("Messages");
-            result = Convert.ToInt32(obj);
+            cr.Id =  Convert.ToInt32(obj);
+            cr.Key = Encrypt(cr.Id.ToString() + ".fgG43$#", true).Replace('+', '$'); ;
+           
         }
 
-        return result;
+        return cr;
     }
+
+    public Comment GetCommentByID(int id)
+    {
+        Comment  comment = new  Comment();
+        CommentsTableAdapter adapter = new CommentsTableAdapter();
+
+        PostAroundMeDataSet.CommentsDataTable dt = new PostAroundMeDataSet.CommentsDataTable();
+        dt = adapter.GetCommentByID(id);
+
+        PostAroundMeDataSet.CommentsRow dr = dt.FirstOrDefault();
+
+        comment = CommentTranslator(dr);
+
+        return comment;
+    }
+
 
     public List<Comment> GetCommentsByMessageID(int msgId, int userId, int timeZone = 0)
     {

@@ -2434,13 +2434,13 @@ $(function () {
         }
     }
 
-    function SendNotification(fromFacebookID, toFacebookID, postID, toUserID) {
+    function SendNotification(fromFacebookID, toFacebookID, commentId) {
         if (sendFacebookNotifications == "True") {
             if (fromFacebookID == toFacebookID)
                 return;
 
             var url = "https://graph.facebook.com/" + toFacebookID + "/notifications";
-            var params = { access_token: accessToken, template: "@[" + fromFacebookID + "] replied to your post around. Go read it!", href: "pages/ref.aspx?postId=" + postID};
+            var params = { access_token: accessToken, template: "@[" + fromFacebookID + "] replied to your post around. Go read it!", href: "pages/PostNotify.aspx?commentId=" + commentId };
 
             $.ajax({
                 type: "POST",
@@ -3370,7 +3370,7 @@ $(function () {
             success: function (data) {
                 
                 
-                ShowImmediateComment(data, body, msgId, box, isPrivate);
+                ShowImmediateComment(data.Id, body, msgId, box, isPrivate);
                 $(box).find("#Comment").val('').blur();
                 $(box).find("#Comment").height(14);
                 $(box).find(".Buttons").hide();
@@ -3382,7 +3382,7 @@ $(function () {
                 }
                 try
                 {
-                    SendNotification(currentUser.facebookID, toFacebookID, msgId, toUserID);
+                    SendNotification(currentUser.facebookID, toFacebookID, data.Key);
                 } catch(err) {
                 }
             }

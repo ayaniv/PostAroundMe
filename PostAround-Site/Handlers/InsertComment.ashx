@@ -16,6 +16,7 @@ public class InsertComment : IHttpHandler {
         //string strUserId = "";
         int userid = 0;
         int retVal = -1;
+        CommentResult cr = null;
 
         userid = Tools.GetUserIdFromCookie(context);
         
@@ -32,12 +33,12 @@ public class InsertComment : IHttpHandler {
 
             PostAroundServiceClient client = new PostAroundServiceClient();
 
-            retVal = client.InsertComment(comment);
+            cr = client.InsertComment(comment);
             client.Close();
             
-            if ((retVal > 0))
+            if ((cr != null) && (cr.Id > 0))
             {
-                comment.ID = retVal;
+                comment.ID = cr.Id;
                 comment.userID = userid;
                 
                 // In a new thread - send email on reply
@@ -46,12 +47,14 @@ public class InsertComment : IHttpHandler {
             }
             
         }
-            
-            
 
 
+        System.Web.Script.Serialization.JavaScriptSerializer oSerializer =
+        new System.Web.Script.Serialization.JavaScriptSerializer();
+        string sJSON = oSerializer.Serialize(cr);
 
-        context.Response.Write(retVal.ToString());
+
+        context.Response.Write(sJSON);
         context.Response.End();
     }
  
@@ -91,8 +94,10 @@ public class InsertComment : IHttpHandler {
             User senderUser = client.GetUserByID(comment.userID);
 
             User recipientUser = client.GetUserByID(mainMessage.userid);
+            
             client.Close();
             data.recipientEmail = recipientUser.email;
+            data.postHeader = mainMessage.title;
 
             data.Date = DateTime.Now.ToString("d MMMM, yyyy", System.Globalization.CultureInfo.CreateSpecificCulture("en-US"));
             data.SenderFullName = senderUser.firstName + " " + senderUser.lastName;

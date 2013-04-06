@@ -204,7 +204,9 @@ h1 span
  .Change { background:url('../images/icons.png') -7px -154px; width:13px; height:13px; float:left; }
 .Content .Box #Marker { cursor:pointer; background:url('../images/pin3.png'); /*background:url('../images/icons.png') -219px -145px;*/ width:13px; height:14px; float:left; }
 
-
+.BigBoxText {
+    margin-top:10px; margin-bottom:10px; padding:0 15px 0 15px;  color:#3b3b3d; font-size:16px; word-break:break-word ;
+}
 
 .LocationLink { cursor:pointer; }
 
@@ -313,7 +315,7 @@ h1 span
 .Content .Box .Image {float:left; width:50px; margin-right:8px;}
 .Content .Box .Image img {width:50px; height:50px; float:right; cursor:pointer}
 
-.Content .Box .Text { color:#424e55; font-size:13px; line-height:1.38; word-wrap: break-word; }
+.Content .Box .Text { color:#424e55; font-size:13px; line-height:1.38; word-break:break-all; }
 
 .MoreInfo { /*margin-top:15px; margin-right:4px;*/ float:left; width:249px; /*position:absolute;*/ margin-left:5px; }
 .MoreInfo .TitleInfo {font-size:18px; color:#424e55; }

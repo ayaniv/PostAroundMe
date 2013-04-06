@@ -2,8 +2,8 @@
 
     <input type="text" name="txtImage" id="txtImage" style="display:none" />
     <div title="Add Photo" style="float:left;  font-weight:bold; font-family:Arial; color:#424E55; width:212px; border:solid 1px #c0c0c0; height:22px; padding:4px; padding-top:2px; padding-right:2px; background-color:#FFF;"><div id="RemoveImage" title="Remove Photo" style="float:right; display:none; width:22px; height:22px; background:url(images/icons.png) no-repeat -229px -1px; cursor:pointer; margin-left:2px;"></div></div>
-    <link href="css/fileuploader.css" rel="stylesheet" type="text/css" />	
-    <script src="scripts/fileuploader.js" type="text/javascript"></script>
+    <link href="<%=siteUrl %>css/fileuploader.css" rel="stylesheet" type="text/css" />	
+    <script src="<%=siteUrl %>scripts/fileuploader.js" type="text/javascript"></script>
     <script type="text/javascript">
         function createUploader() {
             var uploader = new qq.FileUploader({

@@ -247,7 +247,7 @@
   <xs:element name="InsertCommentResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="InsertCommentResult" type="xs:int" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/PostAround.Entities" minOccurs="0" name="InsertCommentResult" nillable="true" type="q14:CommentResult" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -263,7 +263,21 @@
   <xs:element name="GetCommentsByMessageIDResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/PostAround.Entities" minOccurs="0" name="GetCommentsByMessageIDResult" nillable="true" type="q14:ArrayOfComment" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/PostAround.Entities" minOccurs="0" name="GetCommentsByMessageIDResult" nillable="true" type="q15:ArrayOfComment" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCommentByID">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCommentByIDResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/PostAround.Entities" minOccurs="0" name="GetCommentByIDResult" nillable="true" type="q16:Comment" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -278,7 +292,7 @@
   <xs:element name="GetAllCommentsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/PostAround.Entities" minOccurs="0" name="GetAllCommentsResult" nillable="true" type="q15:ArrayOfComment" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/PostAround.Entities" minOccurs="0" name="GetAllCommentsResult" nillable="true" type="q17:ArrayOfComment" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
