@@ -188,7 +188,8 @@
       
       </div>
       
-      <div id="CategoriesBar">
+    <div id="CategoriesWrapper">
+      <div id="CategoriesBar" style="display:none">
       <div style="float:left; width:100%; height:1px; background:url('images/cats_top.png');"></div>
       <div style="float:left; width:100%; padding-bottom:6px; background:url('images/cats_bg.png'); ">
 <!-- Categories -->
@@ -197,6 +198,7 @@
 
       </div>
       </div>
+        </div>
       <div style="float:left; width:100%; height:2px; background:url('images/cats_bottom.png'); margin-bottom:11px;"></div>
       
     </div>

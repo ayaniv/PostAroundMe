@@ -526,8 +526,8 @@ $(function () {
 
     function SetSlide() {
 
-        $("#slider").slider("value", 3000);
-        $("#amount").val("3KM");
+        $("#slider").slider("value", 2000);
+        $("#amount").val("2KM");
 
 
 
@@ -1367,7 +1367,12 @@ $(function () {
             $('#MapPas').slideUp("slow", "linear");
             MakeAddressLinkability();
 
+            $("#CategoriesBar").fadeIn();
+
+            
         }
+
+      
 
     }
 
@@ -3590,7 +3595,7 @@ $(function () {
             $('#LeftWing').css("margin-left", "15px");
             $('#moreButtons').css("margin-left", "15px");
             $('#AddMessageWindow').css("margin-left", "16px");
-            $('#CategoriesBar').css("display", "none");
+            $('#CategoriesWrapper').css("display", "none");
 
             //iphone   
             //isMobile = true;
@@ -3600,7 +3605,7 @@ $(function () {
 
             //$('#MessagesContainer').css("margin-left", "85px");
         } else {
-            $('#CategoriesBar').css("display", "block");
+            $('#CategoriesWrapper').css("display", "block");
             if ((screenWidth == 1383) || (screenWidth == 1400)) {
                 $('#LeftWing').css("margin-left", "10px");
                 $('#moreButtons').css("margin-left", "10px");
