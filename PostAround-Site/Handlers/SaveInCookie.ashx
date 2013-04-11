@@ -3,6 +3,9 @@
 using System;
 using System.Web;
 using PostAroundService;
+using System.IO;
+using System.Runtime.Serialization.Json;
+using System.Text;
 
 public class SaveInCookie : IHttpHandler {
     
@@ -15,14 +18,20 @@ public class SaveInCookie : IHttpHandler {
         int userID = 0;
         string result = null;
         int retVal = 0;
-        string facebookID = context.Request["facebookID"];
-        string secretCode = context.Request["secretCode"];
-        
-        
-        if (!string.IsNullOrWhiteSpace(facebookID))
+        string accessToken = context.Request["accessToken"];
+
+
+        if (!string.IsNullOrWhiteSpace(accessToken))
         {
-            if (CheckSum(secretCode))
+
+            try
             {
+                string url = String.Format("https://graph.facebook.com/me?access_token={0}", accessToken);
+                string response = Tools.CallUrl(url);
+                FacebookResponse facebookResponse = ParseJSON(response);
+                string facebookID = facebookResponse.id;
+
+
                 PostAroundServiceClient client = new PostAroundServiceClient();
                 userID = client.GetUserIdByFacebookId(facebookID);
                 client.Close();
@@ -31,6 +40,8 @@ public class SaveInCookie : IHttpHandler {
                 if (!string.IsNullOrWhiteSpace(result))
                     retVal = 1;
             }
+            catch (Exception ex) { }
+             
         }
 
 
@@ -40,6 +51,17 @@ public class SaveInCookie : IHttpHandler {
 
         context.Response.Write(sJSON);
         context.Response.End();
+    }
+
+
+    private FacebookResponse ParseJSON(string jsonText)
+    {
+        FacebookResponse req = new FacebookResponse();
+        MemoryStream ms = new MemoryStream(Encoding.Unicode.GetBytes(jsonText));
+        DataContractJsonSerializer serializer = new DataContractJsonSerializer(req.GetType());
+        req = serializer.ReadObject(ms) as FacebookResponse;
+        ms.Close();
+        return req;
     }
     
     private bool CheckSum(string time)

@@ -30,14 +30,13 @@
           // Additional initialization code here
 
         var userID;
-          FB.getLoginStatus(function (response) {
+        FB.getLoginStatus(function (response) {
+            
               if (response.status === 'connected') {
-
-                  FB.api('/me', function (response) {
-
-                      userID = GetUserIdByFacebookID(response.id);
-
-                  });
+                  SaveCookie(response.authResponse.accessToken);
+                  //FB.api('/me', function (response) {
+                  //    GetUserIdByFacebookID(response.id);
+                  //});
 
 
 
@@ -56,14 +55,14 @@
         ref.parentNode.insertBefore(js, ref);
     }(document));
 
-    function GetUserIdByFacebookID(facebookid) {
+    function SaveCookie(accessToken) {
 
 
         var url = siteUrlSecured + "/Handlers/SaveInCookie.ashx";
 
         var myJSON = {
-            "facebookID": facebookid,
-            "secretCode": secretCode
+            "accessToken": accessToken
+           
         };
 
 

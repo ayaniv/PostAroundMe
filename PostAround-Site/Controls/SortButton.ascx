@@ -22,14 +22,19 @@
                 
 
                 
-                    <li onselectstart='return false;  padding:0px; width:84px'>
+                    <li onselectstart='return false;'>
                         Newest on top
                         <input style="display:none" value="0">
                     </li>
 
-                    <li onselectstart='return false;  padding:0px; width:84px'>
+                    <li onselectstart='return false;'>
                         Nearest First
                         <input style="display:none" value="1">
+                    </li>
+
+                    <li onselectstart='return false;'>
+                        Most Popular
+                        <input style="display:none" value="2">
                     </li>
                 
 

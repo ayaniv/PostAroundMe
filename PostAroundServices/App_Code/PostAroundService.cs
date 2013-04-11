@@ -26,7 +26,7 @@ using System.Security.Cryptography;
 
 public class PostAroundService : IPostAroundService
 {
-    enum EnumSortBy { Date, Distance };
+    enum EnumSortBy { Date, Distance, Popularity };
     private double ToRad(double value)
     {
         return value * Math.PI / 180;
@@ -406,6 +406,8 @@ public class PostAroundService : IPostAroundService
             //sort by distance
             if (sotyBy == (int)EnumSortBy.Distance)
                 filteredResults = filteredResults.OrderBy(m => m.Distance).ToList();
+            else if (sotyBy == (int)EnumSortBy.Popularity)
+                filteredResults = filteredResults.OrderByDescending(m => m.totalShares).ToList();
             
 
         }

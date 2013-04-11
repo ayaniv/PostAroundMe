@@ -526,8 +526,8 @@ $(function () {
 
     function SetSlide() {
 
-        $("#slider").slider("value", 2000);
-        $("#amount").val("2KM");
+        $("#slider").slider("value", 4000);
+        $("#amount").val("4KM");
 
 
 
@@ -1306,7 +1306,7 @@ $(function () {
 
 
     $('#btnShowMap').click(function () {
-        ToggleMapPanel(true)
+        ToggleMapPanel(true, this);
 
     });
 
@@ -1318,12 +1318,13 @@ $(function () {
 
 
     function ToggleMapPanel(isRegular) {
-
+        
         if (($('#MapPas').css("display") != "none") && isRegular) {
 
             //it is open. then CLOSE
             $('#MapPas').slideUp("slow", "easeInOutSine");
             $('#MapReal').fadeOut();
+            $('#btnShowMap').html("Show Map");
 
 
         }
@@ -1334,6 +1335,7 @@ $(function () {
             //it is closed. then OPEN
             $('#MapPas').slideDown("slow", "easeInOutSine");
             $('#MapReal').fadeIn();
+            $('#btnShowMap').html("Hide Map");
             ResizeMap(myMap);
             
 

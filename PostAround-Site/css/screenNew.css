@@ -62,7 +62,7 @@ h1 span
 	 
 .HeaderList { list-style-type: none;  }
 .HeaderList li { float:left; font-size:14px; height:15px; font-family:Arial; color:#fbf9f4; padding-right:10px; margin-right:13px; padding-top:12px; padding-left:8px; padding-bottom:12px; }
-.HeaderList li li {  padding:5px; width:74px; height:100%; color:#57849d;  }
+.HeaderList li li {  padding:5px; width:74px; height:100%; color:#FFF;  }
 .HeaderList li li a { margin: 0px; display: block; width: 100%; height: 100%;    }
 .MainHead {  clear:both;
              margin:auto;
@@ -139,7 +139,7 @@ h1 span
  .UserBox .Text .Image img {width:24px; height:24px;}
 .MoreBox 
 {
-	 padding:1px; background-color:#FFF; border:1px solid #e2ddcf; margin-left:-8px; 
+	 padding:1px; background-color:#6AA1BB; border:1px solid #e2ddcf; margin-left:-8px; 
 	 display:none; width:100%; margin-top:39px; z-index:90; float:left; top:0; position:absolute}
 
 .MoreBox li 
@@ -205,7 +205,7 @@ h1 span
 .Content .Box #Marker { cursor:pointer; background:url('../images/pin3.png'); /*background:url('../images/icons.png') -219px -145px;*/ width:13px; height:14px; float:left; }
 
 .BigBoxText {
-    margin-top:10px; margin-bottom:10px; padding:0 15px 0 15px;  color:#3b3b3d; font-size:16px; word-break:break-word ;
+    margin-top:10px; margin-bottom:10px; padding:0 15px 0 15px;  color:#3b3b3d; font-size:16px; word-wrap:break-word ;
 }
 
 .LocationLink { cursor:pointer; }
@@ -253,11 +253,11 @@ h1 span
 }
 
 .ShareIcon {
-     width:19px; height:12px; background:url('../images/icons.png') -404px -16px; float:left; cursor:pointer;
+     width:19px; height:15px; background:url('../images/icons.png') -405px -28px; float:left; cursor:pointer;
 }
 
 .ShareIcon:hover {
-     background-position:-422px -16px;
+     background-position-x:-425px;
 }
 
 .SharingArea {
@@ -315,7 +315,7 @@ h1 span
 .Content .Box .Image {float:left; width:50px; margin-right:8px;}
 .Content .Box .Image img {width:50px; height:50px; float:right; cursor:pointer}
 
-.Content .Box .Text { color:#424e55; font-size:13px; line-height:1.38; word-break:break-all; }
+.Content .Box .Text { color:#424e55; font-size:13px; line-height:1.38; word-wrap:break-word; }
 
 .MoreInfo { /*margin-top:15px; margin-right:4px;*/ float:left; width:249px; /*position:absolute;*/ margin-left:5px; }
 .MoreInfo .TitleInfo {font-size:18px; color:#424e55; }
@@ -454,6 +454,10 @@ li.Phone  { background-image: url('../images/iconPhone.gif');  }
 li.Fax   { background-image: url('../images/iconFax.gif');}
 li.Location   { background-image: url('../images/iconLocation.gif'); }
 
+
+.LocationText {
+    color:#333; font-family:Georgia, Calibri, Arial; display:block; font-size:24px; font-style:italic; cursor:pointer;
+}
 
 
 .DropDown  
