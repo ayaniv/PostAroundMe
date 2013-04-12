@@ -355,7 +355,7 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
                 {{if Mine}}
                 <div class="TransparentGrey OnPostButtons">
                 <div id="EditPost" class="MyButton MineButton RightButton">Edit</div>
-                <div id="HidePost" class="MyButton MineButton LeftButton">Hide</div>
+                <div id="HidePost" class="MyButton MineButton LeftButton">Remove</div>
                 </div>
                     
                 {{/if}}
