@@ -440,7 +440,7 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
                 </div>
                 
                 </div>
-                <div style="background:url('images/boxShadow.png') no-repeat; width:273px; height:10px; float:left;"></div>
+                <div style="width:273px; height:10px; float:left;"></div><!-- background:url('images/boxShadow.png') no-repeat;  -->
             </div>
             
             

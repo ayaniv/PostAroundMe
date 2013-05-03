@@ -398,7 +398,7 @@ $(function () {
         if (isMobile) {
             ZeroiseBoxes();
             
-            ApplyMobileUI();
+            //ApplyMobileUI();
 
             //user on mobile phone
             // auto ask for auto-detact
@@ -1646,7 +1646,7 @@ $(function () {
 
 
 
-    $('.Border').live('mouseover', function () { $(this).css("border-color", "#6AA1BB"); ($(this).find('.ImageBox')).css('opacity', '0.5'); });
+    $('.Border').live('mouseover', function () { $(this).css("border-color", "#6AA1BB"); ($(this).find('.ImageBox')).css('opacity', '0.9'); });
     $('.Border').live('mouseout', function () { $(this).css("border-color", "#E2DDCF"); ($(this).find('.ImageBox')).css('opacity', '1'); });
     $('.ImageBox').live('click', function () { ShowPopUp.apply(this); });
 
@@ -2361,7 +2361,7 @@ $(function () {
             params['picture'] = 'http://www.postaround.me/UploadedResized/' + image;
         }
         else {
-            params['picture'] = image = "http://maps.googleapis.com/maps/api/staticmap?center=" + latlon + "&zoom=14&size=150x150&maptype=roadmap&sensor=true&markers=icon:http://postaround.me/images/markers/image.png%7C" + latlon;
+            params['picture'] = image = "http://maps.googleapis.com/maps/api/staticmap?center=" + latlon + "&zoom=14&size=220x220&maptype=roadmap&sensor=true&markers=icon:http://postaround.me/images/markers/image.png%7C" + latlon;
         }
 
 

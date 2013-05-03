@@ -43,7 +43,7 @@ public partial class Controls_MetaTags : System.Web.UI.UserControl
                 if (!string.IsNullOrWhiteSpace(msg.image))
                     image = siteUrl + "UploadedResized/" + msg.image;
                 else
-                    image = "http://maps.googleapis.com/maps/api/staticmap?center=" + latlon + "&zoom=14&size=150x150&maptype=roadmap&sensor=true&markers=icon:http://postaround.me/images/markers/image.png%7C" + latlon;
+                    image = "http://maps.googleapis.com/maps/api/staticmap?center=" + latlon + "&zoom=14&size=220x220&maptype=roadmap&sensor=true&markers=icon:http://postaround.me/images/markers/image.png%7C" + latlon;
             }
 
         }
