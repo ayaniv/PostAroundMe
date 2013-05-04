@@ -269,7 +269,7 @@ h1 span
 .Bottom { background-color:#f5f3eb; float:left; border-bottom-right-radius:3px; border-bottom-left-radius:3px;  /*width:273px;*/  }
 .Bottom .BottomLine { height:1px; background-color:#FFF; }
 .Bottom .CommentsArea { background-color:#F2F2F2; }
-.Bottom .CommentsArea .SingleComment { word-wrap:break-word; float:left; padding-left:15px; padding-right:15px; width:239px;padding-bottom:5px; padding-top:5px; position:relative; }
+.Bottom .CommentsArea .SingleComment { word-wrap:break-word; float:left; padding-left:15px; padding-right:15px; width:241px;padding-bottom:5px; padding-top:5px; position:relative; margin-left: 1px; }
 .Bottom .CommentsArea .SingleComment .CommentImage { float:left; }
 .Bottom .CommentsArea .SingleComment .CommentImage img { width:24px; height:24px; } 
 .Bottom .CommentsArea .SingleComment .CommentWrapper { width:215px; float:left; }
