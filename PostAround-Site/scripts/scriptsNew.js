@@ -163,122 +163,8 @@ $(function () {
 
     });
 
-
-
-
-    function GetAddressFromLatLon() {
-
-
-
-        var center = new GLatLng(myLat, myLon);
-        var geocoder = new GClientGeocoder();
-        geocoder.getLocations(center, function (response) {
-
-            if (response && response.Status.code == 200) {
-                address = response.Placemark[0].address;
-                ShowPosts();
-            }
-        });
-
-    }
-
-    GetDataFromQueryString();
-    function GetDataFromQueryString() {
-        if (getParameterByName("lat") != "" && getParameterByName("lon") != "") {
-            myLat = getParameterByName("lat");
-            myLon = getParameterByName("lon");
-            GetAddressFromLatLon();
-        } else if (getParameterByName("address") != "") {
-            PerformGoToLocation(getParameterByName("address"))
-        }
-    }
-
-
-
-
-    function getParameterByName(name) {
-        name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-        var regexS = "[\\?&]" + name + "=([^&#]*)";
-        var regex = new RegExp(regexS);
-        var results = regex.exec(window.location.search);
-        if (results == null)
-            return "";
-        else
-            return decodeURIComponent(results[1].replace(/\+/g, " "));
-    }
-
-    function RenderAddThis() {
-        addthis.toolbox('.addthis_toolbox');
-    }
-
-    function FixAddThisAjax() {
-
-        
-        var script = 'http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4fdef26e46826d05';
-        if (window.addthis) {
-            window.addthis = null;
-            //window.addthis.ost = 0;
-            //window.addthis.ready();
-
-            //fix for blank counter
-            window._adr = null;
-            window._atc = null;
-            window._atd = null;
-            window._ate = null;
-            window._atr = null;
-            window._atw = null;
-        }
-        $.getScript(script);
-    }
-
-
-
-
-
-    $("#loadingDiv")
-    .ajaxSend(function () {
-
-        $(this).show();
-        //$("#MessagesContainer").fadeTo("slow", 0.33);
-    })
-    .ajaxComplete(function () {
-        $(this).hide();
-
-        //$("#MessagesContainer").fadeTo("slow", 1);
-    })
-    .ajaxStop(function () {
-        $(this).hide();
-
-
-    });
-
-    $("a", "#addMessageAddressSearchButton").button();
-
-    function htmlDecode(value) {
-        return $('<div/>').html(value).text();
-    }
-
-    function htmlEncode(value) {
-        return $('<div/>').text(value).html();
-    }
-
-    // to avoid loading messgae when getMessgaeIsActive.
-    // 0 ready, 1 busy
-    function SetGetMessagesState(state) {
-        getMessageState = state;
-    }
-
-    function GetGetMessagesState() {
-        return getMessageState;
-
-    }
-
-
-    
-
-
     $("#slider").slider({
-    
+
         value: 10500,
         range: "min",
         min: 0,
@@ -367,6 +253,130 @@ $(function () {
     });
 
 
+    function GetAddressFromLatLon() {
+
+
+
+        var center = new GLatLng(myLat, myLon);
+        var geocoder = new GClientGeocoder();
+        geocoder.getLocations(center, function (response) {
+
+            if (response && response.Status.code == 200) {
+                address = response.Placemark[0].address;
+                GetPosition();
+            }
+
+
+
+        });
+        
+
+    }
+    
+
+    function HasQueryStringData() 
+    {
+        if (getParameterByName("lat") != "" && getParameterByName("lon") != "") {
+            return true;
+        }
+    }
+
+    
+    function GetDataFromQueryString() {
+        
+            myLat = getParameterByName("lat");
+            myLon = getParameterByName("lon");
+            GetAddressFromLatLon();
+
+    }
+
+
+
+
+    function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+        var regexS = "[\\?&]" + name + "=([^&#]*)";
+        var regex = new RegExp(regexS);
+        var results = regex.exec(window.location.search);
+        if (results == null)
+            return "";
+        else
+            return decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+
+    function RenderAddThis() {
+        addthis.toolbox('.addthis_toolbox');
+    }
+
+    function FixAddThisAjax() {
+
+        
+        var script = 'http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4fdef26e46826d05';
+        if (window.addthis) {
+            window.addthis = null;
+            //window.addthis.ost = 0;
+            //window.addthis.ready();
+
+            //fix for blank counter
+            window._adr = null;
+            window._atc = null;
+            window._atd = null;
+            window._ate = null;
+            window._atr = null;
+            window._atw = null;
+        }
+        $.getScript(script);
+    }
+
+
+
+
+
+    $("#loadingDiv")
+    .ajaxSend(function () {
+
+        $(this).show();
+        //$("#MessagesContainer").fadeTo("slow", 0.33);
+    })
+    .ajaxComplete(function () {
+        $(this).hide();
+
+        //$("#MessagesContainer").fadeTo("slow", 1);
+    })
+    .ajaxStop(function () {
+        $(this).hide();
+
+
+    });
+
+    $("a", "#addMessageAddressSearchButton").button();
+
+    function htmlDecode(value) {
+        return $('<div/>').html(value).text();
+    }
+
+    function htmlEncode(value) {
+        return $('<div/>').text(value).html();
+    }
+
+    // to avoid loading messgae when getMessgaeIsActive.
+    // 0 ready, 1 busy
+    function SetGetMessagesState(state) {
+        getMessageState = state;
+    }
+
+    function GetGetMessagesState() {
+        return getMessageState;
+
+    }
+
+
+    
+
+
+
+
+
 
 
     ShowPosts();
@@ -382,6 +392,11 @@ $(function () {
         if (address != "" && myLat != "" && myLon != "") {
             address = address.ReplaceAll("+", " ");
             GetPosition();
+        } else if (HasQueryStringData()) {
+            GetDataFromQueryString();
+
+        } else if (getParameterByName("address") != "") {
+        PerformGoToLocation(getParameterByName("address"))
         } else {
             // fresh new user - if it's not a direct link, means it's homepage - show all posts
             if (!isDirectLink) {
