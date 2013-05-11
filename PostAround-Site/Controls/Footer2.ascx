@@ -8,14 +8,14 @@
             <div style="margin-top:8px;">
             
             <div class="Text" style="float:left;">
-            Copyright © 2011-2013 PostAround.me. All Rights Reserved.
+            Copyright © 2012-2013 PostAround.Me. All Rights Reserved.
             </div>
                   <div class="Text" style="float:right; margin-right:47px;">
             <span><a href="<%=siteUrl %>Sitelinks.aspx" target="_blank">site links</a></span>
             <span style=" margin-right:4px; margin-left:4px;">/</span>
             <span><a href="http://blog.postaround.me" target="_blank">blog</a></span>
             <span style=" margin-right:4px; margin-left:4px;">/</span>
-            <span><a href="mailto:info@postaround.me">contact</a></span>
+            <span><a href="mailto:yaniv@postaround.me">contact</a></span>
             <span style=" margin-right:4px; margin-left:4px;">/</span>
             <span><a href="<%=siteUrl %>Pages/Terms.aspx" target="_blank">terms</a></span>
             <span style=" margin-right:4px; margin-left:4px;">/</span>
@@ -31,7 +31,7 @@
 
             </div>
 
-            <div style="float:right; margin-right:47px; margin-top:14px;"><a href="http://madeintlv.org" title="Made in TLV" style="border:0" target="_blank"><img style="width:100px; height:30px; border:0" src="images/madeintlv.png" /></a></div>
+            <div style="float:right; margin-right:47px; margin-top:14px;"><a href="http://madeintlv.org" title="Made in TLV" style="border:0" target="_blank"><img style="width:100px; height:30px; border:0" src="<%=siteUrl %>images/madeintlv.png" /></a></div>
 
 
             </div>

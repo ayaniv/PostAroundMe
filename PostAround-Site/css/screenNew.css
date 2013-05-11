@@ -205,7 +205,10 @@ h1 span
 .Content .Box #Marker { cursor:pointer; background:url('../images/pin3.png'); /*background:url('../images/icons.png') -219px -145px;*/ width:13px; height:14px; float:left; }
 
 .BigBoxText {
-    margin-top:10px; margin-bottom:10px; padding:0 15px 0 15px;  color:#3b3b3d; font-size:16px; word-wrap:break-word ;
+    color:#3b3b3d; font-size:16px; word-break:break-word ;
+}
+
+.PostBottom .BottomDiv { float:left; position:static; bottom:auto; left:auto; width:100%; margin-top:15px;
 }
 
 .LocationLink { cursor:pointer; }
@@ -265,6 +268,14 @@ h1 span
     float:left;
 }
 
+.BigBoxMapBottom {
+    background-color:#f4f2ee; width:100%; color:#333; font-size:14px; padding-top:6px; padding-bottom:6px;
+}
+
+    .BigBoxMapBottom a {
+        font-size:12px;
+    }
+
 .Content .Box .BoxBody .MineButton { font-size:11px; float:right; margin-left:1px; margin-top:10px;  padding-left:12px;padding-right:12px; padding-top:4px; padding-bottom:4px; }
 .Bottom { background-color:#f5f3eb; float:left; border-bottom-right-radius:3px; border-bottom-left-radius:3px;  /*width:273px;*/  }
 .Bottom .BottomLine { height:1px; background-color:#FFF; }
@@ -273,6 +284,9 @@ h1 span
 .Bottom .CommentsArea .SingleComment .CommentImage { float:left; }
 .Bottom .CommentsArea .SingleComment .CommentImage img { width:24px; height:24px; } 
 .Bottom .CommentsArea .SingleComment .CommentWrapper { width:215px; float:left; }
+#BigBoxComments .Bottom .CommentsArea .SingleComment .CommentWrapper { width:558px;  }
+#BigBoxComments .Bottom .CommentsArea .SingleComment { width:582px; padding-left:11px; padding-right:11px; }
+
 
 .SmallXButton { display:none; cursor:pointer; background:url('../images/icons.png') -140px -4px; width:11px; height:14px; position:absolute; right:8px; float:right; }
 .SmallXButtonWrapper {

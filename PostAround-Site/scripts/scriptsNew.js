@@ -3468,6 +3468,7 @@ $(function () {
     {
         if (currentUser == null)
         {
+            $("#fuzz").css("height", $(document).height());
             $('#fuzz').show();
             //$('#fuzz').css("z-index", 2000);
             $('#PleaseLogin').show();

@@ -16,6 +16,8 @@
 <div id="BigBoxContainer" box-lat="<%=BigBoxLat %>" box-lon="<%=BigBoxLon %>" box-fuid="">
 
 
+
+
 <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
 {"parsetags": "explicit"}
 </script>
@@ -26,31 +28,68 @@
         //FB.XFBML.parse();
         //gapi.plusone.go('GplusContainer', { "size": "medium" });
 
-        
+
 
     </script>
 
-<div class="Line" style="background-color:<%=bigBoxLineColor %> ; width:895px; "></div>
-<div id="BigBoxWrapper" class="Box" box-id="<%=msgId %>" style="width:865px; padding:15px; background-color:#FFF; float:left;">
+<div class="Line" style="background-color:<%=bigBoxLineColor %> ; width:100%; "></div>
+<div id="BigBoxWrapper" class="Box" box-id="<%=msgId %>" style="width:610px; padding:15px; background-color:#FFF; float:left;">
     <div id="FacebookID" style="display:none"><%=facebookID %></div>         
-    <div id="BigBoxLeft" style="width:319px; float:left;">
+    <div id="BigBoxLeft" style="width:100%; float:left;">
 
-        <div id="map_canvas1" style="width:319px; background-color:#EAEDEE; height:256px;">
-        
-        
-        </div>
-        <div id="BigBoxAddress" style="background-color:#f4f2ee; margin-top:10px; width:307px; color:#333; font-size:14px; padding: 3px 6px 6px 6px;">
+        <div style="margin-bottom:10px; float:left; width:100%">
+        <div style="clear:both; font-size:14px; color:#3b3b3d; float:left;"><asp:Literal ID="ltrlCategory" runat="server"></asp:Literal></div>
+
+         <div id="BigBoxAddress" style="font-size:12px; float:right">
         <div style="float:left;">
         
         <img src="<%=homePage %>images/markers/image.png" style="width:12px; height:15px; margin:0 6px 0 6px;" /></div>
-        <div style="margin-left:24px"><a href="<%=mapUrl %>" target="_blank" title="Open Google Map"><asp:Literal runat="server" ID="ltrlAddress"></asp:Literal></a></div>
+        <div style="margin-left:24px">
+            <a href="<%=homePage %>?lat=<%=BigBoxLat %>&lon=<%=BigBoxLon %>" style="font-weight:bold" title="See more posts around here"><asp:Literal runat="server" ID="ltrlAddress"></asp:Literal></a>
+        </div>
         
         </div>
-        <div class="GeneralLink" style="background-color:#f4f2ee; margin-top:3px; width:307px; color:#6AA1BB; font-size:14px; padding: 3px 6px 6px 6px;"><img src="<%=homePage %>images/pin3.png" style="width:13px; height:14px; margin:0 6px 0 6px;" /><a href="<%=homePage %>?lat=<%=BigBoxLat %>&lon=<%=BigBoxLon %>">See more posts around this location</a></div>
-        <div id="BigBoxSocial" style="margin-top:10px; width:100%; height:20px">
-        <%--<div style="float:left; width:155px; margin-top:2px;">
-        <uc1:AddThis ID="AddThis1" runat="server" />
-        </div>--%>
+            </div>
+          
+
+        <div id="map_canvas1" style="width:610px; clear:both; background-color:#EAEDEE; height:200px;">
+        
+        
+        </div>
+
+        
+
+        
+                
+       <div style="clear:both; width:100%; direction:<%=directionTitle %>; text-transform:uppercase; color:#3b3b3d; font-size:24px; margin-top:10px;  "><asp:Literal ID="ltrlTitle" runat="server"></asp:Literal></div>
+        
+                <div id="BigBoxText" class="BigBoxText" style="float:<%=alignDescription %>; direction:<%=directionDescription%>;">
+        <asp:Literal ID="ltrlText" runat="server"></asp:Literal>
+        </div>     
+        
+        <div id="BigBoxMedia" class="BigBoxMedia" style="clear:both; margin-bottom:10px; width:610px; text-align:center">
+        <asp:Literal ID="ltrlMedia" runat="server"></asp:Literal>
+        </div>
+
+
+                <div id="BigBoxHeader" style="width:100%; clear:both;height:50px; ">
+            <div id="BigBoxUserImage" runat="server" style="background-color:#EAEDEE; width:50px; height:50px; float:left;">
+            <asp:Literal runat="server" ID="ltrlUserImage"></asp:Literal>
+            </div>
+            <div id="BigBoxUserName" style="padding-top:3px; height:40px; float:left; padding-left:10px">
+                <div style="clear:both; font-size:14px; color:#3b3b3d">Posted By&nbsp;<span style="font-weight:bold"><asp:Literal ID="ltrlName" runat="server"></asp:Literal></span></div>
+                <div id="BigBoxDate" style="clear:both; font-size:12px; color:#888888"><asp:Literal ID="ltrlDate" runat="server"></asp:Literal></div>
+                <div style="float:left; font-size:12px; color:#888888"><asp:Literal ID="ltrlAddressUser" runat="server"></asp:Literal>
+                    <%--<a style="color:#808080; text-decoration:underline" target="_blank" href="<%=mapUrl %>">Directions? See on Google Maps</a>--%>
+
+                </div>
+            </div>
+            
+        
+        </div>
+
+        <div id="BigBoxSocial" style="float:left; margin-top:10px; margin-bottom:10px; width:100%; height:20px">
+
         <div id="socialLinksPopUp" style="float:left;  width:160px;">
         
 
@@ -77,33 +116,10 @@
         
 
 
-    </div>
 
-    <div id="BigBoxRight" style="width:533px;  margin-left:10px; float:right;">
-        <div id="BigBoxHeader" style="width:100%; height:50px; ">
-            <div id="BigBoxUserImage" runat="server" style="background-color:#EAEDEE; width:50px; height:50px; float:left;">
-            <asp:Literal runat="server" ID="ltrlUserImage"></asp:Literal>
-            </div>
-            <div id="BigBoxUserName" style="padding-top:10px; height:40px; float:left; padding-left:10px">
-                <div style="clear:both; font-size:14px; font-weight:bold; color:#3b3b3d"><asp:Literal ID="ltrlName" runat="server"></asp:Literal></div>
-                <div id="BigBoxDate" style="clear:both; font-size:12px; color:#888888"><asp:Literal ID="ltrlDate" runat="server"></asp:Literal></div>
-            </div>
-            <div style="float:right;">
-                <div style="clear:both; font-size:14px; color:#3b3b3d; float:right;"><asp:Literal ID="ltrlCategory" runat="server"></asp:Literal></div>
-                <div style="clear:both; width:300px; direction:<%=directionTitle %>; text-transform:uppercase; color:#3b3b3d; font-size:24px; text-align:right;  float:right;"><asp:Literal ID="ltrlTitle" runat="server"></asp:Literal></div>
-            </div>
+                <div id="BigBoxComments" style="margin-top:10px;">
         
-        </div>
-        <div id="BigBoxMedia" class="BigBoxMedia">
-        <asp:Literal ID="ltrlMedia" runat="server"></asp:Literal>
-        </div>
-        <div id="BigBoxText" class="BigBoxText" style="float:<%=alignDescription %>; direction:<%=directionDescription%>;">
-        <asp:Literal ID="ltrlText" runat="server"></asp:Literal>
-        </div>
-
-        <div id="BigBoxComments" style="margin-top:10px; width:100%;">
-        
-         <div class="Bottom" id="CommentsArea">
+         <div class="Bottom" id="CommentsArea" style="width:100%">
  
                     <div class="BottomLine"></div>
                     
@@ -118,13 +134,13 @@
                         
 
                          <div id="SingleCommentView" comment-id="<%#  ((Comment)Container.DataItem).ID %>">
-                            <div class="SingleComment <%# ((Comment)Container.DataItem).isPrivate ? "PrivateComment" : ""  %>" style="width:503px" >
+                            <div class="SingleComment <%# ((Comment)Container.DataItem).isPrivate ? "PrivateComment" : ""  %>" >
                                 <div id="commentImage" class="CommentImage">
                                 <asp:Literal ID="cmtUserImage" runat="server"></asp:Literal>
                                     
                                 </div>
                                 
-                                <div class="CommentWrapper" style="width:476px">
+                                <div class="CommentWrapper">
                                 
 
                                     
@@ -164,7 +180,7 @@
                     
                     <asp:Panel runat="server" ID="AddCommentPanel">
                         <div class="AddComment" style="margin-top:0">
-                            <textarea style="width:495px"  maxlength="500" id="Comment" cols"1" rows="1">Post a comment...</textarea>
+                            <textarea style="width:100%"  maxlength="500" id="Comment" cols"1" rows="1">Post a comment...</textarea>
 
                             <div class="Buttons">
                             <div style="position:absolute; left:0; float:left;">
@@ -190,6 +206,14 @@
 
     </div>
 
+    <div id="BigBoxRight" style="width:533px;  margin-left:10px; float:right;">
+
+
+
+
+
+    </div>
+
 </div>
 
 
@@ -206,12 +230,12 @@
 
     <script id="TemplateComment" type="text/x-jQuery-tmpl">
                             <div id="SingleCommentView" comment-id="${ID}">
-                            <div class="SingleComment" style="width:503px" >
+                            <div class="SingleComment" >
                                 <div id="commentImage" class="CommentImage">
                                     <img src="${avatarImageUrl}" />
                                 </div>
                                 
-                                <div class="CommentWrapper" style="width:476px">
+                                <div class="CommentWrapper" style="width:558px">
                                 
                                     {{if Mine}}
                                     <div id="HideComment"></div>

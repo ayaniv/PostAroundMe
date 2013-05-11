@@ -45,7 +45,7 @@ public class FileUpload : IHttpHandler {
                     filename = guid + fileExtension;
                     uploadedfile.SaveAs(mapPath + "\\" + filename);
                     img = ResizeImage(Image.FromStream(uploadedfile.InputStream), 235, 0);
-                    imgBig = ResizeImage(Image.FromStream(uploadedfile.InputStream), 533, 0);
+                    imgBig = ResizeImage(Image.FromStream(uploadedfile.InputStream), 610, 0);
                 }
 
             }
@@ -64,7 +64,7 @@ public class FileUpload : IHttpHandler {
                     fileStream.Close();
 
                     img = ResizeImage(Image.FromStream(inputStream), 243, 0);
-                    imgBig = ResizeImage(Image.FromStream(inputStream), 533, 0);
+                    imgBig = ResizeImage(Image.FromStream(inputStream), 610, 0);
                 }
 
             }

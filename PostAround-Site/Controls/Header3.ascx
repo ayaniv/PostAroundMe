@@ -61,7 +61,7 @@
         <div id="AboutBox" class="MoreBox" style="width:84px;">
             <ul>
                 <li id="liBlog"><a href="http://blog.postaround.me" target="_blank" class="LogoutLink" style="padding:0;">Blog</a></li>
-                <li id="liContact"><a href="mailto:info@postaround.me"  class="LogoutLink">Contact</a></li>
+                <li id="liContact"><a href="mailto:yaniv@postaround.me"  class="LogoutLink">Contact</a></li>
             </ul>
             
             

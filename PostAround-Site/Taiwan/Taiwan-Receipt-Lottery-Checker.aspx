@@ -6,7 +6,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <title>Taiwan Receipt Lottery | Uniform Invoice Lottery Online Checker</title>
+    <title>Taiwan Lottery Numbers Online Checker | Taiwan Receipt Lottery</title>
     <link rel="stylesheet" href="../css/screen.css" type="text/css" media="screen" charset="utf-8" />
 </head>
 <body>
@@ -27,10 +27,13 @@
     <div class="HairHeadLine"></div>
         <div class="BottomDiv" id="BottomDiv" style="background:none">
         <div class="Logo">
-        <h1>Taiwan Receipt Lottery Online Checker</h1>
-        Check if you won Taiwan Receipts Lottery
+        <h1>Taiwan Receipt Lottery / Taiwan Lottery / Uniform Invoice Taiwan Online Checker</h1>
+        
+            台灣彩券
+            <br />
+            Check if you won Taiwan Lottery Automatically !!
         <br />
-        with Uniform-Invoice Winning Numbers online web checker
+        with <b>Taiwan Receipt Lottery Winning Numbers</b> Online Web Checker
         
 
                 </div>  

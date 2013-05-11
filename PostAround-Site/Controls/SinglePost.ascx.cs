@@ -55,7 +55,7 @@ public partial class Controls_SinglePost : System.Web.UI.UserControl
                 MyMessage msg = GetMessageByID(msgId);
                 if (msg == null)
                     throw new Exception();
-
+                
                 
                 if (!msg.Mine)
                     ltrlButtons.Text = @"<div class=""slider-frame""><span class=""slider-button""><span class=""PublicIcon PublicIconOn""></span>Public</span><span class=""slider-button-off""><span class=""PrivateIcon""></span>Private</span></div>";
@@ -67,7 +67,8 @@ public partial class Controls_SinglePost : System.Web.UI.UserControl
                 BigBoxAddress = Tools.EncodeTo64(ltrlAddress.Text);
                 ltrlUserImage.Text = "<img src=" + msg.userImage + " style='height:50px; width:50px; border:0;' />";
                 ltrlName.Text = msg.Name;
-                ltrlDate.Text = "Posted on " + msg.Date; // +" at " + msg.Time;
+                ltrlDate.Text = "On " + msg.Date + " at " + msg.Time;
+                ltrlAddressUser.Text = "Around " + ltrlAddress.Text;
                 //fullDate = msg.FullDate;
                 ltrlCategory.Text = msg.category;
                 ltrlTitle.Text = msg.title;
@@ -89,7 +90,7 @@ public partial class Controls_SinglePost : System.Web.UI.UserControl
                     // attach image height
                     System.Drawing.Image objImage = System.Drawing.Image.FromFile(mapPathResized + "\\" + msg.image);
                     msg.ImageHeight = objImage.Height;
-                    ltrlMedia.Text = "<img src=" + homePage + "/UploadedResizedBig/" + msg.image + " style='height:" + msg.ImageHeight + "px;" + " width:533px; float:left; border:0;' />";
+                    ltrlMedia.Text = "<img src=" + homePage + "/UploadedResizedBig/" + msg.image + " style='height:" + msg.ImageHeight + "px;" + " width:610px; float:left; border:0;' />";
                 }
 
                 rptComments.ItemCreated += new RepeaterItemEventHandler(rptComments_ItemCreated);
@@ -124,10 +125,10 @@ public partial class Controls_SinglePost : System.Web.UI.UserControl
         int userId = 0;
 
         userId = Tools.GetUserIdFromCookie(Context);
-        if (userId <= 0)
-        {
-            AddCommentPanel.Visible = false;
-        }
+        //if (userId <= 0)
+        //{
+        //    AddCommentPanel.Visible = false;
+        //}
         
         PostAroundServiceClient client = new PostAroundServiceClient();
 

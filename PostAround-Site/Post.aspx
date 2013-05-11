@@ -2,6 +2,8 @@
 <%@ Register src="Controls/HeadNew.ascx" tagname="Head" tagprefix="uc1" %>
 <%@ Register src="Controls/SinglePost.ascx" tagname="SinglePost" tagprefix="uc1" %>
 <%@ Register src="Controls/SimpleHeader.ascx" tagname="SimpleHeader" tagprefix="uc1" %>
+<%@ Register src="Controls/Footer2.ascx" tagname="Footer" tagprefix="uc1" %>
+<%@ Register src="Controls/AddPostContainer2.ascx" tagname="AddPostContainer" tagprefix="uc1" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@ Register src="Controls/MetaTags.ascx" tagname="MetaTags" tagprefix="uc1" %>
 
@@ -11,23 +13,35 @@
     <uc1:Head ID="PageHeader1" runat="server" />
     
 </head>
-<body>
+<body style="height:100%">
 
     <form id="form1" runat="server">
 
-    <uc1:SimpleHeader ID="SimpleHeader1" runat="server" />
+        <div id="PleaseLogin" style="display:none; float:left; border:6px solid #fff; border-right:8px solid #FFF; z-index:10001; background-color:#FFF; width:320px; top:25%; left:50%; margin-left:-160px; position:fixed;
+box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-shadow: 0px 6px 6px #666; 
 
-    
-    <div id="SinglePostContainer" style="margin-top:100px; position:absolute; left:50%; margin-left:-447px">
+ ">
+	
+</div>
+
+         <div id="fuzz" class="fuzz" style="filter:alpha(opacity=20); display:none"></div>
+            
+
+        <div style="position:relative; min-height:100%">
+    <uc1:SimpleHeader ID="SimpleHeader1" runat="server" />
+        
+     <uc1:AddPostContainer ID="AddPostContainer1" runat="server" />
+    <div id="SinglePostContainer" style=" margin:100px auto; width:640px;">
 
     <uc1:MetaTags ID="MetaTags1" runat="server" />
     <uc1:SinglePost ID="SinglePost1" runat="server" />  
        
     </div>    
     
-    
-
-
+    <div class="PostBottom">
+        <uc1:Footer ID="Footer1" runat="server" />
+</div>
+        </div>
     </form>
 </body>
 </html>
