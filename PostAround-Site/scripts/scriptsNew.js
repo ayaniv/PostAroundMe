@@ -388,15 +388,15 @@ $(function () {
             isMine = 1;
         }
 
-        // If has location data in cookies, display shows in that location
-        if (address != "" && myLat != "" && myLon != "") {
+        
+        if (HasQueryStringData()) {
+            GetDataFromQueryString();
+        } else if (getParameterByName("address") != "") {
+            PerformGoToLocation(getParameterByName("address"))
+        } else if (address != "" && myLat != "" && myLon != "") {
+            // If has location data in cookies, display shows in that location
             address = address.ReplaceAll("+", " ");
             GetPosition();
-        } else if (HasQueryStringData()) {
-            GetDataFromQueryString();
-
-        } else if (getParameterByName("address") != "") {
-        PerformGoToLocation(getParameterByName("address"))
         } else {
             // fresh new user - if it's not a direct link, means it's homepage - show all posts
             if (!isDirectLink) {

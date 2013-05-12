@@ -63,13 +63,15 @@
                 
        <div style="clear:both; width:100%; direction:<%=directionTitle %>; text-transform:uppercase; color:#3b3b3d; font-size:24px; margin-top:10px;  "><asp:Literal ID="ltrlTitle" runat="server"></asp:Literal></div>
         
-                <div id="BigBoxText" class="BigBoxText" style="float:<%=alignDescription %>; direction:<%=directionDescription%>;">
+                <div id="BigBoxMedia" class="BigBoxMedia" style="clear:both; margin-bottom:10px; width:610px; text-align:center">
+        <asp:Literal ID="ltrlMedia" runat="server"></asp:Literal>
+        </div>
+
+                <div id="BigBoxText" class="BigBoxText" style="float:<%=alignDescription %>; margin-bottom:10px; direction:<%=directionDescription%>;">
         <asp:Literal ID="ltrlText" runat="server"></asp:Literal>
         </div>     
         
-        <div id="BigBoxMedia" class="BigBoxMedia" style="clear:both; margin-bottom:10px; width:610px; text-align:center">
-        <asp:Literal ID="ltrlMedia" runat="server"></asp:Literal>
-        </div>
+
 
 
                 <div id="BigBoxHeader" style="width:100%; clear:both;height:50px; ">
