@@ -25,17 +25,19 @@ public partial class Controls_MetaTags : System.Web.UI.UserControl
         string description = "Turn your Facebook into a bulletin board based on your locaion, that finds you what closest to you !";
         string url = siteUrl.TrimEnd('/');
         string image = siteUrl + "images/facebook_ogimage.png";
-
+        string admin = "567517451";
         int msgId;
         string strMsgId = Request.QueryString["id"];
         string page = Path.GetFileNameWithoutExtension(HttpContext.Current.Request.Url.AbsoluteUri).ToLower();
-        
+        string author = "Yaniv Aharon";
 
         if ( (page == "post") && (Int32.TryParse(strMsgId, out msgId)) && msgId > 0)
         {
             MyMessage msg = GetMessageByID(msgId);
             if (msg != null)
             {
+                author = msg.Name;
+                admin = msg.facebookID;
                 title = msg.title;
                 description = FormatText(msg.description);
                 url = siteUrl + "post/" + msg.msgId;
@@ -57,13 +59,13 @@ public partial class Controls_MetaTags : System.Web.UI.UserControl
         ogAttributes.Add("og:type", "website");
         ogAttributes.Add("og:site_name", "postaround.me");
         ogAttributes.Add("fb:app_id", ConfigurationManager.AppSettings["facebookAppKey"]);
-        ogAttributes.Add("fb:admins", "567517451");
+        ogAttributes.Add("fb:admins", admin);
         
         
         Dictionary<string, string> metaAttributes = new Dictionary<string, string>();
         metaAttributes.Add("description", description);
         metaAttributes.Add("keywords", "Location Based Social Network, places, locations, local, hyperlocal, geo-tagging, geo-community, listener, broadcast, local feed, local recommendations, local restaurants, local message board, local community, local issues, Location Based Bulletin Board,  Pinboard, posterboard, bulletin board, billboard, neighborhood, myhood, hood, people around, nearby, nearbyme, bulletin, board, location, geolocation, postaround, posting, based, area, Location Based Bulletin Board, Location Based Pinboard, aroundme, post around me, postaroundme, postaround, לוח מודעות, לוח מודעות מבוסס מיקום");
-        metaAttributes.Add("author", "Yaniv Aharon");
+        metaAttributes.Add("author", author);
         
         HtmlMeta tag;
         foreach (KeyValuePair<string, string> kvp in ogAttributes)
