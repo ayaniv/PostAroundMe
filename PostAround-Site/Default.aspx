@@ -255,7 +255,7 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
                 <div id="BoxLine" class="Line" color="${catColor}" style="background-color:${catColor}">
                 </div>
                 <div class="TextArea">
-                
+                <div style="bottom:0; position:absolute; width: 11px; height: 5px; background:url('images/icons.png') -149px -22px; "></div>
                     <div class="BoxHead">
                 
                 <div class="FullAddress">
@@ -313,17 +313,17 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
                 
                 </div>
 
-                <div class="MessageName">
-                    <a href="${link}" target="_blank"><img src="${userImage}" style="border:0; float:left; width:45px; height:45px; margin-right:6px" /></a> 
-                    <a href="${link}" target="_blank" style="float:left; margin-top:-2px">${Name}</a>
+                <div class="MessageName" style="position:relative">
+                    <a href="${link}" target="_blank"><img src="${userImage}" style="border:0; border-radius:50%; float:left; width:50px; height:50px; margin-right:6px" /></a> 
+                    <a href="${link}" target="_blank" style="padding-top:10px;  position:absolute;">${Name}</a>
                     <br />
-                    <span style="float:left; margin-top:-2px;">Posted on ${Date}</span>
+                    <span style="padding-top:10px;  position:absolute;">${Date}</span>
                     <br />
                     
 
                     
-                    <div style="height:22px" class="SharingArea">
-                            <div class="ShareButton" style="width:192px; background-color:#FFF; height:22px; font-size:13px; font-family:Tahoma, Verdana, Arial;  color:#666; float:left;">
+                    <div style="height:22px; width:100%; padding-top:7px;" class="SharingArea">
+                            <div class="ShareButton" style="width:192px; height:22px; font-size:13px; font-family:Tahoma, Verdana, Arial;  color:#666; float:left;">
                                 <span class="ShareIcon"></span>
                                 <span style="margin-left:4px; font-weight:bold; float:left;">${totalShares}</span>
                                 <span style="margin-left:4px; float:left; text-transform:uppercase">Shares</span>
@@ -336,6 +336,9 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
                                             <div style="float:left; margin-top:2px;">
                                             <a class="addthis_button_preferred_1"></a>
                                                 <a class="addthis_button_preferred_2"></a>
+                                                 <a class="addthis_button_preferred_3"></a>
+                                                 <a class="addthis_button_preferred_4"></a>
+                                                <a class="addthis_button_preferred_5"></a>
                                             <a class="addthis_button_email"></a>
                                                 
 
@@ -369,7 +372,7 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
              
                 <div class="Bottom" id="CommentsArea">
  
-                    <div class="BottomLine"></div>
+                   
                     
                     <div id="currCommentsView" class="CommentsArea">
 
