@@ -174,7 +174,7 @@ h1 span
 
 .Content .Box {  position:absolute; width:273px; float:left; /*box-shadow: 1px 1px 1px #c0bcb1; -moz-box-shadow: 1px 1px 1px #c0bcb1; -webkit-box-shadow: 1px 1px 1px #c0bcb1; */ }
 .Content .Box .BoxBody {  float:left; width:100%; position:relative; box-shadow: 0 0 3px #888; border-radius: 3px; background-color:#fff; /* border-right:1px solid #cbcac9; border-bottom:1px solid #cbcac9 ; border-left:1px solid #E2DDCF;*/    }
-.Content .Box .BoxBody .TextArea { position:relative; width:243px; padding-left:15px; float:left; background-color:#FDFDFD; padding-right:15px; padding-bottom:4px; padding-top:4px; }
+.Content .Box .BoxBody .TextArea { position:relative; width:243px; padding-left:15px; float:left; background-color:#fff; padding-right:15px; padding-bottom:4px; padding-top:4px; }
 .Content .Box .BoxBody .BoxHead { width:243px; float:left; }
 .Content .Box .BoxBody .BoxHead .BoxTitle { /*width:176px;*/ height:27px; float:left }
 .Content .Box .BoxBody .BoxHead  .BoxCategory { margin-top:0px; float:left; color:#a3a3a3; font-size:12px; }
