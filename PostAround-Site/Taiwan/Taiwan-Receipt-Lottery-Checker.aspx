@@ -8,6 +8,13 @@
 <head id="Head1" runat="server">
     <title>Taiwan Lottery Numbers Online Checker | Taiwan Receipt Lottery</title>
     <link rel="stylesheet" href="../css/screen.css" type="text/css" media="screen" charset="utf-8" />
+
+    <style type="text/css">
+        h3 {
+            margin-bottom: 0;
+        }
+    </style>
+
 </head>
 <body>
 
@@ -77,8 +84,19 @@
     </table>
     
     </div>
-    <div>
-            <h4>how to check taiwan receipt lottery?</h4>
+            <h3>When the numbers are published?</h3>
+            <div>
+                
+                The Lottery takes place every two month. The results for two month are published on the 25th of the next month.<br />
+                (i.e. the results for 3-4/2013 will be published on 25/5/2013)<br />
+                We will do our best to serve you the results within the same date.<br />
+                So you will be able to check them easily with our online checker.<br />
+                <b>In case you are faster than us - just write them down in textboxes above</b>
+            </div>
+    
+            <h3>how to check taiwan receipt lottery?</h3>
+            <div>
+            
         Don't need to know anything, simply enter your receipts numbers below
         and check how much money you won.<br />
         Enter the last <b>3 digits</b> (or more) of your receipts <b>seperated by a comma (,)</b> and click "Check":<br /><br />
@@ -115,8 +133,12 @@
     </div>
             
     <br />
-    
+    <h3>Got feedback?</h3>
+            <div>Add a comment. We are listening.</div>
    <div class="fb-comments" data-href="http://postaround.me/taiwan" data-num-posts="2" data-width="470"></div>
+        <br /><br />
+                <h3>Like us?</h3>
+        Please Like us on facebook, it's the least you can do to support us.<br />
    <uc1:FacebookLike ID="FacebookLike1" runat="server" />
    
     </div>
