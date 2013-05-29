@@ -46,6 +46,7 @@
         <img src="<%=homePage %>images/markers/image.png" style="width:12px; height:15px; margin:0 6px 0 6px;" /></div>
         <div style="margin-left:24px">
             <a href="<%=homePage %>?lat=<%=BigBoxLat %>&lon=<%=BigBoxLon %>" style="font-weight:bold" title="See more posts around here"><asp:Literal runat="server" ID="ltrlAddress"></asp:Literal></a>
+
         </div>
         
         </div>
@@ -56,12 +57,12 @@
         
         
         </div>
-
+          <a style="color:#808080; margin-top:4px; float:right; text-decoration:none; font-size:12px;" target="_blank" href="<%=mapUrl %>">Open in Google Maps</a>
         
 
         
                 
-       <div style="clear:both; width:100%; direction:<%=directionTitle %>; text-transform:uppercase; color:#3b3b3d; font-size:24px; margin-top:10px;  "><asp:Literal ID="ltrlTitle" runat="server"></asp:Literal></div>
+       <div style="float:left; width:100%; direction:<%=directionTitle %>; text-transform:uppercase; color:#3b3b3d; font-size:24px; margin-top:10px;  "><asp:Literal ID="ltrlTitle" runat="server"></asp:Literal></div>
         
                 <div id="BigBoxMedia" class="BigBoxMedia" style="clear:both; margin-bottom:10px; width:610px; text-align:center">
         <asp:Literal ID="ltrlMedia" runat="server"></asp:Literal>
@@ -82,7 +83,7 @@
                 <div style="clear:both; font-size:14px; color:#3b3b3d">Posted By&nbsp;<span style="font-weight:bold"><asp:Literal ID="ltrlName" runat="server"></asp:Literal></span></div>
                 <div id="BigBoxDate" style="clear:both; font-size:12px; color:#888888"><asp:Literal ID="ltrlDate" runat="server"></asp:Literal></div>
                 <div style="float:left; font-size:12px; color:#888888"><asp:Literal ID="ltrlAddressUser" runat="server"></asp:Literal>
-                    <%--<a style="color:#808080; text-decoration:underline" target="_blank" href="<%=mapUrl %>">Directions? See on Google Maps</a>--%>
+                  
 
                 </div>
             </div>
