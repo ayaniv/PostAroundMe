@@ -12,7 +12,10 @@
             var siteUrl = '<%=siteUrl %>';
             var currentUser;
             var rootDir = '<%=rootDir %>';
-            
+            var queryStringAddress = '<%= addressFromQueryString %>';
+            var queryStringLat = '<%= latitudeFromQueryString %>';
+            var queryStringLon = '<%= longitudeFromQueryString %>';
+
             var myLat = '<%=lat %>';
             var myLon = '<%=lng %>';
             //var location = unescape("<%=location %>");

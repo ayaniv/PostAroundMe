@@ -10,16 +10,12 @@ using System.IO;
 using PostAround.Entities;
 using PostAroundService;
 
-public partial class Controls_MetaTags : System.Web.UI.UserControl
+public partial class Controls_MetaTags : BaseControl
 {
-    protected string siteUrl;
+    
     protected void Page_Load(object sender, EventArgs e)
     {
-        siteUrl = ConfigurationManager.AppSettings["SiteUrl"];
-        if (Tools.GetProtocol(HttpContext.Current).Equals("https"))
-        {
-            siteUrl = siteUrl.Replace("http://", "https://");
-        }
+        
 
         string title = "Post Around Me | Local Pinboard";
         string description = "Turn your Facebook into a bulletin board based on your locaion, that finds you what closest to you !";

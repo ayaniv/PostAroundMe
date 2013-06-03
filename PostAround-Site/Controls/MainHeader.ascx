@@ -5,7 +5,7 @@
     <div id="HeaderLogo">
     <div style="z-index:2; background:url('images/cloud.png') no-repeat; width:446px; height:154px; position:absolute;">
     
-    <div class="LogoClear"><a href="<%=homePage %>?ref=logo"><img border="0" src="images/logo_neto.png" title="Location Based Pinboard" width="258" height="50" /></a></div>
+    <div class="LogoClear"><a href="<%=siteUrl %>?ref=logo"><img border="0" src="images/logo_neto.png" title="Location Based Pinboard" width="258" height="50" /></a></div>
     <div class="LogoText">Location Based Pinboard</div>
     
     </div>
@@ -46,7 +46,7 @@
     </div>
     
     <div class="HeaderButton" style="float:right; cursor:pointer;  padding:12px; padding-left:30px; padding-right:30px;">
-    <a href="<%=homePage %>?ref=home" style="text-decoration:none; color:#82898E; font-size:inherit;">Home</a>
+    <a href="<%=siteUrl %>?ref=home" style="text-decoration:none; color:#82898E; font-size:inherit;">Home</a>
         
     </div>
     

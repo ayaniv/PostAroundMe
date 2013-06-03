@@ -160,7 +160,7 @@
 
                              <a href="#">
              
-                              <div style="background: url('images/icons.png') no-repeat scroll -281px -4px; height: 20px;
+                              <div style="background: url('<%=siteUrl%>images/icons.png') no-repeat scroll -281px -4px; height: 20px;
                      width: 20px; margin-left: 6px; margin-top: 6px;">
                  </div>
 
@@ -201,7 +201,7 @@
      
 
          <div id="ChkFacebook" class="Checkbox" >
-             <div id="chkFacebookTrue" style="display:none; background: url('images/icons.png') no-repeat scroll -270px -7px;
+             <div id="chkFacebookTrue" style="display:none; background: url('<%=siteUrl%>images/icons.png') no-repeat scroll -270px -7px;
                  width: 10px; height: 9px; margin-top: 3px; margin-left: 3px; position: absolute;">
              </div>
          </div>

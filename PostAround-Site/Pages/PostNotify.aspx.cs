@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Pages_PostNotify : System.Web.UI.Page
+public partial class Pages_PostNotify : BasePage
 {
     protected string postHeader;
     protected int postId;
@@ -17,16 +17,10 @@ public partial class Pages_PostNotify : System.Web.UI.Page
     protected string message;
     protected string senderFName;
     protected string senderImage;
-    protected string siteUrl;
-
+ 
     protected void Page_Load(object sender, EventArgs e)
     {
-        siteUrl = ConfigurationManager.AppSettings["SiteUrl"];
-        if (Tools.GetProtocol(HttpContext.Current).Equals("https"))
-        {
-            siteUrl = siteUrl.Replace("http://", "https://");
-            
-        }
+     
 
         string strCommentId = Request.QueryString["commentId"];
         strCommentId = Server.UrlDecode(strCommentId);

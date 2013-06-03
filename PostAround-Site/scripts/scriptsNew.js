@@ -6,7 +6,7 @@ function SetPostButtonState(on) {
         //requestRunning = false;
     } else {
         $("#PostButton").addClass('Submit-Disable');
-        $("#PostButton").html("<img src='images/loading.gif' style='width:20px; height:20px;' />");
+        $("#PostButton").html("<img src=" + siteUrl + "'images/loading.gif' style='width:20px; height:20px;' />");
     }
 }
 
@@ -391,8 +391,14 @@ $(function () {
         
         if (HasQueryStringData()) {
             GetDataFromQueryString();
+        } else if (queryStringLon != "" && queryStringLat != "") {
+            myLat = queryStringLat;
+            myLon = queryStringLon;
+            GetAddressFromLatLon();
         } else if (getParameterByName("address") != "") {
             PerformGoToLocation(getParameterByName("address"))
+        } else if (queryStringAddress != "") {
+            PerformGoToLocation(queryStringAddress)
         } else if (address != "" && myLat != "" && myLon != "") {
             // If has location data in cookies, display shows in that location
             address = address.ReplaceAll("+", " ");
@@ -551,7 +557,7 @@ $(function () {
 
     $("#bubbleOk").click(function () {
 
-        var url = siteUrl + "/Handlers/SaveLocation.ashx";
+        var url = siteUrl + "Handlers/SaveLocation.ashx";
 
         var myJSON = {
             "dontShowMeAgainWelcome": "1"
@@ -910,6 +916,7 @@ $(function () {
         FB.api('/me/permissions', checkAppUserPermissions);
 
         function checkAppUserPermissions(response) {
+            debugger;
             if (response.data[0].publish_stream != 1)
                 $("#ChkFacebook").click();
         }
@@ -920,7 +927,7 @@ $(function () {
         FB.api('/me/permissions', SetCheckBoxToTrue);
 
         function SetCheckBoxToTrue(response) {
-
+            debugger;
             if (response.data[0].publish_stream == 1) {
                 $("#chkFacebookTrue").show();
                 $("#chkPostToWall").attr('checked', true);
@@ -1051,7 +1058,7 @@ $(function () {
             return;
         }
 
-        var url = siteUrl + "/Handlers/SetMessage.ashx";
+        var url = siteUrl + "Handlers/SetMessage.ashx";
 
         var myJSON = {
 
@@ -1230,7 +1237,7 @@ $(function () {
 
         //call ajax to save cookie
 
-        var url = siteUrl + "/Handlers/ClearLocationCookie.ashx";
+        var url = siteUrl + "Handlers/ClearLocationCookie.ashx";
 
         $.ajax({
             type: 'POST',
@@ -1376,7 +1383,7 @@ $(function () {
     function ChangeToSmallHeader() {
 
         $.when(ChangeToSmallHeaderStep1()).then(ChangeToSmallHeaderStep2());
-
+        SetLocationInAddressBar(myLat, myLon);
     }
 
     function ChangeToSmallHeaderStep2() {
@@ -2364,7 +2371,7 @@ $(function () {
     //---- ADD MESSAGE STUFF END
 
     function PostToWall(message, title, caption, details, image, link, latlon) {
-
+        
         var hasProblem = false;
         var params = {};
         params['message'] = message;
@@ -2381,6 +2388,7 @@ $(function () {
 
 
         FB.api('/me/feed', 'post', params, function (response) {
+            debugger;
             if (!response || response.error) {
             } else { }
         });
@@ -2487,6 +2495,12 @@ $(function () {
     //------------------------LOCATION STUFF BEGIN
 
 
+    function SetLocationInAddressBar(lat, lon) {
+        if (history.pushState) {
+            var stateObj = { "lat": lat, "lon": lon };
+            history.pushState(stateObj, 'Viewing Posts Around ' + lat + "," + lon, rootDir + 'll/' + lat + "," + lon);
+        }
+    }
 
     // Auto Discover on the homepage
     function GetPosition() {

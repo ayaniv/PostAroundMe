@@ -21,7 +21,7 @@
 <div style="float:left;">
 
 <div style="float:left; padding:10px; padding-top:12px; height:100%; width:27px;">
- <img src="images/baloon.png" style="width:27px; height:31px;" />
+ <img src="<%=siteUrl %>images/baloon.png" style="width:27px; height:31px;" />
 </div>
 
 

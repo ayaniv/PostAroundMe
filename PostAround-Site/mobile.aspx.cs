@@ -13,20 +13,15 @@ using PostAroundService;
 using PostAround.Entities;
 using System.Collections.Generic;
 
-public partial class mobile : System.Web.UI.Page
+public partial class mobile : BasePage
 {
-    protected string siteUrl;
-    //protected string homePage;
+    
 
 
     //User currentUser;
     protected void Page_Load(object sender, EventArgs e)
     {
-        siteUrl = ConfigurationManager.AppSettings["SiteUrl"];
-        if (Tools.GetProtocol(HttpContext.Current).Equals("https"))
-        {
-            siteUrl = siteUrl.Replace("http://", "https://");
-        }
+        
         //homePage = ConfigurationManager.AppSettings["HomePage"];
 
         //int ID = 1;

@@ -12,9 +12,9 @@ using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 using System.Text.RegularExpressions;
 
-public partial class Controls_Head : System.Web.UI.UserControl
+public partial class Controls_Head : BaseControl
 {
-    protected string siteUrl;
+    protected string addressFromQueryString;
     protected string lat = "";
     protected string lng = "";
     protected string address = "";
@@ -25,15 +25,20 @@ public partial class Controls_Head : System.Web.UI.UserControl
     protected string rootDir;
     protected string accessToken;
     protected string sendFacebookNotifications;
-
+    protected string latitudeFromQueryString;
+    protected string longitudeFromQueryString;
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        siteUrl = ConfigurationManager.AppSettings["SiteUrl"];
-        if (Tools.GetProtocol(HttpContext.Current).Equals("https"))
+        addressFromQueryString = Request.QueryString["address"];
+        string latlon = Request.QueryString["latlon"];
+        if (!string.IsNullOrWhiteSpace(latlon))
         {
-            siteUrl = siteUrl.Replace("http://", "https://");
+
+            latitudeFromQueryString = latlon.Split(',')[0];
+            longitudeFromQueryString = latlon.Split(',')[1];
         }
+
 
         
         rootDir = ConfigurationManager.AppSettings["Root"];

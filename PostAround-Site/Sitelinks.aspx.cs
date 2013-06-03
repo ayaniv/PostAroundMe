@@ -9,24 +9,20 @@ using PostAroundService;
 using PostAround.Entities;
 using System.Net;
 
-public partial class Sitelinks : System.Web.UI.Page
+public partial class Sitelinks : BasePage
 {
-    protected string SiteUrl;
+    
     protected void Page_Load(object sender, EventArgs e)
     {
 
-        SiteUrl = ConfigurationManager.AppSettings["SiteUrl"];
-        if (Tools.GetProtocol(HttpContext.Current).Equals("https"))
-        {
-            SiteUrl = SiteUrl.Replace("http://", "https://");
-        }
+     
         PostAroundServiceClient client = new PostAroundServiceClient();
         client.CreateJsonPostsDigest();
         client.Close();
         WebClient webclient = new WebClient();
 
         webclient.Encoding = System.Text.Encoding.UTF8; 
-        string jsonString = webclient.DownloadString(SiteUrl + "Pages/json.txt");
+        string jsonString = webclient.DownloadString(siteUrl + "Pages/json.txt");
         
         
 

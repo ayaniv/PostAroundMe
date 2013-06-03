@@ -43,9 +43,9 @@
          <div id="BigBoxAddress" style="font-size:12px; float:right">
         <div style="float:left;">
         
-        <img src="<%=homePage %>images/markers/image.png" style="width:12px; height:15px; margin:0 6px 0 6px;" /></div>
+        <img src="<%=siteUrl %>images/markers/image.png" style="width:12px; height:15px; margin:0 6px 0 6px;" /></div>
         <div style="margin-left:24px">
-            <a href="<%=homePage %>?lat=<%=BigBoxLat %>&lon=<%=BigBoxLon %>" style="font-weight:bold" title="See more posts around here"><asp:Literal runat="server" ID="ltrlAddress"></asp:Literal></a>
+            <a href="<%=siteUrl %>ll/<%=BigBoxLat %>,<%=BigBoxLon %>" style="font-weight:bold" title="See more posts around here"><asp:Literal runat="server" ID="ltrlAddress"></asp:Literal></a>
 
         </div>
         

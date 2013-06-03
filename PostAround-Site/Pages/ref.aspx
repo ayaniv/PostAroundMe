@@ -58,7 +58,7 @@
     function SaveCookie(accessToken) {
 
 
-        var url = siteUrlSecured + "/Handlers/SaveInCookie.ashx";
+        var url = siteUrlSecured + "Handlers/SaveInCookie.ashx";
 
         var myJSON = {
             "accessToken": accessToken

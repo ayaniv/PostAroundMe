@@ -10,7 +10,7 @@ using System.Web.UI.HtmlControls;
 using System.Configuration;
 using System.Xml.Linq;
 
-public partial class Pages_Sitemap : System.Web.UI.Page
+public partial class Pages_Sitemap : BasePage
 {
 
 
@@ -34,11 +34,7 @@ public partial class Pages_Sitemap : System.Web.UI.Page
     private void CreateSiteMapIndex(List<int> lstIndexes)
     {
 
-        string SiteUrl = ConfigurationManager.AppSettings["SiteUrl"];
-        if (Tools.GetProtocol(HttpContext.Current).Equals("https"))
-        {
-            SiteUrl = SiteUrl.Replace("http://", "https://");
-        }
+      
         string strXmlTag = @"<?xml version=""1.0"" encoding=""utf-8"" ?>";
         string xmlns = "http://www.sitemaps.org/schemas/sitemap/0.9";
 
@@ -48,7 +44,7 @@ public partial class Pages_Sitemap : System.Web.UI.Page
         XElement xml = new XElement(ns + "sitemapindex",
                             from i in lstIndexes
                             select new XElement(ns + "sitemap",
-                                      new XElement(ns + "loc", SiteUrl + "XML/sitemap" + i + ".xml"),
+                                      new XElement(ns + "loc", siteUrl + "XML/sitemap" + i + ".xml"),
                                       new XElement(ns + "lastmod", DateTime.Now.ToString("yyyy-MM-ddThh:mm:sszzz"))     
                             )
                     );

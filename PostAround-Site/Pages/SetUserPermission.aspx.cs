@@ -8,19 +8,15 @@ using System.Configuration;
 using PostAround.Entities;
 using PostAroundService;
 
-public partial class Pages_SetUserPermission : System.Web.UI.Page
+public partial class Pages_SetUserPermission : BasePage
 {
     UserPermission up = new UserPermission();
-    protected string siteUrl;
+   
     
     protected void Page_Load(object sender, EventArgs e)
     {
         
-        siteUrl = ConfigurationManager.AppSettings["SiteUrl"];
-        if (Tools.GetProtocol(HttpContext.Current).Equals("https"))
-        {
-            siteUrl = siteUrl.Replace("http://", "https://");
-        }
+     
         
         try
         {

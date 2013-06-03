@@ -6,13 +6,13 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Configuration;
 
-public partial class Controls_MainHeader : System.Web.UI.UserControl
-{
-    protected string homePage;
+public partial class Controls_MainHeader : BaseControl
+{ 
+
     protected void Page_Load(object sender, EventArgs e)
     {
 
-        homePage = ConfigurationManager.AppSettings["HomePage"];
+       
 
 
     }

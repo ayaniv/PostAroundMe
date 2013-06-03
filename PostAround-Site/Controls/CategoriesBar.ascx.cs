@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using PostAroundService;
 using PostAround.Entities;
 
-public partial class Controls_CategoriesBar : System.Web.UI.UserControl
+public partial class Controls_CategoriesBar : BaseControl
 {
     protected void Page_Load(object sender, EventArgs e)
     {

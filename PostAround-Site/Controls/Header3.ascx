@@ -28,14 +28,14 @@
 
 <div id="TopHeader">
 
-      <div id="MainHeader" class="FixedHeader" style="border-bottom:1px solid #e2ddcf; /*min-width:910px;*/ height:80px; background:#FCFCFC url('<%=homePage%>images/bgtop2.png'); width:100%;">
+      <div id="MainHeader" class="FixedHeader" style="border-bottom:1px solid #e2ddcf; /*min-width:910px;*/ height:80px; background:#FCFCFC url('<%=siteUrl%>images/bgtop2.png'); width:100%;">
         <div style="margin:0 auto; padding:0">
 
-        <div id="LogoHeader" style="width:270px; height:90px; background:url('<%=homePage%>images/bgtop2.png') repeat-x; position:absolute; left:50%; margin-left:-135px;">
+        <div id="LogoHeader" style="width:270px; height:90px; background:url('<%=siteUrl%>images/bgtop2.png') repeat-x; position:absolute; left:50%; margin-left:-135px;">
         
-        <div style="width:270px; text-align:center; height:90px; background:url('<%=homePage%>images/logoBg3.png') repeat-x; float:left;">
+        <div style="width:270px; text-align:center; height:90px; background:url('<%=siteUrl%>images/logoBg3.png') repeat-x; float:left;">
         
-            <div class="LogoClear"><a href="<%=homePage %>"><img src="<%=homePage%>images/logoHead.png" title="PostAround.Me | Local Pinboard"  style="width:246px; height:43px; border:0" /></a></div>
+            <div class="LogoClear"><a href="<%=siteUrl %>"><img src="<%=siteUrl%>images/logoHead.png" title="PostAround.Me | Local Pinboard"  style="width:246px; height:43px; border:0" /></a></div>
             <div class="LogoText">Local Pinboard</div>
         
         
@@ -56,7 +56,7 @@
     
         
         
-        <span style="background:url('<%=homePage%>images/icons.png'); float:right; background-position:-100px -152px; margin-left:7px; width:7px; margin-top:5px; height:4px;"></span>
+        <span style="background:url('<%=siteUrl%>images/icons.png'); float:right; background-position:-100px -152px; margin-left:7px; width:7px; margin-top:5px; height:4px;"></span>
         
         <div id="AboutBox" class="MoreBox" style="width:84px;">
             <ul>
@@ -90,7 +90,7 @@
         <li id="liCategory">
         
         <uc1:CategoriesButton ID="CategoriesButton1" runat="server" />
-        <span style="background:url('<%=homePage%>images/icons.png'); float:right; background-position:-100px -152px; margin-left:7px; width:7px; margin-top:5px; height:4px;"></span>
+        <span style="background:url('<%=siteUrl%>images/icons.png'); float:right; background-position:-100px -152px; margin-left:7px; width:7px; margin-top:5px; height:4px;"></span>
         
         </li>
         
@@ -103,7 +103,7 @@
                 
         </div>
 
-        <span style="background:url('<%=homePage%>images/icons.png'); float:right; background-position:-100px -152px; margin-left:7px; margin-top:5px; width:7px; height:4px;"></span>
+        <span style="background:url('<%=siteUrl%>images/icons.png'); float:right; background-position:-100px -152px; margin-left:7px; margin-top:5px; width:7px; height:4px;"></span>
         
 
         
@@ -162,15 +162,15 @@
         </div>
  
         
-        <div id="topShpitz" style="z-index:100; position:absolute; background:url('<%=homePage%>images/toptrianagle.png'); width:13px; height:8px; margin-top:31px; margin-left:65px;"></div>
+        <div id="topShpitz" style="z-index:100; position:absolute; background:url('<%=siteUrl%>images/toptrianagle.png'); width:13px; height:8px; margin-top:31px; margin-left:65px;"></div>
  
       </div>
 
-      <div id="MapSpacing" style="position:relative; height:80px; background:#fcfbf9 url('<%=homePage%>images/ibg.jpg');"></div>
+      <div id="MapSpacing" style="position:relative; height:80px; background:#fcfbf9 url('<%=siteUrl%>images/ibg.jpg');"></div>
 
-      <div id="MapPas" style="height:190px; width:100%; background:url('<%=homePage%>images/map_pas.png'); position:relative">
-      <div id="MapPasShade" style="position:absolute; z-index:1; width:100%; height:18px; top:0; background:url('<%=homePage%>images/dropdown_shadow.png')"></div>
-      <div id="MapPasText" style="background:url('<%=homePage%>images/bgWhite80.png'); height:90px; width:862px; position:relative; margin:0 auto; top:27px; padding:25px 30px;">
+      <div id="MapPas" style="height:190px; width:100%; background:url('<%=siteUrl%>images/map_pas.png'); position:relative">
+      <div id="MapPasShade" style="position:absolute; z-index:1; width:100%; height:18px; top:0; background:url('<%=siteUrl%>images/dropdown_shadow.png')"></div>
+      <div id="MapPasText" style="background:url('<%=siteUrl%>images/bgWhite80.png'); height:90px; width:862px; position:relative; margin:0 auto; top:27px; padding:25px 30px;">
       <div style="float:left"> 
       <h1>What’s good <span>in the hood !</span></h1>
       </div>
@@ -203,7 +203,7 @@
       </div>
       </div>
         </div>
-      <div style="float:left; width:100%; height:2px; background:url('images/cats_bottom.png'); margin-bottom:11px;"></div>
+      <div style="float:left; width:100%; height:2px; background:url('<%=siteUrl%>images/cats_bottom.png'); margin-bottom:11px;"></div>
       
     </div>
     

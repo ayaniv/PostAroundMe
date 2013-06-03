@@ -53,7 +53,7 @@
                 </div>
 
                 <div class="MobileLogo">
-                    <img src="images/mobile_logo.png" />
+                    <img src="<%=siteUrl %>images/mobile_logo.png" />
                 </div>
 
 
@@ -140,7 +140,7 @@
                 
 
         <div id="NoPostsText" style="display:none;  min-height:500px; text-align:center; color:#505050; position:relative; clear:both; top:0;  width:862px; margin:0 auto; padding:25px 30px;">
-        <img id="TextLinkAddPost" style="cursor:pointer" src="images/yet.png">
+        <img id="TextLinkAddPost" style="cursor:pointer" src="<%=siteUrl %>images/yet.png">
         
         </div>
 
@@ -255,7 +255,7 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
                 <div id="BoxLine" class="Line" color="${catColor}" style="background-color:${catColor}">
                 </div>
                 <div class="TextArea">
-                <div style="bottom:0; position:absolute; width: 11px; height: 5px; background:url('images/icons.png') -149px -22px; "></div>
+                <div style="bottom:0; position:absolute; width: 11px; height: 5px; background:url('<%=siteUrl%>images/icons.png') -149px -22px; "></div>
                     <div class="BoxHead">
                 
                 <div class="FullAddress">
@@ -314,10 +314,10 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
                 </div>
 
                 <div class="MessageName" style="position:relative">
-                    <a href="${link}" target="_blank"><img src="${userImage}" style="border:0; border-radius:50%; float:left; width:50px; height:50px; margin-right:6px" /></a> 
-                    <a href="${link}" target="_blank" style="padding-top:10px;  position:absolute;">${Name}</a>
+                    <a href="${link}" target="_blank"><img src="${userImage}" style="border:0; border-radius:50%; border-bottom-right-radius:2px; float:left; width:50px; height:50px; margin-right:6px" /></a> 
+                    <a href="${link}" target="_blank" style="margin-top:17px;  position:absolute;">${Name}</a>
                     <br />
-                    <span style="padding-top:10px;  position:absolute;">${Date}</span>
+                    <span style="margin-top:17px;  position:absolute;">${Date}</span>
                     <br />
                     
 

@@ -12,11 +12,11 @@ using System.Text;
 using System.Globalization;
 using PostAroundService;
 
-public partial class Pages_ref : System.Web.UI.Page
+public partial class Pages_ref : BasePage
 {
 
     public static string FaceBookAppKey;
-    public static string siteUrl;
+ 
     public static string siteUrlSecured;
     public static string secretCode;
 
@@ -26,12 +26,7 @@ public partial class Pages_ref : System.Web.UI.Page
      
        
         secretCode = Tools.Encrypt(DateTime.Now.ToString(), true).Replace('+', '$');
-        siteUrl = ConfigurationManager.AppSettings["SiteUrl"];
-        if (Tools.GetProtocol(HttpContext.Current).Equals("https"))
-        {
-            siteUrl = siteUrl.Replace("http://", "https://");
-            siteUrlSecured = siteUrl;
-        }
+      
         siteUrlSecured = ConfigurationManager.AppSettings["SiteUrlSecured"];
         FaceBookAppKey = ConfigurationManager.AppSettings["facebookAppKey"];
 

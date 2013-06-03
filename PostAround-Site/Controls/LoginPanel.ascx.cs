@@ -12,20 +12,16 @@ using System.Text;
 using System.Globalization;
 using PostAroundService;
 
-public partial class Controls_LoginPanel : System.Web.UI.UserControl
+public partial class Controls_LoginPanel : BaseControl
 {
     public static string FaceBookAppKey;
-    public static string siteUrl;
+  
     private string MyAccessToken;
     protected void Page_Load(object sender, EventArgs e)
     {
         // Login Scenario
         FaceBookAppKey = ConfigurationManager.AppSettings["facebookAppKey"];
-        siteUrl = ConfigurationManager.AppSettings["SiteUrl"];
-        if (Tools.GetProtocol(HttpContext.Current).Equals("https"))
-        {
-            siteUrl = siteUrl.Replace("http://", "https://");
-        }
+       
 
         int userId = Tools.GetUserIdFromCookie(Context);
         User user = null;

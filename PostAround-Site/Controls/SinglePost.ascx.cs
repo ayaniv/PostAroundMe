@@ -10,9 +10,9 @@ using System.Configuration;
 using System.Web.UI.HtmlControls;
 using System.Text.RegularExpressions;
 
-public partial class Controls_SinglePost : System.Web.UI.UserControl
+public partial class Controls_SinglePost : BaseControl
 {
-    protected string homePage;
+    
     protected DateTime fullDate;
 
     protected string BigBoxLat;
@@ -44,7 +44,7 @@ public partial class Controls_SinglePost : System.Web.UI.UserControl
 
 
 
-            homePage = ConfigurationManager.AppSettings["HomePage"];
+          
             string strMsgId = Request.QueryString["id"];
             
             string mapPathResized = System.Configuration.ConfigurationManager.AppSettings["PhysicalPath"] + @"\UploadedResizedBig";
@@ -60,7 +60,7 @@ public partial class Controls_SinglePost : System.Web.UI.UserControl
                 if (!msg.Mine)
                     ltrlButtons.Text = @"<div class=""slider-frame""><span class=""slider-button""><span class=""PublicIcon PublicIconOn""></span>Public</span><span class=""slider-button-off""><span class=""PrivateIcon""></span>Private</span></div>";
 
-                this.Page.Title = msg.title + " Around " + msg.msgAddress + " ::PostAroundMe";
+                this.Page.Title = msg.title + " Around " + msg.msgAddress + "  - PostAround.Me";
                 facebookID = msg.facebookID;
                 ltrlAddress.Text = msg.msgAddress;
                 directionAddress = GetLanguageDirection(ltrlAddress.Text);
@@ -81,7 +81,7 @@ public partial class Controls_SinglePost : System.Web.UI.UserControl
                 BigBoxLat = msg.latitude;
                 BigBoxLon = msg.longitude;
 
-                pageUrl = homePage + "post/" + msg.msgId;
+                pageUrl = siteUrl + "post/" + msg.msgId;
 
                 mapUrl = "https://maps.google.com/maps?q=" + BigBoxLat + "," + BigBoxLon + "&t=m&z=16";
 
@@ -90,7 +90,7 @@ public partial class Controls_SinglePost : System.Web.UI.UserControl
                     // attach image height
                     System.Drawing.Image objImage = System.Drawing.Image.FromFile(mapPathResized + "\\" + msg.image);
                     msg.ImageHeight = objImage.Height;
-                    ltrlMedia.Text = "<img src=" + homePage + "/UploadedResizedBig/" + msg.image + " style='height:" + msg.ImageHeight + "px;" + " width:610px; float:left; border:0;' />";
+                    ltrlMedia.Text = "<img src=" + siteUrl + "UploadedResizedBig/" + msg.image + " style='height:" + msg.ImageHeight + "px;" + " width:610px; float:left; border:0;' />";
                 }
 
                 rptComments.ItemCreated += new RepeaterItemEventHandler(rptComments_ItemCreated);
@@ -109,7 +109,7 @@ public partial class Controls_SinglePost : System.Web.UI.UserControl
         }
         catch (Exception ex)
         {
-            Response.Redirect(homePage);
+            Response.Redirect(siteUrl);
         }
     }
 

@@ -55,7 +55,7 @@
                 </div>
 
                 <div class="MobileLogo">
-                    <img src="images/mobile_logo.png" />
+                    <img src="<%=siteUrl %>images/mobile_logo.png" />
                 </div>
 
 
@@ -139,7 +139,7 @@
                 
 
         <div id="NoPostsText" style="display:none;  min-height:500px; text-align:center; color:#505050; position:relative; clear:both; top:0;  width:862px; margin:0 auto; padding:25px 30px;">
-        <img id="TextLinkAddPost" style="cursor:pointer" src="images/yet.png">
+        <img id="TextLinkAddPost" style="cursor:pointer" src="<%=siteUrl %>images/yet.png">
         
         </div>
 

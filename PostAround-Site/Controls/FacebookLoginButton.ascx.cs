@@ -6,20 +6,16 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Configuration;
 
-public partial class Controls_FacebookLoginButton : System.Web.UI.UserControl
+public partial class Controls_FacebookLoginButton : BaseControl
 {
     public static string FaceBookAppKey;
-    public static string siteUrl;
+    
     
     protected void Page_Load(object sender, EventArgs e)
     {
 
         FaceBookAppKey = ConfigurationManager.AppSettings["facebookAppKey"];
-        siteUrl = ConfigurationManager.AppSettings["SiteUrl"];
-        if (Tools.GetProtocol(HttpContext.Current).Equals("https"))
-        {
-            siteUrl = siteUrl.Replace("http://", "https://");
-        }
+ 
     }
 
     protected void btnFacebook_Click(object sender, EventArgs e)
