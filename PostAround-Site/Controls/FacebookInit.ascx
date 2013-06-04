@@ -6,7 +6,7 @@
     window.fbAsyncInit = function () {
         FB.init({
             appId: '<%=FaceBookAppKey %>', // App ID
-            channelUrl: '//<%= siteUrl%>/channel.aspx', // Channel File
+            channelUrl: '//<%= siteUrl%>Handlers/channel.ashx', // Channel File
             status: true, // check login status
             cookie: true, // enable cookies to allow the server to access the session
             xfbml: true  // parse XFBML
