@@ -8,7 +8,7 @@
         function createUploader() {
             var uploader = new qq.FileUploader({
                 element: document.getElementById('file-uploader-demo1'),
-                action: 'Handlers/FileUpload.ashx',
+                action: siteUrl + 'Handlers/FileUpload.ashx',
                 debug: true,
                 onComplete: function (id, fileName, responseJSON) { $("#txtImage").val(responseJSON.name); $("#txtImageHeight").val(responseJSON.height); $("#RemoveImage").show(); }
             });

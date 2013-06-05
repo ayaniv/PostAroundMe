@@ -6,7 +6,7 @@ function SetPostButtonState(on) {
         //requestRunning = false;
     } else {
         $("#PostButton").addClass('Submit-Disable');
-        $("#PostButton").html("<img src=" + siteUrl + "'images/loading.gif' style='width:20px; height:20px;' />");
+        $("#PostButton").html("<img src='" + siteUrl + "images/loading.gif' style='width:20px; height:20px;' />");
     }
 }
 
@@ -1277,7 +1277,7 @@ $(function () {
     function SaveLocationInCookie() {
         //call ajax to save cookie
 
-        var url = siteUrl + "/Handlers/SaveLocation.ashx";
+        var url = siteUrl + "Handlers/SaveLocation.ashx";
 
         var myJSON = {
             "lat": myLat,
@@ -2182,7 +2182,7 @@ $(function () {
         var message = $("textarea#message").val();
         var response_message = "Thank you for your comment, see ya!"
 
-        var url = siteUrl + "/Handlers/SetFeedback.ashx";
+        var url = siteUrl + "Handlers/SetFeedback.ashx";
 
         var myJSON = {
 
@@ -3271,7 +3271,7 @@ $(function () {
 
 
 
-        var url = siteUrl + "/Handlers/GetMessages.ashx?currLat=" + myLat + "&currLon=" + myLon + "&uptoMeters=" + uptoMeters + "&timeZone=" + gmtHours + "&fromNumber=" + fromNumber + "&CategoryId=" + arrayCurrCategoriesID + "&SortBy=" + sortBy + "&IsMine=" + isMine + "&TakeNum=" + maxMessagesPerScreen;
+        var url = siteUrl + "Handlers/GetMessages.ashx?currLat=" + myLat + "&currLon=" + myLon + "&uptoMeters=" + uptoMeters + "&timeZone=" + gmtHours + "&fromNumber=" + fromNumber + "&CategoryId=" + arrayCurrCategoriesID + "&SortBy=" + sortBy + "&IsMine=" + isMine + "&TakeNum=" + maxMessagesPerScreen;
 
         $.ajax({
             url: url,
@@ -3388,7 +3388,7 @@ $(function () {
         var toFacebookID = $(box).find("#FacebookID").html();
         var toUserID = $(box).find("#UserID").html(); 
 
-        var url = siteUrl + "/Handlers/InsertComment.ashx";
+        var url = siteUrl + "Handlers/InsertComment.ashx";
 
         var myJSON = {
             "messageID": msgId,
@@ -3540,7 +3540,7 @@ $(function () {
         var box = $(this).parents(".Box"); // div 'Bottom'
         var msgId = box.attr("box-id");
 
-        var url = siteUrl + "/Handlers/GetMessageByID.ashx";
+        var url = siteUrl + "Handlers/GetMessageByID.ashx";
 
         var myJSON = {
             "msgId": msgId

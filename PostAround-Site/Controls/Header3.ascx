@@ -194,8 +194,8 @@
       
     <div id="CategoriesWrapper">
       <div id="CategoriesBar" style="display:none">
-      <div style="float:left; width:100%; height:1px; background:url('images/cats_top.png');"></div>
-      <div style="float:left; width:100%; padding-bottom:6px; background:url('images/cats_bg.png'); ">
+      <div style="float:left; width:100%; height:1px; background:url('<%=siteUrl%>images/cats_top.png');"></div>
+      <div style="float:left; width:100%; padding-bottom:6px; background:url('<%=siteUrl%>images/cats_bg.png'); ">
 <!-- Categories -->
 
 <uc1:CategoriesBar ID="CategoriesBar1" runat="server" />
