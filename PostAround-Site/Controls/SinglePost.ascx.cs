@@ -33,6 +33,10 @@ public partial class Controls_SinglePost : BaseControl
   
 
     public string PageTitle { get; set; }
+    protected string myLat;
+    protected string myLon;
+
+    
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -41,10 +45,9 @@ public partial class Controls_SinglePost : BaseControl
         
         try
         {
+            GetDataFromCookie();
 
 
-
-          
             string strMsgId = Request.QueryString["id"];
             
             string mapPathResized = System.Configuration.ConfigurationManager.AppSettings["PhysicalPath"] + @"\UploadedResizedBig";
@@ -83,7 +86,13 @@ public partial class Controls_SinglePost : BaseControl
 
                 pageUrl = siteUrl + "post/" + msg.msgId;
 
-                mapUrl = "https://maps.google.com/maps?daddr=" + BigBoxLat + "," + BigBoxLon + "&t=m&z=16";
+                mapUrl = "https://maps.google.com/maps?daddr=" + BigBoxLat + "," + BigBoxLon; // +"&t=m&z=16";
+                
+                if (!string.IsNullOrWhiteSpace(myLat) && !string.IsNullOrWhiteSpace(myLon))
+                {
+                    mapUrl = mapUrl + "&saddr=" + myLat + "," + myLon;
+                }
+                
 
                 if (!string.IsNullOrWhiteSpace(msg.image))
                 {
@@ -114,7 +123,20 @@ public partial class Controls_SinglePost : BaseControl
     }
 
 
-     
+    private void GetDataFromCookie()
+    {
+        HttpCookie cookie = Request.Cookies["UserInfo"];
+
+        if (cookie != null)
+        {
+            if (!string.IsNullOrEmpty(cookie["lat"]))
+                myLat = cookie["lat"];
+
+            if (!string.IsNullOrEmpty(cookie["lng"]))
+                myLon = cookie["lng"];
+
+        }
+    }
 
     private PostAround.Entities.MyMessage GetMessageByID(int msgId)
     {

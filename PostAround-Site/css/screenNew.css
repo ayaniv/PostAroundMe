@@ -248,10 +248,9 @@ h1 span
     z-index:1;
 }
 
-
-.addthis_toolbox {
+.addthis_toolbox_page {
     position: absolute;
-    left:-60px;
+    left:-60px !important;
 
 }
 

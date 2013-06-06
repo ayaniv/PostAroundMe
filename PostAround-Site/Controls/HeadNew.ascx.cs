@@ -15,8 +15,7 @@ using System.Text.RegularExpressions;
 public partial class Controls_Head : BaseControl
 {
     protected string addressFromQueryString;
-    protected string lat = "";
-    protected string lng = "";
+    
     protected string address = "";
     protected string location = "";
     protected string dontShowMeAgainWelcome = "";
@@ -27,10 +26,16 @@ public partial class Controls_Head : BaseControl
     protected string sendFacebookNotifications;
     protected string latitudeFromQueryString;
     protected string longitudeFromQueryString;
+    protected string myLat;
+    protected string myLon;
 
     protected void Page_Load(object sender, EventArgs e)
     {
         addressFromQueryString = Request.QueryString["address"];
+        if (!string.IsNullOrWhiteSpace(addressFromQueryString))
+        {
+            GetDataFromCookie();
+        }
         string latlon = Request.QueryString["latlon"];
         if (!string.IsNullOrWhiteSpace(latlon))
         {
@@ -53,13 +58,26 @@ public partial class Controls_Head : BaseControl
         if (!currUrl.Contains("www."))
             siteUrl = siteUrl.Replace("www.", "");
         
-        SetCookieData();
+        
         accessToken = ConfigurationManager.AppSettings["facebookAppAccessToken"];
         sendFacebookNotifications = ConfigurationManager.AppSettings["SendFacebookNotifications"];
         //SetQueryStringData();
     }
 
-    
+    private void GetDataFromCookie()
+    {
+        HttpCookie cookie = Request.Cookies["UserInfo"];
+
+        if (cookie != null)
+        {
+            if (!string.IsNullOrEmpty(cookie["lat"]))
+                myLat = cookie["lat"];
+
+            if (!string.IsNullOrEmpty(cookie["lng"]))
+                myLon = cookie["lng"];
+
+        }
+    }
 
     private bool IsMobile()
     {
@@ -71,34 +89,16 @@ public partial class Controls_Head : BaseControl
         return false;
     }
 
-    private void SetCookieData()
-    {
-        HttpCookie cookie = Request.Cookies["UserInfo"];
-
-        if (cookie != null)
-        {
-            if (!string.IsNullOrEmpty(cookie["lat"]))
-                lat = cookie["lat"];
-            
-            if (!string.IsNullOrEmpty(cookie["lng"]))
-                lng = cookie["lng"];
-
-            if (!string.IsNullOrEmpty(cookie["address"]))
-                address = HttpUtility.HtmlEncode(Tools.DecodeFrom64(cookie["address"].Trim('\0')));
-
-            if (!string.IsNullOrEmpty(cookie["dontShowMeAgainWelcome"]))
-                dontShowMeAgainWelcome = cookie["dontShowMeAgainWelcome"];
-        }
-    }
+   
 
     private void SetQueryStringData()
     {
         // in case of location query string override the cookie
         // in case of category query string just add this
         if (!string.IsNullOrWhiteSpace(Request.QueryString["lat"]))
-            lat = Request.QueryString["lat"];
+            myLat = Request.QueryString["lat"];
         if (!string.IsNullOrWhiteSpace(Request.QueryString["lon"]))
-            lng = Request.QueryString["lon"];
+            myLon = Request.QueryString["lon"];
         //if (!string.IsNullOrEmpty(Request.QueryString["address"]))
         //    location = HttpUtility.HtmlEncode(Request.QueryString["address"].Trim('\0'));
 

@@ -200,7 +200,7 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
                                     <div id="HideComment" class="SmallXButton"></div>
                                     {{/if}}
 
-                                    <div id="commentUserName">
+                                    <div id="commentUserName" style="float:left">
                                         <a href="${commentUserLink}" target="_blank">${name}</a>
                                         <span id="CommentText" class="CommentText" style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</span>
                                     </div>
@@ -231,7 +231,7 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
                                     <div id="HideComment" class="SmallXButton"></div>
                                     {{/if}}
 
-                                    <div id="commentUserName">
+                                    <div id="commentUserName" style="float:left">
                                         <a href="${commentUserLink}" target="_blank">${name}</a>
                                         <span id="CommentText" class="CommentText" style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</span>
                                     </div>
@@ -397,7 +397,7 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
                                     <div id="HideComment" class="SmallXButton"></div>
                                     {{/if}}
 
-                                    <div id="commentUserName">
+                                    <div id="commentUserName" style="float:left">
                                         <a href="${commentUserLink}" target="_blank">${name}</a>
                                         <span id="CommentText" class="CommentText" style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</span>
                                     </div>

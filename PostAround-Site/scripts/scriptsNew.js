@@ -124,6 +124,7 @@ $(function () {
     CheckBrowserSupport();
     DisableAutoDiscoverForUnsupportedBrowsers();
 
+
     //set init values
     mouse_is_inside_popup = false;
     mouse_is_inside = false;
@@ -1383,7 +1384,9 @@ $(function () {
     function ChangeToSmallHeader() {
 
         $.when(ChangeToSmallHeaderStep1()).then(ChangeToSmallHeaderStep2());
-        SetLocationInAddressBar(myLat, myLon);
+        if (!isDirectLink) {
+            SetLocationInAddressBar(myLat, myLon);
+        }
     }
 
     function ChangeToSmallHeaderStep2() {
@@ -3621,47 +3624,49 @@ $(function () {
     
 
     function ArrangeBoxesInit() {
+        if (!$('#MessagesContainer').hasClass("BigBoxContainer")) {
+            screenWidth = $('html, body').width() - 40;
+            if (screenWidth < 1025) {
+                $('#LeftWing').css("margin-left", "15px");
+                $('#moreButtons').css("margin-left", "15px");
+                $('#AddMessageWindow').css("margin-left", "16px");
+                $('#CategoriesWrapper').css("display", "none");
 
-        screenWidth = $('html, body').width() - 40;
-        if (screenWidth < 1025) {
-            $('#LeftWing').css("margin-left", "15px");
-            $('#moreButtons').css("margin-left", "15px");
-            $('#AddMessageWindow').css("margin-left", "16px");
-            $('#CategoriesWrapper').css("display", "none");
+                //iphone   
+                //isMobile = true;
+                //ApplyMobilePhoneRules();
 
-            //iphone   
-            //isMobile = true;
-            //ApplyMobilePhoneRules();
-            
-          
 
-            //$('#MessagesContainer').css("margin-left", "85px");
-        } else {
-            $('#CategoriesWrapper').css("display", "block");
-            if ((screenWidth == 1383) || (screenWidth == 1400)) {
-                $('#LeftWing').css("margin-left", "10px");
-                $('#moreButtons').css("margin-left", "10px");
-                $('#AddMessageWindow').css("margin-left", "11px");
 
-                //$('#MessagesContainer').css("margin-left", "7px");
-                screenWidth = 1420;
+                //$('#MessagesContainer').css("margin-left", "85px");
             } else {
-                $('#LeftWing').css("margin-left", "39px");
-                $('#moreButtons').css("margin-left", "39px");
-                $('#AddMessageWindow').css("margin-left", "40px");
+                $('#CategoriesWrapper').css("display", "block");
+                if ((screenWidth == 1383) || (screenWidth == 1400)) {
+                    $('#LeftWing').css("margin-left", "10px");
+                    $('#moreButtons').css("margin-left", "10px");
+                    $('#AddMessageWindow').css("margin-left", "11px");
+
+                    //$('#MessagesContainer').css("margin-left", "7px");
+                    screenWidth = 1420;
+                } else {
+                    $('#LeftWing').css("margin-left", "39px");
+                    $('#moreButtons').css("margin-left", "39px");
+                    $('#AddMessageWindow').css("margin-left", "40px");
+                }
             }
-        }
 
-        msgsPerRow = Math.floor(screenWidth / POST_WIDTH) < 1 ? 1 : Math.floor(screenWidth / POST_WIDTH);
-        var rowWidth = msgsPerRow * POST_WIDTH - 11 + "px";
-        $('#MessagesContainer').css("width", rowWidth);
-        $('#catsBar').css("width", rowWidth);
+            msgsPerRow = Math.floor(screenWidth / POST_WIDTH) < 1 ? 1 : Math.floor(screenWidth / POST_WIDTH);
+            var rowWidth = msgsPerRow * POST_WIDTH - 11 + "px";
 
-        $('#MessagesContainer').css("margin-left", "auto");
-        $('#MessagesContainer').css("margin-right", "auto");
-        boxesHeightsInRow = new Array(msgsPerRow);
-        for (i = 0; i < boxesHeightsInRow.length; i++) {
-            boxesHeightsInRow[i] = 0;
+            $('#MessagesContainer').css("width", rowWidth);
+            $('#catsBar').css("width", rowWidth);
+
+            $('#MessagesContainer').css("margin-left", "auto");
+            $('#MessagesContainer').css("margin-right", "auto");
+            boxesHeightsInRow = new Array(msgsPerRow);
+            for (i = 0; i < boxesHeightsInRow.length; i++) {
+                boxesHeightsInRow[i] = 0;
+            }
         }
     }
 

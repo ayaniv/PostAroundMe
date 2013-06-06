@@ -9,13 +9,14 @@
 
 
 
-<div id="MessagesContainer" style="position:relative;">
+<div id="MessagesContainer" class="BigBoxContainer" style="position:relative;">
                 <!-- AddThis Button BEGIN -->
-<div class="addthis_toolbox addthis_toolbox addthis_floating_style addthis_32x32_style">
+<div class="addthis_toolbox_page addthis_toolbox addthis_floating_style addthis_32x32_style">
 <a class="addthis_button_facebook"></a>
 <a class="addthis_button_twitter"></a>
-<a class="addthis_button_pinterest_share"></a>
 <a class="addthis_button_google_plusone_share"></a>
+<a class="addthis_button_pinterest_share"></a>
+<a class="addthis_button_gmail"></a>
 <a class="addthis_button_email"></a>
 <a class="addthis_button_compact"></a>
 </div>
@@ -48,7 +49,7 @@
 
 
 <div class="Line" style="background-color:<%=bigBoxLineColor %> ; width:100%; "></div>
-<div id="BigBoxWrapper" class="Box" box-id="<%=msgId %>" style="width:610px; padding:15px; background-color:#FFF; float:left;">
+<div id="BigBoxWrapper" class="Box" box-id="<%=msgId %>" style="width:610px; min-height:800px; padding:15px; background-color:#FFF; float:left;">
     <div id="FacebookID" style="display:none"><%=facebookID %></div>         
     <div id="BigBoxLeft" style="width:100%; float:left;">
 

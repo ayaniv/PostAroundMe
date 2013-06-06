@@ -16,8 +16,8 @@
             var queryStringLat = '<%= latitudeFromQueryString %>';
             var queryStringLon = '<%= longitudeFromQueryString %>';
 
-            var myLat = '<%=lat %>';
-            var myLon = '<%=lng %>';
+            var myLat = '<%=myLat %>';
+            var myLon = '<%=myLon %>';
             //var location = unescape("<%=location %>");
             var address = unescape("<%=address %>");
             var dontShowMeAgainWelcome = "<%=dontShowMeAgainWelcome %>";
