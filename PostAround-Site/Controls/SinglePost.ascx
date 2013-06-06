@@ -8,11 +8,22 @@
 <%@ Import Namespace="PostAround.Entities" %> 
 
 
-    
+
+<div id="MessagesContainer" style="position:relative;">
+                <!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_toolbox addthis_floating_style addthis_32x32_style">
+<a class="addthis_button_facebook"></a>
+<a class="addthis_button_twitter"></a>
+<a class="addthis_button_pinterest_share"></a>
+<a class="addthis_button_google_plusone_share"></a>
+<a class="addthis_button_email"></a>
+<a class="addthis_button_compact"></a>
+</div>
 
 
 
-<div id="MessagesContainer">
+<!-- AddThis Button END -->
+
 <div id="BigBoxContainer" box-lat="<%=BigBoxLat %>" box-lon="<%=BigBoxLon %>" box-fuid="">
 
 
@@ -32,19 +43,27 @@
 
     </script>
 
+    
+
+
+
 <div class="Line" style="background-color:<%=bigBoxLineColor %> ; width:100%; "></div>
 <div id="BigBoxWrapper" class="Box" box-id="<%=msgId %>" style="width:610px; padding:15px; background-color:#FFF; float:left;">
     <div id="FacebookID" style="display:none"><%=facebookID %></div>         
     <div id="BigBoxLeft" style="width:100%; float:left;">
 
         <div style="margin-bottom:10px; float:left; width:100%">
-        <div style="clear:both; font-size:14px; color:#3b3b3d; float:left;"><asp:Literal ID="ltrlCategory" runat="server"></asp:Literal></div>
+      
 
-         <div id="BigBoxAddress" style="font-size:12px; float:right">
+
+         <a style="color:#808080; float:right; font-size:14px;" target="_blank" href="<%=mapUrl %>">Get Directions</a>
+           
+         <div id="BigBoxAddress" style="font-size:12px; float:left">
         <div style="float:left;">
         
-        <img src="<%=siteUrl %>images/markers/image.png" style="width:12px; height:15px; margin:0 6px 0 6px;" /></div>
-        <div style="margin-left:24px">
+        <img src="<%=siteUrl %>images/markers/image.png" style="width:12px; height:15px;" /></div>
+        <div style="margin-left:18px; font-size:14px;">
+             <span style="font-family:Tahoma; color:#6AA1BB">Posted around</span> 
             <a href="<%=siteUrl %>ll/<%=BigBoxLat %>,<%=BigBoxLon %>" style="font-weight:bold" title="See more posts around here"><asp:Literal runat="server" ID="ltrlAddress"></asp:Literal></a>
 
         </div>
@@ -57,12 +76,12 @@
         
         
         </div>
-          <a style="color:#808080; margin-top:4px; float:right; text-decoration:none; font-size:12px;" target="_blank" href="<%=mapUrl %>">Open in Google Maps</a>
+         
         
 
         
-                
-       <div style="float:left; width:100%; direction:<%=directionTitle %>; text-transform:uppercase; color:#3b3b3d; font-size:24px; margin-top:10px;  "><asp:Literal ID="ltrlTitle" runat="server"></asp:Literal></div>
+                <div style="clear:both; margin-top:10px;font-size:14px; color:#3b3b3d; float:left;"><asp:Literal ID="ltrlCategory" runat="server"></asp:Literal></div>  
+       <div style="float:right; text-transform:uppercase; color:#3b3b3d; font-size:24px; margin-top:10px;  "><asp:Literal ID="ltrlTitle" runat="server"></asp:Literal></div>
         
                 <div id="BigBoxMedia" class="BigBoxMedia" style="clear:both; margin-bottom:10px; width:610px; text-align:center">
         <asp:Literal ID="ltrlMedia" runat="server"></asp:Literal>
@@ -76,13 +95,13 @@
 
 
                 <div id="BigBoxHeader" style="width:100%; clear:both;height:50px; ">
-            <div id="BigBoxUserImage" runat="server" style="background-color:#EAEDEE; width:50px; height:50px; float:left;">
+            <div id="BigBoxUserImage" runat="server" style="width:50px; height:50px; float:left;">
             <asp:Literal runat="server" ID="ltrlUserImage"></asp:Literal>
             </div>
-            <div id="BigBoxUserName" style="padding-top:3px; height:40px; float:left; padding-left:10px">
+            <div id="BigBoxUserName" style="padding-top:15px; float:left; padding-left:10px">
                 <div style="clear:both; font-size:14px; color:#3b3b3d">Posted By&nbsp;<span style="font-weight:bold"><asp:Literal ID="ltrlName" runat="server"></asp:Literal></span></div>
                 <div id="BigBoxDate" style="clear:both; font-size:12px; color:#888888"><asp:Literal ID="ltrlDate" runat="server"></asp:Literal></div>
-                <div style="float:left; font-size:12px; color:#888888"><asp:Literal ID="ltrlAddressUser" runat="server"></asp:Literal>
+                <div style="float:left; display:none; font-size:12px; color:#888888"><asp:Literal ID="ltrlAddressUser" runat="server"></asp:Literal>
                   
 
                 </div>
@@ -91,32 +110,7 @@
         
         </div>
 
-        <div id="BigBoxSocial" style="float:left; margin-top:10px; margin-bottom:10px; width:100%; height:20px">
-
-        <div id="socialLinksPopUp" style="float:left;  width:160px;">
-        
-
-
-
-     
-
-
-           <div id="GplusPopUp" style="float:right; width:60px;  height:20px;">
-           <div id="GplusContainer">
-                <uc1:GooglePlus ID="GooglePlus" runat="server" /> 
-                </div>
-            </div>
-
-
-                       <div id="FBPopUp" style="float:right; width:100px; height:20px;">
-                <uc1:FacebookLike ID="FacebookLike" runat="server" />
-            </div>
-
-
-
-        </div>
-        </div>
-        
+      
 
 
 
@@ -152,11 +146,11 @@
 
                                     <div id="commentUserName">
                                         <asp:Literal ID="cmtUserName" runat="server"></asp:Literal>
-                                        
-                                    </div>
-                                    <div id="CommentText" class="CommentText" runat="server" >
+                                                                    <span id="CommentText" class="CommentText" runat="server" >
                                     <asp:Literal ID="cmtBody" runat="server"></asp:Literal>
+                                    </span>
                                     </div>
+        
                                     <div class="CommentDate">
                                     <asp:Literal ID="cmtDate" runat="server"></asp:Literal>
                                     </div>
@@ -183,7 +177,7 @@
                     
                     <asp:Panel runat="server" ID="AddCommentPanel">
                         <div class="AddComment" style="margin-top:0">
-                            <textarea style="width:100%"  maxlength="500" id="Comment" cols"1" rows="1">Post a comment...</textarea>
+                            <textarea style="width:100%" placeholder="Post a comment..."  maxlength="500" id="Comment" cols"1" rows="1">Post a comment...</textarea>
 
                             <div class="Buttons">
                             <div style="position:absolute; left:0; float:left;">
@@ -246,8 +240,9 @@
 
                                     <div id="commentUserName">
                                         <a href="${commentUserLink}" target="_blank">${name}</a>
+                                        <div id="CommentText" class="CommentText" style="direction:${GetLanguageDirection(body)}" >${body}</div>
                                     </div>
-                                    <div id="CommentText" class="CommentText" style="direction:${GetLanguageDirection(body)}" >${body}</div>
+                                    
                                     <div class="CommentDate">${strDate} at ${strTime}</div>
 
                                 </div>

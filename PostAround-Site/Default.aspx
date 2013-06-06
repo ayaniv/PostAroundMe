@@ -202,8 +202,9 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
 
                                     <div id="commentUserName">
                                         <a href="${commentUserLink}" target="_blank">${name}</a>
+                                        <span id="CommentText" class="CommentText" style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</span>
                                     </div>
-                                    <div id="CommentText" class="CommentText" style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</div>
+                                    
                                     <div class="CommentDate">${strDate} at ${strTime}</div>
                                     <div class="CommentDate PosterOnly" style="display:none;">· Poster Only&nbsp;·&nbsp;<span class="Locker"></span></div>
                                 </div>
@@ -232,8 +233,9 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
 
                                     <div id="commentUserName">
                                         <a href="${commentUserLink}" target="_blank">${name}</a>
+                                        <span id="CommentText" class="CommentText" style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</span>
                                     </div>
-                                    <div id="CommentText" class="CommentText" style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</div>
+                                    
                                     <div class="CommentDate">${strDate} at ${strTime}</div>
                                     <div class="CommentDate PosterOnly" style="display:none;">· Poster Only&nbsp;·&nbsp;<span class="Locker"></span></div>
                                 </div>
@@ -397,8 +399,9 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
 
                                     <div id="commentUserName">
                                         <a href="${commentUserLink}" target="_blank">${name}</a>
+                                        <span id="CommentText" class="CommentText" style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</span>
                                     </div>
-                                    <div id="CommentText" class="CommentText" style="direction:${GetLanguageDirection(body)}" ><span>{{html FormatText(body)}}</span></div>
+                                    
                                     <div class="CommentDate">${strDate} at ${strTime}</div>
                                     {{if isPrivate}}
                                     <div class="CommentDate PosterOnly">· Poster Only&nbsp;·&nbsp;<span class="Locker"></span></div>

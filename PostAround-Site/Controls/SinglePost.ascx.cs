@@ -65,9 +65,9 @@ public partial class Controls_SinglePost : BaseControl
                 ltrlAddress.Text = msg.msgAddress;
                 directionAddress = GetLanguageDirection(ltrlAddress.Text);
                 BigBoxAddress = Tools.EncodeTo64(ltrlAddress.Text);
-                ltrlUserImage.Text = "<img src=" + msg.userImage + " style='height:50px; width:50px; border:0;' />";
+                ltrlUserImage.Text = "<img src=" + msg.userImage + " style='height:50px; width:50px; border-radius:50px; border-bottom-right-radius:2px; border:0;' />";
                 ltrlName.Text = msg.Name;
-                ltrlDate.Text = "On " + msg.Date + " at " + msg.Time;
+                ltrlDate.Text = "On " + msg.Date; //+ " at " + msg.Time;
                 ltrlAddressUser.Text = "Around " + ltrlAddress.Text;
                 //fullDate = msg.FullDate;
                 ltrlCategory.Text = msg.category;
@@ -83,7 +83,7 @@ public partial class Controls_SinglePost : BaseControl
 
                 pageUrl = siteUrl + "post/" + msg.msgId;
 
-                mapUrl = "https://maps.google.com/maps?q=" + BigBoxLat + "," + BigBoxLon + "&t=m&z=16";
+                mapUrl = "https://maps.google.com/maps?daddr=" + BigBoxLat + "," + BigBoxLon + "&t=m&z=16";
 
                 if (!string.IsNullOrWhiteSpace(msg.image))
                 {

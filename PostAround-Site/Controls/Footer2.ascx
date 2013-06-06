@@ -26,7 +26,7 @@
                 
     <a href="<%=siteUrl %>" style="color:#dfdfdf; font-style:normal; font-size:12px; font-weight:bold;">Post Around Me</a> is fun and easy way to share with your neighbors. <br />
     Know a good restarurant around? Need a ladder to borrow? Want to sell your sofa? Looking for a babysitter? Anything you want to share with your neighborhood,
-    just post it around in public and find out1 what's good in your hood !
+    just post it around in public and find out what's good in your hood !
                     
 
             </div>

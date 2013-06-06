@@ -3087,7 +3087,7 @@ $(function () {
 
         myLat = currLat;
         myLon = currLon;
-        var url = "https://maps.google.com/maps?q=" + myLat + "," + myLon;
+        var url = "https://maps.google.com/maps?daddr=" + myLat + "," + myLon;
         window.open(url);
 
     });
