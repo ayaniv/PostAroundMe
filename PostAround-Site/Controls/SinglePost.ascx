@@ -18,7 +18,6 @@
 <a class="addthis_button_pinterest_share"></a>
 <a class="addthis_button_gmail"></a>
 <a class="addthis_button_email"></a>
-<a class="addthis_button_compact"></a>
 </div>
 
 
@@ -155,7 +154,7 @@
                                     <div class="CommentDate">
                                     <asp:Literal ID="cmtDate" runat="server"></asp:Literal>
                                     </div>
-                                    <%# ((Comment)Container.DataItem).isPrivate ? @"<div class=""CommentDate PosterOnly"">· Poster Only&nbsp;·&nbsp;<span class=""Locker""></span></div>" : ""  %>
+                                    <%# ((Comment)Container.DataItem).isPrivate ? @"<div class=""PosterOnly"">· Poster Only&nbsp;·&nbsp;<span class=""Locker""></span></div>" : ""  %>
                                     
                                     
                                     
@@ -233,15 +232,15 @@
                                     <img src="${avatarImageUrl}" />
                                 </div>
                                 
-                                <div class="CommentWrapper" style="width:558px">
+                                <div class="CommentWrapper">
                                 
                                     {{if Mine}}
-                                    <div id="HideComment"></div>
+                                    <div id="HideComment" class="SmallXButton"></div>
                                     {{/if}}
 
                                     <div id="commentUserName">
                                         <a href="${commentUserLink}" target="_blank">${name}</a>
-                                        <div id="CommentText" class="CommentText" style="direction:${GetLanguageDirection(body)}" >${body}</div>
+                                        <span id="CommentText" class="CommentText" dir="${GetLanguageDirection(body)}" style="direction:${GetLanguageDirection(body)}" >${body}</span>
                                     </div>
                                     
                                     <div class="CommentDate">${strDate} at ${strTime}</div>
@@ -258,6 +257,27 @@
 
  
             
-
+<script type="text/javascript">
  
-    
+      function GetLanguageDirection(str) {
+        
+        //english
+        var direction = "ltr"
+
+        str = str.replace(/[0-9]/g, '');
+        str = str.trim();
+
+        //hebrew
+        if ((str != "") &&  (str.charCodeAt(0) > 0x590) && (str.charCodeAt(0) < 0x5FF))
+            direction = "rtl";
+
+        //arabic
+        else if ((str != "") && (str.charCodeAt(0) > 0x600) && (str.charCodeAt(0) < 0x6FF))
+            direction = "rtl";
+
+        return direction;
+
+    }
+
+
+</script>  

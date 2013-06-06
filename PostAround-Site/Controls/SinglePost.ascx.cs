@@ -178,11 +178,12 @@ public partial class Controls_SinglePost : BaseControl
 
             Comment item = (Comment)e.Item.DataItem;
             ((Literal)e.Item.FindControl("cmtUserImage")).Text = "<img src='" + item.avatarImageUrl +"' />";
-            ((Literal)e.Item.FindControl("cmtUserName")).Text = "<a href='" + item.commentUserLink + "' target='_blank' style='font-size:13px'>" + item.name + "</a>";
+            ((Literal)e.Item.FindControl("cmtUserName")).Text = "<a href='" + item.commentUserLink + "' target='_blank' >" + item.name + "</a>";
             ((Literal)e.Item.FindControl("cmtBody")).Text = FormatText(item.body);
             ((Literal)e.Item.FindControl("cmtDate")).Text = item.strDate + " at " + item.strTime;
 
             ((HtmlGenericControl)e.Item.FindControl("CommentText")).Style.Add("direction", GetLanguageDirection(item.body));
+            ((HtmlGenericControl)e.Item.FindControl("CommentText")).Attributes.Add("dir", GetLanguageDirection(item.body));
             string strComment = @"<div id=""HideComment"" class=""SmallXButton""></div>";
             if (item.Mine == true)
             {

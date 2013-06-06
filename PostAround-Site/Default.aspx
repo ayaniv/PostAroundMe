@@ -189,7 +189,7 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
     
     <script id="TemplateCommentBig" type="text/x-jQuery-tmpl">
                             <div id="SingleCommentView" comment-id="${ID}">
-                            <div class="SingleComment" style="width:503px" >
+                            <div class="SingleComment" >
                                 <div id="commentImage" class="CommentImage">
                                     <img src="${avatarImageUrl}" />
                                 </div>
@@ -202,11 +202,11 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
 
                                     <div id="commentUserName" style="float:left">
                                         <a href="${commentUserLink}" target="_blank">${name}</a>
-                                        <span id="CommentText" class="CommentText" style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</span>
+                                        <span id="CommentText" class="CommentText"  dir="${GetLanguageDirection(body)}"  style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</span>
                                     </div>
                                     
                                     <div class="CommentDate">${strDate} at ${strTime}</div>
-                                    <div class="CommentDate PosterOnly" style="display:none;">· Poster Only&nbsp;·&nbsp;<span class="Locker"></span></div>
+                                    <div class="PosterOnly" style="display:none;">· Poster Only&nbsp;·&nbsp;<span class="Locker"></span></div>
                                 </div>
 
                             </div>
@@ -233,11 +233,11 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
 
                                     <div id="commentUserName" style="float:left">
                                         <a href="${commentUserLink}" target="_blank">${name}</a>
-                                        <span id="CommentText" class="CommentText" style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</span>
+                                        <span id="CommentText" class="CommentText"  dir="${GetLanguageDirection(body)}"  style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</span>
                                     </div>
                                     
                                     <div class="CommentDate">${strDate} at ${strTime}</div>
-                                    <div class="CommentDate PosterOnly" style="display:none;">· Poster Only&nbsp;·&nbsp;<span class="Locker"></span></div>
+                                    <div class="PosterOnly" style="display:none;">· Poster Only&nbsp;·&nbsp;<span class="Locker"></span></div>
                                 </div>
 
                             </div>
@@ -399,12 +399,12 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
 
                                     <div id="commentUserName" style="float:left">
                                         <a href="${commentUserLink}" target="_blank">${name}</a>
-                                        <span id="CommentText" class="CommentText" style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</span>
+                                        <span id="CommentText" class="CommentText" dir="${GetLanguageDirection(body)}" style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</span>
                                     </div>
                                     
                                     <div class="CommentDate">${strDate} at ${strTime}</div>
                                     {{if isPrivate}}
-                                    <div class="CommentDate PosterOnly">· Poster Only&nbsp;·&nbsp;<span class="Locker"></span></div>
+                                    <div class="PosterOnly">· Poster Only&nbsp;·&nbsp;<span class="Locker"></span></div>
                                     {{/if}}
                                     
 
