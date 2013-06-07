@@ -1,0 +1,50 @@
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="MorePosts.ascx.cs" Inherits="Controls_MorePosts" %>
+
+<div class="MorePosts">
+    <div class="MorePostsTitle">
+        <span class="Line1">Latest posts around this location</span>
+        <div class="Line2"><span class="SmallLocationIcon"></span><asp:HyperLink runat="server" ID="linkAddress"></asp:HyperLink></div>
+
+    </div>
+    <div class="MorePostsWrapper">
+        <asp:Repeater ID="rptPosts" runat="server">
+            <ItemTemplate>
+        <div class="PostItem" runat="server" id="PostItem">
+            <div runat="server" id="divLine" class="PostItemLine"></div>
+            <div class="PostItemContent">
+                <asp:Image runat="server" ID="imgUserAvatar" />
+                <div class="NameLine">
+                    <span class="UserName"><asp:Literal ID="ltrlUserName" runat="server"></asp:Literal></span>
+                    <div style="float: right;">
+                        <span class="SmallLocationIcon"></span>
+                        <span class="DistanceAround"><asp:Literal runat="server" ID="ltrlDistance"></asp:Literal></span>
+                    </div>
+                </div>
+                <asp:HyperLink CssClass="BoxHeader" Style="width: auto; text-decoration:none; overflow:hidden" runat="server" ID="linkTitle"></asp:HyperLink>
+            </div>
+        </div>
+                </ItemTemplate>
+            </asp:Repeater>
+    </div>
+
+     <div class="MorePostsTitle" style="background-color:#f7f7f7; height:12px; margin-top:7px; padding-top:4px; padding-bottom:9px; ">
+         <asp:HyperLink runat="server" Text="More posts around here >>" ID="linkMorePosts"></asp:HyperLink>
+       
+        
+
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('.PostItem').click(function () {
+            
+            var postId = $(this).attr("postId");
+            url = siteUrl + "post/" + postId;
+            window.location.href = url;
+        });
+    });
+
+</script>
+

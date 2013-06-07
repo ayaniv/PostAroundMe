@@ -15,14 +15,11 @@ public partial class Controls_FacebookLoginButton : BaseControl
     {
 
         FaceBookAppKey = ConfigurationManager.AppSettings["facebookAppKey"];
- 
-    }
-
-    protected void btnFacebook_Click(object sender, EventArgs e)
-    {
 
         string url = "https://www.facebook.com/dialog/oauth?client_id={0}&redirect_uri={1}&scope=email,user_birthday";
         url = String.Format(url, FaceBookAppKey, HttpUtility.UrlEncode(siteUrl));
-        Response.Redirect(url);
+        linkFacebookLogin.NavigateUrl = url;
+ 
     }
+
 }

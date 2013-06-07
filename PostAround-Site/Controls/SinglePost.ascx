@@ -2,8 +2,6 @@
 
 <%@ Register src="AddThis.ascx" tagname="AddThis" tagprefix="uc1" %>
 
-<%@ Register src="FacebookLike.ascx" tagname="FacebookLike" tagprefix="uc1" %>
-<%@ Register src="GooglePlus.ascx" tagname="GooglePlus" tagprefix="uc1" %>
 
 <%@ Import Namespace="PostAround.Entities" %> 
 
@@ -58,7 +56,7 @@
 
          <a style="color:#808080; float:right; font-size:14px;" target="_blank" href="<%=mapUrl %>">Get Directions</a>
            
-         <div id="BigBoxAddress" style="font-size:12px; float:left">
+         <div id="BigBoxAddress" style="font-size:12px; float:left; width:500px;">
         <div style="float:left;">
         
         <img src="<%=siteUrl %>images/markers/image.png" style="width:12px; height:15px;" /></div>
@@ -81,7 +79,7 @@
 
         
                 <div style="clear:both; margin-top:10px;font-size:14px; color:#3b3b3d; float:left;"><asp:Literal ID="ltrlCategory" runat="server"></asp:Literal></div>  
-       <div style="float:right; text-transform:uppercase; color:#3b3b3d; font-size:24px; margin-top:10px;  "><asp:Literal ID="ltrlTitle" runat="server"></asp:Literal></div>
+       <div style="float:right; text-transform:uppercase; word-break:break-word; color:#3b3b3d; font-size:24px; margin-top:10px;  "><asp:Literal ID="ltrlTitle" runat="server"></asp:Literal></div>
         
                 <div id="BigBoxMedia" class="BigBoxMedia" style="clear:both; margin-bottom:10px; width:610px; text-align:center">
         <asp:Literal ID="ltrlMedia" runat="server"></asp:Literal>
@@ -177,7 +175,7 @@
                     
                     <asp:Panel runat="server" ID="AddCommentPanel">
                         <div class="AddComment" style="margin-top:0">
-                            <textarea style="width:100%" placeholder="Post a comment..."  maxlength="500" id="Comment" cols"1" rows="1">Post a comment...</textarea>
+                            <textarea style="width:572px; height:50px;" placeholder="Post a comment..."  maxlength="500" id="Comment" cols"1" rows="1">Post a comment...</textarea>
 
                             <div class="Buttons">
                             <div style="position:absolute; left:0; float:left;">
@@ -218,6 +216,9 @@
 
 
 </div>
+
+
+
 </div>
 
 

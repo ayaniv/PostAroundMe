@@ -1,6 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Post.aspx.cs" Inherits="Pages_Post" %>
 <%@ Register src="Controls/HeadNew.ascx" tagname="Head" tagprefix="uc1" %>
 <%@ Register src="Controls/SinglePost.ascx" tagname="SinglePost" tagprefix="uc1" %>
+<%@ Register src="Controls/MorePosts.ascx" tagname="MorePosts" tagprefix="uc1" %>
 <%@ Register src="Controls/SimpleHeader.ascx" tagname="SimpleHeader" tagprefix="uc1" %>
 <%@ Register src="Controls/Footer2.ascx" tagname="Footer" tagprefix="uc1" %>
 <%@ Register src="Controls/AddPostContainer2.ascx" tagname="AddPostContainer" tagprefix="uc1" %>
@@ -31,17 +32,20 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
     <uc1:SimpleHeader ID="SimpleHeader1" runat="server" />
         
      <uc1:AddPostContainer ID="AddPostContainer1" runat="server" />
-    <div id="SinglePostContainer" style=" margin:100px auto; width:640px;">
+    <div id="SinglePostContainer" style=" margin:0 auto; padding-top:100px; width:640px;">
 
     <uc1:MetaTags ID="MetaTags1" runat="server" />
     <uc1:SinglePost ID="SinglePost1" runat="server" />  
        
-    </div>    
+    </div> 
+            
+            <uc1:MorePosts ID="MorePosts1" runat="server" />   
     
     <div class="PostBottom">
         <uc1:Footer ID="Footer1" runat="server" />
 </div>
         </div>
+         
     </form>
 </body>
 </html>
