@@ -28,6 +28,7 @@ public partial class Controls_Head : BaseControl
     protected string longitudeFromQueryString;
     protected string myLat;
     protected string myLon;
+    
 
     protected void Page_Load(object sender, EventArgs e)
     {

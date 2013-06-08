@@ -54,8 +54,30 @@ public partial class Controls_MetaTags : BaseControl
             url = "http://postaround.me/taiwan/Taiwan-Receipt-Lottery-Checker.aspx";
             image = "http://postaround.me/images/taiwan_receipt_lottery.jpg";
 
-        } 
+        }
+        else if (Request.QueryString["latlon"] == "32.069798,34.795407")
+        {
+            author = "";
+            admin = "567517451";
+            title = "Post Around שכונת ביצרון  - לוח המודעות השכונתי";
+            description = "מה קורה בשכונת ביצרון? לוח מודעות שיתופי המיועד לתושבי השכונה. המקום שלכם ליצור קשר עם השכנים שלכם";
+            url = "http://postaround.me/ll/32.069798,34.795407";
+            this.Page.Title = title;
+           
+
+        }
+        else if (Request.QueryString["latlon"] == "32.1112796,34.8014162")
+        {
+            author = "";
+            admin = "567517451";
+            title = "Post Around האוניברסיטה - לוח המודעות באוניברסיטת תל אביב";
+            description = "מה קורה באוניברסיטת תל אביב? לוח מודעות שיתופי המיועד לכל מי שנמצא באיזור אוניברסיטת תל אביב. המקום לעדכן ולהתעדכן על כל מה שקורה בסביבה";
+            url = "http://postaround.me/ll/32.1112796,34.8014162";
+            this.Page.Title = title;
+        }
         
+        
+
         Dictionary<string, string> ogAttributes = new Dictionary<string, string>();
         ogAttributes.Add("og:title", title);
         ogAttributes.Add("og:description", description);
