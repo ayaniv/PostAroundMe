@@ -3522,6 +3522,7 @@ $(function () {
         //$(this).height(34);
         
         $(this).parents(".AddComment").children('.Buttons').show();
+        $(this).css("margin-bottom", "5px");
         OrderElements();
     }
 

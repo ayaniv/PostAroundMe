@@ -9,8 +9,7 @@ public partial class Pages_Post : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        //string str = SinglePost1.PageTitle;
-        //Page.Title = str;
+        this.MorePosts1.numberOfItems = 5;
         
     }
 }

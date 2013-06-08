@@ -168,7 +168,9 @@ public static class Tools
 
     public static bool IsDirectLink(HttpContext context)
     {
-        return (context.Request.QueryString["id"] != null);
+        bool hasQueryStringID = (context.Request.QueryString["id"] != null);
+        bool isTaiwan = (HttpContext.Current.Request.Url.AbsoluteUri.ToLower().Contains("taiwan-receipt-lottery-checker.aspx"));
+        return (hasQueryStringID || isTaiwan);
     }
 
     public static string GetProtocol(HttpContext context)

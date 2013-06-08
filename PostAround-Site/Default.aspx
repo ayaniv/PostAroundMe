@@ -268,7 +268,7 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
                             <div class="BoxCategory">${category}</div>
                             <div class="BoxLocation">
                             
-                            <div id="Marker"></div>
+                            <div class="SmallLocationIcon"></div>
                             <a href="<%=siteUrl %>post/${msgId}" onclick="return false;" id="ShowOnMap" class="Word">{{html ShowDistance(Distance, msgAddress)}}</a>
                             
                             </div>
@@ -532,7 +532,7 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
         else {
             if (meters == -1) {
 
-            retVal = "around <b>" + GetStatefromAddress(address, meters) + "</b>";
+            retVal = "<b>" + GetStatefromAddress(address, meters) + "</b>";
             } else
                 if (meters > 1000) {
                     distance = Math.round(meters / 1000) + "KM";

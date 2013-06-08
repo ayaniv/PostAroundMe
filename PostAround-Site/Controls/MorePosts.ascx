@@ -2,7 +2,7 @@
 
 <div class="MorePosts">
     <div class="MorePostsTitle">
-        <span class="Line1">Latest posts around this location</span>
+        <span class="Line1">Latest posts around here</span>
         <div class="Line2"><span class="SmallLocationIcon"></span><asp:HyperLink runat="server" ID="linkAddress"></asp:HyperLink></div>
 
     </div>
@@ -20,7 +20,7 @@
                         <span class="DistanceAround"><asp:Literal runat="server" ID="ltrlDistance"></asp:Literal></span>
                     </div>
                 </div>
-                <asp:HyperLink CssClass="BoxHeader" Style="width: auto; text-decoration:none; overflow:hidden" runat="server" ID="linkTitle"></asp:HyperLink>
+                <asp:HyperLink CssClass="BoxHeader" Style="width: auto; text-decoration:none; font-size:16px; overflow:hidden" runat="server" ID="linkTitle"></asp:HyperLink>
             </div>
         </div>
                 </ItemTemplate>

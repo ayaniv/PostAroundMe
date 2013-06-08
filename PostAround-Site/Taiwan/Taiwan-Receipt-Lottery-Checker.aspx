@@ -1,165 +1,54 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Taiwan-Receipt-Lottery-Checker.aspx.cs" Inherits="Taiwan_Taiwan_Receipt_Lottery_Checker" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Taiwan-Receipt-Lottery-Checker.aspx.cs" Inherits="TaiwanLottery" %>
+<%@ Register src="../Controls/HeadNew.ascx" tagname="Head" tagprefix="uc1" %>
+<%@ Register src="../Controls/SinglePost_Taiwan.ascx" tagname="SinglePost" tagprefix="uc1" %>
+<%@ Register src="../Controls/MorePosts.ascx" tagname="MorePosts" tagprefix="uc1" %>
+<%@ Register src="../Controls/SimpleHeader.ascx" tagname="SimpleHeader" tagprefix="uc1" %>
+<%@ Register src="../Controls/Footer2.ascx" tagname="Footer" tagprefix="uc1" %>
 
-<%@ Register src="../Controls/FacebookLike.ascx" tagname="FacebookLike" tagprefix="uc1" %>
+<%@ Register src="../Controls/MetaTags.ascx" tagname="MetaTags" tagprefix="uc1" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head id="Head1" runat="server">
-    <title>Taiwan Lottery Numbers Online Checker | Taiwan Receipt Lottery</title>
-    <link rel="stylesheet" href="../css/screen.css" type="text/css" media="screen" charset="utf-8" />
 
-    <style type="text/css">
-        h3 {
-            margin-bottom: 0;
-        }
-    </style>
-
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://ogp.me/ns/fb#" xml:lang="en">
+<head runat="server">
+    
+    
+    <uc1:Head ID="PageHeader1" runat="server" />
+    
 </head>
-<body>
-
-<div id="fb-root"></div>
-<script>    (function (d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-        fjs.parentNode.insertBefore(js, fjs);
-    } (document, 'script', 'facebook-jssdk'));</script>
-
+<body style="height:100%">
 
     <form id="form1" runat="server">
 
-            <div class="HeadLine" ></div>
-    <div class="HairHeadLine"></div>
-        <div class="BottomDiv" id="BottomDiv" style="background:none">
-        <div class="Logo">
-        <h1>Taiwan Receipt Lottery / Taiwan Lottery / Uniform Invoice Taiwan Online Checker</h1>
-        
-            台灣彩券
-            <br />
-            Check if you won Taiwan Lottery Automatically !!
-        <br />
-        with <b>Taiwan Receipt Lottery Winning Numbers</b> Online Web Checker
-        
+        <div id="PleaseLogin" style="display:none; float:left; border:6px solid #fff; border-right:8px solid #FFF; z-index:10001; background-color:#FFF; width:320px; top:25%; left:50%; margin-left:-160px; position:fixed;
+box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-shadow: 0px 6px 6px #666; 
 
-                </div>  
-        <br />  
-        <div class="Text" style="font-style:normal; color:#424E55; font-size:13px;">
+ ">
+	
+</div>
 
-
-    
-    Winning numbers for months <asp:DropDownList ID="ddMonth" OnSelectedIndexChanged="Index_Changed" AutoPostBack="true" runat="server"></asp:DropDownList>
-    
-    as can be shown <a href="http://service.etax.nat.gov.tw/etwmain/front/ETW183W6" target="_blank">here</a>
-
-    <br /><br />
-    <table style="wdith:800">
-    <tr>
-    <td>Special Prize Number:</td>
-    <td><asp:TextBox id="txtSpecial" runat="server"></asp:TextBox></td>
-    <td style="padding-left:30px;">First Prize #1:</td>
-    <td><asp:TextBox id="txtFirst1" runat="server"></asp:TextBox></td>
-    <td style="padding-left:30px;">Addition #1:</td>
-    <td><asp:TextBox id="txtAdd1" runat="server"></asp:TextBox></td>
-    </tr>
-    <tr>
-    <td>Grand Prize Number:</td>
-    <td><asp:TextBox id="txtGrand" runat="server"></asp:TextBox></td>
-    <td style="padding-left:30px;">First Prize #2:</td>
-    <td><asp:TextBox id="txtFirst2" runat="server"></asp:TextBox></td>
-    <td style="padding-left:30px;">Addition #2:</td>
-    <td><asp:TextBox id="txtAdd2" runat="server"></asp:TextBox></td>
-    </tr>
-
-    <tr>
-    <td></td>
-    <td></td>
-    <td style="padding-left:30px;">First Prize #3:</td>
-    <td><asp:TextBox id="txtFirst3" runat="server"></asp:TextBox></td>
-    <td></td>
-    <td></td>
-    </tr>
-
-    </table>
-    
-    </div>
-            <h3>When the numbers are published?</h3>
-            <div>
-                
-                The Lottery takes place every two month. The results for two month are published on the 25th of the next month.<br />
-                (i.e. the results for 3-4/2013 will be published on 25/5/2013)<br />
-                We will do our best to serve you the results within the same date.<br />
-                So you will be able to check them easily with our online checker.<br />
-                <b>In case you are faster than us - just write them down in textboxes above</b>
-            </div>
-    
-            <h3>how to check taiwan receipt lottery?</h3>
-            <div>
+         <div id="fuzz" class="fuzz" style="filter:alpha(opacity=20); display:none"></div>
             
-        Don't need to know anything, simply enter your receipts numbers below
-        and check how much money you won.<br />
-        Enter the last <b>3 digits</b> (or more) of your receipts <b>seperated by a comma (,)</b> and click "Check":<br /><br />
-    <asp:TextBox TextMode="MultiLine" ID="txtNumbers" runat="server" style="width:800px; height:100px"></asp:TextBox>
+
+        <div style="position:relative; min-height:100%">
+    <uc1:SimpleHeader ID="SimpleHeader1" runat="server" />
+        
     
-    <br />
-    <asp:Button ID="btnCheck" runat="server" Text="Check" onclick="btnCheck_Click" />
-    <br />
-    <br />
-    Checking Results:
-    <br />
-    <asp:TextBox ID="txtResults" Enabled="false" style="width:800px" runat="server" TextMode="MultiLine"></asp:TextBox>
-    <br />
-    <hr />
-    Brought to you by:
-    
-    <div style="border:1px solid; background-color:#fff947; width:780px; height:50px; padding:10px; ">
-        <div style="float:left; padding-right:10px;">
-    <a href="http://postaround.me"><img border="0" src="../images/logo_neto.png" alt="Local Pinboard" width="258" height="50" style="border:none" /></a>
-    </div>
-    <div class="Text" style="margin-top:7px; text-align:center; ">
-    
-    
-    
-    <a href="http://postaround.me" style="font-style:normal; text-decoration:none;  color:#424E55; font-weight:bold; text-transform:uppercase;  font-family:Trebuchet MS, Arial; font-size:14px;">
-    READ <span style="font-family:Helvetica">&</span> SHARE POSTS IN YOUR OWN NEIGHBORHOOD
-    <br />ON A PINBOARD BASED ON YOUR LOCATION
-    </a>
-    
-    
-    
-    </div>
-    <br />
-    </div>
+    <div id="SinglePostContainer" style=" margin:0 auto; padding-top:100px; width:640px;">
+
+    <uc1:MetaTags ID="MetaTags1" runat="server" />
+    <uc1:SinglePost ID="SinglePost1" runat="server" />  
+       
+    </div> 
             
-    <br />
-    <h3>Got feedback?</h3>
-            <div>Add a comment. We are listening.</div>
-   <div class="fb-comments" data-href="http://postaround.me/taiwan" data-num-posts="2" data-width="470"></div>
-        <br /><br />
-                <h3>Like us?</h3>
-        Please Like us on facebook, it's the least you can do to support us.<br />
-   <uc1:FacebookLike ID="FacebookLike1" runat="server" />
-   
-    </div>
-    </div>
+            <uc1:MorePosts ID="MorePosts1" runat="server" />   
+    
+    <div class="PostBottom">
+        <uc1:Footer ID="Footer1" runat="server" />
+</div>
+        </div>
+         
     </form>
-
-
-    <script type="text/javascript">
-
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-28432512-1']);
-        _gaq.push(['_trackPageview']);
-
-        (function () {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-        })();
-
-</script>
-
-
 </body>
 </html>

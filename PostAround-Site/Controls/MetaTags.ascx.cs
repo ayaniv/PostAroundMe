@@ -45,6 +45,16 @@ public partial class Controls_MetaTags : BaseControl
             }
 
         }
+        else if (HttpContext.Current.Request.Url.AbsoluteUri.ToLower().Contains("taiwan-receipt-lottery-checker.aspx"))
+        {
+            author = "";
+            admin = "567517451";
+            title = "Taiwan Lottery Numbers Online Checker | Taiwan Receipt Lottery";
+            description = "Easily check your receipts with the up to date Winning Numbers for Taiwan's Receipt Lottery";
+            url = "http://postaround.me/taiwan/Taiwan-Receipt-Lottery-Checker.aspx";
+            image = "http://postaround.me/images/taiwan_receipt_lottery.jpg";
+
+        } 
         
         Dictionary<string, string> ogAttributes = new Dictionary<string, string>();
         ogAttributes.Add("og:title", title);

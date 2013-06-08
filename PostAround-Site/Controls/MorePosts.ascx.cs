@@ -10,6 +10,8 @@ using System.Web.UI.WebControls;
 
 public partial class Controls_MorePosts : BaseControl
 {
+
+    public int numberOfItems { get; set; }
     
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -40,16 +42,12 @@ public partial class Controls_MorePosts : BaseControl
                 lng = msg.longitude;
                 address = msg.msgAddress;
 
-                List<MyMessage> messages = GetMessages(lat, lng, 5);
 
-                rptPosts.ItemCreated += new RepeaterItemEventHandler(rptPosts_ItemCreated);
-                rptPosts.DataSource = messages;
-                rptPosts.DataBind();
 
             }
             else
             {
-                if (HttpContext.Current.Request.Url.AbsoluteUri.Contains("Taiwan-Receipt-Lottery-Checker.aspx"))
+                if (HttpContext.Current.Request.Url.AbsoluteUri.ToLower().Contains("taiwan-receipt-lottery-checker.aspx"))
                 {
                     lat = "25.020725";
                     lng = "121.528168";
@@ -57,6 +55,16 @@ public partial class Controls_MorePosts : BaseControl
                 }
             }
             SetLocationScreen(lat, lng, address);
+            GetPosts(lat, lng, numberOfItems);
+    }
+
+    private void GetPosts(string lat, string lng, int num)
+    {
+        List<MyMessage> messages = GetMessages(lat, lng, num);
+
+        rptPosts.ItemCreated += new RepeaterItemEventHandler(rptPosts_ItemCreated);
+        rptPosts.DataSource = messages;
+        rptPosts.DataBind();
     }
 
     private void SetLocationScreen(string lat, string lng, string address)
@@ -98,8 +106,8 @@ public partial class Controls_MorePosts : BaseControl
                 ((Literal)e.Item.FindControl("ltrlUserName")).Text = item.Name;
                 ((Literal)e.Item.FindControl("ltrlDistance")).Text = FormatDistanceFromMeters(item.Distance);
 
-                ((HyperLink)e.Item.FindControl("linkTitle")).NavigateUrl = siteUrl + "/post/" + item.msgId;
-                ((HyperLink)e.Item.FindControl("linkTitle")).Text = TruncateAtWord(item.title, 19);
+                ((HyperLink)e.Item.FindControl("linkTitle")).NavigateUrl = siteUrl + "post/" + item.msgId;
+                ((HyperLink)e.Item.FindControl("linkTitle")).Text = TruncateAtWord(item.title, 20);
             }
         }
     }
