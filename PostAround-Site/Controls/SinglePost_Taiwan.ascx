@@ -66,7 +66,7 @@
 
             <div style="width:100%; height:300px; background:#000 url('../images/taiwan_receipt_lottery.jpg')">
                 <div style="background:url('../images/textShadow.png'); height:300px; width:610px;">
-                <h1>Taiwan<span>Receipt Lottery Checker</span></h1>
+                <h1>Taiwan Lottery<span>Receipt Lottery Checker</span></h1>
                 </div>
             </div>
             <!-- Content START -->
