@@ -290,23 +290,31 @@ h1 span
     
 
     .MorePosts .MorePostsTitle {
+        border-top-left-radius:8px;border-top-right-radius:8px;
          width: 272px; padding:10px 14px 10px 14px; float: left; background-color: #f7f7f7; margin-top: 0px; border-bottom: 2px solid #ced0d2; font-size:18px; color:#3b3b3d;
          
     }
 
+        .MorePosts .MorePostsFooter {
+        border-bottom-left-radius:8px;border-bottom-right-radius:8px;
+         width: 272px; padding:4px 14px 9px 14px; float: left; background-color: #f7f7f7; border-bottom: 2px solid #ced0d2; font-size:18px; color:#3b3b3d;
+         height:12px; margin-top:7px;  
+         
+    }
+
         .MorePosts .MorePostsTitle .Line1 {
-            float:left
+            float:left;
         }
 
         .MorePosts .MorePostsTitle .Line2 {    
             clear:both;   float:left;
         }
 
-        .MorePosts .MorePostsTitle a {    
+        .MorePosts .MorePostsTitle a, .MorePosts .MorePostsFooter a {    
             float:left; font-size:12px; color:#3b3b3d; text-decoration:none; width:255px;
         }
 
-       .MorePosts .MorePostsTitle a:hover {    
+       .MorePosts .MorePostsTitle a:hover,  .MorePosts .MorePostsFooter a:hover {    
             float:left; font-size:12px; color:#3b3b3d; text-decoration:underline
         }
 
@@ -332,11 +340,11 @@ h1 span
         }
 
         .MorePosts .MorePostsWrapper .PostItem .PostItemContent {
-            float:left; padding: 10px 10px 10px 5px; background-color: #f7f7f7;  width:281px;  
+            float:left; padding: 10px 10px 10px 5px; background-color: #fff;  width:281px;  
         }
 
             .MorePosts .MorePostsWrapper .PostItem .PostItemContent:hover {
-                background-color:#fff;
+                background-color:#f7f7f7;
             }
 
         .MorePosts .MorePostsWrapper .PostItem .PostItemContent img {

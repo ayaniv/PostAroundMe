@@ -30,6 +30,8 @@
     </ItemTemplate>
     <FooterTemplate></FooterTemplate>
     </asp:Repeater>
+        <a href="<%=siteUrl %>in/ביצרון">לוח מודעות שכונת ביצרון</a>
+        <a href="<%=siteUrl %>in/אוניברסיטת_תל_אביב">לוח מודעות אוניברסיטת תל אביב</a>
     </div>
     
     </form>

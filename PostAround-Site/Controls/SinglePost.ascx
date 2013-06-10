@@ -7,7 +7,7 @@
 
 
 
-<div id="MessagesContainer" class="BigBoxContainer" style="position:relative;">
+<div id="MessagesContainer" class="BigBoxContainer" style="position:relative; float:left;">
                 <!-- AddThis Button BEGIN -->
 <div class="addthis_toolbox_page addthis_toolbox addthis_floating_style addthis_32x32_style">
 <a class="addthis_button_facebook"></a>
@@ -27,25 +27,13 @@
 
 
 
-<script type="text/javascript" src="https://apis.google.com/js/plusone.js">
-{"parsetags": "explicit"}
-</script>
 
-<link rel="canonical" href="<%=pageUrl %>" />    
-    <script type="text/javascript">
-
-        //FB.XFBML.parse();
-        //gapi.plusone.go('GplusContainer', { "size": "medium" });
-
-
-
-    </script>
 
     
 
 
 
-<div class="Line" style="background-color:<%=bigBoxLineColor %> ; width:100%; "></div>
+<div class="Line" style="background-color:<%=bigBoxLineColor %> ; width:640px; "></div>
 <div id="BigBoxWrapper" class="Box" box-id="<%=msgId %>" style="width:610px; min-height:800px; padding:15px; background-color:#FFF; float:left;">
     <div id="FacebookID" style="display:none"><%=facebookID %></div>         
     <div id="BigBoxLeft" style="width:100%; float:left;">

@@ -35,7 +35,7 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
     <uc1:SimpleHeader ID="SimpleHeader1" runat="server" />
         
     
-    <div id="SinglePostContainer" style=" margin:0 auto; padding-top:100px; width:640px;">
+    <div id="SinglePostContainer" style=" margin:0 auto; padding-top:100px; width:920px;">
 
     <uc1:MetaTags ID="MetaTags1" runat="server" />
     <uc1:SinglePost ID="SinglePost1" runat="server" />  

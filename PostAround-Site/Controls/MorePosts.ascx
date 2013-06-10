@@ -27,7 +27,7 @@
             </asp:Repeater>
     </div>
 
-     <div class="MorePostsTitle" style="background-color:#f7f7f7; height:12px; margin-top:7px; padding-top:4px; padding-bottom:9px; ">
+     <div class="MorePostsFooter">
          <asp:HyperLink runat="server" Text="More posts around here >>" ID="linkMorePosts"></asp:HyperLink>
        
         
