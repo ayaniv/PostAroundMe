@@ -69,7 +69,7 @@ public partial class Controls_MorePosts : BaseControl
 
     private void SetLocationScreen(string lat, string lng, string address)
     {
-        linkMorePosts.NavigateUrl = linkAddress.NavigateUrl = siteUrl + "ll/" + lat + "," + lng;
+        linkMorePosts.NavigateUrl = linkAddress.NavigateUrl = siteUrl + "ll/" + lat + "," + lng + "?ref=mp";
         linkAddress.Text = address;
         
     }
@@ -89,6 +89,14 @@ public partial class Controls_MorePosts : BaseControl
         return string.Format("{0}...", input.Substring(0, (iNextSpace > 0) ? iNextSpace : length).Trim());
     }
 
+    private string TruncString(string input, int length)
+    {
+        if (input == null || input.Length < length)
+            return input;
+        
+        return string.Format("{0}...", input.Substring(0, length).Trim());
+    }
+
 
     void rptPosts_ItemCreated(object sender, RepeaterItemEventArgs e)
     {
@@ -104,12 +112,36 @@ public partial class Controls_MorePosts : BaseControl
                 ((HtmlGenericControl)e.Item.FindControl("divLine")).Style.Add("background-color", item.catColor);
                 ((Image)e.Item.FindControl("imgUserAvatar")).ImageUrl = item.userImage;
                 ((Literal)e.Item.FindControl("ltrlUserName")).Text = item.Name;
-                ((Literal)e.Item.FindControl("ltrlDistance")).Text = FormatDistanceFromMeters(item.Distance);
+                ((Literal)e.Item.FindControl("ltrlDistance")).Text = FormatDistanceFromMeters(item.Distance); 
 
-                ((HyperLink)e.Item.FindControl("linkTitle")).NavigateUrl = siteUrl + "post/" + item.msgId;
-                ((HyperLink)e.Item.FindControl("linkTitle")).Text = TruncateAtWord(item.title, 20);
+                ((HyperLink)e.Item.FindControl("linkTitle")).NavigateUrl = siteUrl + "post/" + item.msgId + "?ref=mp";
+                ((HyperLink)e.Item.FindControl("linkTitle")).Text = TruncString(item.title, 20);
             }
         }
+    }
+
+    private string GetStreetFromAddress(string str)
+    {
+
+        string newstring = "";
+        if ((str != null) && (str != ""))
+        {
+
+
+                string[] wordsArray = str.Split(',');
+                if (wordsArray.Length < 5)
+                    newstring = TruncString(wordsArray[0], 15);
+                else if (wordsArray.Length == 5)
+                    newstring = TruncString(wordsArray[1], 15);
+                else
+                    newstring = TruncString(wordsArray[3], 15);
+
+                
+
+
+        }
+        return newstring;
+
     }
 
     private string FormatDistanceFromMeters(int meters)

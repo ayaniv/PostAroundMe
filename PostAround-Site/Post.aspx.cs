@@ -9,7 +9,7 @@ public partial class Pages_Post : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        this.MorePosts1.numberOfItems = 5;
+        this.MorePosts1.numberOfItems = 10;
         
     }
 }

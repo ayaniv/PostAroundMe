@@ -209,7 +209,7 @@ public class PostAroundService : IPostAroundService
         msg.image = dr.ImageUrl;
         msg.msgAddress = dr.address;
         msg.facebookID = dr.facebookID; // need to pull this from db
-
+        msg.FullDate = msgDate;
         msg.link = dr.link;
         msg.Mine = false;
         if (msg.userid == userId)
@@ -784,6 +784,14 @@ public class PostAroundService : IPostAroundService
 
     }
 
+    public DateTime GetDateOfLastPost(string lat = "", string lon = "", int uptoMeters = -1)
+    {
+
+        List<MyMessage> msgs = GetMessages(lat, lon, 0, 0, 1, 0, null, 0, 0, uptoMeters, 0);
+        return msgs.FirstOrDefault().FullDate;
+       
+    }
+
     private void CreateXmlFileFromStaticPages()
     {
 
@@ -798,27 +806,27 @@ public class PostAroundService : IPostAroundService
 
                             new XElement(ns + "url",
                                       new XElement(ns + "loc", SiteUrl),
-                                      new XElement(ns + "lastmod", DateTime.Now.ToString("yyyy-MM-ddThh:mm:sszzz")),
+                                      new XElement(ns + "lastmod", GetDateOfLastPost().ToString("yyyy-MM-ddThh:mm:sszzz")),
                                       new XElement(ns + "changefreq", "daily"),
                                       new XElement(ns + "priority", "1.0")),
                             new XElement(ns + "url",
                                       new XElement(ns + "loc", SiteUrl + "in/אוניברסיטת_תל_אביב"),
-                                      new XElement(ns + "lastmod", DateTime.Now.ToString("yyyy-MM-ddThh:mm:sszzz")),
+                                      new XElement(ns + "lastmod", GetDateOfLastPost("32.1112857", "34.8015036", 4000).ToString("yyyy-MM-ddThh:mm:sszzz")),
                                       new XElement(ns + "changefreq", "daily"),
                                       new XElement(ns + "priority", "0.8")),
                             new XElement(ns + "url",
                                       new XElement(ns + "loc", SiteUrl + "in/ביצרון"),
-                                      new XElement(ns + "lastmod", DateTime.Now.ToString("yyyy-MM-ddThh:mm:sszzz")),
+                                      new XElement(ns + "lastmod", GetDateOfLastPost("32.069798", "34.795407", 4000).ToString("yyyy-MM-ddThh:mm:sszzz")),
                                       new XElement(ns + "changefreq", "daily"),
                                       new XElement(ns + "priority", "0.8")),
                             new XElement(ns + "url",
                                       new XElement(ns + "loc", SiteUrl + "Taiwan/Taiwan-Receipt-Lottery-Checker.aspx"),
-                                      new XElement(ns + "lastmod", "2012-05-25"),
-                                      new XElement(ns + "changefreq", "monthly"),
+                                      new XElement(ns + "lastmod", GetDateOfLastPost().ToString("yyyy-MM-ddThh:mm:sszzz")),
+                                      new XElement(ns + "changefreq", "daily"),
                                       new XElement(ns + "priority", "0.2")),
                             new XElement(ns + "url",
                                       new XElement(ns + "loc", SiteUrl + "Sitelinks.aspx"),
-                                      new XElement(ns + "lastmod", DateTime.Now.ToString("yyyy-MM-ddThh:mm:sszzz")),
+                                      new XElement(ns + "lastmod", GetDateOfLastPost().ToString("yyyy-MM-ddThh:mm:sszzz")),
                                       new XElement(ns + "changefreq", "daily"),
                                       new XElement(ns + "priority", "0.1"))
                                       );

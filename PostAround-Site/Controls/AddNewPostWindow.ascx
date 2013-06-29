@@ -21,7 +21,7 @@
     <div style="position: relative;">
 
 
-        <textarea maxlength="400" id="txtPopupDetails" style="width: 299px; height: 70px; padding-right: 20px; margin-top: 0; float: left; margin-bottom: 6px;" title="Details" placeholder="Post to your neighbors here !"></textarea>
+        <textarea maxlength="400" id="txtPopupDetails" style="width: 299px; height: 70px; padding-right: 20px; margin-top: 0; float: left; margin-bottom: 6px;" title="Details" placeholder="Spread your post around here !"></textarea>
 
         <div id="xbutton" style="width: 14px; height: 16px; clear: both; float: right; top: 0; right: 0; padding: 5px; padding-top: 4px; position: absolute; cursor: pointer;">
             <div class="SmallXButton" style="display: block;">
@@ -125,9 +125,9 @@
          <div class="FreeText" id="divAddressApprove" style="display:none; color: #82898e; margin-top:10px;
              font-size: 14px;">
              Please click <b>'Allow'</b> above to <b>Share Location</b>...</div>
-         <div id="divAddressContainer" style="margin-bottom:6px; width:380; " >
-             <div class="Marker" style="margin-top:2px"></div>
-             <div style="float:left; padding-left: 6px; font-size:16px; font-family:Calibri, Arial; font-style:italic; color:#57849D;">Post around:</div>
+         <div id="divAddressContainer" style="margin-bottom:6px; " >
+             <div class="SmallLocationIcon" style="margin-top:4px"></div>
+             <div style="float:left; font-size:16px; font-family:Calibri, Arial; font-style:italic; color:#57849D;">Post around:</div>
              <div  id="divAddress" style="clear:both; padding-left: 15px; width:310px; color: #82898e;
                  font-size: 15px;">
                  </div>

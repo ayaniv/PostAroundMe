@@ -24,6 +24,9 @@ namespace PostAround.ServiceContracts
         List<MyMessage> GetMessages(string currLat, string currLon, int userId, int skipNum, int takeNum, int isMine, List<int> lstCatID, int sotyBy, int timeZone, int uptoMeters, int regionID);
 
         [OperationContract]
+        DateTime GetDateOfLastPost(string lat = "", string lon = "", int uptoMeters = -1);
+
+        [OperationContract]
         int CreateXmlSiteMap();
 
         [OperationContract]

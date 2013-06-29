@@ -55,6 +55,22 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetDateOfLastPost">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="lat" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="lon" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="uptoMeters" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDateOfLastPostResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetDateOfLastPostResult" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="CreateXmlSiteMap">
     <xs:complexType>
       <xs:sequence />

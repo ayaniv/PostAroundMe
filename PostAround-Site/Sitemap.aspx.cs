@@ -13,13 +13,14 @@ using System.Xml.Linq;
 public partial class Pages_Sitemap : BasePage
 {
 
-
+    
 
     protected void Page_Load(object sender, EventArgs e)
     {
 
         PostAroundServiceClient client = new PostAroundServiceClient();
         int siteMapsCount = client.CreateXmlSiteMap();
+        DateTime lastpostDate = client.GetDateOfLastPost("", "", -1);
         client.Close();
         List<int> lstIndexes = new List<int>();
 
@@ -27,11 +28,11 @@ public partial class Pages_Sitemap : BasePage
         {
             lstIndexes.Add(i);
         }
-        CreateSiteMapIndex(lstIndexes);
+        CreateSiteMapIndex(lstIndexes, lastpostDate);
 
     }
 
-    private void CreateSiteMapIndex(List<int> lstIndexes)
+    private void CreateSiteMapIndex(List<int> lstIndexes, DateTime lastpostDate)
     {
 
       
@@ -45,7 +46,7 @@ public partial class Pages_Sitemap : BasePage
                             from i in lstIndexes
                             select new XElement(ns + "sitemap",
                                       new XElement(ns + "loc", siteUrl + "XML/sitemap" + i + ".xml"),
-                                      new XElement(ns + "lastmod", DateTime.Now.ToString("yyyy-MM-ddThh:mm:sszzz"))     
+                                      new XElement(ns + "lastmod", lastpostDate.ToString("yyyy-MM-ddThh:mm:sszzz"))     
                             )
                     );
 

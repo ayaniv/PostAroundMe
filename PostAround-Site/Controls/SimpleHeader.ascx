@@ -19,7 +19,12 @@
         <div id="RightWing" style="float:right; height:80px; width:400px; margin-right:17px;">
         
         <ul class="HeaderList" style="float:right">
-       
+       <li style="cursor:pointer;" id="divMobileLink">
+                <span class="MobileIcon"></span>
+                <span style="font-weight:bold">
+                    Mobile
+                </span>
+                </li>
         <li id="divLogin" style="margin-right:20px"><uc1:FacebookLogin ID="Facebook" runat="server" /></li>
         </ul>
 

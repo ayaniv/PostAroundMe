@@ -27,7 +27,7 @@
     <uc1:Head ID="Head2" runat="server" />
     
     <meta name="robots" content="noindex" />
-    <meta name="viewport" content="width=device-width,initial-scale=0.5,maximum-scale=1" />
+    <meta name="viewport" content="width=device-width" />
 
 </head>
 <body>

@@ -2,31 +2,31 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>http://localhost/PostAround/</loc>
-    <lastmod>2013-04-06T02:43:28+03:00</lastmod>
+    <lastmod>2013-06-07T03:09:12+03:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>http://localhost/PostAround/Pages/Terms.aspx</loc>
-    <lastmod>2012-01-12</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.1</priority>
+    <loc>http://localhost/PostAround/in/אוניברסיטת_תל_אביב</loc>
+    <lastmod>2012-02-25T10:14:49+02:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://localhost/PostAround/Pages/Privacy.aspx</loc>
-    <lastmod>2012-01-12</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.1</priority>
+    <loc>http://localhost/PostAround/in/ביצרון</loc>
+    <lastmod>2013-05-14T09:20:15+03:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>http://localhost/PostAround/Taiwan/Taiwan-Receipt-Lottery-Checker.aspx</loc>
-    <lastmod>2012-05-25</lastmod>
+    <lastmod>2013-06-07T03:09:12+03:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
     <loc>http://localhost/PostAround/Sitelinks.aspx</loc>
-    <lastmod>2013-04-06T02:43:28+03:00</lastmod>
+    <lastmod>2013-06-07T03:09:12+03:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.1</priority>
   </url>

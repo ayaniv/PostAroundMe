@@ -2,7 +2,7 @@
 
 <div class="MorePosts">
     <div class="MorePostsTitle">
-        <span class="Line1">Latest posts around here</span>
+        <span class="Line1">Most Recent Posts Around Here</span>
         <div class="Line2"><span class="SmallLocationIcon"></span><asp:HyperLink runat="server" ID="linkAddress"></asp:HyperLink></div>
 
     </div>
@@ -28,7 +28,7 @@
     </div>
 
      <div class="MorePostsFooter">
-         <asp:HyperLink runat="server" Text="More posts around here >>" ID="linkMorePosts"></asp:HyperLink>
+         <asp:HyperLink runat="server" Text="Read & Share More Posts Around Here..." ID="linkMorePosts"></asp:HyperLink>
        
         
 
@@ -41,7 +41,7 @@
         $('.PostItem').click(function () {
             
             var postId = $(this).attr("postId");
-            url = siteUrl + "post/" + postId;
+            url = siteUrl + "post/" + postId + "?ref=mp";
             window.location.href = url;
         });
     });

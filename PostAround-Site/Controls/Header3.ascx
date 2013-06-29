@@ -46,6 +46,12 @@
         <div id="RightWing" style="float:right; height:80px; width:400px; margin-right:17px;">
         
         <ul class="HeaderList" style="float:right">
+            <li style="cursor:pointer;" id="divMobileLink">
+                <span class="MobileIcon"></span>
+                <span style="font-weight:bold">
+                    Mobile
+                </span>
+                </li>
         <li style="cursor:default;" id="divAbout">
         
         
@@ -154,7 +160,7 @@
 
         <div style="float:left; margin-top:3px; margin-left:8px; color:#666; font-size:12px;">
         
-        <textarea maxlength="400" id="txtPopupDetails1" style="margin-top:3px; width:315px; height:18px; color:#3c3c3c; border:solid 1px #b8b8b8; resize:none; overflow:auto; padding:4px; font-size:14px; font-family:Tahoma, Arial" title="Details"  placeholder="Post to your neighbors here !"></textarea>
+        <textarea maxlength="400" id="txtPopupDetails1" style="margin-top:3px; width:315px; height:18px; color:#3c3c3c; border:solid 1px #b8b8b8; resize:none; overflow:auto; padding:4px; font-size:14px; font-family:Tahoma, Arial" title="Details"  placeholder="Spread your post around here !"></textarea>
         </div>
         
         </div>
@@ -169,7 +175,7 @@
       <div id="MapSpacing" style="position:relative; height:80px; background:#fcfbf9 url('<%=siteUrl%>images/ibg.jpg');"></div>
 
       <div id="MapPas" style="height:190px; width:100%; background:url('<%=siteUrl%>images/map_pas.png'); position:relative">
-      <div id="MapPasShade" style="position:absolute; z-index:1; width:100%; height:18px; top:0; background:url('<%=siteUrl%>images/dropdown_shadow.png')"></div>
+      <div id="MapPasShade" style="position:absolute; z-index:1; width:100%; height:18px; top:0;"></div>
       <div id="MapPasText" style="background:url('<%=siteUrl%>images/bgWhite80.png'); height:90px; width:862px; position:relative; margin:0 auto; top:27px; padding:25px 30px;">
       <div style="float:left"> 
       <h1>What’s good <span>in the hood !</span></h1>

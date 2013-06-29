@@ -880,7 +880,7 @@ $(function () {
         }
 
 
-        if (($.trim($("#txtPopupDetails").val()) == '') || ($.trim($("#txtPopupDetails").val()) == "Post to your neighbors here !")) {
+        if (($.trim($("#txtPopupDetails").val()) == '') || ($.trim($("#txtPopupDetails").val()) == "Spread your post around here !")) {
             $("#txtPopupDetails").css("border-color", "#FF0000");
             if (errorText != "")
                 errorText = errorText + ", "
@@ -1842,10 +1842,12 @@ $(function () {
             $("#AboutBox").hide();
     });
 
+    $('#divMobileLink').click(function () {
+        window.location.href = "http://goo.gl/sOXPS";
+    });
 
 
     $('#divLogin').hover(function () {
-        $(this).css("background-color", "#487690");
         if (currentUser != null) {
             $("#MoreBox").show();
         }
@@ -1896,7 +1898,6 @@ $(function () {
     });
 
     $('#divAbout').hover(function () {
-        $(this).css("background-color", "#487690");
         $("#AboutBox").show();
 
     }, function () {
