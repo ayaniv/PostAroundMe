@@ -33,7 +33,7 @@ public class FileUpload : IHttpHandler {
             string mapPathResized = System.Configuration.ConfigurationManager.AppSettings["PhysicalPath"] + @"\UploadedResized";
             string mapPathResizedBig = System.Configuration.ConfigurationManager.AppSettings["PhysicalPath"] + @"\UploadedResizedBig";
 
-            if (HttpContext.Current.Request.Browser.Browser.ToLower().Equals("ie") && (HttpContext.Current.Request.Browser.MajorVersion < 9))
+            if (HttpContext.Current.Request.Browser.Browser.ToLower().Equals("ie") && (HttpContext.Current.Request.Browser.MajorVersion < 10))
             {
                 HttpPostedFile uploadedfile = context.Request.Files[0];
                 filename = uploadedfile.FileName;
