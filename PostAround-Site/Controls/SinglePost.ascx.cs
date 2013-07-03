@@ -63,7 +63,7 @@ public partial class Controls_SinglePost : BaseControl
                 if (!msg.Mine)
                     ltrlButtons.Text = @"<div class=""slider-frame""><span class=""slider-button""><span class=""PublicIcon PublicIconOn""></span>Public</span><span class=""slider-button-off""><span class=""PrivateIcon""></span>Private</span></div>";
 
-                this.Page.Title = msg.title + " Around " + msg.msgAddress + "  - PostAround.Me";
+                this.Page.Title = msg.title + " - " + msg.msgAddress;
                 facebookID = msg.facebookID;
                 ltrlAddress.Text = msg.msgAddress;
                 directionAddress = GetLanguageDirection(ltrlAddress.Text);

@@ -3217,7 +3217,7 @@ $(function () {
                 AssignAndWait();
 
             }
-        }, 500);
+        }, 100);
     }
 
     function StartTimerAndGetMessages(isUrgent) {

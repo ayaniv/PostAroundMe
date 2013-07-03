@@ -22,7 +22,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://ogp.me/ns/fb#" xml:lang="en"  xmlns:addthis="http://www.addthis.com/help/api-spec">
 <head runat="server">
-    <title>Post Around Me | Local Pinboard</title>
+    
     <uc1:Head runat="server" />
     
     
