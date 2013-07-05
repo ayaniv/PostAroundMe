@@ -69,7 +69,8 @@ public partial class Controls_MorePosts : BaseControl
 
     private void SetLocationScreen(string lat, string lng, string address)
     {
-        linkMorePosts.NavigateUrl = linkAddress.NavigateUrl = siteUrl + "ll/" + lat + "," + lng + "?ref=mp";
+        string address_no_space = address.Replace(",", "").Replace(" ", "_");
+        linkMorePosts.NavigateUrl = linkAddress.NavigateUrl = siteUrl + "in/" + address_no_space;
         linkAddress.Text = address;
         
     }

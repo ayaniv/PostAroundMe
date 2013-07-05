@@ -1385,7 +1385,7 @@ $(function () {
 
         $.when(ChangeToSmallHeaderStep1()).then(ChangeToSmallHeaderStep2());
         if (!isDirectLink) {
-            SetLocationInAddressBar(myLat, myLon);
+            SetLocationInAddressBar();
         }
     }
 
@@ -2499,10 +2499,11 @@ $(function () {
     //------------------------LOCATION STUFF BEGIN
 
 
-    function SetLocationInAddressBar(lat, lon) {
+    function SetLocationInAddressBar() {
         if (history.pushState) {
-            var stateObj = { "lat": lat, "lon": lon };
-            history.pushState(stateObj, 'Viewing Posts Around ' + lat + "," + lon, rootDir + 'll/' + lat + "," + lon);
+            var address_no_space = address.ReplaceAll(",", "").ReplaceAll(" ", "_")
+            var stateObj = { "address": address };
+            history.pushState(stateObj, 'Viewing Posts Around ' + address, rootDir + 'in/' + address_no_space);
         }
     }
 
@@ -2904,10 +2905,10 @@ $(function () {
 
             // Save Default Location
             SaveLocationInCookie();
-
+            $.when(ChangeToSmallHeader()).then(SetSlide());
         });
 
-        $.when(ChangeToSmallHeader()).then(SetSlide());
+       
 
     }
 
@@ -2938,8 +2939,9 @@ $(function () {
 
                 $('#moreButtonsText').html(address + " ");
             }
+            $.when(ChangeToSmallHeader()).then(SetSlide());
         });
-        $.when(ChangeToSmallHeader()).then(SetSlide());
+      
     }
 
     $('#AutoDiscover').click(function () {
@@ -3596,6 +3598,9 @@ $(function () {
         winHeight = winNewHeight;
     });
 
+
+    function GoogleFun() {
+    }
 
     //----DATA END
 

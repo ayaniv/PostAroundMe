@@ -18,6 +18,7 @@ public partial class Controls_SinglePost : BaseControl
     protected string BigBoxLat;
     protected string BigBoxLon;
     protected string BigBoxAddress;
+    protected string BigBoxAddressNoSpace;
 
     protected string directionDescription;
     protected string alignDescription;
@@ -67,7 +68,8 @@ public partial class Controls_SinglePost : BaseControl
                 facebookID = msg.facebookID;
                 ltrlAddress.Text = msg.msgAddress;
                 directionAddress = GetLanguageDirection(ltrlAddress.Text);
-                BigBoxAddress = Tools.EncodeTo64(ltrlAddress.Text);
+                BigBoxAddress = ltrlAddress.Text;
+                BigBoxAddressNoSpace = BigBoxAddress.Replace(",", "").Replace(" ", "_");
                 ltrlUserImage.Text = "<img src=" + msg.userImage + " style='height:50px; width:50px; border-radius:50px; border-bottom-right-radius:2px; border:0;' />";
                 ltrlName.Text = msg.Name;
                 ltrlDate.Text = "On " + msg.Date; //+ " at " + msg.Time;

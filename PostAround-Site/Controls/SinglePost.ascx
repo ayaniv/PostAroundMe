@@ -50,7 +50,7 @@
         <img src="<%=siteUrl %>images/markers/image.png" style="width:12px; height:15px;" /></div>
         <div style="margin-left:18px; font-size:14px;">
              <span style="font-family:Tahoma; color:#6AA1BB">Posted around</span> 
-            <a href="<%=siteUrl %>ll/<%=BigBoxLat %>,<%=BigBoxLon %>" style="font-weight:bold" title="See more posts around here"><asp:Literal runat="server" ID="ltrlAddress"></asp:Literal></a>
+            <a href="<%=siteUrl %>in/<%=BigBoxAddressNoSpace %>" style="font-weight:bold" title="See more posts around here"><asp:Literal runat="server" ID="ltrlAddress"></asp:Literal></a>
 
         </div>
         

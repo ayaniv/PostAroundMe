@@ -11,6 +11,8 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Globalization;
 using PostAroundService;
+using PostAround.Entities;
+
 
 public partial class Controls_LoginPanel : BaseControl
 {
@@ -97,6 +99,9 @@ public partial class Controls_LoginPanel : BaseControl
                             user = GetUserDetailsFromToken(accessToken);
                             //save the user in db
                             userId = SaveUserInDB(user);
+
+                            //no need this. i added in sql
+                            //SetUserEmailPemission(userId);
 
                         }
                     }
@@ -392,11 +397,25 @@ public partial class Controls_LoginPanel : BaseControl
         return user;
     }
 
+    private void SetUserEmailPemission(int userId)
+    {
+        UserPermission up = new UserPermission();
+        up.date = DateTime.Now.Date;
+        up.permissionId = (int)Enums.Permissions.EmailPermission;
+        up.status = true;
+        up.userId = userId;
+        PostAroundServiceClient client = new PostAroundServiceClient();
+        int response = client.SetUserPermission(up);
+        client.Close();
+    }
+
     private int SaveUserInDB(User user)
     {
         int userId;
+
         PostAroundServiceClient client = new PostAroundServiceClient();
         userId = client.InsertUpdateUser(user);
+        
         client.Close();
         return userId;
 
