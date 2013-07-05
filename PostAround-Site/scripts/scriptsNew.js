@@ -548,8 +548,8 @@ $(function () {
 
     function SetSlide() {
 
-        $("#slider").slider("value", 4000);
-        $("#amount").val("4KM");
+        $("#slider").slider("value", 3000);
+        $("#amount").val("3KM");
 
 
 
@@ -1391,7 +1391,7 @@ $(function () {
 
     function ChangeToSmallHeaderStep2() {
         if ($('#MapPas').css("display") != "none") {
-            $('#MapPas').slideUp("slow", "linear");
+            //$('#MapPas').slideUp("slow", "linear");
             MakeAddressLinkability();
 
             $("#CategoriesBar").fadeIn();
@@ -2501,7 +2501,7 @@ $(function () {
 
     function SetLocationInAddressBar() {
         if (history.pushState) {
-            var address_no_space = address.ReplaceAll(",", "").ReplaceAll(" ", "_")
+            var address_no_space = address.ReplaceAll(",", "").ReplaceAll(" ", "_").ReplaceAll("/", "_")
             var stateObj = { "address": address };
             history.pushState(stateObj, 'Viewing Posts Around ' + address, rootDir + 'in/' + address_no_space);
         }

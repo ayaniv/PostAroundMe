@@ -69,7 +69,7 @@ public partial class Controls_SinglePost : BaseControl
                 ltrlAddress.Text = msg.msgAddress;
                 directionAddress = GetLanguageDirection(ltrlAddress.Text);
                 BigBoxAddress = ltrlAddress.Text;
-                BigBoxAddressNoSpace = BigBoxAddress.Replace(",", "").Replace(" ", "_");
+                BigBoxAddressNoSpace = BigBoxAddress.Replace(",", "").Replace(" ", "_").Replace("/", "_");
                 ltrlUserImage.Text = "<img src=" + msg.userImage + " style='height:50px; width:50px; border-radius:50px; border-bottom-right-radius:2px; border:0;' />";
                 ltrlName.Text = msg.Name;
                 ltrlDate.Text = "On " + msg.Date; //+ " at " + msg.Time;
