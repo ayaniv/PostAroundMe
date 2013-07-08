@@ -15,10 +15,10 @@ public partial class Controls_MetaTags : BaseControl
     
     protected void Page_Load(object sender, EventArgs e)
     {
-        
 
-        string title = "Post Around Me | Local Pinboard";
-        string description = "Turn your Facebook into a bulletin board based on your locaion, that finds you what closest to you !";
+
+        string title = "PostAround.Me • Local Pinboard";
+        string description = "Turn your Facebook into a bulletin board based on your locaion, that finds you what's closest to you !";
         string url = siteUrl.TrimEnd('/');
         string image = siteUrl + "images/facebook_ogimage.png";
         string admin = "567517451";
@@ -59,7 +59,7 @@ public partial class Controls_MetaTags : BaseControl
         {
             author = "";
             admin = "567517451";
-            title = "שכונת ביצרון  - לוח המודעות השכונתי";
+            title = "לוח מודעות שכונת ביצרון  - לוח המודעות השכונתי";
             description = "מה קורה בשכונת ביצרון? לוח מודעות שיתופי המיועד לתושבי השכונה. המקום שלכם ליצור קשר עם השכנים שלכם";
             url = "http://postaround.me/ll/32.069798,34.795407";
             
@@ -70,7 +70,7 @@ public partial class Controls_MetaTags : BaseControl
         {
             author = "";
             admin = "567517451";
-            title = "לוח מודעות - אוניברסיטת תל אביב";
+            title = "לוח מודעות אוניברסיטת תל אביב - לוח המודעות השכונתי";
             description = "מה קורה באוניברסיטת תל אביב? לוח מודעות שיתופי המיועד לכל מי שנמצא באיזור אוניברסיטת תל אביב. המקום לעדכן ולהתעדכן על כל מה שקורה בסביבה";
             url = "http://postaround.me/ll/32.1112796,34.8014162";
             

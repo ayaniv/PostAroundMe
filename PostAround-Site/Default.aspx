@@ -303,7 +303,7 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
 
                 <div class="Text" style="direction:${GetLanguageDirection(description)}">{{html FormatText(description)}}</div>
                 
-                <div class="MessageName" style="margin-top:10px;">
+                <div style="margin-top:10px; display:none"">
                     
                     <div id="CurrLat" style="display:none">${latitude}</div>
                     <div id="CurrLng" style="display:none">${longitude}</div>
@@ -316,19 +316,18 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
                 </div>
 
                 <div class="MessageName" style="position:relative">
-                    <a href="${link}" target="_blank"><img src="${userImage}" style="border:0; border-radius:50%; border-bottom-right-radius:2px; float:left; width:50px; height:50px; margin-right:6px" /></a> 
-                    <a href="${link}" target="_blank" style="margin-top:17px;  position:absolute;">${Name}</a>
-                    <br />
-                    <span style="margin-top:17px;  position:absolute;">${Date}</span>
+                    <a href="${link}" target="_blank"><img src="${userImage}" class="UserAvatar" /></a> 
+                    <a href="${link}" style="padding-top:10px"  target="_blank">${Name}</a>
                     <br />
                     
 
                     
                     <div style="height:22px; width:100%; padding-top:7px;" class="SharingArea">
-                            <div class="ShareButton" style="width:192px; height:22px; font-size:13px; font-family:Tahoma, Verdana, Arial;  color:#666; float:left;">
+                            <div class="ShareButton" style="width:100%; height:22px; font-size:13px; font-family:Tahoma, Verdana, Arial;  color:#666; float:left;">
                                 <span class="ShareIcon"></span>
                                 <span style="margin-left:4px; font-weight:bold; float:left;">${totalShares}</span>
                                 <span style="margin-left:4px; float:left; text-transform:uppercase">Shares</span>
+                                <span style="float:right; color:#b2b2b2">${Date}</span>
                             
 
                                         </div>

@@ -138,7 +138,7 @@ h1 span
  .UserBox .Text .Account {float:left; vertical-align:middle; color:#82898e; display:block; float:left; margin-left:3px; }
 .Icon {background-image:url('../images/trainagle_grey.png'); width:9px; height:6px; float:left; margin-top:5px; margin-left:4px;}
  .UserBox .Image {float:left; }
- .UserBox .Text .Image img {width:24px; height:24px;}
+ .UserBox .Text .Image img {width:28px; height:28px; border-radius:50%;}
 .MoreBox 
 {
 	 padding:1px; background-color:#6AA1BB; border:1px solid #e2ddcf; margin-left:-8px; 
@@ -196,10 +196,17 @@ h1 span
 
 .Content .Box .BoxBody .BoxImage .Border img { width:235px; border:3px solid #FFF; background-color:#EAEDEE; }
 .Content .Box .BoxBody .Text { margin-top:15px; float:left; width:243px; font-family:Tahoma,Arial;  }
-.Content .Box .BoxBody .MessageName { font-size:12px; color:#b2b2b2; margin-top:15px; float:left; width:100% }
-									  
-.Content .Box .BoxBody .MessageName a {font-size:12px; /*color:#888888;*/ font-weight:bold; /*text-decoration:none;*/}
 
+.Content .Box .BoxBody .MessageName { font-size:12px; margin-top:15px; color:#b2b2b2; float:left; width:100% }
+.Content .Box .BoxBody .MessageName a {font-size:12px; float:left; font-weight:bold; /*text-decoration:none;*/}
+    .Content .Box .BoxBody .MessageName .UserAvatar {
+        border: 0;
+        border-radius: 50%;
+        float: left;
+        width: 36px;
+        height: 36px;
+        margin-right: 6px;
+    }
 .Content .Box .BoxBody .MessageName .zoomIn { font-weight:normal; }
 
  .Marker { background:url('../images/icons.png') -219px -145px; width:9px; height:13px; float:left; }
@@ -375,7 +382,7 @@ h1 span
 .Bottom .CommentsArea { background-color:#F2F2F2; }
 .Bottom .CommentsArea .SingleComment { word-wrap:break-word; float:left; padding-left:15px; padding-right:15px; width:241px;padding-bottom:5px; padding-top:5px; position:relative; margin-left: 1px; }
 .Bottom .CommentsArea .SingleComment .CommentImage { float:left; }
-.Bottom .CommentsArea .SingleComment .CommentImage img { width:24px; height:24px; } 
+.Bottom .CommentsArea .SingleComment .CommentImage img { width:24px; height:24px; border-radius:50%; } 
 .Bottom .CommentsArea .SingleComment .CommentWrapper { width:215px; float:left; }
 #BigBoxComments .Bottom .CommentsArea .SingleComment .CommentWrapper { width:558px;  }
 #BigBoxComments .Bottom .CommentsArea .SingleComment { width:582px; padding-left:11px; padding-right:11px; }

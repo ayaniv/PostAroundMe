@@ -109,7 +109,7 @@
     <form id="form1" runat="server">
     <div>
 
-        Redirects to <a href="http://postaround.me" target="_top">PostAround.Me | Local Pinboard</a>...
+        Redirects to <a href="http://postaround.me" target="_top">PostAround.Me • Local Pinboard</a>...
     <script type="text/javascript">
 
  

@@ -35,7 +35,7 @@
         
         <div style="width:270px; text-align:center; height:90px; background:url('<%=siteUrl%>images/logoBg3.png') repeat-x; float:left;">
         
-            <div class="LogoClear"><a href="<%=siteUrl %>"><img src="<%=siteUrl%>images/logoHead.png" title="PostAround.Me | Local Pinboard"  style="width:246px; height:43px; border:0" /></a></div>
+            <div class="LogoClear"><a href="<%=siteUrl %>"><img src="<%=siteUrl%>images/logoHead.png" title="PostAround.Me • Local Pinboard"  style="width:246px; height:43px; border:0" /></a></div>
             <div class="LogoText">Local Pinboard</div>
         
         
