@@ -6,7 +6,7 @@
 </div>
 
 <div id="FeedbackFacebook" class="PopupBox" style="width:516px; background-color:#FFF; height:440px; opacity:1; filter:alpha(opacity=100); z-index:200; margin-left:320px;  margin-top:55px; box-shadow: 1px 1px 10px #000; -moz-box-shadow: 1px 1px 10px #000; -webkit-box-shadow: 1px 1px 10px #000; display:none " >
-        <div style="width:100%; height:40px; background-image:url('<%=siteUrl%>images/addMessageBgTop.gif'); background-repeat:repeat-x; ">
+        <div style="width:100%; height:40px; background-image:url('images/addMessageBgTop.gif'); background-repeat:repeat-x; ">
             <div style="padding:9px; font-size:20px; font-weight:500; color:#57849d;">
                 <div class="PopupTitle">&nbsp;</div>
                 <div style="float:right; cursor:pointer;" class="xbuttonPopUp">x</div>

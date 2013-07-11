@@ -10,6 +10,8 @@ namespace PostAround.Entities
     public class MyMessage
     {
         [DataMember]
+        public string relativeDate { get; set; }
+        [DataMember]
         public int msgId { get; set; }
         [DataMember]
         public string latitude { get; set; }

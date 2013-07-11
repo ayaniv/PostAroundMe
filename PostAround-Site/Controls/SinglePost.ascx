@@ -67,7 +67,7 @@
 
         
                 <div style="clear:both; margin-top:10px;font-size:14px; color:#3b3b3d; float:left;"><asp:Literal ID="ltrlCategory" runat="server"></asp:Literal></div>  
-       <div style="float:right; text-transform:uppercase; word-break:break-word; color:#3b3b3d; font-size:24px; margin-top:10px;  "><asp:Literal ID="ltrlTitle" runat="server"></asp:Literal></div>
+       <div style="float:right; text-transform:uppercase; word-break:break-word; color:#3b3b3d; font-size:24px; margin-top:10px; " runat="server" id="titleContainer"><asp:Literal ID="ltrlTitle" runat="server"></asp:Literal></div>
         
                 <div id="BigBoxMedia" class="BigBoxMedia" style="clear:both; margin-bottom:10px; width:610px; text-align:center">
         <asp:Literal ID="ltrlMedia" runat="server"></asp:Literal>

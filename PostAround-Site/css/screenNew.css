@@ -175,13 +175,13 @@ h1 span
 .SelectedCategoryInBar { left:10px; display:none; position:absolute; width:15px; height:14px; background:url('../images/icons.png') -315px -7px; margin-top:-4px; }
 
 .Content .Box {  position:absolute; width:273px; float:left; /*box-shadow: 1px 1px 1px #c0bcb1; -moz-box-shadow: 1px 1px 1px #c0bcb1; -webkit-box-shadow: 1px 1px 1px #c0bcb1; */ }
-.Content .Box .BoxBody {  float:left; width:100%; position:relative; box-shadow: 0 0 3px #888; border-radius: 3px; background-color:#fff; /* border-right:1px solid #cbcac9; border-bottom:1px solid #cbcac9 ; border-left:1px solid #E2DDCF;*/    }
+.Content .Box .BoxBody {  float:left; width:100%; position:relative; -webkit-box-shadow:0 1px 3px 0 rgba(0,0,0,0.33); box-shadow: 0 1px 3px 0 rgba(0,0,0,0.33); border-radius: 3px; background-color:#fff; /* border-right:1px solid #cbcac9; border-bottom:1px solid #cbcac9 ; border-left:1px solid #E2DDCF;*/    }
 .Content .Box .BoxBody .TextArea { position:relative; width:243px; padding-left:15px; float:left; background-color:#fff; padding-right:15px; padding-bottom:4px; padding-top:4px; }
 .Content .Box .BoxBody .BoxHead { width:243px; float:left; }
 .Content .Box .BoxBody .BoxHead .BoxTitle { /*width:176px;*/ height:27px; float:left }
 .Content .Box .BoxBody .BoxHead  .BoxCategory { margin-top:0px; float:left; color:#a3a3a3; font-size:12px; }
 .Content .Box .BoxBody .BoxHead  .BoxLocation { float:right }
-.BoxHeader { margin-top:0px; float:left; text-transform: uppercase; width:100%; color:#424e55; font-size:18px;  word-break:break-word; }
+.BoxHeader { margin-top:0px; float:left; text-transform: uppercase; width:100%; color:#424e55 !important; font-family:Arial, Helvetica, sans-serif !important; font-size:18px;  word-break:break-word; }
 .Content .Box .BoxBody .BoxHead .BoxDistance { width:64px; float:right; height:27px }
 .Content .Box .BoxBody .BoxHead .Word { font-family:Arial; cursor:pointer; text-decoration:none; float:left; margin-top:0px; float:right;  color:#666; font-size:12px; font-style:italic; text-align:right;  }
 .Content .Box .BoxBody .BoxHead .BoxDistance .Meters { float:left; margin-top:-2px; float:right;  font-family:Calibri, Arial; width:100%; text-align:right; font-weight:bold; font-style:italic; font-size:16px; color:#6aa1bb }

@@ -1752,9 +1752,10 @@ $(function () {
         ShowPopUp.apply(this);
     });
 
-    $("#Marker").live("click",
+
+    $("#LinkToPost").live("click",
     function () {
-        $('#ShowOnMap').click();
+        ShowPopUp.apply(this);
     });
 
 
@@ -2420,6 +2421,7 @@ $(function () {
 
 
     function ShowPopUp() {
+        debugger;
         PopUpIsOpened = true;
         var href = $(this).attr("href");
 

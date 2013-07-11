@@ -77,7 +77,11 @@ public partial class Controls_SinglePost : BaseControl
                 //fullDate = msg.FullDate;
                 ltrlCategory.Text = msg.category;
                 ltrlTitle.Text = msg.title;
+                titleContainer.Style.Add("direction", GetLanguageDirection(ltrlTitle.Text));
+                titleContainer.Style.Add("text-align", GetLanguageDirection(ltrlTitle.Text));
+
                 ltrlText.Text = FormatText(msg.description);
+
                 directionDescription = GetLanguageDirection(ltrlText.Text);
                 alignDescription = directionDescription == "ltr" ? "left" : "right";
                 bigBoxLineColor = msg.catColor;

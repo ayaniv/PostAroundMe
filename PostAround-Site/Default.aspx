@@ -273,7 +273,7 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
                             
                             </div>
                         </div>
-                            <div class="BoxHeader" style="direction:${GetLanguageDirection(title)}; text-align:${GetLanguageDirection(title)};">${title}</div>
+                            <a href="<%=siteUrl %>post/${msgId}" onclick="return false;" id="LinkToPost" class="BoxHeader" style="direction:${GetLanguageDirection(title)}; text-align:${GetLanguageDirection(title)};">${title}</a>
 
 
 
@@ -317,17 +317,19 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
 
                 <div class="MessageName" style="position:relative">
                     <a href="${link}" target="_blank"><img src="${userImage}" class="UserAvatar" /></a> 
-                    <a href="${link}" style="padding-top:10px"  target="_blank">${Name}</a>
+                    <span style="width:201px; padding-top:3px;  float:left; color:#d2d2d2; font-weight:bold">Posted By</span><br />
+                    <a href="${link}" style="width:201px;"  target="_blank">${Name}</a>
                     <br />
                     
 
                     
                     <div style="height:22px; width:100%; padding-top:7px;" class="SharingArea">
-                            <div class="ShareButton" style="width:100%; height:22px; font-size:13px; font-family:Tahoma, Verdana, Arial;  color:#666; float:left;">
+                            <div class="ShareButton" style="width:100%; height:22px; font-size:12px; font-family:Tahoma, Verdana, Arial;  color:#666; float:left;">
                                 <span class="ShareIcon"></span>
-                                <span style="margin-left:4px; font-weight:bold; float:left;">${totalShares}</span>
-                                <span style="margin-left:4px; float:left; text-transform:uppercase">Shares</span>
-                                <span style="float:right; color:#b2b2b2">${Date}</span>
+                                <span style="margin-left:4px; margin-top:1px; color:#b2b2b2; font-weight:bold; float:left;">${totalShares}</span>
+                                <span style="margin-left:4px; margin-top:1px; color:#b2b2b2; float:left;">Shares</span>
+                                <span style="float:left; color:#b2b2b2; margin-top:1px; margin-left:4px; margin-right:4px; display:none">· ${totalViews} Views ·</span>
+                                <span style="float:right; color:#b2b2b2; margin-top:1px;">${relativeDate}</span>
                             
 
                                         </div>
