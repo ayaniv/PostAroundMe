@@ -404,6 +404,8 @@ public class PostAroundService : IPostAroundService
     }
 
 
+
+
     public List<MyMessage> GetMessages(string currLat, string currLon, int userId, int skipNum, int takeNum, int isMine, List<int> lstCatID, int sotyBy, int timeZone = 0, int uptoMeters = -1, int regionId = 0)
     {
         
@@ -497,6 +499,55 @@ public class PostAroundService : IPostAroundService
 
     }
 
+    
+    public int ActivateUserLoginByLoginID(int loginID, int userID)
+    {
+        LoginTableAdapter loginAdapter = new LoginTableAdapter();
+        return loginAdapter.ActivateUserLoginByLoginID(loginID, userID);
+    }
+
+
+
+    public int CheckLoginData(LoginDetail data)
+    {
+        int res = -1;
+        Object obj;
+        try
+        {
+            LoginTableAdapter loginAdapter = new LoginTableAdapter();
+            obj = loginAdapter.CheckLoginData(data.email, data.password);
+            if (obj != null)
+            {
+                res = Convert.ToInt32(obj);
+            }
+        }
+        catch (Exception ex)
+        {
+            EventLog.WriteEntry("Yaniv program", ex.Message, EventLogEntryType.SuccessAudit, 1);
+        }
+        return res;
+    }
+
+    public int InsertLoginDetails(LoginDetail data)
+    {
+        int res = -1;
+        Object obj;
+        try
+        {
+            LoginTableAdapter loginAdapter = new LoginTableAdapter();
+            obj = loginAdapter.InsertLoginDetails(data.UserID, data.email, data.password);
+            if (obj != null)
+            {
+                res = Convert.ToInt32(obj);
+            }
+        }
+        catch (Exception ex)
+        {
+            EventLog.WriteEntry("Yaniv program", ex.Message, EventLogEntryType.SuccessAudit, 1);
+        }
+        return res;
+    }
+
 
     public int InsertMessage(MyMessage msg)
     {
@@ -529,6 +580,18 @@ public class PostAroundService : IPostAroundService
         if (obj != null)
             retVal = Convert.ToInt32(obj);
         return retVal;
+    }
+
+    public User GetUserByEmail(string email)
+    {
+        List<User> lstUsers = new List<User>();
+
+        UsersTableAdapter usersAdapter = new UsersTableAdapter();
+        PostAroundMeDataSet.UsersDataTable dtResult = usersAdapter.GetUserByEmail(email);
+
+        lstUsers = UserTranslator(dtResult);
+
+        return lstUsers.FirstOrDefault();
     }
 
     public User GetUserByID(int ID)

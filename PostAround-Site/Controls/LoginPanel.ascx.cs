@@ -447,7 +447,7 @@ public partial class Controls_LoginPanel : BaseControl
         if (user != null)
         {
             UserName.InnerHtml = user.firstName + " " + user.lastName;
-            UserImage.InnerHtml = "<img src=" + user.avatarImageUrl + "/>";
+            UserImage.InnerHtml = "<img src=" + user.avatarImageUrl + " />";
         }
         else
         {

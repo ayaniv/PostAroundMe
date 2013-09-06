@@ -5,6 +5,17 @@ html, body {height:100%; margin:0 0 0 0; font-family: Arial, Helvetica,  sans-se
 
 input, textarea, a:link, select { outline: none; }
 
+.LoginSignUpBox {
+    float:left; width:323px; overflow:hidden;
+}
+
+.field-wrapper {
+    float: left;
+    width:49%;
+}
+label {
+    color:#3c3c3c; font-size:14px; font-family:Arial, Tahoma, sans-serif;
+}
 
 .arrow{ display:none; margin-top:300px; position:absolute; top:0; padding:10px; cursor:pointer}
 
@@ -84,10 +95,13 @@ h1 span
 .LogoText {  font-style:italic; color:#a4a8ab; font-size:20px; font-family:Georgia, Arial, Calibri, Arial;  }
 
 
-/*.PostBox {width:485px; height:37px; float:left; position:relative;}*/
+.PostBox {
+    margin:0 auto; width:922px; height:42px; padding:6px 0px 6px 0; 
+
+}
 .PostBox .Shpitz { z-index:2; background-image:url('../images/input_shpitz.png'); margin-top:1px; height:58px; width:7px; float:left; }
-.PostBox .Field { height:38px; padding:3px; width:666px; background-color:#eaedee; /* background-image:url('../images/mainBoxBg2.png'); margin-left:-3px;*/  }
-.PostBox .Field input[type="text"] { float:left; background: #FFF url('../images/locationInputBg.png') 0 0; /*margin-top:5px;*/ height:28px; width:527px; border:1px inset #c0c0c0; font-family:Arial; padding-left:9px; font-size:20px; padding-top:4px; padding-bottom:4px; padding-right:10px; color:#a3a3a3;}
+.PostBox .Field { height:38px; padding:3px; float:left; background-color:#eaedee; /* background-image:url('../images/mainBoxBg2.png'); margin-left:-3px;*/  }
+.PostBox .Field input[type="text"] { float:left; background: #FFF; /*margin-top:5px;*/ height:28px; width:777px; border:1px inset #c0c0c0; font-family:Arial; padding-left:9px; font-size:20px; padding-top:4px; padding-bottom:4px; padding-right:10px; color:#a3a3a3;}
 .PostBox .Field .BlackText { color:#333 !important; }
 
 
@@ -103,8 +117,113 @@ h1 span
   color: #424E55;
 }
 
+.appContent {
+     width:440px; padding:20px; background: #fff; margin:20px auto; position:relative; border-radius:4px; -webkit-box-shadow: 0 1px 3px 0 rgba(0,0,0,0.33); box-shadow: 0 1px 3px 0 rgba(0,0,0,0.33);
+}
+
+.createNewAccount {
+     font-family: Trebuchet MS, Arial, Sans-Serif; color: #808080; padding-top: 4px; color: #6AA1BB; float: right; font-weight: lighter; font-size: 13px
+}
+.LoginPanel {  width: 969px; list-style-type: none; position: relative; }
+
+    .LoginPanel .LoginSignUpBox  {
+        /*visibility: hidden;*/
+    }
+
+.DisplayBlock {
+
+    visibility:visible !important;
+
+}
+
+.LoginMessageToDelete {
+    
+    border: 1px solid #FFF;
+    border-top: 0;
+    
+    padding-bottom: 5px;
+    
+    
+}
+
+.AddPostField {
+    float:left;
+    margin-bottom:6px;
+}
+
+.LoginMessage {
+    
+    float: left;
+    border: 6px solid #fff;
+    background-color: #FFF;
+    width: 320px;
+    
+    box-shadow: 0px 6px 6px #666;
+    -moz-box-shadow: 0px 6px 6px #666;
+    -webkit-box-shadow: 0px 6px 6px #666;
+}
+
+.CenterLoginMessage {
+    top: 25%;
+    left: 50%;
+    margin-left: -160px;
+    position: fixed;
+    display: none;
+    z-index: 10001;
+}
+
 #liAddPost { cursor:pointer; }
-#PopupBox textarea, #PopupBox input { font-family:Tahoma, Arial; font-size:14px; border:solid 1px #B8B8B8; color:#3C3C3C; resize:none; overflow:hidden; padding:4px; }
+#PopupBox textarea, #PopupBox input[type="text"] { font-family:Tahoma, Arial; font-size:14px; border:solid 1px #B8B8B8; color:#3C3C3C; resize:none; overflow:hidden; padding:4px; }
+
+.uiStickyPlaceholderInput .placeholderField {
+    position: absolute; top:0; left:0; padding:6px 4px 4px 5px; cursor:text; background:transparent;
+    font-family:Tahoma, Arial; font-size:14px; color:#999; resize:none; overflow:hidden; height:19px; display:none;
+}
+
+.uiStickyPlaceholderInputFocus .placeholderField {
+    color:#c0c0c0 !important;
+}
+
+.PostBox .uiStickyPlaceholderInput .placeholderField {
+    
+    font-family:Tahoma, Arial; font-size:20px; resize:none; overflow:hidden; height:19px;  padding:5px 10px 5px 11px;
+}
+
+
+hr.style-six {
+    border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+hr.style-eight {
+    padding: 0;
+    border: none;
+    border-top: medium double #999;
+    color: #999;
+    text-align: center;
+}
+hr.style-eight:after {
+    content: "or";
+    display: inline-block;
+    position: relative; 
+    top: -0.7em;  
+    font-size: 1.5em;
+    padding: 0 0.25em;
+    background: white;
+}
+
+
+
+.uiStickyPlaceholderEmptyInput .placeholderField {
+    display:block;
+}
+
+.uiStickyPlaceholderInput {
+    position:relative;
+    display:inline-block;
+}
 
 .PopupBox { position:absolute; left:0; z-index:300; }
 
@@ -181,11 +300,183 @@ h1 span
 .Content .Box .BoxBody .BoxHead .BoxTitle { /*width:176px;*/ height:27px; float:left }
 .Content .Box .BoxBody .BoxHead  .BoxCategory { margin-top:0px; float:left; color:#a3a3a3; font-size:12px; }
 .Content .Box .BoxBody .BoxHead  .BoxLocation { float:right }
-.BoxHeader { margin-top:0px; float:left; text-transform: uppercase; width:100%; color:#424e55 !important; font-family:Arial, Helvetica, sans-serif !important; font-size:18px;  word-break:break-word; }
+.BoxHeader { margin-top:0px; display:block; float:left; text-transform: uppercase; width:100%; color:#424e55 !important; font-family:Arial, Helvetica, sans-serif !important; font-size:18px;  word-wrap:break-word; }
 .Content .Box .BoxBody .BoxHead .BoxDistance { width:64px; float:right; height:27px }
 .Content .Box .BoxBody .BoxHead .Word { font-family:Arial; cursor:pointer; text-decoration:none; float:left; margin-top:0px; float:right;  color:#666; font-size:12px; font-style:italic; text-align:right;  }
 .Content .Box .BoxBody .BoxHead .BoxDistance .Meters { float:left; margin-top:-2px; float:right;  font-family:Calibri, Arial; width:100%; text-align:right; font-weight:bold; font-style:italic; font-size:16px; color:#6aa1bb }
 .Content .Box .BoxBody .BoxImage { float:left; margin-top:15px; }
+
+.join-with-email {
+    padding:2px 0 4px 0;
+    text-align:center;
+}
+
+    .join-with-email a {
+        color: #959595;
+        cursor:pointer;
+        -webkit-transition: color 0.2s;
+        font-size:13px;
+
+    }
+
+.blue-link-button {
+      font-size: 12px;
+  line-height: 25px;
+  font-weight: normal;
+  color: #1d9ee1;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.input-text {
+    font-family:Arial; font-size:14px; color:#3c3c3c; width:293px; border-radius:3px; margin-bottom:6px; border:solid 1px #c8c8c8; height:19px; padding:4px; padding-top:6px;
+    resize:none; overflow:hidden; background:#fff;
+}
+
+.login-panel-text {
+    float:left; padding-left:10px; padding-right:10px; margin-top:10px;
+    color:#333; margin:0 auto;padding-bottom:20px; background-color:#EAEDEE; font-family:Trebuchet MS, Arial, Sans-Serif; text-align:left;
+}
+
+.ErrorText {
+    font-size: 14px;
+    color: #f00;
+    font-weight: bold;
+    display:none;
+}
+
+.LoginSeparator {
+    height:10px; background:url('../images/separator.png') -31px 9px no-repeat; margin-bottom:18px; margin-right:10px; color:#666; margin-left:10px; text-align:center; font-size:12px; font-weight:bold; font-family:'Trebuchet MS', Arial, sans-serif;
+}
+
+
+.ErrorMessageArea {
+   border-top:1px solid #ccc; float:left; color:red; width:303px; background-color:#EAEDEE; padding:2px 10px 8px 10px; height:26px; font-size:12px;
+}
+
+.RedBorder {
+    border-color: red !important;
+}
+
+.join-wrap {
+    padding:1px 0;
+}
+
+.panel-login {
+    padding:0 10px 0 10px;
+}
+
+.join-with-facebook-button {
+  display: inline-block;
+  padding: 4px 10px;
+  font-family: "Open Sans", "Lucida Grande", arial, sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 1px 0 #575757;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+  color: #fff;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border: 1px solid rgb(25.598%, 35.155%, 54.951%);
+  border-bottom: 1px solid rgb(19.878%, 27.299%, 42.671%);
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgb(48.527%, 57.479%,
+    76.022%);
+  -webkit-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgb(48.527%, 57.479%,
+    76.022%);
+  -moz-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgb(48.527%, 57.479%,
+    76.022%);
+  background: #4b67a1;
+  background: -moz-linear-gradient(top, rgb(34.883%, 46.208%, 69.666%) 0%,
+    rgb(27.505%, 37.774%, 59.044%) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,
+    rgb(34.883%, 46.208%, 69.666%)), color-stop(100%, rgb(27.505%,
+    37.774%, 59.044%)));
+  background: -webkit-linear-gradient(top, rgb(34.883%, 46.208%, 69.666%) 0%,
+    rgb(27.505%, 37.774%, 59.044%) 100%);
+  background: -o-linear-gradient(top, rgb(34.883%, 46.208%, 69.666%) 0%,
+    rgb(27.505%, 37.774%, 59.044%) 100%);
+  background: -ms-linear-gradient(top, rgb(34.883%, 46.208%, 69.666%) 0%,
+    rgb(27.505%, 37.774%, 59.044%) 100%);
+  background: linear-gradient(bottom, rgb(34.883%, 46.208%, 69.666%) 0%,
+    rgb(27.505%, 37.774%, 59.044%) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF5976B2',
+    endColorstr='#FF466097', GradientType=0);
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  margin: 10px 0;
+  padding: 7px 30px;
+  font-size: 15px;
+  font-weight: bold;
+  display: block;
+}
+
+.join-with-facebook-button:hover {
+  background: rgb(40.341%, 50.716%, 72.208%);
+  filter: none;
+}
+
+.gray-button {
+ 
+  display: inline-block;
+  padding: 4px 10px;
+  font-family:Arial, sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+ 
+  color: #5e5e5e;
+  text-shadow: 1px 1px 1px #FFF;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border: 1px solid #d7d7d7;
+  border-bottom: 1px solid #c0c0c0;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.15), inset 0 1px 0 #ffffff;
+  -webkit-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.15), inset 0 1px 0 #ffffff;
+  -moz-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.15), inset 0 1px 0 #ffffff;
+  background: #e6e6e6;
+  background: -moz-linear-gradient(top, #f5f5f5 0%, #dedede 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,
+    #f5f5f5), color-stop(100%, #dedede));
+  background: -webkit-linear-gradient(top, #f5f5f5 0%, #dedede 100%);
+  background: -o-linear-gradient(top, #f5f5f5 0%, #dedede 100%);
+  background: -ms-linear-gradient(top, #f5f5f5 0%, #dedede 100%);
+  background: linear-gradient(bottom, #f5f5f5 0%, #dedede 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFF5F5F5',
+    endColorstr='#FFDEDEDE', GradientType=0);
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}
+.gray-button.hover, .gray-button:focus, .gray-button:hover {
+  background: #f5f5f5;
+  filter: none;
+}
+.gray-button.active, .gray-button:active {
+  background: #cdcdcd;
+  filter: none;
+}
+.gray-button.disabled {
+  cursor: default;
+  background: none !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  color: #666666 !important;
+  border: 1px solid #aaaaaa !important;
+}
 
 
 .Content .Box .BoxBody .Border .ImageBox {
@@ -222,7 +513,7 @@ h1 span
 
 .LocationLink { cursor:pointer; }
 
-.AddMessage {  }
+.AddMessage { display:none;  }
 
 .MyButton { cursor:pointer; color:#FFF; -moz-user-select: none;-webkit-user-select: none; }
 .Orange .MyButton { background-color:#F57311; }
@@ -388,15 +679,17 @@ h1 span
 #BigBoxComments .Bottom .CommentsArea .SingleComment { width:582px; padding-left:11px; padding-right:11px; }
 
 
-.SmallXButton { display:none; cursor:pointer; background:url('../images/icons.png') -140px -4px; width:11px; height:14px; position:absolute; right:8px; float:right; }
+.SmallXButton { display:none; cursor:pointer; background:url('../images/icons.png') -140px -4px; width:11px; height:14px; position:absolute; float:right; }
 .SmallXButtonWrapper {
-     width: 14px; height: 16px; clear: both; float: right; top: 0; right: 0; padding: 5px; padding-top: 4px; position: absolute; cursor: pointer;
+     width: 14px; height: 16px; clear: both; top: 0; right: 0; padding-top: 4px; cursor: pointer; position:absolute;
+      z-index: 100; 
 }
 .Bottom .CommentsArea .SingleComment .CommentWrapper #commentUserName { margin-right:5px; margin-left:5px; }
-.Bottom .CommentsArea .SingleComment .CommentWrapper #commentUserName a { font-family:Tahoma, Arial; color:#6AA1BB; font-size:12px; font-weight:bold; } 
-.Bottom .CommentsArea .SingleComment .CommentWrapper #commentUserName .CommentText a {  font-weight:normal } 
+.Bottom .CommentsArea .SingleComment .CommentWrapper #commentUserName a { font-family:Tahoma, Arial; color:#6AA1BB; font-size:12px; font-weight:bold; line-height:16px; float:left; margin-right:4px; } 
+.Bottom .CommentsArea .SingleComment .CommentWrapper #commentUserName .CommentText a {  font-weight:normal }
 
-.Bottom .CommentsArea .SingleComment .CommentWrapper .CommentText { word-break:break-word; line-height:16px; font-family:Tahoma, Arial; text-align:left; color:#424E55; font-size:12px; }
+
+.Bottom .CommentsArea .SingleComment .CommentWrapper .CommentText {  word-wrap:break-word; display:block; line-height:16px; font-family:Tahoma, Arial; text-align:left; color:#424E55; font-size:12px; }
 .Bottom .CommentsArea .SingleComment .CommentWrapper .CommentDate { clear:both; color:#A3A3A3; font-size:11px; margin-left:5px; float:left; }
 .Bottom .CommentsArea .SingleComment .CommentWrapper .PosterOnly { color:#A3A3A3; font-size:11px; margin-left:5px; float:left; }
 
@@ -790,7 +1083,7 @@ textarea {
  
  .SendFeedback { cursor:pointer; height:22px; width:88px; background-image:url('../images/btnSend.png'); border:0px; float:right; margin-right:12px; margin-top:10px; }
  
- .MoreIcon {background-image:url('../images/trainagle_grey.png'); width:9px; height:6px; float:right; margin-top:5px; margin-left:8px;}
+ .MoreIcon {background-image:url('../images/trainagle_grey.png'); width:9px; height:6px; float:right; margin-top:5px; margin-left:8px; margin-right:3px;}
  
  .TopLinks { color:#888888; font-weight:bold; font-style:italic; font-size:20px; float:left; margin-left:4px; padding-bottom:2px; margin-right:8px; }
  

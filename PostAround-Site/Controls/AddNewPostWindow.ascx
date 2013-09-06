@@ -2,7 +2,7 @@
 
 <%@ Register src="FileUpload.ascx" tagname="FileUpload" tagprefix="uc1" %>
 
-    <div id="PopupBox" class="PopupBox" style="padding:6px; position:relative; ">
+    <div id="PopupBox" class="PopupBox" style="position:relative; ">
 
 
        <div style="float:left;">
@@ -18,10 +18,10 @@
                 <input type="checkbox" id="chkPostToWall" style="display:none;" />
 
 
-    <div style="position: relative;">
+    <div class="AddPostField">
 
 
-        <textarea maxlength="400" id="txtPopupDetails" style="width: 299px; height: 70px; padding-right: 20px; margin-top: 0; float: left; margin-bottom: 6px;" title="Details" placeholder="Spread your post around here !"></textarea>
+        <textarea maxlength="400" id="txtPopupDetails" style="width: 299px; height: 70px; padding-right: 20px; margin-top: 0; float: left; " title="Details" placeholder="Spread your post around here !"></textarea>
 
         <div id="xbutton" style="width: 14px; height: 16px; clear: both; float: right; top: 0; right: 0; padding: 5px; padding-top: 4px; position: absolute; cursor: pointer;">
             <div class="SmallXButton" style="display: block;">
@@ -30,12 +30,12 @@
     </div>
 
                                 
-                    <div style="margin-bottom:6px; width:325px;"><input maxlength="50" type="text" name="txtTitle" id="txtPopupTitle" style="font-family:Arial; font-size:14px; color:#3c3c3c; width:315px; border:solid 1px #c8c8c8; height:19px; padding:4px; padding-top:6px" title="Title" placeholder="Add Title..." /></div>
+                    <div class="AddPostField"><input maxlength="50" type="text" name="txtTitle" id="txtPopupTitle" style="font-family:Arial; font-size:14px; color:#3c3c3c; width:315px; border:solid 1px #c8c8c8; height:19px; padding:4px; padding-top:6px" title="Title" placeholder="Add Title..." /></div>
                 
 
 
                 
-                    <div id="addPostBtnCategory"  title="Category" style="margin-bottom:6px; float:left;">
+                    <div id="addPostBtnCategory"  title="Category"  class="AddPostField">
                     
                         <div id="ddlCategory"  style="-moz-user-select: none;-webkit-user-select: none; width:315px; height:19px; border:1px solid #c8c8c8; padding:4px; padding-top:6px; float:left; color:#a3a3a3; font-size:14px; background-color:#FFF; cursor:pointer;" >
                     
@@ -66,7 +66,7 @@
                 
 
 
-              <div id="CategoriesBoxAddMessage" class="DropDown" style="display:none; margin:0; margin-top:159px; border-color:#C8C8C8; border-top:0; width:321px;">
+              <div id="CategoriesBoxAddMessage" class="DropDown" style="display:none; margin:0; margin-top:154px; border-color:#C8C8C8; border-top:0; width:321px;">
                 
 
                 <asp:Repeater runat="server" ID="rptCategoriesColumn1">
@@ -103,7 +103,7 @@
                 
 
 
-               <div style="margin-bottom:6px; clear:both; float:left; width:325px;">
+               <div  class="AddPostField" style="width:325px">
                     <div id="file-uploader-demo1">		
 	                </div>
                     <uc1:FileUpload ID="FileUpload1" runat="server" />
@@ -196,8 +196,7 @@
              e.g. Xinhai Rd. Taipei, Taiwan.&nbsp; Then Click 'Go'</div>
          </div>
      </div>
-     <div style="margin-top:10px;">
-
+     <div style="margin-top:10px; display:none; ">
      
 
          <div id="ChkFacebook" class="Checkbox" >

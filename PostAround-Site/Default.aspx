@@ -160,12 +160,8 @@
 </div>
 
 
-<div id="PleaseLogin" style="display:none; float:left; border:6px solid #fff; border-right:8px solid #FFF; z-index:10001; background-color:#FFF; width:320px; top:25%; left:50%; margin-left:-160px; position:fixed;
-box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-shadow: 0px 6px 6px #666; 
+<div id="PleaseLogin" class="LoginMessage CenterLoginMessage" />
 
- ">
-	
-</div>
 
 
 
@@ -200,7 +196,7 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
                                     <div id="HideComment" class="SmallXButton"></div>
                                     {{/if}}
 
-                                    <div id="commentUserName" style="float:left">
+                                    <div id="commentUserName">
                                         <a href="${commentUserLink}" target="_blank">${name}</a>
                                         <span id="CommentText" class="CommentText"  dir="${GetLanguageDirection(body)}"  style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</span>
                                     </div>
@@ -231,7 +227,7 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
                                     <div id="HideComment" class="SmallXButton"></div>
                                     {{/if}}
 
-                                    <div id="commentUserName" style="float:left">
+                                    <div id="commentUserName">
                                         <a href="${commentUserLink}" target="_blank">${name}</a>
                                         <span id="CommentText" class="CommentText"  dir="${GetLanguageDirection(body)}"  style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</span>
                                     </div>
@@ -398,7 +394,7 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
                                     <div id="HideComment" class="SmallXButton"></div>
                                     {{/if}}
 
-                                    <div id="commentUserName" style="float:left">
+                                    <div id="commentUserName">
                                         <a href="${commentUserLink}" target="_blank">${name}</a>
                                         <span id="CommentText" class="CommentText" dir="${GetLanguageDirection(body)}" style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</span>
                                     </div>

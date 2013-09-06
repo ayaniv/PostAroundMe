@@ -15,6 +15,10 @@ public partial class Controls_AddPostContainer2 : BaseControl
             // user is logged in - show add message
             NewPost1.Visible = true;
             LoginMessage.Visible = false;
+            
+            Container.Style.Add("width", "325px");
+            Container.Style.Add("margin-left", "1px");
+
 
         }
         else

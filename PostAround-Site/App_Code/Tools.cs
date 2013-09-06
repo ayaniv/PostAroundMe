@@ -9,6 +9,7 @@ using System.Configuration;
 using System.Security.Cryptography;
 using System.Net.Mail;
 using System.Threading;
+using System.Globalization;
 
 /// <summary>
 /// Summary description for Tools
@@ -57,6 +58,17 @@ public static class Tools
 
         // Close the stream:
         log.Close();
+    }
+
+    public static string HashIt(string toBeHashed)
+    {
+        string hashedValue = "";
+
+        SHA256 alg = SHA256.Create();
+        alg.ComputeHash(Encoding.UTF8.GetBytes(toBeHashed));
+        hashedValue = BitConverter.ToString(alg.Hash);
+
+        return hashedValue;
     }
 
 
@@ -165,6 +177,16 @@ public static class Tools
  
     }
 
+    public static string Capitalize(string s)
+    {
+        return char.ToUpper(s[0]) + s.Substring(1).ToLower();
+    }
+
+    public static bool InputCheck(string whatToCheck, string regexValidate)
+    {
+        return true;
+    }
+
 
     public static bool IsDirectLink(HttpContext context)
     {
@@ -234,6 +256,7 @@ public static class Tools
     }
 
 
+  
 
     
 

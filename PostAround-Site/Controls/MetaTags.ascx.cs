@@ -18,7 +18,7 @@ public partial class Controls_MetaTags : BaseControl
 
 
         string title = "PostAround.Me • Local Pinboard";
-        string description = "Turn your Facebook into a bulletin board based on your locaion, that finds you what's closest to you !";
+        string description = "PostAround.me connects you with the people around you, and lets you share anything you want with them! It’s your local pinboard, tailored to your location. Who knew that your neighbors were so useful ;)";
         string url = siteUrl.TrimEnd('/');
         string image = siteUrl + "images/facebook_ogimage.png";
         string admin = "567517451";

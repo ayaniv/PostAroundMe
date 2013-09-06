@@ -178,7 +178,7 @@
       <div id="MapPasShade" style="position:absolute; z-index:1; width:100%; height:18px; top:0;"></div>
       <div id="MapPasText" style="background:url('<%=siteUrl%>images/bgWhite80.png'); height:90px; width:862px; position:relative; margin:0 auto; top:27px; padding:25px 30px;">
       <div style="float:left"> 
-      <h1>What’s good <span>in the hood !</span></h1>
+      <h1>What’s good <span>in my hood ?</span></h1>
       </div>
       <div style="float:left; margin-left:40px; margin-right:30px; width:1px; height:100%; background-color:#505050;"></div>
       <div style="float:left; text-transform:uppercase; color:#505050; font-family: Trebuchet MS, Arial; text-align:center; width:420px; font-size:18px; padding:20px 15px 0 15px;">
@@ -191,7 +191,7 @@
       <div id="MapReal" style="display:none; height:190px; width:100%;"></div>
       </div>
       
-      <div id="MapPasBottom" style="width:100%; /*min-width:910px;*/ position:relative;  z-index:10; float:left; background-color:#fcfcfc; border-bottom:1px solid #e1dfdc; border-top:1px solid #e1dfdc;">
+      <div id="MapPasBottom" style="width:100%; /*min-width:910px;*/ position:relative;  z-index:10; float:left; background-color:#fefdd8; border-bottom:1px solid #e1dfdc; border-top:1px solid #e1dfdc;">
       <uc1:LocationBar ID="LocationBar" runat="server" />
       <uc1:SearchLocation ID="SearchLocation1" runat="server" />
 

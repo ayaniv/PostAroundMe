@@ -166,7 +166,7 @@
                                     <h3>When the numbers are published?</h3>
                 <div>
                     The Lottery takes place every two month. The results for two month are published on the 25th of the next month.<br />
-                    (i.e. the results for 3-4/2013 will be published on 25/5/2013)<br />
+                    (i.e. the results for 5-6/2013 will be published on 25/7/2013)<br />
                     We will do our best to serve you the results within the same date.<br />
                     So you will be able to check them easily with our online checker.<br />
                     <b>In case you are faster than us - just write them down in textboxes above</b>

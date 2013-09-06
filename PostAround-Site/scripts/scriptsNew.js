@@ -496,6 +496,7 @@ $(function () {
         if (input.val() == input.attr('placeholder')) {
             input.val('');
             input.removeClass('placeholder');
+           
         }
     }).blur(function () {
         var input = $(this);
@@ -527,16 +528,12 @@ $(function () {
 
 
     $("#content").focus(function () {
-        $(this).css('background-position', '0px -35px');
+        //$(this).css('background-position', '0px -35px');
     });
     $("#content").blur(function () {
         if ($("#content").val() == '') {
-            //            if (myLon == "" && myLat == "") {
-            //                $("#WelcomeBubble").show();
-            //                $("#AutoDiscoverBubble").hide();
-            //            }
-            //$("#content").val('Street Address, City, State');
-            $(this).css("background", "#FFF url('images/locationInputBg.png') 0 0");
+            
+            //$(this).css("background", "#FFF url('images/locationInputBg.png') 0 0");
         }
         else {
             hasValue = true;
@@ -623,6 +620,7 @@ $(function () {
     });
 
     function HideAddMessageWindow() {
+        $(".signup-why-join-text").hide();
         $('#txtPopupDetails1').show();
         $("#AddMessageWindow").hide();
         $('#fuzz').hide();
@@ -639,7 +637,7 @@ $(function () {
             $('.qq-upload-drop-area').hide();
 
             if (isNewMessage) {
-                SetPostToFacebookCheckBoxIfPermissionAlreadyGranted();
+               // SetPostToFacebookCheckBoxIfPermissionAlreadyGranted();
 
                 if (HasAddress())
                     ShowLocationInAddMessgae();
@@ -917,7 +915,7 @@ $(function () {
         FB.api('/me/permissions', checkAppUserPermissions);
 
         function checkAppUserPermissions(response) {
-            debugger;
+            
             if (response.data[0].publish_stream != 1)
                 $("#ChkFacebook").click();
         }
@@ -928,7 +926,7 @@ $(function () {
         FB.api('/me/permissions', SetCheckBoxToTrue);
 
         function SetCheckBoxToTrue(response) {
-            debugger;
+            
             if (response.data[0].publish_stream == 1) {
                 $("#chkFacebookTrue").show();
                 $("#chkPostToWall").attr('checked', true);
@@ -1438,6 +1436,8 @@ $(function () {
     }
 
 
+    
+
 
     $('.slider-button-off').live('click', function () {
         if ($(this).parents('.slider-frame').attr("IsPrivate") != "true") {
@@ -1464,7 +1464,7 @@ $(function () {
 
 
 
-
+    
 
     $('#AutoDiscover').hover(function () {
         $(this).addClass('underline pointer');
@@ -1486,23 +1486,23 @@ $(function () {
 
 
 
-    $('#addMessageAddressInput').click(function () {
-        if ($(this).val() == "Enter address, location, city or zipcode...") $(this).val('')
-    });
+    //$('#addMessageAddressInput').click(function () {
+    //    if ($(this).val() == "Enter address, location, city or zipcode...") $(this).val('')
+    //});
 
-    $('#addMessageAddressInput').blur(function () {
-        if ($(this).val() == '') $(this).val('Enter address, location, city or zipcode...')
-    });
+    //$('#addMessageAddressInput').blur(function () {
+    //    if ($(this).val() == '') $(this).val('Enter address, location, city or zipcode...')
+    //});
 
 
 
-    $('#txtAddressChange').click(function () {
-        if ($(this).val() == "Enter address, location, city or zipcode...") $(this).val('')
-    });
+    //$('#txtAddressChange').click(function () {
+    //    if ($(this).val() == "Enter address, location, city or zipcode...") $(this).val('')
+    //});
 
-    $('#txtAddressChange').blur(function () {
-        if ($(this).val() == '') $(this).val('Enter address, location, city or zipcode...')
-    });
+    //$('#txtAddressChange').blur(function () {
+    //    if ($(this).val() == '') $(this).val('Enter address, location, city or zipcode...')
+    //});
 
     function RemoveAfter(msgId) {
         var i = 0;
@@ -1610,6 +1610,8 @@ $(function () {
         $(comments).html(--commentsNum);
 
     }
+
+    $('#flip').live('click', function () { $(this).parents('.Box').find('#card').toggleClass("flipped") });
 
     $('.SingleComment').live('mouseover', function () { var element = $(this).find('#HideComment'); if (element != "") { $(element).show(); } });
     $('.SingleComment').live('mouseout', function () { var element = $(this).find('#HideComment'); if (element != "") { $(element).hide(); } })
@@ -2393,7 +2395,7 @@ $(function () {
 
 
         FB.api('/me/feed', 'post', params, function (response) {
-            debugger;
+            
             if (!response || response.error) {
             } else { }
         });
@@ -2421,7 +2423,7 @@ $(function () {
 
 
     function ShowPopUp() {
-        debugger;
+        
         PopUpIsOpened = true;
         var href = $(this).attr("href");
 
@@ -3500,6 +3502,58 @@ $(function () {
 
 
     }
+
+    function MakeLoginMessagePopUpAlive(){
+        HidePlaceHolderCheck();
+
+        $(".placeholderField").live('click', function () {
+            var parent = $(this).parent()
+            parent.children('input').focus();
+
+        });
+
+        $(".inputWithPlaceHolder").live('keydown' ,function (e) {
+
+            HidePlaceHolder(e, this);
+
+        });
+
+        $(".inputWithPlaceHolder").live('keyup', function () {
+
+            ShowPlaceHolder(this);
+
+        });
+
+        $(".inputWithPlaceHolder").live('focus', function () {
+            CheckToHidePlaceHolder(this);
+            ChangeTextColor(this, true);
+        });
+
+        $(".inputWithPlaceHolder").live('blur', function () {
+             ChangeTextColor(this, false);
+        });
+
+        $(".btnLoginForm").live('click', function () {
+            LoginWithEmail(this);
+        });
+
+
+        $(".btnSignUp").live('click', function () {
+            SignUpWithEmail(this);
+        });
+
+
+       
+        $(".signup-why-join-expand-button").live('click', function () {
+            $(".signup-why-join-text").slideToggle("500", "swing");
+        });
+
+
+        $("#createNewAccount").live('click', function () { ShowSignUpForm(this) });
+        $("#alreadyMember").live('click', function () { ShowLoginPanel(this) });
+        
+        $('#xbuttonLoginMsg').live('click', function () { HideAddMessageWindow() });
+    }
     
     function IsLoggedIn() 
     {
@@ -3514,7 +3568,9 @@ $(function () {
 
 
             $('#PleaseLogin').html($('#PopupBox').html());
-            $('#xbuttonLoginMsg').live('click', function () { HideAddMessageWindow() });
+
+
+            MakeLoginMessagePopUpAlive();
             return false;
         } else 
         {
@@ -3679,6 +3735,341 @@ $(function () {
         }
     }
 
+    $(".signup-with-email-expand-button").click(function () {
+        
+        $(".sign-up-box").animate({
+            right: '500px' 
+            
+            
+        }, 500, function() {
+            // Animation complete.
+        });
+
+        $(".log-in-box").animate({
+            left: '+=50' 
+           
+
+        }, 500, function () {
+            // Animation complete.
+        });
+
+ 
+    });
+
+    $(".signup-why-join-expand-button").click(function () {
+        $(this).parents(".sign-up-box").find(".signup-why-join-text").slideToggle("500", "swing");
+    });
+
+    function IsOkLoginInputCheck(email, password) {
+        
+        var isInputOk = true;
+        if (!validateEmail(email)) {
+            SetLoginErrorMessage("Please enter a valid Email");
+            $(".login_email").addClass("RedBorder");
+            isInputOk = false;
+        } else {
+            $(".login_email").removeClass("RedBorder");
+        }
+
+        if (!validatePassword(password)) {
+            
+            SetLoginErrorMessage("Password invalid. Password must be 6-18 of letters, numbers, underscores or hyphens.");
+            $(".login_password").addClass("RedBorder");
+            isInputOk = false;
+        } else {
+            $(".login_password").removeClass("RedBorder");
+        }
+
+        return isInputOk;
+    }
+
+    function SignUpWithEmail(elem) {
+        debugger;
+        var fname = $(elem).parents(".LoginPanel").find(".signup_fname").val();
+        var lname = $(elem).parents(".LoginPanel").find(".signup_lname").val();
+        var email = $(elem).parents(".LoginPanel").find(".signup_email").val();
+        var password = $(elem).parents(".LoginPanel").find(".signup_password").val();
+
+        if (IsOkSignupFields(fname, lname, email, password)) {
+            $(".SignUpErrorMessageArea").hide();
+            var url = siteUrlSecured + "Handlers/Register.ashx";
+
+            var myJSON = {
+                "fname": fname,
+                "lname": lname,
+                "email": email,
+                "password": password
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: myJSON,
+                sync: false,
+                dataType: "json",
+                success: function (data) { ShowSignUpMessage(data, email); }
+            })
+        }
+
+    }
+
+    function LoginWithEmail(elem) {
+
+        var email = $(elem).parents(".LoginPanel").find('.login_email').val();
+        var password = $(elem).parents(".LoginPanel").find('.login_password').val();
+        
+        if (IsOkLoginInputCheck(email, password)) {
+            var url = siteUrlSecured + "Handlers/CheckLoginData.ashx";
+
+            var myJSON = {
+                "email": email,
+                "password": password
+            };
+
+
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: myJSON,
+                sync: false,
+                dataType: "json",
+                success: function (data) { SetCurrentUser(data); }
+            })
+        }
+    }
+
+    $(".btnSignUp").click(function () {
+        SignUpWithEmail(this);
+    });
+
+    $(".btnLoginForm").click(function () {
+        LoginWithEmail(this);
+    });
+
+    $(".placeholderField").click(function () {
+        var parent = $(this).parent()
+        
+        parent.children('input').focus();
+
+    });
+
+    function HidePlaceHolder(e, item) {
+        
+        if (e.keyCode > 0) {
+            if ((e.keyCode < 46) || (e.keyCode > 90 && e.keyCode < 94) || (e.keyCode > 111 && e.keyCode < 124) || (e.keyCode > 143 && e.keyCode < 146))
+                return;                          
+        }
+
+        RemovePlaceholderClass(item);
+    }
+
+    function ChangeTextColor(elem, hasFocus) {
+        if (hasFocus) {
+            $(elem).parent().addClass("uiStickyPlaceholderInputFocus");
+        } else {
+            $(elem).parent().removeClass("uiStickyPlaceholderInputFocus");
+        }
+        
+    }
+
+    function RemovePlaceholderClass(item) {
+        var parent = $(item).parent();
+        parent.removeClass("uiStickyPlaceholderEmptyInput");
+    }
+    HidePlaceHolderCheck();
+
+    function HidePlaceHolderCheck() {
+        $('.inputWithPlaceHolder').each(function () {
+            var elem = $(this);
+            if ($.trim(elem.val()) != "") {
+                RemovePlaceholderClass(elem);
+            }
+        });
+    }
+
+    $(".inputWithPlaceHolder").keydown(function (e) {
+        
+        HidePlaceHolder(e, this);
+
+    });
+
+    $(".inputWithPlaceHolder").focus(function (e) {
+
+        ChangeTextColor(this, true);
+
+    });
+
+    $(".inputWithPlaceHolder").blur(function (e) {
+
+        ChangeTextColor(this, false);
+
+    });
+    
+
+    function CheckToHidePlaceHolder(elem) {
+        if ($(elem).val().length > 0 && $(elem).parent().hasClass("uiStickyPlaceholderEmptyInput")) {
+            HidePlaceHolder(-1, elem)
+        }
+    }
+
+    $(".inputWithPlaceHolder").focus(function () {
+        CheckToHidePlaceHolder(this);
+    });
+
+    $(".signup_fname").blur(function () {
+        if ($(".signup_lname").val().length > 0 && $(".signup_lname").parent().hasClass("uiStickyPlaceholderEmptyInput")) {
+            HidePlaceHolder(-1, $(".signup_lname"))
+        }
+    });
+
+
+    function ShowPlaceHolder(elem) {
+        var parent = $(elem).parent();
+        if ($(elem).val().length == 0) {
+            if (!parent.hasClass("uiStickyPlaceholderEmptyInput")) {
+                parent.addClass("uiStickyPlaceholderEmptyInput");
+            }
+        }
+    }
+
+    $(".inputWithPlaceHolder").keyup(function () {
+        ShowPlaceHolder(this);
+    });
+
+
+
+    function SetCurrentUser(data) {
+        if (data < 0) {
+            SetLoginErrorMessage("User/Password Incorrect or Account not Activated.")
+        } else {
+            window.location.href = siteUrl;
+        }
+    }
+
+    function InputCheckName(name) {
+        name = ($.trim(name));
+        var re = /^[a-zA-Z\u0591-\u05F4]{2,16}$/
+        return (re.test(name))
+    }
+
+    function validatePassword(password)
+    {
+        var re = /^[A-Za-z0-9_-]{6,18}$/
+        return (re.test(password))
+    }
+
+    function validateEmail(email) { 
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    } 
+
+    function IsOkSignupFields(fname, lname, email, password) {
+        var isOkInput = true;
+
+        if (!InputCheckName(fname)) {
+            $(".signup_fname").addClass("RedBorder");
+            SetSignUpErrorMessage("First Name must be 2-16 letters.");
+            isOkInput = false;
+        } else {
+            $(".signup_fname").removeClass("RedBorder");
+        }
+
+        if (!InputCheckName(lname)) {
+            $(".signup_lname").addClass("RedBorder");
+            SetSignUpErrorMessage("Last Name must be 2-16 letters");
+            isOkInput = false;
+        } else {
+            $(".signup_lname").removeClass("RedBorder");
+        }
+
+        if (!validateEmail(email)) {
+            $(".signup_email").addClass("RedBorder");
+            SetSignUpErrorMessage("Please enter a valid email");
+            isOkInput = false;
+        } else {
+            $(".signup_email").removeClass("RedBorder");
+        }
+
+        if (!validatePassword(password)) {
+            $(".signup_password").addClass("RedBorder");
+            SetSignUpErrorMessage("Password invalid. Password must be 6-18 of letters, numbers, underscores or hyphens.");
+            isOkInput = false;
+        } else {
+            $(".signup_password").removeClass("RedBorder");
+        }
+
+        return isOkInput;
+
+    }
+
+    function SetSignUpErrorMessage(msg) {
+        $(".SignUpErrorMessageArea").html(msg);
+        $(".SignUpErrorMessageArea").show();
+    }
+
+    $("#btnSendResetPassword").click(function () {
+        var email = $("#txtSendResetEmail").val();
+        if (!validateEmail(email)) {
+            $("#txtSendResetEmail").addClass("RedBorder");
+            $('#errorEmailNoExist').html("Please enter a valid email");
+            $('#errorEmailNoExist').css('display', 'block');
+            return false;
+            } else {
+                $("#txtSendResetEmail").removeClass("RedBorder");
+        }
+
+    });
+
+
+
+    $("#btnResetPassword").click(function () {
+        var email = $("#txtResetEmail").val();
+        var password1 = $("#txtResetPass1").val();
+        var password2 = $("#txtResetPass2").val();
+
+        return IsOkPasswordResetFields(email, password1, password2);
+    });
+
+    function IsOkPasswordResetFields(email, password1, password2)
+    {
+        var isOkInput = true;
+
+        if (!validateEmail(email)) {
+            $("#txtResetEmail").addClass("RedBorder");
+            $('#errorMsg').html("Please enter a valid email");
+            $('#errorMsg').css('display', 'block');
+            return false;
+        } else {
+            $("#txtResetEmail").removeClass("RedBorder");
+            $('#errorMsg').css('display', 'none');
+        }
+
+        if (!validatePassword(password1)) {
+            $("#txtResetPass1").addClass("RedBorder");
+            $('#errorMsg').html("Password invalid. Password must be 6-18 of letters, numbers, underscores or hyphens.");
+            $('#errorMsg').css('display', 'block');
+            return false;
+        } else {
+            $("#txtResetPass1").removeClass("RedBorder");
+            $('#errorMsg').css('display', 'none');
+        }
+
+        if (password1 != password2)
+        {
+            $("#txtResetPass1").addClass("RedBorder");
+            $("#txtResetPass2").addClass("RedBorder");
+            $('#errorMsg').html("Passwords mismatch.");
+            $('#errorMsg').css('display', 'block');
+            return false;
+        } else {
+            $("#txtResetPass1").removeClass("RedBorder");
+            $("#txtResetPass2").removeClass("RedBorder");
+            $('#errorMsg').css('display', 'none');
+        }
+
+        return true;
+    }
 
 
     function GetLowestColumn() {
@@ -3715,6 +4106,7 @@ $(function () {
 
 
         for (i = startIndex; i < postsLength; i++) {
+
             currPostHeight = parseInt($(posts.eq(i)).css("height").replace("px", ""));
 
             if (i < msgsPerRow) {
@@ -3757,17 +4149,73 @@ $(function () {
 
     }
 
+    function ShowSignUpForm(item) {
+        // the sign up form will be shown
+        var parent = $(item).parents('li');
+
+        parent.next().addClass("DisplayBlock");
+        $(".signup_fname").removeClass("RedBorder");
+        $(".signup_lname").removeClass("RedBorder");
+        $(".signup_email").removeClass("RedBorder");
+        $(".signup_password").removeClass("RedBorder");
+        $(".LoginErrorMessageArea").html('');
+
+        $(".LoginPanel").animate({
+            left: -323
+        }, 300, "swing", function () { parent.removeClass("DisplayBlock"); });
+    }
+
+    $("#createNewAccount").click(function () {
+        ShowSignUpForm(this);
+    });
+
+
+    function ShowSignUpMessage(data, email) {
+        if (data < 0) {
+            SetSignUpErrorMessage("Email already exists");
+        } else {
+            $(".SignUpSucess").addClass("DisplayBlock");
+
+            $(".ActivationEmail").html(email);
+            $(".LoginSignUp").animate({
+                left: -646
+            }, 300, "swing", function () { $(".sign-up-box").removeClass("DisplayBlock"); });
+
+        }
+    }
+
+    function SetLoginErrorMessage(msg) {
+        $(".LoginErrorMessageArea").html(msg);
+    }
+
+
+    $("#alreadyMember").click(function () {
+        ShowLoginPanel(this);
+    
+    });
+
+    function ShowLoginPanel(elem) {
+        var parent = $(elem).parents('li');
+        parent.prev().addClass("DisplayBlock");
+
+
+
+        $(".SignUpErrorMessageArea").hide();
+       
+        $(".input-text").removeClass("RedBorder");
+        $(".LoginPanel").animate({
+            left: 0
+        }, 300, "swing", function () { parent.removeClass("DisplayBlock"); });
+        $(".signup-why-join-text").hide();
+    }
+
 
 
 
     //-- DATA ARRANGE END
    
-    
-
 
     
-
-
 
 });
 

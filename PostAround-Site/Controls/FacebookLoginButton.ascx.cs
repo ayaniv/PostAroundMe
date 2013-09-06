@@ -9,7 +9,12 @@ using System.Configuration;
 public partial class Controls_FacebookLoginButton : BaseControl
 {
     public static string FaceBookAppKey;
-    
+
+    public string Text
+    {
+        get { return linkFacebookLogin.Text; }
+        set { linkFacebookLogin.Text = value; }
+    }
     
     protected void Page_Load(object sender, EventArgs e)
     {

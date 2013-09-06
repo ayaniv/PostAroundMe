@@ -13,6 +13,11 @@ namespace PostAround.ServiceContracts
     [ServiceContract]
     public interface IPostAroundService
     {
+        [OperationContract]
+        int CheckLoginData(LoginDetail data);
+
+        [OperationContract]
+        int InsertLoginDetails(LoginDetail data);
 
         [OperationContract]
         bool GetUserPermission(int userId, int permissionId);
@@ -50,6 +55,9 @@ namespace PostAround.ServiceContracts
         User GetUserByID(int ID);
 
         [OperationContract]
+        User GetUserByEmail(string email);
+
+        [OperationContract]
         int GetUserIdByFacebookId(string fid);
 
         [OperationContract]
@@ -84,6 +92,9 @@ namespace PostAround.ServiceContracts
 
         [OperationContract]
         int DeleteComment(int commentId, int userid);
+
+        [OperationContract]
+        int ActivateUserLoginByLoginID(int loginID, int userID);
 
     }
  
