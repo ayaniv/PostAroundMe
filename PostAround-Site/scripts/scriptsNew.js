@@ -451,7 +451,9 @@ $(function () {
     }
 
 
-
+    $('.btnFacebook').click(function () {
+        IsLoggedIn();
+    });
 
     $('#TryAgain').click(function () {
         GetPosition();

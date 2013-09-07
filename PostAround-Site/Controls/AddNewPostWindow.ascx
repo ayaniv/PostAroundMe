@@ -24,7 +24,7 @@
         <textarea maxlength="400" id="txtPopupDetails" style="width: 299px; height: 70px; padding-right: 20px; margin-top: 0; float: left; " title="Details" placeholder="Spread your post around here !"></textarea>
 
         <div id="xbutton" style="width: 14px; height: 16px; clear: both; float: right; top: 0; right: 0; padding: 5px; padding-top: 4px; position: absolute; cursor: pointer;">
-            <div class="SmallXButton" style="display: block;">
+            <div class="SmallXButton" style="display: block; margin-right:5px;">
             </div>
         </div>
     </div>

@@ -11,7 +11,7 @@
 
 
         <div id="xbuttonLoginMsg" class="SmallXButtonWrapper" >
-            <div class="SmallXButton" style="display: block;">
+            <div class="SmallXButton" style="display: block; margin-right:5px;"">
             </div>
         </div>
 
@@ -169,10 +169,10 @@
                     <div style="padding: 10px;">
                         
                         <ul style="clear: both; padding-top: 10px; font-size: 13px; color: #424e55">
-                            <li>Only one step separate you with creating your neighborhood a happier environment !!!</li>
-                            <li style="padding-top: 8px;">We'll verify your data and will send you an activation email to <b class="ActivationEmail"></b>&nbsp;when we're done.</li>
-                            <li style="padding-top: 8px;"><b>Please click on the activation link we'll send you to verify your email.</b></li>
-                            <li style="padding-top: 8px;">If you don't receive it within 30 minutes, check your email's spam and junk filters, or contact us at <b>info@postaround.me</b></li>
+                            <li>Only one step seperates you from creating a<br />happier environment !</li>
+                            <li style="padding-top: 8px;">We would like to verify your email: <b class="ActivationEmail"></b>.</li>
+                            <li style="padding-top: 8px; font-size:20px;"><b>Please check your mailbox and click on the activation link we've sent you.</b></li>
+                            <li style="padding-top: 8px;">If you do not receive an email from us within 30 minutes, please check your email's spam and junk filters, or contact us at <b>info@postaround.me</b></li>
                            
                         </ul>
 

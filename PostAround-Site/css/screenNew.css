@@ -674,12 +674,12 @@ hr.style-eight:after {
 .Bottom .CommentsArea .SingleComment { word-wrap:break-word; float:left; padding-left:15px; padding-right:15px; width:241px;padding-bottom:5px; padding-top:5px; position:relative; margin-left: 1px; }
 .Bottom .CommentsArea .SingleComment .CommentImage { float:left; }
 .Bottom .CommentsArea .SingleComment .CommentImage img { width:24px; height:24px; border-radius:50%; } 
-.Bottom .CommentsArea .SingleComment .CommentWrapper { width:215px; float:left; }
+.Bottom .CommentsArea .SingleComment .CommentWrapper { width:215px; float:left; position:relative; }
 #BigBoxComments .Bottom .CommentsArea .SingleComment .CommentWrapper { width:558px;  }
 #BigBoxComments .Bottom .CommentsArea .SingleComment { width:582px; padding-left:11px; padding-right:11px; }
 
 
-.SmallXButton { display:none; cursor:pointer; background:url('../images/icons.png') -140px -4px; width:11px; height:14px; position:absolute; float:right; }
+.SmallXButton { display:none; cursor:pointer; background:url('../images/icons.png') -140px -4px; width:11px; height:14px; position:absolute; right:0; }
 .SmallXButtonWrapper {
      width: 14px; height: 16px; clear: both; top: 0; right: 0; padding-top: 4px; cursor: pointer; position:absolute;
       z-index: 100; 
