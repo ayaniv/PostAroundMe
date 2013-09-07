@@ -12,6 +12,7 @@ public partial class Controls_MorePosts : BaseControl
 {
 
     public int numberOfItems { get; set; }
+    public string CategoryName { get; set; }
     
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -26,6 +27,7 @@ public partial class Controls_MorePosts : BaseControl
         string lat = "";
         string lng = "";
         string address = "";
+        List<int> lstCatId = new List<int>();
         
 
         string strMsgId = Request.QueryString["id"];
@@ -40,8 +42,9 @@ public partial class Controls_MorePosts : BaseControl
                 
                 lat = msg.latitude;
                 lng = msg.longitude;
+                lstCatId.Add(msg.catID);
                 address = msg.msgAddress;
-
+                CategoryName = msg.category;
 
 
             }
@@ -55,12 +58,12 @@ public partial class Controls_MorePosts : BaseControl
                 }
             }
             SetLocationScreen(lat, lng, address);
-            GetPosts(lat, lng, numberOfItems);
+            GetPosts(lat, lng, numberOfItems, lstCatId);
     }
 
-    private void GetPosts(string lat, string lng, int num)
+    private void GetPosts(string lat, string lng, int num, List<int> lstCatID)
     {
-        List<MyMessage> messages = GetMessages(lat, lng, num);
+        List<MyMessage> messages = GetMessages(lat, lng, num, lstCatID);
 
         rptPosts.ItemCreated += new RepeaterItemEventHandler(rptPosts_ItemCreated);
         rptPosts.DataSource = messages;
@@ -75,10 +78,10 @@ public partial class Controls_MorePosts : BaseControl
         
     }
 
-    private List<MyMessage> GetMessages(string lat, string lon, int takeNum)
+    private List<MyMessage> GetMessages(string lat, string lon, int takeNum, List<int> lstCatID)
     {
         PostAroundServiceClient client = new PostAroundServiceClient();
-        List<MyMessage> messages = client.GetMessages(lat, lon, 0, 0, takeNum, 0, null, 0, 0, 4000, 0).ToList();
+        List<MyMessage> messages = client.GetMessages(lat, lon, 0, 0, takeNum, 0, lstCatID.ToArray(), 0, 0, 4000, 0).ToList();
         return messages;
     }
 

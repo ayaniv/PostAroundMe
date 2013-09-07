@@ -2,7 +2,7 @@
 
 <div class="MorePosts">
     <div class="MorePostsTitle">
-        <span class="Line1">Most Recent Posts Around Here</span>
+        <span class="Line1">Recent <%=CategoryName %> around</span>
         <div class="Line2"><span class="SmallLocationIcon"></span><asp:HyperLink runat="server" ID="linkAddress"></asp:HyperLink></div>
 
     </div>

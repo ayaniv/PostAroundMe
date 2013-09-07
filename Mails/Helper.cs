@@ -25,6 +25,8 @@ namespace Mails
                 //MailAddress fromMail = new MailAddress(from, "PostAround.Me");
                 //mMailMessage.Sender = fromMail;
 
+                if (!string.IsNullOrWhiteSpace(from))
+                    mMailMessage.ReplyToList.Add(from);
 
                 // Set the recepient address of the mail message
                 mMailMessage.To.Add(new MailAddress(to));
