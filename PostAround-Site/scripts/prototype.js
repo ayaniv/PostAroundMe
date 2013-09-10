@@ -36,3 +36,7 @@ String.prototype.rtrim = function () {
     return this.replace(/\s+$/, "");
 }
 
+String.prototype.startsWith = function (str) {
+    return this.slice(0, str.length) == str;
+};
+

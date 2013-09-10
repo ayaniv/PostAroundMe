@@ -95,13 +95,26 @@ h1 span
 .LogoText {  font-style:italic; color:#a4a8ab; font-size:20px; font-family:Georgia, Arial, Calibri, Arial;  }
 
 
+ .pac-container:after{ content:none !important; }
+
+ .pac-container  {
+ font-size:20px;
+    z-index:2000 !important;
+}
+
+.pac-container ~ .pac-container {
+    font-size:14px !important;
+   
+}
+
+
 .PostBox {
     margin:0 auto; width:922px; height:42px; padding:6px 0px 6px 0; 
 
 }
 .PostBox .Shpitz { z-index:2; background-image:url('../images/input_shpitz.png'); margin-top:1px; height:58px; width:7px; float:left; }
 .PostBox .Field { height:38px; padding:3px; float:left; background-color:#eaedee; /* background-image:url('../images/mainBoxBg2.png'); margin-left:-3px;*/  }
-.PostBox .Field input[type="text"] { float:left; background: #FFF; /*margin-top:5px;*/ height:28px; width:777px; border:1px inset #c0c0c0; font-family:Arial; padding-left:9px; font-size:20px; padding-top:4px; padding-bottom:4px; padding-right:10px; color:#a3a3a3;}
+.PostBox .Field input[type="text"] { float:left; background: #FFF; /*margin-top:5px;*/ height:28px; width:777px; border:1px inset #c0c0c0; font-family:Arial; padding-left:9px; font-size:20px; padding-top:4px; padding-bottom:4px; padding-right:10px; color:#3C3C3C;}
 .PostBox .Field .BlackText { color:#333 !important; }
 
 
@@ -485,7 +498,7 @@ hr.style-eight:after {
 }
 .Content .Box .BoxBody .BoxImage .Border { border:1px solid #E2DDCF; float:left; /*cursor:pointer;*/ }
 
-.Content .Box .BoxBody .BoxImage .Border img { width:235px; border:3px solid #FFF; background-color:#EAEDEE; }
+.Content .Box .BoxBody .BoxImage .Border img { width:241px; /*border:3px solid #FFF; background-color:#EAEDEE;*/ }
 .Content .Box .BoxBody .Text { margin-top:15px; float:left; width:243px; font-family:Tahoma,Arial;  }
 
 .Content .Box .BoxBody .MessageName { font-size:12px; margin-top:15px; color:#b2b2b2; float:left; width:100% }

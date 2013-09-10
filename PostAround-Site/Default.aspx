@@ -190,7 +190,7 @@
                                     <img src="${avatarImageUrl}" />
                                 </div>
                                 
-                                <div class="CommentWrapper" style="width:476px">
+                                <div class="CommentWrapper">
                                 
                                     {{if Mine}}
                                     <div id="HideComment" class="SmallXButton"></div>

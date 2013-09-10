@@ -188,7 +188,7 @@
       
       </div>
       <div id="MapRealCover" style="display:none; background-color:Black; height:190px; width:100%;"></div>
-      <div id="MapReal" style="display:none; height:190px; width:100%;"></div>
+      <div id="MapReal" style="display:none; height:100%; width:100%;"></div>
       </div>
       
       <div id="MapPasBottom" style="width:100%; /*min-width:910px;*/ position:relative;  z-index:10; float:left; background-color:#fefdd8; border-bottom:1px solid #e1dfdc; border-top:1px solid #e1dfdc;">

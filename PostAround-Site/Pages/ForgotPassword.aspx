@@ -78,8 +78,8 @@ If you do not receive it within an hour or two, check your spam folder.
                                 <div class="placeholderField">Confirm New Password</div>
                             </div>
 
-            <div style="padding-bottom:10px; float:right;">
-                <asp:Button runat="server" id="btnResetPassword" class="email-login-button gray-button right clear-errors-button" style="height:30px" TabIndex="2" Text="Reset Password" OnClick="btnResetPassword_Click" />
+            <div style="padding-bottom:10px; ">
+                <asp:Button runat="server" id="btnResetPassword" class="email-login-button gray-button right clear-errors-button" style="height:30px; margin:0" TabIndex="2" Text="Reset Password" OnClick="btnResetPassword_Click" />
             
             </div>
             <div runat="server" id="errorMsg" class="ErrorText"></div>
@@ -110,7 +110,11 @@ If you do not receive it within an hour or two, check your spam folder.
             <div style="font-size:18px; padding-bottom:20px; font-weight:bold; color:red;">Password Reset Error</div>
             <div style="font-size:14px; color:#333;">
 
-                <span style="color:#333; font-weight:bold;">Go back to your email link and try again</span>
+                <span style="color:#333;">Go back to your email link and try again
+                    <br /><br />
+                    Or continue to PostAround.Me and login with your Facebook
+
+                </span>
 <br />
 
 
