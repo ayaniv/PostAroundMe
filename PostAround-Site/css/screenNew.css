@@ -698,7 +698,7 @@ hr.style-eight:after {
       z-index: 100; 
 }
 .Bottom .CommentsArea .SingleComment .CommentWrapper #commentUserName { margin-right:5px; margin-left:5px; }
-.Bottom .CommentsArea .SingleComment .CommentWrapper #commentUserName a { color:#6AA1BB; font-weight:bold; float:left; margin-right:4px; } 
+.Bottom .CommentsArea .SingleComment .CommentWrapper #commentUserName a { font-weight:bold; } 
 .Bottom .CommentsArea .SingleComment .CommentWrapper #commentUserName .CommentText a {  font-weight:normal }
 
 
