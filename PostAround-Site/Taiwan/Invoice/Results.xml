@@ -1,6 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Lottery>
 
+<Results Date="07-08/2013">
+    <Special>71895847</Special>
+    <Grand>04949941</Grand>
+    <First1>04532693</First1>
+    <First2>52951166</First2>
+    <First3>82155062</First3>
+    <Additional1>715</Additional1>
+    <Additional1></Additional1>
+  </Results>
+
 <Results Date="05-06/2013">
     <Special>40148354</Special>
     <Grand>64348046</Grand>

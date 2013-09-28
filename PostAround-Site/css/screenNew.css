@@ -698,11 +698,11 @@ hr.style-eight:after {
       z-index: 100; 
 }
 .Bottom .CommentsArea .SingleComment .CommentWrapper #commentUserName { margin-right:5px; margin-left:5px; }
-.Bottom .CommentsArea .SingleComment .CommentWrapper #commentUserName a { font-family:Tahoma, Arial; color:#6AA1BB; font-size:12px; font-weight:bold; line-height:16px; float:left; margin-right:4px; } 
+.Bottom .CommentsArea .SingleComment .CommentWrapper #commentUserName a { color:#6AA1BB; font-weight:bold; float:left; margin-right:4px; } 
 .Bottom .CommentsArea .SingleComment .CommentWrapper #commentUserName .CommentText a {  font-weight:normal }
 
 
-.Bottom .CommentsArea .SingleComment .CommentWrapper .CommentText {  word-wrap:break-word; display:block; line-height:16px; font-family:Tahoma, Arial; text-align:left; color:#424E55; font-size:12px; }
+.Bottom .CommentsArea .SingleComment .CommentWrapper {  word-wrap:break-word; display:block; line-height:16px; font-family:Tahoma, Arial; text-align:left; color:#424E55; font-size:12px; }
 .Bottom .CommentsArea .SingleComment .CommentWrapper .CommentDate { clear:both; color:#A3A3A3; font-size:11px; margin-left:5px; float:left; }
 .Bottom .CommentsArea .SingleComment .CommentWrapper .PosterOnly { color:#A3A3A3; font-size:11px; margin-left:5px; float:left; }
 

@@ -210,9 +210,9 @@ $(function () {
                     else if (currZoomLevel == 10)
                         SetZoom(10, uptoMeters);
                     else if (currZoomLevel == 9)
-                        SetZoom(11, uptoMeters);
-                    else if (currZoomLevel == 8)
                         SetZoom(12, uptoMeters);
+                    else if (currZoomLevel == 8)
+                        SetZoom(13, uptoMeters);
                     else if (currZoomLevel == 7)
                         SetZoom(13, uptoMeters);
                     else if (currZoomLevel == 6)
@@ -220,15 +220,15 @@ $(function () {
                     else if (currZoomLevel == 5)
                         SetZoom(14, uptoMeters);
                     else if (currZoomLevel == 4)
-                        SetZoom(15, uptoMeters);
+                        SetZoom(14, uptoMeters);
                     else if (currZoomLevel == 3)
                         SetZoom(15, uptoMeters);
                     else if (currZoomLevel == 2)
-                        SetZoom(16, uptoMeters);
+                        SetZoom(15, uptoMeters);
                     else if (currZoomLevel == 1)
-                        SetZoom(17, uptoMeters);
+                        SetZoom(15, uptoMeters);
                     else if (currZoomLevel == 0)
-                        SetZoom(19, 10);
+                        SetZoom(16, 10);
 
                     //currResults = jQuery.grep(allResults, function (a) { return a.Distance <= ui.value && a.Distance >= 0 });
 
