@@ -3316,7 +3316,7 @@ $(function () {
         if (data < 0) {
             SetLoginErrorMessage("User/Password Incorrect or Account not Activated.")
         } else {
-            window.location.href = siteUrl;
+            window.location.href = document.location.href;
         }
     }
 

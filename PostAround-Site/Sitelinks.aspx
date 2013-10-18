@@ -26,7 +26,7 @@
     <asp:Repeater runat="server" ID="rptLinks">
     <HeaderTemplate></HeaderTemplate>
     <ItemTemplate>
-    <a href="<%=siteUrl %>post/<%# ((BriefMessage)Container.DataItem).msgId %>"><%# ((BriefMessage)Container.DataItem).Title %></a>
+    <a href="<%=siteUrl %>post/<%# ((BriefMessage)Container.DataItem).msgId %>/<%# ((BriefMessage)Container.DataItem).Title.Replace(' ', '-') %>"><%# ((BriefMessage)Container.DataItem).Title %></a>
     </ItemTemplate>
     <FooterTemplate></FooterTemplate>
     </asp:Repeater>
