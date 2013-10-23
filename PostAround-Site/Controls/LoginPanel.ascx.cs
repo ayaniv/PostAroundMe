@@ -292,10 +292,10 @@ public partial class Controls_LoginPanel : BaseControl
             Uri uri = new Uri(HttpContext.Current.Request.Url.AbsoluteUri);
             siteUrl = uri.GetLeftPart(UriPartial.Path);
         }
-        
-        
 
-        url = String.Format(url, FaceBookAppKey, HttpUtility.UrlEncode(siteUrl), secretCode, code);
+
+
+        url = String.Format(url, FaceBookAppKey, Request.Url.AbsoluteUri.ToString(), secretCode, code);
 
         string response = Tools.CallUrl(url);
         // now we got the string string: 'access_token=gfdgfdgd&expires=5108' or an error message

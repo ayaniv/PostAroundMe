@@ -63,8 +63,8 @@ public static class Tools
     public static string HashIt(string toBeHashed)
     {
         string hashedValue = "";
-        string key = ConfigurationManager.AppSettings["EncryptKey"];
-        toBeHashed = key + toBeHashed;
+        //string key = ConfigurationManager.AppSettings["EncryptKey"];
+        //toBeHashed = key + toBeHashed;
 
         SHA256 alg = SHA256.Create();
         alg.ComputeHash(Encoding.UTF8.GetBytes(toBeHashed));

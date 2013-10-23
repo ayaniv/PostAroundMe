@@ -3313,10 +3313,11 @@ $(function () {
 
 
     function SetCurrentUser(data) {
+        
         if (data < 0) {
             SetLoginErrorMessage("User/Password Incorrect or Account not Activated.")
         } else {
-            window.location.href = document.location.href;
+            location.reload();
         }
     }
 
