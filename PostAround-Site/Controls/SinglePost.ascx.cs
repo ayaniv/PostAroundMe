@@ -224,29 +224,41 @@ public partial class Controls_SinglePost : BaseControl
 
     }
 
-    protected string GetLanguageDirection(string str)
-    {
-        //english
-        string direction = "ltr";
+    private bool checkRTL(char s) {
+        string ltrChars = "A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02B8\u0300-\u0590\u0800-\u1FFF" + "\u2C00-\uFB1C\uFDFE-\uFE6F\uFEFD-\uFFFF";
+        string rtlChars = "\u0591-\u07FF\uFB1D-\uFDFD\uFE70-\uFEFC";
+        string rtlDirCheck = "^[^" + ltrChars + "]*[" + rtlChars + "]";
 
-        if (str == null)
-            return direction;
-
-        str = Regex.Replace(str, @"[\d-]", string.Empty);
-        str = str.Trim();
-
-
-        //hebrew
-        if ((!string.IsNullOrWhiteSpace(str)) && (str[0] > 0x590) && (str[0] < 0x5FF))
-            direction = "rtl";
-
-        //arabic
-        else if ((!string.IsNullOrWhiteSpace(str)) &&  (str[0] > 0x600) && (str[0] < 0x6FF))
-            direction = "rtl";
-
-        return direction;
-
+        return Regex.IsMatch(s.ToString(), rtlDirCheck);
     }
+
+    protected string GetLanguageDirection(string str) {
+        string dir = "LTR";
+        bool isRTL = false;
+        string finalDirection = "LTR";
+        for (var i = 0; i < str.Length; i++) {
+            isRTL = checkRTL(str[i]);
+            dir = isRTL ? "RTL" : "LTR";
+            
+            if (dir == "RTL")
+            {
+                finalDirection = "RTL";
+            }
+                
+            if (finalDirection == "RTL")
+            {
+                 dir = "RTL";
+            }
+               
+        }
+        
+        if (dir == "LTR") {
+            return "ltr";
+        } else {
+            return "rtl";
+        }
+    }
+
 
     private string Linkify(string inputText) {
         //URLs starting with http://, https://, or ftp://
