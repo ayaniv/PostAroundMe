@@ -23,6 +23,3 @@
         ga('send', 'pageview');
 
 </script>
-
-
-</script>

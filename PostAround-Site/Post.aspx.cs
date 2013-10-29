@@ -32,7 +32,7 @@ public partial class Pages_Post : BasePage
 
             PostAroundServiceClient client = new PostAroundServiceClient();
             MyMessage message = client.GetMessageById(msgId, "", "", -1, 0, -1);
-            string originalSlug = message.title.Replace(' ', '-');
+            string originalSlug = message.title.Slugify();
             client.Close();
 
            

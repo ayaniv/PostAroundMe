@@ -19,6 +19,7 @@ using System.Globalization;
 using System.Web.Caching;
 using System.Text;
 using System.Security.Cryptography;
+using System.Text.RegularExpressions;
 
 /// <summary>
 /// Summary description for ServiceImplementation
@@ -963,7 +964,7 @@ public class PostAroundService : IPostAroundService
             XElement xml = new XElement(ns + "urlset",
                                 from p in list
                                 select new XElement(ns + "url",
-                                          new XElement(ns + "loc", SiteUrl + "post/" + p.msgId + "/" + p.Title.Replace(' ', '-')),
+                                          new XElement(ns + "loc", SiteUrl + "post/" + p.msgId + "/" + p.Title.Slugify()),
                                           new XElement(ns + "lastmod", p.FullDate.ToString("yyyy-MM-ddThh:mm:sszzz")),
                                           new XElement(ns + "changefreq", "weekly"),
                                           new XElement(ns + "priority", "0.8")
@@ -977,6 +978,7 @@ public class PostAroundService : IPostAroundService
         return retVal;
     }
 
+  
 
     public bool GetUserPermission(int userId, int permissionId)
     {

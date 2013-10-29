@@ -32,6 +32,12 @@ public partial class Controls_Head : BaseControl
 
     protected void Page_Load(object sender, EventArgs e)
     {
+
+        if (HttpContext.Current.Request.Url.AbsoluteUri.ToLower().Contains("taiwan-receipt-lottery-checker.aspx"))
+        {
+            GAC1.Visible = false;
+        }
+
         addressFromQueryString = Request.QueryString["address"];
         if (!string.IsNullOrWhiteSpace(addressFromQueryString))
         {
