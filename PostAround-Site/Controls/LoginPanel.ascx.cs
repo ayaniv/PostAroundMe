@@ -52,7 +52,23 @@ public partial class Controls_LoginPanel : BaseControl
             // continue the flow to get the user details
             if (!string.IsNullOrWhiteSpace(facebookReturnedServerCode))
             {
-                string url = siteUrl;
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                Uri uri = new Uri(Request.Url.AbsoluteUri);
+                sb.Append(siteUrl);
+                
+                string page = Path.GetFileNameWithoutExtension(HttpContext.Current.Request.Url.AbsoluteUri).ToLower();
+                if (page == "post")
+                {
+                    string id = Request.QueryString["id"];
+                    string title = Request.QueryString["title"];
+                    if (!string.IsNullOrWhiteSpace(id) && !string.IsNullOrWhiteSpace(id))
+                    {
+                        sb.Append("post/" + id);
+                        sb.Append("/" + title);
+                    }
+                }
+
+                
                 //string page = Path.GetFileNameWithoutExtension(Request.Url.AbsolutePath);
                 //page = page.ToLower();
 
@@ -73,7 +89,7 @@ public partial class Controls_LoginPanel : BaseControl
                 //}
 
                 SaveEncryptedCodeInCookie(facebookReturnedServerCode);
-                Response.Redirect(url);
+                Response.Redirect(sb.ToString());
                 return;
                 
             }
@@ -231,7 +247,7 @@ public partial class Controls_LoginPanel : BaseControl
         //siteUrl = uri.GetLeftPart(UriPartial.Path);
 
         string url = "https://www.facebook.com/dialog/oauth?client_id={0}&redirect_uri={1}&scope=email,user_birthday" /*+ state*/;
-        url = String.Format(url, FaceBookAppKey, HttpUtility.UrlEncode(siteUrl));
+        url = String.Format(url, FaceBookAppKey, HttpUtility.UrlEncode(Request.Url.AbsoluteUri));
         Response.Redirect(url);
     }
 
@@ -295,7 +311,7 @@ public partial class Controls_LoginPanel : BaseControl
 
 
 
-        url = String.Format(url, FaceBookAppKey, Request.Url.AbsoluteUri.ToString(), secretCode, code);
+        url = String.Format(url, FaceBookAppKey, HttpUtility.UrlEncode(Request.Url.AbsoluteUri), secretCode, code);
 
         string response = Tools.CallUrl(url);
         // now we got the string string: 'access_token=gfdgfdgd&expires=5108' or an error message

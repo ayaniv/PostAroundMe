@@ -90,7 +90,7 @@ public partial class Controls_SinglePost : BaseControl
                 BigBoxLat = msg.latitude;
                 BigBoxLon = msg.longitude;
 
-                pageUrl = siteUrl + "post/" + msg.msgId;
+                pageUrl = siteUrl + "post/" + msg.msgId + "/" + msg.title.Slugify();
 
                 mapUrl = "https://maps.google.com/maps?daddr=" + BigBoxLat + "," + BigBoxLon; // +"&t=m&z=16";
                 

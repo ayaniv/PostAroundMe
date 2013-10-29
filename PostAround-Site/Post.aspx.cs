@@ -14,11 +14,12 @@ public partial class Pages_Post : BasePage
         this.MorePosts1.numberOfItems = 10;
 
         // for Facebook Login
-        if (!string.IsNullOrWhiteSpace(Request.QueryString["code"]))
-        {
-            string id = Request.QueryString["id"];
-            Response.Redirect(siteUrl + "post/" + id);
-        }
+        //if (!string.IsNullOrWhiteSpace(Request.QueryString["code"]))
+        //{
+        //    string id = Request.QueryString["id"];
+        //    string title = Request.QueryString["title"];
+        //    Response.Redirect(siteUrl + "post/" + id + "/" + title);
+        //}
 
         if (!IsPostBack)
         {

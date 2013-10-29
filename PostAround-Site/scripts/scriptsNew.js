@@ -420,7 +420,7 @@ $(function () {
         if (isMobile) {
             ZeroiseBoxes();
             
-            //ApplyMobileUI();
+            ApplyMobileUI();
 
             //user on mobile phone
             // auto ask for auto-detact

@@ -36,7 +36,7 @@ public partial class Controls_MetaTags : BaseControl
                 admin = msg.facebookID;
                 title = msg.title;
                 description = FormatText(msg.description);
-                url = siteUrl + "post/" + msg.msgId;
+                url = siteUrl + "post/" + msg.msgId + "/" + msg.title.Slugify();
                 string latlon = msg.latitude + "," + msg.longitude;
                 if (!string.IsNullOrWhiteSpace(msg.image))
                     image = siteUrl + "UploadedResized/" + msg.image;
