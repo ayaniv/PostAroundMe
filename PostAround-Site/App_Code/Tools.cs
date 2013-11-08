@@ -10,12 +10,48 @@ using System.Security.Cryptography;
 using System.Net.Mail;
 using System.Threading;
 using System.Globalization;
+using PostAround.Entities;
+
 
 /// <summary>
 /// Summary description for Tools
 /// </summary>
 public static class Tools
 {
+    public static string GetFriendlyUrl(string siteUrl, string address, bool isSlugged) {
+        if (address == null || address == "")
+            return siteUrl;
+
+        string format = "{0}in/{1}";
+        string url = string.Format(format, siteUrl, isSlugged ? address : address.Slugify());
+        return url;
+    }
+    public static string GetQueryStringByKey(Uri uri, string key)
+    {
+        // this gets all the query string key value pairs as a collection
+        var newQueryString = HttpUtility.ParseQueryString(uri.Query);
+
+        // this returns the value if key exists
+        return newQueryString.Get(key);
+
+    }
+
+    public static string RemoveQueryStringByKey(Uri uri, string key)
+    {
+        // this gets all the query string key value pairs as a collection
+        var newQueryString = HttpUtility.ParseQueryString(uri.Query);
+
+        // this removes the key if exists
+        newQueryString.Remove(key);
+
+        // this gets the page path from root without QueryString
+        string pagePathWithoutQueryString = uri.GetLeftPart(UriPartial.Path);
+
+        return newQueryString.Count > 0
+            ? String.Format("{0}?{1}", pagePathWithoutQueryString, newQueryString)
+            : pagePathWithoutQueryString;
+    }
+
     public static string CallUrl(string url)
     {
         string result = null;

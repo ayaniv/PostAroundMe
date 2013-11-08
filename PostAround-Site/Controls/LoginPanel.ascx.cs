@@ -53,12 +53,12 @@ public partial class Controls_LoginPanel : BaseControl
             if (!string.IsNullOrWhiteSpace(facebookReturnedServerCode))
             {
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                Uri uri = new Uri(Request.Url.AbsoluteUri);
-                sb.Append(siteUrl);
+                
                 
                 string page = Path.GetFileNameWithoutExtension(HttpContext.Current.Request.Url.AbsoluteUri).ToLower();
                 if (page == "post")
                 {
+                    sb.Append(siteUrl);
                     string id = Request.QueryString["id"];
                     string title = Request.QueryString["title"];
                     if (!string.IsNullOrWhiteSpace(id) && !string.IsNullOrWhiteSpace(id))
@@ -66,6 +66,18 @@ public partial class Controls_LoginPanel : BaseControl
                         sb.Append("post/" + id);
                         sb.Append("/" + title);
                     }
+                }
+                else
+                {
+                    Uri uri = new Uri(Request.Url.AbsoluteUri);
+                    string address = Tools.GetQueryStringByKey(uri, "address");
+                    string url = siteUrl;
+                    if (address != null && address != "")
+                    {
+                        url = Tools.GetFriendlyUrl(siteUrl, address, true);
+                    }
+                    
+                    sb.Append(url);
                 }
 
                 

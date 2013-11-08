@@ -922,7 +922,7 @@ public class PostAroundService : IPostAroundService
                                       new XElement(ns + "changefreq", "daily"),
                                       new XElement(ns + "priority", "0.8")),
                             new XElement(ns + "url",
-                                      new XElement(ns + "loc", SiteUrl + "in/ביצרון"),
+                                      new XElement(ns + "loc", SiteUrl + "in/שכונת_ביצרון"),
                                       new XElement(ns + "lastmod", GetDateOfLastPost("32.069798", "34.795407", 4000).ToString("yyyy-MM-ddThh:mm:sszzz")),
                                       new XElement(ns + "changefreq", "daily"),
                                       new XElement(ns + "priority", "0.8")),
