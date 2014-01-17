@@ -160,7 +160,7 @@
 
         <div style="float:left; margin-top:3px; margin-left:8px; color:#666; font-size:12px;">
         
-        <textarea maxlength="400" id="txtPopupDetails1" style="margin-top:3px; width:315px; height:18px; color:#3c3c3c; border:solid 1px #b8b8b8; resize:none; overflow:auto; padding:4px; font-size:14px; font-family:Tahoma, Arial" title="Details"  placeholder="Spread your post around here !"></textarea>
+        <textarea maxlength="400" id="txtPopupDetails1" style="margin-top:3px; overflow:hidden; width:315px; height:18px; color:#3c3c3c; border:solid 1px #b8b8b8; resize:none; overflow:auto; padding:4px; font-size:14px; font-family:Tahoma, Arial" title="Details"  placeholder="Spread your post around here !"></textarea>
         </div>
         
         </div>

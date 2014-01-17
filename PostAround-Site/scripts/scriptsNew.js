@@ -415,7 +415,7 @@ $(function () {
     }
 
 
-    ApplyMobilePhoneRules();
+    //ApplyMobilePhoneRules();
     function ApplyMobilePhoneRules() {
         if (isMobile) {
             ZeroiseBoxes();
@@ -3165,7 +3165,7 @@ $(function () {
 
         if (IsOkSignupFields(fname, lname, email, password)) {
             $(".SignUpErrorMessageArea").hide();
-            var url = siteUrlSecured + "Handlers/Register.ashx";
+            var url = siteUrl + "Handlers/Register.ashx";
 
             var myJSON = {
                 "fname": fname,
@@ -3192,7 +3192,7 @@ $(function () {
         var password = $(elem).parents(".LoginPanel").find('.login_password').val();
         
         if (IsOkLoginInputCheck(email, password)) {
-            var url = siteUrlSecured + "Handlers/CheckLoginData.ashx";
+            var url = siteUrl + "Handlers/CheckLoginData.ashx";
 
             var myJSON = {
                 "email": email,
