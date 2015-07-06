@@ -39,9 +39,9 @@
 <script type="text/javascript">
     $(function () {
         $('.PostItem').click(function () {
-            
+
             var postId = $(this).attr("postId");
-            url = siteUrl + "post/" + postId + "?ref=mp";
+            url = siteUrl + "post/" + postId;
             window.location.href = url;
         });
     });

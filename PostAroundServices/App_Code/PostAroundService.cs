@@ -237,6 +237,7 @@ public class PostAroundService : IPostAroundService
         msg.userid = Convert.ToInt32(dr.UserID);
         msg.Name = dr.Name;
         msg.title = dr.title;
+        msg.titleSlugged = Helpers.Slugify(msg.title);
         msg.description = dr.description;
         msg.userImage = dr.avatarImageUrl;
         msg.Date = msgDate.ToString("d MMM yyyy", new CultureInfo("en-us"));

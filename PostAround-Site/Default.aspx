@@ -160,7 +160,7 @@
 </div>
 
 
-<div id="PleaseLogin" class="LoginMessage CenterLoginMessage" />
+<div id="PleaseLogin" class="LoginMessage CenterLoginMessage"></div>
 
 
 
@@ -265,11 +265,11 @@
                             <div class="BoxLocation">
                             
                             <div class="SmallLocationIcon"></div>
-                            <a href="<%=siteUrl %>post/${msgId}" onclick="return false;" id="ShowOnMap" class="Word">{{html ShowDistance(Distance, msgAddress)}}</a>
+                            <a href="<%=siteUrl %>post/${msgId}/${titleSlugged}" onclick="return false;" id="ShowOnMap" class="Word">{{html ShowDistance(Distance, msgAddress)}}</a>
                             
                             </div>
                         </div>
-                            <a href="<%=siteUrl %>post/${msgId}" onclick="return false;" id="LinkToPost" class="BoxHeader" style="direction:${GetLanguageDirection(title)}; text-align:${GetLanguageDirection(title)};">${title}</a>
+                            <a href="<%=siteUrl %>post/${msgId}/${titleSlugged}" onclick="return false;" id="LinkToPost" class="BoxHeader" style="direction:${GetLanguageDirection(title)}; text-align:${GetLanguageDirection(title)};">${title}</a>
 
 
 
@@ -286,7 +286,7 @@
 
 
                         
-                <a class="ImageBox" style="font-size:0" href="<%=siteUrl %>post/${msgId}" onclick="return false;">
+                <a class="ImageBox" style="font-size:0" href="<%=siteUrl %>post/${msgId}/${titleSlugged}" onclick="return false;">
                 <img src='<%=siteUrl %>UploadedResized/${image}' style="height:${ImageHeight}px;"  />
                 </a>
             

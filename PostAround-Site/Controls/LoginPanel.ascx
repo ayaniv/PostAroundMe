@@ -23,7 +23,7 @@
 </script>--%>
 
 <div id="fb-root"></div>
-<asp:LinkButton OnClientClick="return false;" id="btnFacebook" CssClass="btnFacebook HeaderButton" style="color:inherit; cursor:pointer;  text-decoration:none; float:right" runat="server"  onclick="btnFacebook_Click"><span style="font-size:inherit">Login</span></asp:LinkButton>
+<asp:LinkButton OnClientClick="return false;" id="btnFacebook" CssClass="btnFacebook HeaderButton" style="color:inherit; cursor:pointer;  text-decoration:none; float:right" runat="server"  onclick="btnFacebook_Click"><span style="font-size:inherit" data-i18n="header.login"></span></asp:LinkButton>
 
       
       

@@ -81,7 +81,41 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 
 $(function () {
-    
+
+    var i18nOptions = {
+        resGetPath: siteUrl + 'locales/__lng__/__ns__.json',
+        detectLngQS: 'lang',
+        fallbackLng: 'en',
+        useLocalStorage: false
+    };
+
+    var ERROR_PERMISSION_DENIED;
+    var ERROR_UNKNOWN_ERROR;
+    var ERROR_POSITION_UNAVAILABLE;
+    var FIELD_CATEGORY;
+    var FIELD_DETAILS;
+    var FIELD_TITLE;
+    var FIELD_LOCATION;
+
+   
+    i18n.init(i18nOptions, function (err, t) {
+        // translate nav
+        $("body").i18n();
+
+        // programatical access
+        //var appName = t("app.name");
+        //alert(appName);
+        ERROR_PERMISSION_DENIED = t("errors.PERMISSION_DENIED")
+        ERROR_UNKNOWN_ERROR = t("errors.UNKNOWN_ERROR"),
+        ERROR_POSITION_UNAVAILABLE = t("errors.POSITION_UNAVAILABLE")
+
+        FIELD_CATEGORY = t("post.category")
+        FIELD_DETAILS = t("post.details")
+        FIELD_TITLE = t("post.title")
+        FIELD_LOCATION = t("post.location")
+    });
+
+
     //variable declaration
     // save the current slider uptoMeters value
     var TRESHOLD = 10;
@@ -864,7 +898,8 @@ $(function () {
         errorText = "";
         if (currPostCategory == "") {
             $("#ddlCategory").css("border-color", "#FF0000");
-            errorText = "Category"
+            
+            errorText = FIELD_CATEGORY;
             flag = true;
         } else {
             $("#ddlCategory").css("border-color", "#C8C8C8");
@@ -875,7 +910,8 @@ $(function () {
             $("#txtPopupTitle").css("border-color", "#FF0000");
             if (errorText != "")
                 errorText = errorText + ", ";
-            errorText = errorText + "Title";
+            errorText = errorText + FIELD_TITLE;
+
             flag = true;
         } else {
             $("#txtPopupTitle").css("border-color", "#C8C8C8");
@@ -886,7 +922,8 @@ $(function () {
             $("#txtPopupDetails").css("border-color", "#FF0000");
             if (errorText != "")
                 errorText = errorText + ", "
-            errorText = errorText + "Details";
+            errorText = errorText + FIELD_DETAILS;
+
             flag = true;
         } else {
             $("#txtPopupDetails").css("border-color", "#C8C8C8");
@@ -897,7 +934,7 @@ $(function () {
             //Radio2Click();
             if (errorText != "")
                 errorText = errorText + ", "
-            errorText = errorText + "Location";
+            errorText = errorText + FIELD_LOCATION;
             flag = true;
         } else {
             $(".ui-button").css("border-color", "#C8C8C8");
@@ -2396,7 +2433,6 @@ $(function () {
     }
 
 
-
     function ShowPopUp() {
         
         PopUpIsOpened = true;
@@ -2404,6 +2440,7 @@ $(function () {
 
         var box = $(this).parents(".Box"); // box
         var msgId = box.attr("box-id");
+        var msgTitle = href.split("" + msgId + "/")[1];
 
         // not HTML 5 supported
         if (!history.pushState) {
@@ -2412,7 +2449,7 @@ $(function () {
 
             var stateObj = { id: msgId };
 
-            history.pushState(stateObj, 'Viewing Post #' + msgId, rootDir + 'post/' + msgId);
+            history.pushState(stateObj, 'Viewing Post #' + msgId, rootDir + 'post/' + msgId + "/" + msgTitle);
             var url = href + " #BigBoxContainer, script";
             $('#PopUp').load(url);
             $("#PopUp").show();
@@ -4172,17 +4209,17 @@ $(function () {
     function GetErrorLocationMessage(error) {
 
         var errJSON = {
-            "Message": "Ooops... Couldn't get your location. Please click 'Change' to try again or to set it manually",
+            "Message": ERROR_UNKNOWN_ERROR,
             "Code": errorCodes.UNKNOWN_ERROR
         };
 
         switch (error.code) {
             case errorCodes.PERMISSION_DENIED:
-                errJSON.Message = "Ooops... Please Allow Location Tracking from Settings and 'Try Again' or click 'Change' to set it manually";
+                errJSON.Message = ERROR_PERMISSION_DENIED;
                 errJSON.Code = errorCodes.PERMISSION_DENIED;
                 break;
             case errorCodes.POSITION_UNAVAILABLE:
-                errJSON.Message = "Ooops... Position Unavailable. We coudlnt get your location. Please click 'Change' to set it manually";
+                errJSON.Message = ERROR_POSITION_UNAVAILABLE;
                 errJSON.Code = errorCodes.POSITION_UNAVAILABLE;
                 break;
             case errorCodes.TIMEOUT:

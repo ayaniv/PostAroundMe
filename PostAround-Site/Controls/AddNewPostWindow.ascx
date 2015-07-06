@@ -21,7 +21,7 @@
     <div class="AddPostField">
 
 
-        <textarea maxlength="400" id="txtPopupDetails" style="width: 299px; height: 70px; padding-right: 20px; margin-top: 0; float: left; " title="Details" placeholder="Spread your post around here !"></textarea>
+        <textarea maxlength="400" id="txtPopupDetails" style="width: 299px; height: 70px; padding-right: 20px; margin-top: 0; float: left; " data-i18n="[placeholder]header.placeholder;[title]post.details;"></textarea>
 
         <div id="xbutton" style="width: 14px; height: 16px; clear: both; float: right; top: 0; right: 0; padding: 5px; padding-top: 4px; position: absolute; cursor: pointer;">
             <div class="SmallXButton" style="display: block; margin-right:5px;">
@@ -30,12 +30,12 @@
     </div>
 
                                 
-                    <div class="AddPostField"><input maxlength="50" type="text" name="txtTitle" id="txtPopupTitle" style="font-family:Arial; font-size:14px; color:#3c3c3c; width:315px; border:solid 1px #c8c8c8; height:19px; padding:4px; padding-top:6px" title="Title" placeholder="Add Title..." /></div>
+                    <div class="AddPostField"><input maxlength="50" type="text" name="txtTitle" id="txtPopupTitle" style="font-family:Arial; font-size:14px; color:#3c3c3c; width:315px; border:solid 1px #c8c8c8; height:19px; padding:4px; padding-top:6px"  data-i18n="[placeholder]post.add-title;[title]post.title;" /></div>
                 
 
 
                 
-                    <div id="addPostBtnCategory"  title="Category"  class="AddPostField">
+                    <div id="addPostBtnCategory" data-i18n="[title]post.category" class="AddPostField">
                     
                         <div id="ddlCategory"  style="-moz-user-select: none;-webkit-user-select: none; width:315px; height:19px; border:1px solid #c8c8c8; padding:4px; padding-top:6px; float:left; color:#a3a3a3; font-size:14px; background-color:#FFF; cursor:pointer;" >
                     
@@ -45,7 +45,7 @@
 
                         <li style="float:left; margin:-3px; color:#3c3c3c" id="addPostBtnCategoryText">
                         
-                        <span style="margin-left:6px; padding-top:3px; float:left;">Choose Category...</span>
+                        <span style="margin-left:6px; padding-top:3px; float:left;" data-i18n="post.choose-category"></span>
                         
                         </li>
                     </ul>
@@ -124,7 +124,8 @@
      <div id="CurrLocation" style="display:none;">
          <div class="FreeText" id="divAddressApprove" style="display:none; color: #82898e; margin-top:10px;
              font-size: 14px;">
-             Please click <b>'Allow'</b> above to <b>Share Location</b>...</div>
+             <span data-i18n="post.please-click"></span>&nbsp;<b data-i18n="post.allow"></b>&nbsp;<span data-i18n="post.above-to"></span>&nbsp;<b data-i18n="post.share-location"></b>
+             </div>
          <div id="divAddressContainer" style="margin-bottom:6px; " >
              <div class="SmallLocationIcon" style="margin-top:4px"></div>
              <div style="float:left; font-size:16px; font-family:Calibri, Arial; font-style:italic; color:#57849D;">Post around:</div>
@@ -151,11 +152,11 @@
 
          <div class="FreeText" id="divManualAddress" style="margin-right:0px; display:none;">
          <div style="font-size: 20px; color: #57849d; font-family: Calibri, Arial;
-         font-style: italic;">Where do you want to post?</div>
+         font-style: italic;" data-i18n="post.location-title"></div>
              <div style="float: left;" id="addMessageAddressDiv">
 
 
-                          <div id="AddMessageAutoDiscover" title="Show My Location" class="AutoDiscover">
+                          <div id="AddMessageAutoDiscover" data-i18n="[title]header.show-my-location" class="AutoDiscover">
                 
 
                              <a href="#">
@@ -174,7 +175,7 @@
 
                  <input type="text" id="addMessageAddressInput" class="AddressTextBox" style="width: 219px;
                      height: 18px; border: 1px solid #c0c0c0; font-weight: normal; font-size: 14px;
-                     color: #3c3c3c; float:left; padding:4px; padding-top:6px;" title="Location" placeholder="Street Address, City, State" />
+                     color: #3c3c3c; float:left; padding:4px; padding-top:6px;" data-i18n="[placeholder]post.street-address-state;[title]post.location" />
                      
                      
                      
@@ -185,15 +186,15 @@
 
                              <a href="#">
              
-                              <div style="height: 17px; width: auto; margin-left: auto; margin-top: -2px; font-size:16px !important; font-weight:bold;">Go</div>
+                              <div style="height: 17px; width: auto; margin-left: auto; margin-top: -2px; font-size:16px !important; font-weight:bold;" data-i18n="post.go"></div>
 
              </a>
 
 
 
              </div>
-             <div style="clear:both; float:left; font-size:11px; font-style:italic; padding:6px;">
-             e.g. Xinhai Rd. Taipei, Taiwan.&nbsp; Then Click 'Go'</div>
+             <div style="clear:both; float:left; font-size:11px; font-style:italic; padding:6px;" data-i18n="post.example">
+             </div>
          </div>
      </div>
      <div style="margin-top:10px; display:none; ">
@@ -227,13 +228,14 @@
                 <div style="margin-top:12px; float:right;">
 
                 <div id="MandatoryFieldsMessage" style="display:none; float:left; width:246px; color:#FF0000; font-size:13px; ">
-                Please fill the following fields:
+                
+                <span data-i18n="post.please-fill"></span>
                 <div id="MandatoryFields" style="font-weight:bold"></div>
                 
                 </div>
 
 
-                    <div id="PostButton" class="Submit" style="float:right">Post</div>
+                    <div id="PostButton" class="Submit" style="float:right" data-i18n="post.post"></div>
                 </div>
             </div>
             

@@ -440,6 +440,7 @@ public partial class Controls_LoginPanel : BaseControl
     private int SaveUserInDB(User user)
     {
         int userId;
+        user.birthday = user.regDate; // patch fixes the facebook issue
 
         PostAroundServiceClient client = new PostAroundServiceClient();
         userId = client.InsertUpdateUser(user);

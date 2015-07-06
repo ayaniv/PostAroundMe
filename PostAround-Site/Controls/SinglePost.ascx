@@ -34,7 +34,7 @@
 
 
 <div class="Line" style="background-color:<%=bigBoxLineColor %> ; width:640px; "></div>
-<div id="BigBoxWrapper" class="Box" box-id="<%=msgId %>" style="width:610px; min-height:800px; padding:15px; background-color:#FFF; float:left;">
+<div id="BigBoxWrapper" class="Box" box-id="<%=msgId %>" style="width:610px; padding:15px; background-color:#FFF; float:left;">
     <div id="FacebookID" style="display:none"><%=facebookID %></div>         
     <div id="BigBoxLeft" style="width:100%; float:left;">
 

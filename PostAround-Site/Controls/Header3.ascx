@@ -36,7 +36,7 @@
         <div style="width:270px; text-align:center; height:90px; background:url('<%=siteUrl%>images/logoBg3.png') repeat-x; float:left;">
         
             <div class="LogoClear"><a href="<%=siteUrl %>"><img src="<%=siteUrl%>images/logoHead.png" title="PostAround.Me • Local Pinboard"  style="width:246px; height:43px; border:0" /></a></div>
-            <div class="LogoText">Local Pinboard</div>
+            <div class="LogoText" data-i18n="header.logo-text"></div>
         
         
         </div>
@@ -48,16 +48,14 @@
         <ul class="HeaderList" style="float:right">
             <li style="cursor:pointer;" id="divMobileLink">
                 <span class="MobileIcon"></span>
-                <span style="font-weight:bold">
-                    Mobile
+                <span style="font-weight:bold" data-i18n="header.mobile">
                 </span>
                 </li>
         <li style="cursor:default;" id="divAbout">
         
         
         <!-- About Start -->
-            <span style="float:left;">
-                About
+            <span style="float:left;" data-i18n="header.about">
             </span>
     
         
@@ -66,8 +64,8 @@
         
         <div id="AboutBox" class="MoreBox" style="width:84px;">
             <ul>
-                <li id="liBlog"><a href="http://blog.postaround.me" target="_blank" class="LogoutLink" style="padding:0;">Blog</a></li>
-                <li id="liContact"><a href="mailto:yaniv@postaround.me"  class="LogoutLink">Contact</a></li>
+                <li id="liBlog"><a href="http://blog.postaround.me" target="_blank" class="LogoutLink" style="padding:0;"  data-i18n="header.blog"></a></li>
+                <li id="liContact"><a href="mailto:yaniv@postaround.me"  class="LogoutLink" data-i18n="header.contact"></a></li>
             </ul>
             
             
@@ -90,7 +88,7 @@
         </div>
         <div id="LeftWing" style="float:left; height:80px; width:400px; margin-left:39px; ">
         <ul class="HeaderList">
-        <li style="width:90px;" id="liAddPost"><span class="AddPostIcon"></span>Add Post
+        <li style="width:90px;" id="liAddPost"><span class="AddPostIcon"></span><span data-i18n="header.add-post"></span>
         <%--<div style="background:url('images/icons.png');  background-position:-100px -156px; margin-left:7px; z-index:1; position:absolute; margin-top:8px; width:10px; clear:both; height:6px;" ></div>--%>
         </li>
         <li id="liCategory">
@@ -102,9 +100,7 @@
         
         <li id="liSort">
         <!-- Sort Start -->
-        <div id="btnSort" class="ChooseCategory" >
-                    
-                        Newest on top
+        <div id="btnSort" class="ChooseCategory"  data-i18n="header.newest-on-top">
                     
                 
         </div>
@@ -130,17 +126,18 @@
 
                 
                     <li onselectstart='return false;'  style="width:104px; cursor:pointer;">
-                        Newest on top
+                        <span data-i18n="header.newest-on-top"></span>
                         <input style="display:none" value="0">
                     </li>
 
                     <li onselectstart='return false;' style="width:104px; cursor:pointer;">
-                        Nearest First
+                        <span data-i18n="header.nearest-first"></span>
                         <input style="display:none" value="1">
                     </li>
                 
                          <li onselectstart='return false;' style="width:104px; cursor:pointer;">
-                        Most Shared
+                         <span data-i18n="header.most-shared"></span>
+                        
                         <input style="display:none" value="2">
                     </li>
 
@@ -160,7 +157,7 @@
 
         <div style="float:left; margin-top:3px; margin-left:8px; color:#666; font-size:12px;">
         
-        <textarea maxlength="400" id="txtPopupDetails1" style="margin-top:3px; overflow:hidden; width:315px; height:18px; color:#3c3c3c; border:solid 1px #b8b8b8; resize:none; overflow:auto; padding:4px; font-size:14px; font-family:Tahoma, Arial" title="Details"  placeholder="Spread your post around here !"></textarea>
+        <textarea maxlength="400" id="txtPopupDetails1" style="margin-top:3px; overflow:hidden; width:315px; height:18px; color:#3c3c3c; border:solid 1px #b8b8b8; resize:none;  padding:4px; font-size:14px; font-family:Tahoma, Arial" data-i18n="[placeholder]header.placeholder;[title]post.details"></textarea>
         </div>
         
         </div>
@@ -178,12 +175,12 @@
       <div id="MapPasShade" style="position:absolute; z-index:1; width:100%; height:18px; top:0;"></div>
       <div id="MapPasText" style="background:url('<%=siteUrl%>images/bgWhite80.png'); height:90px; width:862px; position:relative; margin:0 auto; top:27px; padding:25px 30px;">
       <div style="float:left"> 
-      <h1>What’s good <span>in my hood ?</span></h1>
+      <h1>
+          <span class="font1" data-i18n="header.whats-good"></span>
+          <span class="font2" data-i18n="header.in-the-hood"></span></h1>
       </div>
       <div style="float:left; margin-left:40px; margin-right:30px; width:1px; height:100%; background-color:#505050;"></div>
-      <div style="float:left; text-transform:uppercase; color:#505050; font-family: Trebuchet MS, Arial; text-align:center; width:420px; font-size:18px; padding:20px 15px 0 15px;">
-      Read <span style="font-family:Helvetica">&</span> Share Posts in your own neighborhood on a pinboard based on your location
-      <span  style="display:none; text-transform:lowercase;  font-size:11px; color:#6AA1BB">more <span style="font-size:14px">»</span></span>
+      <div data-i18n="header.description" style="float:left; text-transform:uppercase; color:#505050; font-family: Trebuchet MS, Arial; text-align:center; width:420px; font-size:18px; padding:20px 15px 0 15px;">
       </div>
       
       </div>
@@ -191,7 +188,7 @@
       <div id="MapReal" style="display:none; height:100%; width:100%;"></div>
       </div>
       
-      <div id="MapPasBottom" style="width:100%; /*min-width:910px;*/ position:relative;  z-index:10; float:left; background-color:#fefdd8; border-bottom:1px solid #e1dfdc; border-top:1px solid #e1dfdc;">
+      <div id="MapPasBottom" style="width:100%; /*min-width:910px;*/ position:relative;  z-index:10; float:left; background-color:#fcfcfc; border-bottom:1px solid #e1dfdc; border-top:1px solid #e1dfdc;">
       <uc1:LocationBar ID="LocationBar" runat="server" />
       <uc1:SearchLocation ID="SearchLocation1" runat="server" />
 

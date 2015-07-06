@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="HeadNew.ascx.cs" Inherits="Controls_Head" %>
 
 <%@ Register Src="GAC.ascx" TagName="GAC" TagPrefix="uc1" %>
-<%--<meta name="viewport" content="width=device-width,initial-scale=0.5,maximum-scale=1" />--%>
+<meta name="viewport" content="width=device-width,initial-scale=0.5,maximum-scale=1" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <!-- scripts -->
 
@@ -48,8 +48,9 @@
 <script src="<%=siteUrl %>scripts/compress/date.format.js" type="text/javascript"></script>
 <script type='text/javascript' src='<%=siteUrl %>scripts/compress/jquery.autogrow-textarea.js'></script>
 
+<script src="<%=siteUrl %>scripts/i18next-1.10.1.min.js" type="text/javascript"></script>
+<script src="<%=siteUrl %>scripts/scriptsNew.js" type="text/javascript"></script>
 
-<script src="<%=siteUrl %>scripts/compress/scriptsNew.js" type="text/javascript"></script>
 
 
 

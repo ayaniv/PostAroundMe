@@ -19,23 +19,37 @@ public partial class Controls_SinglePost_Taiwan : BaseControl
 
     public string PageTitle { get; set; }
 
+    public static string FaceBookAppKey;
 
 
     private void SetTextBoxesByValue(string date)
     {
-        string fileName = ConfigurationManager.AppSettings["PhysicalPath"] + @"\Taiwan\Invoice\" + "Results.xml";
-        var xmlDocument = XDocument.Load(fileName);
-        List<XElement> lstCombo = xmlDocument.Descendants("Results").ToList<XElement>();
-        List<XElement> lst = (from a in lstCombo where a.Attribute("Date").Value == date select a).Elements().ToList<XElement>();
+        
+            string fileName = ConfigurationManager.AppSettings["PhysicalPath"] + @"\Taiwan\Invoice\" + "Results.xml";
+            var xmlDocument = XDocument.Load(fileName);
+            List<XElement> lstCombo = xmlDocument.Descendants("Results").ToList<XElement>();
+            List<XElement> lst = (from a in lstCombo where a.Attribute("Date").Value == date select a).Elements().ToList<XElement>();
 
 
-        txtSpecial.Text = lst[0].Value;
-        txtGrand.Text = lst[1].Value;
-        txtFirst1.Text = lst[2].Value;
-        txtFirst2.Text = lst[3].Value;
-        txtFirst3.Text = lst[4].Value;
-        txtAdd1.Text = lst[5].Value;
-        txtAdd2.Text = lst[6].Value;
+            txtSpecial.Text = lst[0].Value;
+            txtGrand.Text = lst[1].Value;
+            txtFirst1.Text = lst[2].Value;
+            txtFirst2.Text = lst[3].Value;
+            txtFirst3.Text = lst[4].Value;
+            txtAdd1.Text = lst[5].Value;
+            txtAdd2.Text = lst[6].Value;
+            if (lst.Count > 7)
+            {
+                txtAdd3.Text = lst[7].Value;
+                txtAdd4.Text = lst[8].Value;
+            }
+            else
+            {
+                txtAdd3.Text = "-";
+                txtAdd4.Text = "-";
+            }
+            
+        
     }
 
     protected void Index_Changed(Object sender, EventArgs e)
@@ -49,6 +63,8 @@ public partial class Controls_SinglePost_Taiwan : BaseControl
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        
+        FaceBookAppKey = ConfigurationManager.AppSettings["facebookAppKey"];
         this.Page.Title = "Taiwan Lottery Numbers Online Checker | Taiwan Receipt Lottery";
         if (!IsPostBack)
         {
@@ -88,7 +104,9 @@ public partial class Controls_SinglePost_Taiwan : BaseControl
         if (values.Max() != 0)
             return values.Max();
 
-        if ((currNum.EndsWith(txtAdd1.Text) && txtAdd1.Text != "") || (currNum.EndsWith(txtAdd2.Text) && txtAdd2.Text != ""))
+        if ((currNum.EndsWith(txtAdd1.Text) && txtAdd1.Text != "") || (currNum.EndsWith(txtAdd2.Text) && txtAdd2.Text != "") ||
+            (currNum.EndsWith(txtAdd3.Text) && txtAdd3.Text != "") || (currNum.EndsWith(txtAdd4.Text) && txtAdd4.Text != "")
+            )
             return 3;
         return 0;
     }

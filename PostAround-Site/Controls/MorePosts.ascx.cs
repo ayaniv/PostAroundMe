@@ -13,7 +13,7 @@ public partial class Controls_MorePosts : BaseControl
 
     public int numberOfItems { get; set; }
     public string CategoryName { get; set; }
-    
+
     protected void Page_Load(object sender, EventArgs e)
     {
         // Get postId from queryString
@@ -28,37 +28,37 @@ public partial class Controls_MorePosts : BaseControl
         string lng = "";
         string address = "";
         List<int> lstCatId = new List<int>();
-        
+
 
         string strMsgId = Request.QueryString["id"];
-            
 
 
-            if (Int32.TryParse(strMsgId, out msgId) && msgId > 0)
+
+        if (Int32.TryParse(strMsgId, out msgId) && msgId > 0)
+        {
+            MyMessage msg = GetMessageByID(msgId);
+            if (msg == null)
+                throw new Exception();
+
+            lat = msg.latitude;
+            lng = msg.longitude;
+            lstCatId.Add(msg.catID);
+            address = msg.msgAddress;
+            CategoryName = msg.category;
+
+
+        }
+        else
+        {
+            if (HttpContext.Current.Request.Url.AbsoluteUri.ToLower().Contains("taiwan-receipt-lottery-checker.aspx"))
             {
-                MyMessage msg = GetMessageByID(msgId);
-                if (msg == null)
-                    throw new Exception();
-                
-                lat = msg.latitude;
-                lng = msg.longitude;
-                lstCatId.Add(msg.catID);
-                address = msg.msgAddress;
-                CategoryName = msg.category;
-
-
+                lat = "25.020725";
+                lng = "121.528168";
+                address = "Taipower building station, Daan District, Taipei, Taiwan 106";
             }
-            else
-            {
-                if (HttpContext.Current.Request.Url.AbsoluteUri.ToLower().Contains("taiwan-receipt-lottery-checker.aspx"))
-                {
-                    lat = "25.020725";
-                    lng = "121.528168";
-                    address = "Taipower building station, Daan District, Taipei, Taiwan 106";
-                }
-            }
-            SetLocationScreen(lat, lng, address);
-            GetPosts(lat, lng, numberOfItems, lstCatId);
+        }
+        SetLocationScreen(lat, lng, address);
+        GetPosts(lat, lng, numberOfItems, lstCatId);
     }
 
     private void GetPosts(string lat, string lng, int num, List<int> lstCatID)
@@ -75,7 +75,7 @@ public partial class Controls_MorePosts : BaseControl
         string address_no_space = address.Replace(",", "").Replace(" ", "_").Replace("/", "_");
         linkMorePosts.NavigateUrl = linkAddress.NavigateUrl = siteUrl + "in/" + address_no_space;
         linkAddress.Text = address;
-        
+
     }
 
     private List<MyMessage> GetMessages(string lat, string lon, int takeNum, List<int> lstCatID)
@@ -97,7 +97,7 @@ public partial class Controls_MorePosts : BaseControl
     {
         if (input == null || input.Length < length)
             return input;
-        
+
         return string.Format("{0}...", input.Substring(0, length).Trim());
     }
 
@@ -107,7 +107,7 @@ public partial class Controls_MorePosts : BaseControl
         if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
         {
 
-            
+
             MyMessage item = (MyMessage)e.Item.DataItem;
             if (item != null)
             {
@@ -116,7 +116,7 @@ public partial class Controls_MorePosts : BaseControl
                 ((HtmlGenericControl)e.Item.FindControl("divLine")).Style.Add("background-color", item.catColor);
                 ((Image)e.Item.FindControl("imgUserAvatar")).ImageUrl = item.userImage;
                 ((Literal)e.Item.FindControl("ltrlUserName")).Text = item.Name;
-                ((Literal)e.Item.FindControl("ltrlDistance")).Text = FormatDistanceFromMeters(item.Distance); 
+                ((Literal)e.Item.FindControl("ltrlDistance")).Text = FormatDistanceFromMeters(item.Distance);
 
                 ((HyperLink)e.Item.FindControl("linkTitle")).NavigateUrl = siteUrl + "post/" + item.msgId + "?ref=mp";
                 ((HyperLink)e.Item.FindControl("linkTitle")).Text = TruncString(item.title, 20);
@@ -132,15 +132,15 @@ public partial class Controls_MorePosts : BaseControl
         {
 
 
-                string[] wordsArray = str.Split(',');
-                if (wordsArray.Length < 5)
-                    newstring = TruncString(wordsArray[0], 15);
-                else if (wordsArray.Length == 5)
-                    newstring = TruncString(wordsArray[1], 15);
-                else
-                    newstring = TruncString(wordsArray[3], 15);
+            string[] wordsArray = str.Split(',');
+            if (wordsArray.Length < 5)
+                newstring = TruncString(wordsArray[0], 15);
+            else if (wordsArray.Length == 5)
+                newstring = TruncString(wordsArray[1], 15);
+            else
+                newstring = TruncString(wordsArray[3], 15);
 
-                
+
 
 
         }
@@ -188,8 +188,8 @@ public partial class Controls_MorePosts : BaseControl
         int userId = 0;
 
         userId = 0;
- 
-        
+
+
         PostAroundServiceClient client = new PostAroundServiceClient();
 
         PostAround.Entities.MyMessage message = client.GetMessageById(msgId, currLon, currLat, regionId, timeZone, userId);
@@ -201,7 +201,7 @@ public partial class Controls_MorePosts : BaseControl
         client.Close();
 
         return message;
-        
+
     }
- 
+
 }

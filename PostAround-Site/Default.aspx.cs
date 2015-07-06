@@ -22,7 +22,8 @@ public partial class _Default : BasePage
     //User currentUser;
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+        Session["Test"] = "Testing..";
+
     
 
     }

@@ -11,7 +11,7 @@
 
 
         <div id="xbuttonLoginMsg" class="SmallXButtonWrapper" >
-            <div class="SmallXButton" style="display: block; margin-right:5px;"">
+            <div class="SmallXButton" style="display: block; margin-right:5px;">
             </div>
         </div>
 
@@ -21,8 +21,8 @@
                 <li class="log-in-box LoginSignUpBox DisplayBlock">
                     <div style="background: #EAEDEE; padding: 10px; height: 30px;">
 
-                        <span style="font-weight: bold; font-family: Trebuchet MS, Arial, Sans-Serif; float: left; font-size: 20px">Login</span>
-                        <a href="#" id="createNewAccount" class="createNewAccount">Create New Account</a>
+                        <span style="font-weight: bold; font-family: Trebuchet MS, Arial, Sans-Serif; float: left; font-size: 20px" data-i18n="login.login-noun"></span>
+                        <a href="#" id="createNewAccount" class="createNewAccount" data-i18n="login.create-new-account"></a>
 
                     </div>
 
@@ -39,13 +39,13 @@
 
                            <div class="uiStickyPlaceholderInput uiStickyPlaceholderEmptyInput">
                                 <input type="text" class="login_email input-text inputWithPlaceHolder"  />
-                                <div class="placeholderField">Email</div>
+                                <div class="placeholderField" data-i18n="login.email"></div>
                             </div>
 
 
                             <div class="uiStickyPlaceholderInput uiStickyPlaceholderEmptyInput">
                                 <input type="password" class="login_password input-text inputWithPlaceHolder"  />
-                                <div class="placeholderField">Password</div>
+                                <div class="placeholderField" data-i18n="login.password"></div>
                             </div>
                             
 
@@ -56,8 +56,8 @@
                         <div class="join-with-email" style="margin-left: 10px; margin-right: 10px; padding-bottom: 10px; width: 303px; float: left;">
 
 
-                            <a href="<%=urlForgotPassword %>" target="_top" class="signup-with-email-expand-button blue-link-button" style="float: left;">Forgot password?</a>
-                            <input type="button" class="btnLoginForm email-login-button gray-button right clear-errors-button" style="float: right;" tabindex="103" value="Log in">
+                            <a href="<%=urlForgotPassword %>" target="_top" class="signup-with-email-expand-button blue-link-button" style="float: left;"  data-i18n="login.forgot-password"></a>
+                            <input type="button" class="btnLoginForm email-login-button gray-button right clear-errors-button" style="float: right;" tabindex="103" data-i18n="[value]header.login">
                         </div>
                         
 
@@ -76,8 +76,8 @@
 
                     <div style="background: #EAEDEE; padding: 10px; height: 30px;">
 
-                        <span style="font-weight: bold; font-family: Trebuchet MS, Arial, Sans-Serif; float: left; font-size: 20px">Sign Up</span>
-                        <a href="#" style="font-family: Trebuchet MS, Arial, Sans-Serif; color: #808080; padding-top: 4px; color: #6AA1BB; float: right; font-weight: lighter; font-size: 13px" id="alreadyMember">Already a member? Log In</a>
+                        <span style="font-weight: bold; font-family: Trebuchet MS, Arial, Sans-Serif; float: left; font-size: 20px" data-i18n="login.signup"></span>
+                        <a href="#" style="font-family: Trebuchet MS, Arial, Sans-Serif; color: #808080; padding-top: 4px; color: #6AA1BB; float: right; font-weight: lighter; font-size: 13px" id="alreadyMember" data-i18n="login.already-member"></a>
 
                     </div>
 
@@ -90,23 +90,23 @@
 
                              <div class="uiStickyPlaceholderInput uiStickyPlaceholderEmptyInput">
                                 <input type="text" style="width: 139px"  class="signup_fname input-text inputWithPlaceHolder"  />
-                                <div class="placeholderField" style="width: 139px" >First Name</div>
+                                <div class="placeholderField" style="width: 139px" data-i18n="login.first-name"></div>
                             </div>
 
                             <div class="uiStickyPlaceholderInput uiStickyPlaceholderEmptyInput">
                                 <input type="text" style="width: 139px"  class="signup_lname input-text inputWithPlaceHolder"  />
-                                <div class="placeholderField" style="width: 139px" >Last Name</div>
+                                <div class="placeholderField" style="width: 139px"  data-i18n="login.last-name"></div>
                             </div>
 
 
                            <div class="uiStickyPlaceholderInput uiStickyPlaceholderEmptyInput">
                                 <input type="text" class="signup_email input-text inputWithPlaceHolder"  />
-                                <div class="placeholderField">Email</div>
+                                <div class="placeholderField" data-i18n="login.email"></div>
                             </div>
 
                            <div class="uiStickyPlaceholderInput uiStickyPlaceholderEmptyInput">
                                 <input type="password" class="signup_password input-text inputWithPlaceHolder"  />
-                                <div class="placeholderField">New Password</div>
+                                <div class="placeholderField" data-i18n="login.new-password"></div>
                             </div>
                              
                             
@@ -119,8 +119,8 @@
                         <div class="join-with-email" style="margin-left: 10px; margin-right: 10px; padding-bottom: 10px; width: 303px; float: left;">
 
 
-                            <a href="#" class="signup-why-join-expand-button blue-link-button" style="float: left;">Why Sign Up?</a>
-                            <input type="button" class="btnSignUp email-login-button gray-button right clear-errors-button" style="float: right;" tabindex="103" value="Sign Up" />
+                            <a href="#" class="signup-why-join-expand-button blue-link-button" style="float: left;" data-i18n="login.why-signup"></a>
+                            <input type="button" class="btnSignUp email-login-button gray-button right clear-errors-button" style="float: right;" tabindex="103" data-i18n="[value]login.signup-verb" />
                         </div>
 
 
@@ -133,17 +133,17 @@
 
                     <div style="display: none; border-top: 1px solid #ccc;" class="login-panel-text signup-why-join-text info">
                         <ul style="margin-top: 10px;">
-                            <li><b>Post Around Me</b> connects you with the people around you, 
-              and lets you share anything you want with them!</li>
-                            <li>It’s your local pinboard, tailored to your location.
-             Who knew that your neighbors were so useful ;)</li>
+                            <li><b data-i18n="header.post-around-me"></b>
+                                <span data-i18n="header.why-join-details-part1"></span>
+                                </li>
+                            <li data-i18n="header.why-join-details-part2"></li>
 
-                            <li style="padding-top: 10px;"><b>Facebook Sign Ups:</b></li>
-                            <li>We just ask for your basic details.</li>
-                            <li>We don't store your password.</li>
-                            <li>We will never post ANYTHING on your behalf, unless you ask for it.</li>
+                            <li style="padding-top: 10px;"><b data-i18n="header.facebook-signups"></b></li>
+                            <li data-i18n="header.facebook-signups-line1"></li>
+                            <li data-i18n="header.facebook-signups-line2"></li>
+                            <li data-i18n="header.facebook-signups-line3"></li>
 
-                            <li style="padding-top: 10px;">Join NOW, spread your posts around, and create a happier environment!</li>
+                            <li style="padding-top: 10px;" data-i18n="header.why-join-details-cta"></li>
 
 
                         </ul>
@@ -161,7 +161,7 @@
 
                 <div style="background:#EAEDEE; padding: 10px; height:30px;">
 
-                    <span style="font-weight: bold; font-family: Trebuchet MS, Arial, Sans-Serif; float:left; font-size: 20px">Success !</span>
+                    <span style="font-weight: bold; font-family: Trebuchet MS, Arial, Sans-Serif; float:left; font-size: 20px" data-i18n="login.success"></span>
                   
 
                 </div>
@@ -169,10 +169,10 @@
                     <div style="padding: 10px;">
                         
                         <ul style="clear: both; padding-top: 10px; font-size: 13px; color: #424e55">
-                            <li>Only one step seperates you from creating a<br />happier environment !</li>
-                            <li style="padding-top: 8px;">We would like to verify your email: <b class="ActivationEmail"></b>.</li>
-                            <li style="padding-top: 8px; font-size:20px;"><b>Please check your mailbox and click on the activation link we've sent you.</b></li>
-                            <li style="padding-top: 8px;">If you do not receive an email from us within 30 minutes, please check your email's spam and junk filters, or contact us at <b>info@postaround.me</b></li>
+                            <li data-i18n="login.success-line1"></li>
+                            <li style="padding-top: 8px;"><span data-i18n="login.success-line2"></span>&nbsp;<b class="ActivationEmail"></b>.</li>
+                            <li style="padding-top: 8px; font-size:20px;"><b data-i18n="login.success-line3"></b></li>
+                            <li style="padding-top: 8px;"><span data-i18n="login.success-line4"></span>&nbsp;<b>info@postaround.me</b></li>
                            
                         </ul>
 

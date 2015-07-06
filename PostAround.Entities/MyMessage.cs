@@ -12,6 +12,8 @@ namespace PostAround.Entities
         [DataMember]
         public string relativeDate { get; set; }
         [DataMember]
+        public string titleSlugged { get; set; }
+        [DataMember]
         public int msgId { get; set; }
         [DataMember]
         public string latitude { get; set; }

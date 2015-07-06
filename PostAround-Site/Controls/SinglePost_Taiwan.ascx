@@ -38,7 +38,7 @@
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
         js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=<%= FaceBookAppKey %>";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
 
@@ -60,7 +60,7 @@
     <div id="BigBoxContainer" style="font-family:Georgia, Arial, Sans-Serif; color:#424e55">
 
         
-        <div id="BigBoxWrapper" class="Box" style="width: 610px; min-height: 800px; padding: 15px; background-color: #FFF; float: left;">
+        <div id="BigBoxWrer" class="Box" style="width: 610px; min-height: 800px; padding: 15px; background-color: #FFF; float: left;">
 
 
 
@@ -116,22 +116,22 @@
 
                                  <tr>
                <td><asp:TextBox ID="txtGrand" runat="server"></asp:TextBox> </td>
-               <td> <asp:TextBox ID="txtFirst2" runat="server"></asp:TextBox></td>
-               <td> <asp:TextBox ID="txtAdd2" runat="server"></asp:TextBox></td>
+               <td><asp:TextBox ID="txtFirst2" runat="server"></asp:TextBox></td>
+               <td><asp:TextBox ID="txtAdd2" runat="server"></asp:TextBox></td>
            </tr>
 
            
                                  <tr>
-               <td></td>
+               <td>Addition #3:</td>
                <td> First Prize #3: </td>
-               <td> </td>
+               <td>Addition #4:</td>
            </tr>
 
            
                                  <tr>
-               <td></td>
+               <td><asp:TextBox ID="txtAdd3" Text="-" runat="server"></asp:TextBox></td>
                <td><asp:TextBox ID="txtFirst3" runat="server"></asp:TextBox>  </td>
-               <td> </td>
+               <td><asp:TextBox ID="txtAdd4" Text="-" runat="server"></asp:TextBox></td>
            </tr>
 
        </table>
@@ -175,11 +175,11 @@
                      For more inofrmation regarding the lottery, please refer to <a href="http://service.etax.nat.gov.tw/etwmain/front/ETW183W6" target="_blank">Ministry of Finance</a>
                     <br />
                                        
-                     
-                    <br />
+                     When you use our application, you're agreeing to our terms.
+                    <br /><br />
                     <h3>Got feedback?</h3>
                     <div>Add a comment. We are listening.</div>
-                    <div class="fb-comments" data-href="http://postaround.me/taiwan" data-num-posts="2" data-width="610"></div>
+                    <div class="fb-comments" data-href="http://postaround.me/taiwan" data-numposts="50" data-width="610"></div>
                     <br />
                     <br />
                     <h3>Like us?</h3>

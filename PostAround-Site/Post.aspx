@@ -9,7 +9,7 @@
 <%@ Register src="Controls/MetaTags.ascx" tagname="MetaTags" tagprefix="uc1" %>
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://ogp.me/ns/fb#" xml:lang="en">
-<head runat="server">
+<head id="Head1" runat="server">
     
     <uc1:Head ID="PageHeader1" runat="server" />
     
