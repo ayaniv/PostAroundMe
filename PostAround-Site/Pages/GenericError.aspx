@@ -5,7 +5,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://ogp.me/ns/fb#" xml:lang="en">
 <head id="Head1" runat="server">
-    <title>Post Around Me | Local Pinboard</title>
+    <title>PostAround.Me • Local Pinboard</title>
     <uc1:Head runat="server" />
     
     
@@ -17,7 +17,7 @@
     <form id="form1" runat="server">
     <div style="width:500px; height:400px; padding:50px; background:url('http://postaround.me/images/bgWhite80.png') repeat scroll 0 0 transparent; margin-left:auto; margin-right:auto; margin-top:50px;">
     <a href="http://postaround.me">
-    <img alt="Post Around Me | Local Pinboard" style="border:0; width:246px; height:43px; border:0" title="PostAround.Me | Local Pinboard" src="http://postaround.me/images/logoHead.png" />
+    <img alt="PostAround.Me • Local Pinboard" style="border:0; width:246px; height:43px; border:0" title="PostAround.Me | Local Pinboard" src="http://postaround.me/images/logoHead.png" />
     </a>
     <br /><br />
     <span style="color:#6AA1BB; clear:both; font-size:48px; font-weight:bold; font-family:Trebuchet MS,Arial,Sans-Serif">OOPS...</span>

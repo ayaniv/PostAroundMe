@@ -1,3 +1,5 @@
-ajaxmin.exe sourcefile.js –out outputfile.js –clobber
+cd C:\Program Files (x86)\Microsoft\Microsoft Ajax Minifier
+ajaxmin.exe C:\Users\aharony\Private\PostAroundMe\PostAround-Site\scripts\scriptsNew.js –out C:\Users\aharony\Private\PostAroundMe\PostAround-Site\scripts\compress\scriptsNew.js –clobber
 
-ajaxmin.exe C:\Users\Yaniv\Projects\PostAroundMe\PostAround-Site\scripts\scriptsNew.js -out C:\Users\Yaniv\Projects\PostAroundMe\PostAround-Site\scripts\compress\scriptsNew.js -clobber
+
+ajaxmin.exe C:\Users\aharony\Private\PostAroundMe\PostAround-Site\scripts\fileuploader.js –out C:\Users\aharony\Private\PostAroundMe\PostAround-Site\scripts\compress\fileuploader.js  –clobber

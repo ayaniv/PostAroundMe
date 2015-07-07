@@ -13,6 +13,11 @@ namespace PostAround.ServiceContracts
     [ServiceContract]
     public interface IPostAroundService
     {
+        [OperationContract]
+        int CheckLoginData(LoginDetail data);
+
+        [OperationContract]
+        int InsertLoginDetails(LoginDetail data);
 
         [OperationContract]
         bool GetUserPermission(int userId, int permissionId);
@@ -24,7 +29,13 @@ namespace PostAround.ServiceContracts
         List<MyMessage> GetMessages(string currLat, string currLon, int userId, int skipNum, int takeNum, int isMine, List<int> lstCatID, int sotyBy, int timeZone, int uptoMeters, int regionID);
 
         [OperationContract]
-        List<BriefMessage> GetAllBriefMessages();
+        DateTime GetDateOfLastPost(string lat = "", string lon = "", int uptoMeters = -1);
+
+        [OperationContract]
+        int CreateXmlSiteMap();
+
+        [OperationContract]
+        void CreateJsonPostsDigest();
 
         [OperationContract]
         MyMessage GetMessageById(int msgId, string currLat, string currLon, int regionId, int timeZone, int userId);
@@ -44,6 +55,12 @@ namespace PostAround.ServiceContracts
         User GetUserByID(int ID);
 
         [OperationContract]
+        User GetUserByEmail(string email);
+
+        [OperationContract]
+        int GetUserIdByFacebookId(string fid);
+
+        [OperationContract]
         int InsertUpdateUser(User user);
 
         [OperationContract]
@@ -56,10 +73,16 @@ namespace PostAround.ServiceContracts
         List<Category> GetListCategories();
 
         [OperationContract]
-        int InsertComment(Comment comment);
+        int UpdateMessageSharesByID(int msgId, int totalShares);
+
+        [OperationContract]
+        CommentResult InsertComment(Comment comment);
 
         [OperationContract]
         List<Comment> GetCommentsByMessageID(int id, int userId, int timeZone);
+
+        [OperationContract]
+        Comment GetCommentByID(int id);
 
         [OperationContract]
         List<Comment> GetAllComments(int userId, int timeZone);
@@ -69,6 +92,9 @@ namespace PostAround.ServiceContracts
 
         [OperationContract]
         int DeleteComment(int commentId, int userid);
+
+        [OperationContract]
+        int ActivateUserLoginByLoginID(int loginID, int userID);
 
     }
  

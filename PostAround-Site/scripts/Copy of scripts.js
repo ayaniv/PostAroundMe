@@ -196,7 +196,7 @@ $(document).ready(function () {
 
     function GetMessages() {
 
-        var url = siteUrl + "/Handlers/GetMessages.ashx?currLat=" + myLat + "&currLon=" + myLon;
+        var url = siteUrl + "Handlers/GetMessages.ashx?currLat=" + myLat + "&currLon=" + myLon;
 
         var result = $.ajax({
             url: url,
@@ -348,7 +348,7 @@ $(document).ready(function () {
     function PostComment(e, msgId, data) {
         if (e.keyCode == 13) {
 
-            var url = siteUrl + "/Handlers/InsertComment.ashx";
+            var url = siteUrl + "Handlers/InsertComment.ashx";
 
             if (currentUser == null) {
                 alert("Please Log In");
@@ -393,7 +393,7 @@ $(document).ready(function () {
             (box).addClass("isOpen");
 
             if (!(box).hasClass("wasOpened")) {
-                var url = siteUrl + "/Handlers/GetCommentsByMsgID.ashx?id=" + msgId;
+                var url = siteUrl + "Handlers/GetCommentsByMsgID.ashx?id=" + msgId;
 
                 var result = $.ajax({
                     url: url,
@@ -777,7 +777,7 @@ $(document).ready(function () {
         var message = $("textarea#message").val();
         var response_message = "Thank you for your comment, see ya!"
 
-        var url = siteUrl + "/Handlers/SetFeedback.ashx";
+        var url = siteUrl + "Handlers/SetFeedback.ashx";
 
         var myJSON = {
 

@@ -6,13 +6,9 @@ function SetPostButtonState(on) {
         //requestRunning = false;
     } else {
         $("#PostButton").addClass('Submit-Disable');
-        $("#PostButton").html("<img src='images/loading.gif' style='width:20px; height:20px;' />");
+        $("#PostButton").html("<img src='" + siteUrl + "images/loading.gif' style='width:20px; height:20px;' />");
     }
 }
-
-
-
-
 
 function Linkify(inputText) {
     //URLs starting with http://, https://, or ftp://
@@ -28,45 +24,98 @@ function Linkify(inputText) {
 
 
 function SetMapCanvas(lat, lng) {
-    var center = new GLatLng(lat, lng);
+    //var center = new GLatLng(lat, lng);
 
-    var icon = GetMarker();
-    var markerOptions = { icon: icon };
+    //var icon = GetMarker();
+    //var markerOptions = { icon: icon };
 
-    var marker = new GMarker(center, markerOptions);
+    //var marker = new GMarker(center, markerOptions);
 
-    var jsMap = new GMap2(document.getElementById("map_canvas1"));
-    jsMap.setCenter(center, 15);
-    jsMap.setUIToDefault();
+    //var jsMap = new GMap2(document.getElementById("map_canvas1"));
+    //jsMap.setCenter(center, 15);
+    //jsMap.setUIToDefault();
 
-    jsMap.setMapType(G_NORMAL_MAP);
-    jsMap.checkResize();
-    jsMap.addOverlay(marker);
-}
+    //jsMap.setMapType(G_NORMAL_MAP);
+    //jsMap.checkResize();
+    //jsMap.addOverlay(marker);
 
 
-function GetMarker() {
-    var myIcon = new GIcon();
-    myIcon.image = siteUrl + 'images/markers/image.png';
-    myIcon.shadow = siteUrl + 'images/markers/shadow.png';
-    myIcon.iconSize = new GSize(24, 31);
-    myIcon.shadowSize = new GSize(40, 31);
-    myIcon.iconAnchor = new GPoint(12, 31);
-    myIcon.infoWindowAnchor = new GPoint(12, 0);
-    myIcon.printImage = siteUrl + 'images/markers/printImage.gif';
-    myIcon.mozPrintImage = siteUrl + 'images/markers/mozPrintImage.gif';
-    myIcon.printShadow = siteUrl + 'images/markers/printShadow.gif';
-    myIcon.transparent = siteUrl + 'images/markers/transparent.png';
-    myIcon.imageMap = [14, 0, 17, 1, 18, 2, 20, 3, 20, 4, 21, 5, 22, 6, 22, 7, 23, 8, 23, 9, 23, 10, 23, 11, 23, 12, 23, 13, 23, 14, 23, 15, 22, 16, 22, 17, 21, 18, 21, 19, 20, 20, 19, 21, 19, 22, 18, 23, 17, 24, 16, 25, 15, 26, 15, 27, 14, 28, 13, 29, 12, 30, 11, 30, 10, 29, 10, 28, 9, 27, 8, 26, 7, 25, 6, 24, 6, 23, 5, 22, 4, 21, 3, 20, 3, 19, 2, 18, 2, 17, 1, 16, 1, 15, 1, 14, 0, 13, 0, 12, 0, 11, 0, 10, 1, 9, 1, 8, 1, 7, 2, 6, 2, 5, 3, 4, 4, 3, 5, 2, 7, 1, 10, 0];
-    return myIcon;
+    var mapOptions = {
+        center: new google.maps.LatLng(lat, lng),
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(document.getElementById("map_canvas1"),
+        mapOptions);
+
+    var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(lat, lng),
+        title: address,
+        //icon: siteUrl + "images/markers/image.png",
+        //shadow: siteUrl + "images/markers/shadow.png",
+ 
+        animation: google.maps.Animation.DROP
+
+    });
+    marker.setMap(map);
+
 }
 
 
 
 // load google maps v2
-google.load("maps", "2");
-$(function () {
+//google.load("maps", "2");
+
+function initialize() {
+    var input = /** @type {HTMLInputElement} */(document.getElementById('content'));
+    if (input) {
+        var autocomplete = new google.maps.places.Autocomplete(input);
+    }
+    var input2 = /** @type {HTMLInputElement} */(document.getElementById('addMessageAddressInput'));
+    if (input2) {
+        var autocomplete2 = new google.maps.places.Autocomplete(input2);
+    }
     
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+
+
+$(function () {
+
+    var i18nOptions = {
+        resGetPath: siteUrl + 'locales/__lng__/__ns__.json',
+        detectLngQS: 'lang',
+        fallbackLng: 'en',
+        useLocalStorage: false
+    };
+
+    var ERROR_PERMISSION_DENIED;
+    var ERROR_UNKNOWN_ERROR;
+    var ERROR_POSITION_UNAVAILABLE;
+    var FIELD_CATEGORY;
+    var FIELD_DETAILS;
+    var FIELD_TITLE;
+    var FIELD_LOCATION;
+
+   
+    i18n.init(i18nOptions, function (err, t) {
+        // translate nav
+        $("body").i18n();
+
+        // programatical access
+        //var appName = t("app.name");
+        //alert(appName);
+        ERROR_PERMISSION_DENIED = t("errors.PERMISSION_DENIED")
+        ERROR_UNKNOWN_ERROR = t("errors.UNKNOWN_ERROR"),
+        ERROR_POSITION_UNAVAILABLE = t("errors.POSITION_UNAVAILABLE")
+
+        FIELD_CATEGORY = t("post.category")
+        FIELD_DETAILS = t("post.details")
+        FIELD_TITLE = t("post.title")
+        FIELD_LOCATION = t("post.location")
+    });
+
+
     //variable declaration
     // save the current slider uptoMeters value
     var TRESHOLD = 10;
@@ -124,6 +173,7 @@ $(function () {
     CheckBrowserSupport();
     DisableAutoDiscoverForUnsupportedBrowsers();
 
+
     //set init values
     mouse_is_inside_popup = false;
     mouse_is_inside = false;
@@ -163,36 +213,113 @@ $(function () {
 
     });
 
+    $("#slider").slider({
+
+        value: 10500,
+        range: "min",
+        min: 0,
+        max: 11000,
+        step: 1000,
+        change: function (event, ui) {
+            fromNumber = 0;
+            if (ui.value > 10000) {
+                // go to DB and bring all
+                uptoMeters = -1;
+                StartTimerAndGetMessages(false);
+                SetZoom(2, 0);
 
 
-
-    function GetAddressFromLatLon() {
-
-
-
-        var center = new GLatLng(myLat, myLon);
-        var geocoder = new GClientGeocoder();
-        geocoder.getLocations(center, function (response) {
-
-            if (response && response.Status.code == 200) {
-                address = response.Placemark[0].address;
-                ShowPosts();
             }
-        });
+            else {
 
+                // filter results by meters
+                if (myLon != "" && myLat != "") {
+                    uptoMeters = ui.value;
+
+                    StartTimerAndGetMessages(false);
+
+                    currZoomLevel = ui.value / 1000;
+                    if (currZoomLevel > 10)
+                        SetZoom(9, uptoMeters);
+                    else if (currZoomLevel == 10)
+                        SetZoom(10, uptoMeters);
+                    else if (currZoomLevel == 9)
+                        SetZoom(12, uptoMeters);
+                    else if (currZoomLevel == 8)
+                        SetZoom(13, uptoMeters);
+                    else if (currZoomLevel == 7)
+                        SetZoom(13, uptoMeters);
+                    else if (currZoomLevel == 6)
+                        SetZoom(14, uptoMeters);
+                    else if (currZoomLevel == 5)
+                        SetZoom(14, uptoMeters);
+                    else if (currZoomLevel == 4)
+                        SetZoom(14, uptoMeters);
+                    else if (currZoomLevel == 3)
+                        SetZoom(15, uptoMeters);
+                    else if (currZoomLevel == 2)
+                        SetZoom(15, uptoMeters);
+                    else if (currZoomLevel == 1)
+                        SetZoom(15, uptoMeters);
+                    else if (currZoomLevel == 0)
+                        SetZoom(16, 10);
+
+                    //currResults = jQuery.grep(allResults, function (a) { return a.Distance <= ui.value && a.Distance >= 0 });
+
+                } else {
+                    alert("Please Insert Location");
+                }
+            }
+
+
+            //            if (currResults != null)
+            //                resultsNum = currResults.length;
+            //            else
+            //                resultsNum = 0;
+
+
+            //maxPage = Math.ceil(resultsNum / (numberOfColumns * itemsPerColumn));
+            //ShowMessages(currResults);
+        },
+        slide: function (event, ui) {
+           
+            if (ui.value > 10000) {
+                $("#amount").val("ALL");
+            } else {
+                if (ui.value < 1000)
+                    if (ui.value <= 0) {
+                        $("#amount").val("Here");
+                        ui.value = 0;
+                    }
+                    else {
+                        $("#amount").val(ui.value + "m");
+                    }
+                else {
+
+                    $("#amount").val((ui.value / 1000) + "KM");
+                }
+
+            }
+        }
+    });
+
+
+
+    function HasQueryStringData() 
+    {
+        if (getParameterByName("lat") != "" && getParameterByName("lon") != "") {
+            return true;
+        }
     }
 
-    GetDataFromQueryString();
+    
     function GetDataFromQueryString() {
-        if (getParameterByName("lat") != "" && getParameterByName("lon") != "") {
+        
             myLat = getParameterByName("lat");
             myLon = getParameterByName("lon");
-            GetAddressFromLatLon();
-        } else if (getParameterByName("address") != "") {
-            PerformGoToLocation(getParameterByName("address"))
-        }
-
-
+            var latlon = { "lat": myLat, "lon": myLon };
+            Caller(GenericGetAddressFromLatLon, HandleAddress, latlon);
+            //GetAddressFromLatLon();
 
     }
 
@@ -210,10 +337,13 @@ $(function () {
             return decodeURIComponent(results[1].replace(/\+/g, " "));
     }
 
-
+    function RenderAddThis() {
+        addthis.toolbox('.addthis_toolbox');
+    }
 
     function FixAddThisAjax() {
 
+        
         var script = 'http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4fdef26e46826d05';
         if (window.addthis) {
             window.addthis = null;
@@ -277,94 +407,7 @@ $(function () {
     
 
 
-    $("#slider").slider({
-    
-        value: 10500,
-        range: "min",
-        min: 0,
-        max: 11000,
-        step: 1000,
-        change: function (event, ui) {
-            fromNumber = 0;
-            if (ui.value > 10000) {
-                // go to DB and bring all
-                uptoMeters = -1;
-                StartTimerAndGetMessages(false);
-                SetZoom(2);
 
-
-            }
-            else {
-
-                // filter results by meters
-                if (myLon != "" && myLat != "") {
-                    uptoMeters = ui.value;
-
-                    StartTimerAndGetMessages(false);
-
-                    currZoomLevel = ui.value / 1000;
-                    if (currZoomLevel > 10)
-                        SetZoom(9);
-                    else if (currZoomLevel == 10)
-                        SetZoom(10);
-                    else if (currZoomLevel == 9)
-                        SetZoom(11);
-                    else if (currZoomLevel == 8)
-                        SetZoom(12);
-                    else if (currZoomLevel == 7)
-                        SetZoom(13);
-                    else if (currZoomLevel == 6)
-                        SetZoom(14);
-                    else if (currZoomLevel == 5)
-                        SetZoom(14);
-                    else if (currZoomLevel == 4)
-                        SetZoom(15);
-                    else if (currZoomLevel == 3)
-                        SetZoom(15);
-                    else if (currZoomLevel == 2)
-                        SetZoom(15);
-                    else if (currZoomLevel == 1)
-                        SetZoom(17);
-                    else if (currZoomLevel == 0)
-                        SetZoom(19);
-
-                    //currResults = jQuery.grep(allResults, function (a) { return a.Distance <= ui.value && a.Distance >= 0 });
-
-                } else {
-                    alert("Please Insert Location");
-                }
-            }
-
-
-            //            if (currResults != null)
-            //                resultsNum = currResults.length;
-            //            else
-            //                resultsNum = 0;
-
-
-            //maxPage = Math.ceil(resultsNum / (numberOfColumns * itemsPerColumn));
-            //ShowMessages(currResults);
-        },
-        slide: function (event, ui) {
-            if (ui.value > 10000) {
-                $("#amount").val("ALL");
-            } else {
-                if (ui.value < 1000)
-                    if (ui.value <= 0) {
-                        $("#amount").val("Here");
-                        ui.value = 0;
-                    }
-                    else {
-                        $("#amount").val(ui.value + "m");
-                    }
-                else {
-
-                    $("#amount").val((ui.value / 1000) + "KM");
-                }
-
-            }
-        }
-    });
 
 
 
@@ -378,8 +421,21 @@ $(function () {
             isMine = 1;
         }
 
-        // If has location data in cookies, display shows in that location
-        if (address != "" && myLat != "" && myLon != "") {
+        
+        if (HasQueryStringData()) {
+            GetDataFromQueryString();
+        } else if (queryStringLon != "" && queryStringLat != "") {
+            myLat = queryStringLat;
+            myLon = queryStringLon;
+            var latlon = { "lat": myLat, "lon": myLon };
+            Caller(GenericGetAddressFromLatLon, HandleAddress, latlon);
+            //GetAddressFromLatLon();
+        } else if (getParameterByName("address") != "") {
+            PerformGoToLocation(getParameterByName("address"))
+        } else if (queryStringAddress != "") {
+            PerformGoToLocation(queryStringAddress)
+        } else if (HasAddress()) {
+            // If has location data in cookies, display shows in that location
             address = address.ReplaceAll("+", " ");
             GetPosition();
         } else {
@@ -393,9 +449,13 @@ $(function () {
     }
 
 
-    ApplyMobilePhoneRules();
+    //ApplyMobilePhoneRules();
     function ApplyMobilePhoneRules() {
         if (isMobile) {
+            ZeroiseBoxes();
+            
+            ApplyMobileUI();
+
             //user on mobile phone
             // auto ask for auto-detact
             // hide feedback panel
@@ -405,11 +465,29 @@ $(function () {
             $("#MapSpacing").hide();
             $(".feedback-panel").hide();
             GetPosition();
+           
+            
+
+          
+
+
 
         }
     }
 
+    function ApplyMobileUI() {
+        
+        $('body').css("overflow", "hidden");
+        $("#mobileHeader").show();
+        $("#TopHeader").hide();
+        $("#BottomDiv").hide();
+        $(".feedback-panel").hide();
+    }
 
+
+    $('.btnFacebook').click(function () {
+        IsLoggedIn();
+    });
 
     $('#TryAgain').click(function () {
         GetPosition();
@@ -454,6 +532,7 @@ $(function () {
         if (input.val() == input.attr('placeholder')) {
             input.val('');
             input.removeClass('placeholder');
+           
         }
     }).blur(function () {
         var input = $(this);
@@ -485,16 +564,12 @@ $(function () {
 
 
     $("#content").focus(function () {
-        $(this).css('background-position', '0px -35px');
+        //$(this).css('background-position', '0px -35px');
     });
     $("#content").blur(function () {
         if ($("#content").val() == '') {
-            //            if (myLon == "" && myLat == "") {
-            //                $("#WelcomeBubble").show();
-            //                $("#AutoDiscoverBubble").hide();
-            //            }
-            //$("#content").val('Street Address, City, State');
-            $(this).css("background", "#FFF url('images/locationInputBg.png') 0 0");
+            
+            //$(this).css("background", "#FFF url('images/locationInputBg.png') 0 0");
         }
         else {
             hasValue = true;
@@ -516,7 +591,7 @@ $(function () {
 
     $("#bubbleOk").click(function () {
 
-        var url = siteUrl + "/Handlers/SaveLocation.ashx";
+        var url = siteUrl + "Handlers/SaveLocation.ashx";
 
         var myJSON = {
             "dontShowMeAgainWelcome": "1"
@@ -581,13 +656,17 @@ $(function () {
     });
 
     function HideAddMessageWindow() {
+        $(".signup-why-join-text").hide();
         $('#txtPopupDetails1').show();
         $("#AddMessageWindow").hide();
         $('#fuzz').hide();
+        $('#PleaseLogin').hide();
+        changeFontSize = true;
     }
 
     function ShowAddMessageWindow(isNewMessage) {
 
+        
         $('#txtPopupDetails1').hide();
         //SetPostButtonState(true);
 
@@ -596,7 +675,7 @@ $(function () {
             $('.qq-upload-drop-area').hide();
 
             if (isNewMessage) {
-                SetPostToFacebookCheckBoxIfPermissionAlreadyGranted();
+               // SetPostToFacebookCheckBoxIfPermissionAlreadyGranted();
 
                 if (HasAddress())
                     ShowLocationInAddMessgae();
@@ -819,7 +898,8 @@ $(function () {
         errorText = "";
         if (currPostCategory == "") {
             $("#ddlCategory").css("border-color", "#FF0000");
-            errorText = "Category"
+            
+            errorText = FIELD_CATEGORY;
             flag = true;
         } else {
             $("#ddlCategory").css("border-color", "#C8C8C8");
@@ -830,18 +910,20 @@ $(function () {
             $("#txtPopupTitle").css("border-color", "#FF0000");
             if (errorText != "")
                 errorText = errorText + ", ";
-            errorText = errorText + "Title";
+            errorText = errorText + FIELD_TITLE;
+
             flag = true;
         } else {
             $("#txtPopupTitle").css("border-color", "#C8C8C8");
         }
 
 
-        if (($.trim($("#txtPopupDetails").val()) == '') || ($.trim($("#txtPopupDetails").val()) == "Add your post here !")) {
+        if (($.trim($("#txtPopupDetails").val()) == '') || ($.trim($("#txtPopupDetails").val()) == "Spread your post around here !")) {
             $("#txtPopupDetails").css("border-color", "#FF0000");
             if (errorText != "")
                 errorText = errorText + ", "
-            errorText = errorText + "Details";
+            errorText = errorText + FIELD_DETAILS;
+
             flag = true;
         } else {
             $("#txtPopupDetails").css("border-color", "#C8C8C8");
@@ -852,7 +934,7 @@ $(function () {
             //Radio2Click();
             if (errorText != "")
                 errorText = errorText + ", "
-            errorText = errorText + "Location";
+            errorText = errorText + FIELD_LOCATION;
             flag = true;
         } else {
             $(".ui-button").css("border-color", "#C8C8C8");
@@ -874,6 +956,7 @@ $(function () {
         FB.api('/me/permissions', checkAppUserPermissions);
 
         function checkAppUserPermissions(response) {
+            
             if (response.data[0].publish_stream != 1)
                 $("#ChkFacebook").click();
         }
@@ -884,7 +967,7 @@ $(function () {
         FB.api('/me/permissions', SetCheckBoxToTrue);
 
         function SetCheckBoxToTrue(response) {
-
+            
             if (response.data[0].publish_stream == 1) {
                 $("#chkFacebookTrue").show();
                 $("#chkPostToWall").attr('checked', true);
@@ -1015,7 +1098,7 @@ $(function () {
             return;
         }
 
-        var url = siteUrl + "/Handlers/SetMessage.ashx";
+        var url = siteUrl + "Handlers/SetMessage.ashx";
 
         var myJSON = {
 
@@ -1181,20 +1264,26 @@ $(function () {
 
     });
 
+    var changeFontSize = true;
     $('#addMessageAddressInput').keydown(function (e) {
 
         if (e.keyCode == 13) {
             $('#addMessageAddressSearchButton').click();
+
+        
         }
 
 
     });
 
+ 
+
+
     function ClearPositionCookie() {
 
         //call ajax to save cookie
 
-        var url = siteUrl + "/Handlers/ClearLocationCookie.ashx";
+        var url = siteUrl + "Handlers/ClearLocationCookie.ashx";
 
         $.ajax({
             type: 'POST',
@@ -1234,7 +1323,7 @@ $(function () {
     function SaveLocationInCookie() {
         //call ajax to save cookie
 
-        var url = siteUrl + "/Handlers/SaveLocation.ashx";
+        var url = siteUrl + "Handlers/SaveLocation.ashx";
 
         var myJSON = {
             "lat": myLat,
@@ -1285,7 +1374,7 @@ $(function () {
 
 
     $('#btnShowMap').click(function () {
-        ToggleMapPanel(true)
+        ToggleMapPanel(true, this);
 
     });
 
@@ -1297,23 +1386,26 @@ $(function () {
 
 
     function ToggleMapPanel(isRegular) {
-
+        
         if (($('#MapPas').css("display") != "none") && isRegular) {
 
             //it is open. then CLOSE
             $('#MapPas').slideUp("slow", "easeInOutSine");
             $('#MapReal').fadeOut();
+            $('#btnShowMap').html("Show Map");
 
 
         }
         else {
 
-
+            
 
             //it is closed. then OPEN
             $('#MapPas').slideDown("slow", "easeInOutSine");
             $('#MapReal').fadeIn();
+            $('#btnShowMap').html("Hide Map");
             ResizeMap(myMap);
+            
 
         }
 
@@ -1337,15 +1429,22 @@ $(function () {
     function ChangeToSmallHeader() {
 
         $.when(ChangeToSmallHeaderStep1()).then(ChangeToSmallHeaderStep2());
-
+        if (!isDirectLink) {
+            SetLocationInAddressBar();
+        }
     }
 
     function ChangeToSmallHeaderStep2() {
         if ($('#MapPas').css("display") != "none") {
-            $('#MapPas').slideUp("slow", "linear");
+            //$('#MapPas').slideUp("slow", "linear");
             MakeAddressLinkability();
 
+            $("#CategoriesBar").fadeIn();
+
+            
         }
+
+      
 
     }
 
@@ -1365,6 +1464,9 @@ $(function () {
 
     }
 
+
+
+
     function MakeAddressLinkabilityDie() {
         $('#moreButtonsText').die('click');
         $('#moreButtonsText').die('mouseover');
@@ -1381,6 +1483,8 @@ $(function () {
     }
 
 
+    
+
 
     $('.slider-button-off').live('click', function () {
         if ($(this).parents('.slider-frame').attr("IsPrivate") != "true") {
@@ -1388,12 +1492,17 @@ $(function () {
                 $(this).parents('.slider-frame').children('.slider-button').css("background-position", "0px 0px");
                 $(this).css("display", "none").css("left", "0").fadeIn().html('<span class="PublicIcon"></span>Public');
                 $(this).parents('.slider-frame').attr("IsPrivate", "true");
+                $(this).parents('.AddComment').children('#Comment').css('border', "1px dashed #6AA1BB");
+                $(this).parents('.AddComment').children('#Comment').attr('placeholder', 'Reply to poster only...');
             } else {
                 $(this).parents('.slider-frame').children('.slider-button').removeClass('on').html('<span class="PublicIcon PublicIconOn"></span>Public');
                 $(this).parents('.slider-frame').children('.slider-button').css("background-position", "-8px 0px");
                 $(this).css("display", "none").css("left", "50%").fadeIn().html('<span class="PrivateIcon"></span>Private');
                 $(this).parents('.slider-frame').attr("IsPrivate", "false");
-            }
+                $(this).parents('.AddComment').children('#Comment').css('border', "solid 1px #cbd2d4");
+                $(this).parents('.AddComment').children('#Comment').attr('placeholder', 'Post a comment...');
+        }
+        $(this).parents('.AddComment').children('#Comment').focus();
             });
 
             $('.slider-button').live('click', function () {
@@ -1402,7 +1511,7 @@ $(function () {
 
 
 
-
+    
 
     $('#AutoDiscover').hover(function () {
         $(this).addClass('underline pointer');
@@ -1424,23 +1533,23 @@ $(function () {
 
 
 
-    $('#addMessageAddressInput').click(function () {
-        if ($(this).val() == "Enter address, location, city or zipcode...") $(this).val('')
-    });
+    //$('#addMessageAddressInput').click(function () {
+    //    if ($(this).val() == "Enter address, location, city or zipcode...") $(this).val('')
+    //});
 
-    $('#addMessageAddressInput').blur(function () {
-        if ($(this).val() == '') $(this).val('Enter address, location, city or zipcode...')
-    });
+    //$('#addMessageAddressInput').blur(function () {
+    //    if ($(this).val() == '') $(this).val('Enter address, location, city or zipcode...')
+    //});
 
 
 
-    $('#txtAddressChange').click(function () {
-        if ($(this).val() == "Enter address, location, city or zipcode...") $(this).val('')
-    });
+    //$('#txtAddressChange').click(function () {
+    //    if ($(this).val() == "Enter address, location, city or zipcode...") $(this).val('')
+    //});
 
-    $('#txtAddressChange').blur(function () {
-        if ($(this).val() == '') $(this).val('Enter address, location, city or zipcode...')
-    });
+    //$('#txtAddressChange').blur(function () {
+    //    if ($(this).val() == '') $(this).val('Enter address, location, city or zipcode...')
+    //});
 
     function RemoveAfter(msgId) {
         var i = 0;
@@ -1465,9 +1574,8 @@ $(function () {
     }
 
 
-    function ShowImmediateComment(id, body, msgId, box) {
+    function ShowImmediateComment(id, body, msgId, box, isPrivate) {
         // create json data with the comment details
-
         var currCommentsContainer = $("#MessagesContainer").find('[box-id=' + msgId + ']').find("#currCommentsView");
         var currCommentsContainerPopUp = $(box).find("#currCommentsView");
 
@@ -1497,6 +1605,11 @@ $(function () {
             $.template("CommentTemplate", markup)
 
             currComment = $.tmpl("CommentTemplate", myJSON);
+ 
+            if (isPrivate == 'true') {
+                $(currComment).find('.SingleComment').addClass('PrivateComment');
+                $(currComment).find('.PosterOnly').show();
+            }
 
             // push the template on comments area
             $(currComment).appendTo(currCommentsContainerPopUp);
@@ -1509,11 +1622,17 @@ $(function () {
 
         currComment = $.tmpl("CommentTemplate", myJSON);
 
+ 
+        if (isPrivate == 'true') {
+            $(currComment).find('.SingleComment').addClass('PrivateComment');
+            $(currComment).find('.PosterOnly').show();
+        }
+
+
         // push the template on comments area
         $(currComment).appendTo(currCommentsContainer);
-        //            }
-
-
+        
+        
 
 
 
@@ -1539,8 +1658,69 @@ $(function () {
 
     }
 
+    $('#flip').live('click', function () { $(this).parents('.Box').find('#card').toggleClass("flipped") });
 
-    $('.Border').live('mouseover', function () { $(this).css("border-color", "#6AA1BB"); ($(this).find('.ImageBox')).css('opacity', '0.5'); });
+    $('.SingleComment').live('mouseover', function () { var element = $(this).find('#HideComment'); if (element != "") { $(element).show(); } });
+    $('.SingleComment').live('mouseout', function () { var element = $(this).find('#HideComment'); if (element != "") { $(element).hide(); } })
+    
+    $('.Box').live('mouseover', function () { var element = $(this).find('.OnPostButtons'); if (element != "") { $(element).show(); } });
+    $('.Box').live('mouseout', function () { var element = $(this).find('.OnPostButtons'); if (element != "") { $(element).hide(); } })
+
+    $('.ShareButton').live('click', function () { ShowSharingButtons.apply(this); });
+    //$('.SharingArea').live('mouseout', function () { HideSharingButtons.apply(this); });
+
+    function HideSharingButtons() {
+        var sharing_button = $(this).find('.ShareButton');
+        var sharing_div = $(this).find('.SharingDiv');
+        var sharing_area = $(this);
+
+        if ($(sharing_area).attr('open')) {
+            $(sharing_area).removeAttr('open');
+            $(sharing_button).show();
+            $(sharing_div).hide();
+            
+        }
+    }
+
+
+    function RenderAndShowButtons(sharing_button, sharing_div, func) {
+        
+        if (typeof func === 'function') { //check if b is a function
+            func(); //invoke
+
+        RenderAddThis();
+        $(sharing_button).fadeOut('fast', function () {
+            $(sharing_div).show();
+           
+        });
+
+        }
+    }
+
+    function AddAttribute(to, name, value) {
+        $(to).attr(name, value);
+    }
+
+    function ShowSharingButtons() {
+
+        var sharing_button = $(this).parents('.MessageName').find('.ShareButton');
+        var sharing_div = $(this).parents('.MessageName').find('.SharingDiv');
+        var sharing_area = $(this).parents('.SharingArea');
+        if (!$(this).parents('.SharingArea').attr('open')) {
+            
+            RenderAndShowButtons(sharing_button, sharing_div, function () {
+                AddAttribute(sharing_area, 'open', 'true');
+            });
+        }
+    }
+
+
+
+    
+
+
+
+    $('.Border').live('mouseover', function () { $(this).css("border-color", "#6AA1BB"); ($(this).find('.ImageBox')).css('opacity', '0.9'); });
     $('.Border').live('mouseout', function () { $(this).css("border-color", "#E2DDCF"); ($(this).find('.ImageBox')).css('opacity', '1'); });
     $('.ImageBox').live('click', function () { ShowPopUp.apply(this); });
 
@@ -1553,15 +1733,11 @@ $(function () {
     //    $('#CommentsWord').live('mouseout', function () { $(this).removeClass('underline pointer'); });
 
     //$('#Comment').live('keyup', function (e) { if (e.keyCode != 13) return;  });
-    $('#Comment').live('keypress', function (e) {
-            if ($(this).height() > 14)
-            {
-                OrderElements();
-                
-            }
+    $('#Comment').live('keyup', function (e) {
+        OrderElements();
     });
 
-    $('#BtnPostComment').live('click', function() { PostComment($(this).parents('.Box'), $(this).parents('.AddComment').children('textarea').val()) });
+    $('#BtnPostComment').live('click', function () { PostComment($(this).parents('.Box'), $(this).parents('.AddComment').children('textarea').val(), $(this).parents('.Buttons').find('.slider-frame')) });
 
     $('#Comment').live('focus', function () {
         if ($(this).val() == "Post a comment...") {
@@ -1581,6 +1757,8 @@ $(function () {
     //$('#HidePost').live('mouseout', function () { $(this).removeClass('pointer'); });
 
     $('#HideComment').live('click', function () { HideComment.apply(this); });
+    $('.SmallXButton').live('mouseover', function () { $(this).css('background-position-x', '-393px'); });
+    $('.SmallXButton').live('mouseout', function () { $(this).css('background-position-x', '-140px'); });
 
     $('#EditPost').live('click', function () { EditPost.apply(this); });
     $('#Comment').live('focus', function () { if (IsLoggedIn()) { SetAutoGrow.apply(this); CommentTextAreaEventFucus.apply(this); } });
@@ -1589,8 +1767,8 @@ $(function () {
     //$('#EditPost').live('mouseout', function () { $(this).removeClass('pointer'); });
 
     
-    $('#locationWrapper').live('mouseover', function () { $(this).parents(".BoxHead").find(".FullAddress").show(); });
-    $('#locationWrapper').live('mouseout', function () { $(this).parents(".BoxHead").find(".FullAddress").hide(); });
+    $('.BoxLocation').live('mouseover', function () { $(this).parents(".BoxHead").find(".FullAddress").show(); });
+    $('.BoxLocation').live('mouseout', function () { $(this).parents(".BoxHead").find(".FullAddress").hide(); });
 
     
     
@@ -1623,9 +1801,10 @@ $(function () {
         ShowPopUp.apply(this);
     });
 
-    $("#Marker").live("click",
+
+    $("#LinkToPost").live("click",
     function () {
-        $('#ShowOnMap').click();
+        ShowPopUp.apply(this);
     });
 
 
@@ -1713,10 +1892,12 @@ $(function () {
             $("#AboutBox").hide();
     });
 
+    $('#divMobileLink').click(function () {
+        window.location.href = "http://goo.gl/sOXPS";
+    });
 
 
     $('#divLogin').hover(function () {
-        $(this).css("background-color", "#487690");
         if (currentUser != null) {
             $("#MoreBox").show();
         }
@@ -1767,7 +1948,6 @@ $(function () {
     });
 
     $('#divAbout').hover(function () {
-        $(this).css("background-color", "#487690");
         $("#AboutBox").show();
 
     }, function () {
@@ -1866,6 +2046,7 @@ $(function () {
         if (!mouse_is_inside_categories && !mouse_is_inside_categories_clicked) $('#CategoriesBox').hide();
         if (!mouse_is_inside_sort && !mouse_is_inside_sort_clicked) $('#SortBox').hide();
         if (PopUpIsOpened && !mouse_is_inside_popup) ClosePopUp();
+        
     });
 
     $(".MoreBox li").hover(function () {
@@ -1912,42 +2093,7 @@ $(function () {
 
     });
 
-    function DisplayShortAddress(lat, lon, element) {
-
-
-        if (lat.length < 8 || lon.length < 8) {
-            $(element).text('');
-            return
-        }
-
-        var reverseGeocode = "";
-        var reverseGeocodeShort = "";
-        var geocoder = new GClientGeocoder();
-        var latlng = new GLatLng(lat, lon);
-
-
-        geocoder.getLocations(latlng, function (response) {
-            if (response && response.Status.code == 200) {
-
-                reverseGeocode = response.Placemark[0].address;
-                if (reverseGeocode.length > 32) {
-                    reverseGeocodeShort = reverseGeocode.substring(0, 30) + "..."
-                    $(element).text(reverseGeocodeShort);
-                } else {
-                    $(element).text(reverseGeocode);
-                }
-                $(element).parent().children("#FullAddress").text(reverseGeocode);
-
-            }
-
-
-
-        });
-
-
-    }
-
-
+    
     //    $("#btnSort").click(function () {
 
     //        if ($("#SortBox").css("display") == "none") {
@@ -2027,7 +2173,7 @@ $(function () {
                 if ($('.feedback-panel').hasClass('open')) {
 
                     $('#fuzz').fadeOut();
-                    $('#fuzz').css('z-index', '200');
+                    //$('#fuzz').css('z-index', '200');
                     $('.feedback-panel').animate({ left: '-' + feedbackTab.containerWidth }, feedbackTab.speed)
                         .removeClass('open');
                 } else {
@@ -2036,7 +2182,7 @@ $(function () {
                     }
 
                     $('#fuzz').fadeIn();
-                    $('#fuzz').css('z-index', '99');
+                    //$('#fuzz').css('z-index', '99');
                     $('.feedback-panel').animate({ left: '0' }, feedbackTab.speed)
                         .addClass('open');
                 }
@@ -2055,7 +2201,7 @@ $(function () {
         var message = $("textarea#message").val();
         var response_message = "Thank you for your comment, see ya!"
 
-        var url = siteUrl + "/Handlers/SetFeedback.ashx";
+        var url = siteUrl + "Handlers/SetFeedback.ashx";
 
         var myJSON = {
 
@@ -2244,7 +2390,7 @@ $(function () {
     //---- ADD MESSAGE STUFF END
 
     function PostToWall(message, title, caption, details, image, link, latlon) {
-
+        
         var hasProblem = false;
         var params = {};
         params['message'] = message;
@@ -2256,11 +2402,12 @@ $(function () {
             params['picture'] = 'http://www.postaround.me/UploadedResized/' + image;
         }
         else {
-            params['picture'] = image = "http://maps.googleapis.com/maps/api/staticmap?center=" + latlon + "&zoom=14&size=150x150&maptype=roadmap&sensor=true&markers=icon:http://postaround.me/images/markers/image.png%7C" + latlon;
+            params['picture'] = image = "http://maps.googleapis.com/maps/api/staticmap?center=" + latlon + "&zoom=14&size=220x220&maptype=roadmap&sensor=true&markers=icon:http://postaround.me/images/markers/image.png%7C" + latlon;
         }
 
 
         FB.api('/me/feed', 'post', params, function (response) {
+            
             if (!response || response.error) {
             } else { }
         });
@@ -2286,13 +2433,14 @@ $(function () {
     }
 
 
-
     function ShowPopUp() {
+        
         PopUpIsOpened = true;
         var href = $(this).attr("href");
 
         var box = $(this).parents(".Box"); // box
         var msgId = box.attr("box-id");
+        var msgTitle = href.split("" + msgId + "/")[1];
 
         // not HTML 5 supported
         if (!history.pushState) {
@@ -2301,7 +2449,7 @@ $(function () {
 
             var stateObj = { id: msgId };
 
-            history.pushState(stateObj, 'Viewing Post #' + msgId, rootDir + 'post/' + msgId);
+            history.pushState(stateObj, 'Viewing Post #' + msgId, rootDir + 'post/' + msgId + "/" + msgTitle);
             var url = href + " #BigBoxContainer, script";
             $('#PopUp').load(url);
             $("#PopUp").show();
@@ -2336,611 +2484,102 @@ $(function () {
         }
     }
 
+    function SendNotification(fromFacebookID, toFacebookID, commentId) {
+        if (sendFacebookNotifications == "True") {
+            if (fromFacebookID == toFacebookID)
+                return;
 
+            var url = "https://graph.facebook.com/" + toFacebookID + "/notifications";
+            var params = { access_token: accessToken, template: "@[" + fromFacebookID + "] replied to your post around. Go read it!", href: "pages/PostNotify.aspx?commentId=" + commentId };
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: params,
+                dataType: "json"
+            });
+        }
+
+
+
+    }
 
 
 
 
     $('#AddMessageAutoDiscover').click(function () {
+        $('#autoDiscoverText').hide();
         RunAutoDicoverInAddMessage();
     });
 
-    //------------------------LOCATION STUFF BEGIN
 
 
+    // mobile start
+    
 
-    // Auto Discover on the homepage
-    function GetPosition() {
-        // if you have address already
-        if (address != "" && myLat != "" && myLon != "") {
-            //allowScrolling = true;
-            $('#moreButtonsText').html(address + " ");
-            $.when(ChangeToSmallHeader()).then(SetSlide());
-        } else {
-            //ShowMoreButtonsArea(40);
-            if (window.navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-		        showPosition, errorCallback, {
-		            enableHighAccuracy: true, maximumAge: 600000
-		        }
-        );
-            } else {
-                $('#moreButtonsText').html("<b>Your browser doesn't support it...</b> please type your address manually...");
-            }
-        }
-    }
 
+    //$('.MobileSettings').on('click', toggleSettings);
 
+    //function toggleSettings() {
+     
+    //    var opened = $('.MobileContainer').data('opened');
+        
+    //    opened ? closeSettings() : openSettings();
+    //}
 
-    function ShowLocationInAddMessgae() {
-        GetAddress(false);
-        $("#CurrLocation").show();
-        $("#divManualAddress").hide();
-    }
+    //function openSettings() {
+    //    //$('.MobileTop').css("position", "static");
+    //    //$('.MobileContainer').addClass('slideRight').data('opened', true);
+    //}
 
+    //function closeSettings(callback) {
 
-    function HasAddress() {
-        if (address != "" && myLat != "" && myLon != "")
-            return true;
-        return false;
-    }
+        
+    //    //$('.MobileContainer').removeClass('slideRight').data('opened', false);
+    //    //if (callback) {
+    //    //    if (supportTransitions) {
+    //    //        $('.MobileContainer').on(transEndEventName, function () {
+    //    //            $(this).off(transEndEventName);
+    //    //            callback.call();
+    //    //        });
+    //    //    }
+    //    //    else {
+    //    //        callback.call();
+    //    //    }
+    //    //}
 
-    function RunAutoDicoverInAddMessage() {
+    //}
 
-        GetAddress(true);
-        $("#CurrLocation").show();
-        $("#divManualAddress").hide();
+    //mobile end
 
 
-    };
-
-
-
-    function ShowSearchLocationInAddMessage() {
-
-        $("#txtAddMessageLat").val('');
-        $("#txtAddMessageLon").val('');
-
-        $("#CurrLocation").hide();
-        $("#divManualAddress").show();
-
-
-    };
-
-
-    function inverseOrder(marker, b) {
-        return -GOverlay.getZIndex(marker.getPoint().lat());
-    }
-
-
-    function importanceOrder(marker, b) {
-        return GOverlay.getZIndex(marker.getPoint().lat()) + marker.importance * 1000000;
-    }
-
-    function createMarker(latlng, markerOptions, importance) {
-        var marker = new GMarker(latlng, markerOptions);
-        marker.importance = importance;
-        GEvent.addListener(marker, "click", function () {
-            var myHtml = latlng.toString();
-            myMap.openInfoWindowHtml(latlng, myHtml);
-        });
-        return marker;
-    }
-
-    function AddMultipleMarkers(data) {
-
-        /// צריך להביא את כל המרקרים ולא רק את החבילה הנוכחית אחרת אל תציג את זה
-
-        var myData = eval(data);
-
-        // Create our "tiny" marker icon
-        var blueIcon = new GIcon(G_DEFAULT_ICON);
-        blueIcon.image = "http://gmaps-samples.googlecode.com/svn/trunk/markers/blue/blank.png";
-
-        // Set up our GMarkerOptions object
-        var markerOptions = { icon: blueIcon
-            , zIndexProcess: importanceOrder
-
-        };
-
-        var latlng;
-        var marker;
-        for (var i = 0; i < myData.length; i++) {
-            latlng = new GLatLng(myData[i].latitude, myData[i].longitude);
-            marker = createMarker(latlng, markerOptions, 0);
-            myMap.addOverlay(marker);
-        }
-    }
-
-
-
-
-    function showMyLocation(lat, lng) {
-
-
-        var icon = GetMarker();
-        var markerOptions = { icon: icon
-            , zIndexProcess: importanceOrder
-
-        };
-
-        jsCenter = new GLatLng(lat, lng);
-        var marker = new GMarker(jsCenter, markerOptions);
-        marker.importance = 100;
-        var htmlMap = document.getElementById("MapReal");
-        if (htmlMap == null)
-            return;
-        myMap = new GMap2(htmlMap);
-
-        myMap.setCenter(jsCenter);
-        $("#MapReal").show();
-        myMap.addOverlay(marker);
-
-        ResizeMap(myMap);
-    }
-
-
-    function ShowLocationOnMap(lat, lng) {
-
-        var center = new GLatLng(lat, lng);
-
-        var icon = GetMarker();
-        var markerOptions = { icon: icon };
-
-        var marker = new GMarker(center, markerOptions);
-
-        var jsMap = new GMap2(document.getElementById("map_canvas"));
-        jsMap.setCenter(center, 15);
-        jsMap.setUIToDefault();
-
-        jsMap.setMapType(G_NORMAL_MAP);
-        jsMap.checkResize();
-        jsMap.addOverlay(marker);
-
-
-
-        //V3
-        //        var latlng = new google.maps.LatLng(lat, lng);
-        //        var myOptions = {
-        //            zoom: 15,
-        //            center: latlng,
-        //            mapTypeId: google.maps.MapTypeId.ROADMAP
-        //        };
-        //        var map = new google.maps.Map(document.getElementById("map_canvas"),
-        //        myOptions);
-
-        //        var marker = new google.maps.Marker({
-        //            position: latlng,
-        //            title: "Post Around Me !"
-        //        });
-
-        //        // To add the marker to the map, call setMap();
-        //        marker.setMap(map);
-
-
-
-        $("#Map").show();
-        $("#fuzz").show();
-        $('#fuzz').css('z-index', '100');
-        ResizeMap(jsMap);
-
-    }
-
-
-
-    function ResizeMap(jsMap) {
-        var center = jsMap.getCenter();
-        jsMap.checkResize();
-        jsMap.setCenter(center);
-    }
-
-    function SetZoom(zoomLevel) {
-        myMap.setCenter(jsCenter);
-        myMap.setZoom(zoomLevel);
-    }
-
-    function ShowAdressDetailsInAddMessage(address, myLat, myLon) {
-        $('#divAddress').html(address + " ");
-        $('#divAddressApprove').hide();
-        $('#divAddressContainer').show();
-        $("#divBrowserDontSupport").hide();
-
-        $("#txtAddMessageLat").val(myLat);
-        $("#txtAddMessageLon").val(myLon);
-        $("#txtAddMessageAddress").val(address);
-
-        SaveLocationInCookie();
-    }
-
-    function GetAddress(force) {
-
-        if (address != "" && myLat != "" && myLon != "" && !force) {
-            ShowAdressDetailsInAddMessage(address, myLat, myLon);
-        }
-        else if (window.navigator.geolocation) {
-
-            $('#divAddress').html('');
-            $('#divAddressApprove').show();
-            $('#divAddressContainer').hide();
-            $("#divBrowserDontSupport").hide();
-
-            navigator.geolocation.getCurrentPosition(
-		    showAddress, errorCallbackAddMessage, {
-		        enableHighAccuracy: true, maximumAge: 600000
-		    }
-        );
-        } else {
-
-            //$("#divBrowserDontSupport").show();
-            //$('#divAddressApprove').hide();
-            //$('#divAddressContainer').hide();
-
-
-            //--yaniv radio
-            //Radio2Click();
-            //setRadio('radio2');
-        }
-    }
-
-
-    function errorCallbackAddMessage(error) {
-
-        var errMsg = "";
-        var showTryAgain = false;
-        var errJSON = GetErrorLocationMessage(error);
-        if (errJSON.Code == errorCodes.UNKNOWN_ERROR || errJSON.Code == errorCodes.PERMISSION_DENIED) {
-            errMsg = errJSON.Message;
-            showTryAgain = true;
-        } else if (errJSON.Code == errorCodes.TIMEOUT) {
-            //navigator.geolocation.getCurrentPosition(showPosition, errorCallback, { enableHighAccuracy: true, maximumAge: 600000 });
-        } else {
-            errMsg = errJSON.Message;
-        }
-
-        if (errMsg != "") {
-            $("#divBrowserDontSupport").html(errMsg);
-            $("#TopMessageAddPost").show();
-            $("#divBrowserDontSupport").show();
-            $('#divAddressApprove').hide();
-            $('#divAddressContainer').hide();
-
-            $('#LocationLinksAddPost').show();
-            if (showTryAgain) {
-                $('#TryAgainWrapperAddPost').show();
-            }
-        }
-
-
-        //$("#divBrowserDontSupport").html(error.message + " ");
-        //        $("#divBrowserDontSupport").show();
-        //        $('#divAddressApprove').hide();
-        //        $('#divAddressContainer').hide();
-
-
-    }
-
-    var errorCodes = { "UNKNOWN_ERROR": 0, "PERMISSION_DENIED": 1, "POSITION_UNAVAILABLE": 2, "TIMEOUT": 3 };
-
-    function GetErrorLocationMessage(error) {
-
-        var errJSON = {
-            "Message": "Ooops... Couldn't get your location. Please click 'Change' to try again or to set it manually",
-            "Code": errorCodes.UNKNOWN_ERROR
-        };
-
-        switch (error.code) {
-            case errorCodes.PERMISSION_DENIED:
-                errJSON.Message = "Ooops... Please Allow Location Tracking from Settings and 'Try Again' or click 'Change' to set it manually";
-                errJSON.Code = errorCodes.PERMISSION_DENIED;
-                break;
-            case errorCodes.POSITION_UNAVAILABLE:
-                errJSON.Message = "Ooops... Position Unavailable. We coudlnt get your location. Please click 'Change' to set it manually";
-                errJSON.Code = errorCodes.POSITION_UNAVAILABLE;
-                break;
-            case errorCodes.TIMEOUT:
-                errJSON.Code = errorCodes.TIMEOUT;
-                break;
-        }
-
-
-        return errJSON;
-    }
-
-    function errorCallback(error) {
-
-        var errMsg = "";
-        var showTryAgain = false;
-        var errJSON = GetErrorLocationMessage(error);
-        if (errJSON.Code == errorCodes.UNKNOWN_ERROR || errJSON.Code == errorCodes.PERMISSION_DENIED) {
-            errMsg = errJSON.Message;
-            showTryAgain = true;
-        } else if (errJSON.Code == errorCodes.TIMEOUT) {
-            navigator.geolocation.getCurrentPosition(showPosition, errorCallback, { enableHighAccuracy: true, maximumAge: 600000 });
-        } else {
-            errMsg = errJSON.Message;
-        }
-
-        if (errMsg != "") {
-            $('#moreButtonsText').html(errMsg);
-            $('#LocationLinks').show();
-            if (showTryAgain) {
-                $('#TryAgainWrapper').show();
-            }
-        }
-    }
-
-
-    function showAddress(position) {
-
-        myLat = position.coords.latitude;
-        myLon = position.coords.longitude;
-
-        var center = new GLatLng(myLat, myLon);
-        var geocoder = new GClientGeocoder();
-
-
-        geocoder.getLocations(center, function (response) {
-            if (response && response.Status.code == 200) {
-                address = response.Placemark[0].address;
-            } else {
-                address = "My Location (" + myLat + ", " + myLon + ")";
-            }
-
-            ShowAdressDetailsInAddMessage(address, myLat, myLon);
-            showAddressInBar(myLat, myLon, address);
-
-        });
-    }
-
-    function showAddressInAddMessage(searchPhrase, lat, lng) {
-
-        var center = new GLatLng(lat, lng);
-        var geocoder = new GClientGeocoder();
-
-        myLat = lat;
-        myLon = lng;
-
-        geocoder.getLocations(center, function (response) {
-            if (response && response.Status.code == 200) {
-                address = response.Placemark[0].address;
-            } else {
-                address = searchPhrase;
-            }
-
-            $("#CurrLocation").show();
-            $("#divManualAddress").hide();
-            ShowAdressDetailsInAddMessage(address, myLat, myLon);
-
-        });
-
-
-    }
-
-    function showAddressInBar(lat, lng, searchPhrase) {
-        //MakeAddressLinkability();
-        var center = new GLatLng(lat, lng);
-        var geocoder = new GClientGeocoder();
-
-        myLat = lat;
-        myLon = lng;
-
-        geocoder.getLocations(center, function (response) {
-            if (response && response.Status.code == 200) {
-                address = response.Placemark[0].address;
-            } else {
-                address = searchPhrase;
-            }
-
-
-            $('#moreButtonsText').html(address + " ");
-
-
-            $('#moreButtonsText').show();
-
-            // Save Default Location
-            SaveLocationInCookie();
-
-        });
-
-        $.when(ChangeToSmallHeader()).then(SetSlide());
-
-    }
-
-
-    function ShowGeoHead() {
-        if ($("#GeoHead").hasClass("GeoHeadDisable")) {
-            $("#GeoHead").removeClass("GeoHeadDisable");
-        }
-    }
-
-    function showPosition(position) {
-
-        //MakeAddressLinkability();
-        var center = new GLatLng(position.coords.latitude, position.coords.longitude);
-        var geocoder = new GClientGeocoder();
-        //allowScrolling = true;
-        myLat = position.coords.latitude;
-        myLon = position.coords.longitude;
-
-        geocoder.getLocations(center, function (response) {
-            if (response && response.Status.code == 200) {
-                address = response.Placemark[0].address;
-
-                //showMyLocation(myLat, myLon);
-
-                //Save Location
-                SaveLocationInCookie();
-
-                $('#moreButtonsText').html(address + " ");
-            }
-        });
-        $.when(ChangeToSmallHeader()).then(SetSlide());
-    }
-
-    $('#AutoDiscover').click(function () {
-
-        //$('#MapBg').hide();
-        $("#WelcomeBubble").hide();
-        $("#AutoDiscoverBubble").hide();
-        $("#autoDiscoverText").hide();
-
-
-        $('#moreButtonsText').html("Please click <b>'Allow'</b> above to <b>Share Location</b>...");
-
-
-        myLat = "";
-        myLon = "";
-        address = "";
-
-        GetPosition();
-
-
-        //$('#moreButtonsTextArea').hide();
-        //$('#SearchBtn').hide();
-        $('#moreButtonsText').css("cursor", "text");
-        $('#moreButtonsText').show();
-        $('#TopMessage').show();
-        $('#SearchLocation').hide();
-        $('#LocationLinks').hide();
-        //$('#SaveLocation').show();
-        //$('#AutoDiscover').hide();
-    });
-
-
-    function GetLatLngToAddMessage(address) {
-
-        var geocoder = new GClientGeocoder();
-
-        geocoder.getLatLng(
-            address,
-            function (point) {
-                if (!point) {
-                    alert(address + " not found");
-                } else {
-
-                    var lat = point.lat();
-                    var lng = point.lng();
-
-                    showAddressInAddMessage(address, lat, lng);
-                    showAddressInBar(lat, lng, address);
-                }
-            }
-      );
-    }
-
-    function PerformGoToLocation(searchPhrase) {
-
-
-
-        MakeAddressLinkabilityDie();
-
-        //$('#MapBg').hide();
-        $("#WelcomeBubble").hide();
-        $("#AutoDiscoverBubble").hide();
-        GetLatLng(searchPhrase);
-
-
-    }
-
-    $('#SearchBtn').click(function () {
-        var searchPhrase = $('#content').val();
-        if (searchPhrase == '') {
-            ClearPositionCookie()
-        } else {
-            PerformGoToLocation(searchPhrase);
-        }
-    });
-
-
-
-
-    function GetLatLng(address) {
-
-        var geocoder = new GClientGeocoder();
-
-        geocoder.getLatLng(
-            address,
-            function (point) {
-                if (!point) {
-                    alert("Location Not Found.\nEnter address or place around you, in any language");
-                } else {
-                    //allowScrolling = true;
-
-                    var lat = point.lat();
-                    var lng = point.lng();
-
-                    myLat = lat;
-                    myLon = lng;
-
-                    showAddressInBar(lat, lng, address);
-
-
-                }
-            }
-      );
-    }
-
-    var currLat = "";
-    var currLon = "";
-    var currAddress = "";
-
-    function DisplayMap() {
-
-        var box = $(this).parents(".Box"); // div 'Bottom'
-
-
-        $("#Map").css("margin-top", $(document).scrollTop() + 20);
-        currLat = $(box).find("#CurrLat").html();
-        currLon = $(box).find("#CurrLng").html();
-        currAddress = $(box).find("#FullAddress").html();
-        $("#MapAddress").html(currAddress);
-        ShowLocationOnMap(currLat, currLon);
-    }
-
-
-    function SetThisAsMyAddress() {
-
-
-        showAddressInBar(myLat, myLon, address);
-
-        //$('#moreButtonsText').html(address + " ");
-        //$.when(ChangeToSmallHeader()).then(SetSlide());
-
-
-    }
-
-
-    $('#SetThisAsMyAddress').click(function () {
-
-        myLat = currLat;
-        myLon = currLon;
-        address = currAddress;
-        showAddressInBar(myLat, myLon, address);
-        $("#xbuttonPopUp").click();
-
-    });
-
-
-
-    $('#ViewOnMapSite').click(function () {
-
-        myLat = currLat;
-        myLon = currLon;
-        var url = "https://maps.google.com/maps?q=" + myLat + "," + myLon;
-        window.open(url);
-
-    });
-
-
-
-    //------------------------END LOCATION STUFF
-
+    
 
 
     //----DATA START
 
-
+    var st;
+    var lastScrollTop = 0;
     $(window).scroll(function () {
+        if (isMobile) {
+
+
+            st = $(this).scrollTop();
+            if (st > lastScrollTop) {
+                // downscroll code
+                //$('.MobileTopSecondary').fadeOut('slow');
+                $('.MobileBottom').slideUp('fast');
+                
+            } else {
+                // upscroll code
+                //$('.MobileTopSecondary').fadeIn('fast');
+                $('.MobileBottom').slideDown('fast');
+            }
+            lastScrollTop = st;
+
+
+            
+        }
         if (isDirectLink || getMessagesRunning || arrangerRunning) {
             // don't do anything in direct link
             // don't do anything if an AJAX request is pending
@@ -2994,7 +2633,7 @@ $(function () {
                 AssignAndWait();
 
             }
-        }, 500);
+        }, 100);
     }
 
     function StartTimerAndGetMessages(isUrgent) {
@@ -3052,7 +2691,7 @@ $(function () {
 
 
 
-        var url = siteUrl + "/Handlers/GetMessages.ashx?currLat=" + myLat + "&currLon=" + myLon + "&uptoMeters=" + uptoMeters + "&timeZone=" + gmtHours + "&fromNumber=" + fromNumber + "&CategoryId=" + arrayCurrCategoriesID + "&SortBy=" + sortBy + "&IsMine=" + isMine + "&TakeNum=" + maxMessagesPerScreen;
+        var url = siteUrl + "Handlers/GetMessages.ashx?currLat=" + myLat + "&currLon=" + myLon + "&uptoMeters=" + uptoMeters + "&timeZone=" + gmtHours + "&fromNumber=" + fromNumber + "&CategoryId=" + arrayCurrCategoriesID + "&SortBy=" + sortBy + "&IsMine=" + isMine + "&TakeNum=" + maxMessagesPerScreen;
 
         $.ajax({
             url: url,
@@ -3075,12 +2714,30 @@ $(function () {
             },
             complete: function () {
                 getMessagesRunning = false;
-                //FixAddThisAjax();
-
+                //RenderAddThis();
+                //addthis.counter('.addthis_counter');
             }
         });
 
 
+    }
+
+    function GetTotalShares(url)
+    {
+        //facebook
+        var fb_url = 'http://graph.facebook.com/?id=' + url;
+
+        //twitter
+        var tw_url = 'http://cdn.api.twitter.com/1/urls/count.json?url=' + url;
+
+        //pinterest
+        var pin_url = 'http://api.pinterest.com/v1/urls/count.json?callback=&url=' + url;
+
+        //linkedin
+        var ln_url = 'http://www.linkedin.com/countserv/count/share?url=' + url + '&format=json';
+
+        //stumble
+        var su = 'http://www.stumbleupon.com/services/1.01/badge.getinfo?url=' + url;
     }
 
     function GetMessagesOnComplete(data) {
@@ -3123,8 +2780,8 @@ $(function () {
         ArrangeAll();
     }
 
-    function PostComment(box, body) {
-
+    function PostComment(box, body, sliderframe) {
+        
         if (body == "")
             return;
 
@@ -3141,17 +2798,24 @@ $(function () {
             }
             return;
         }
+        
+        var isPrivate = 'false'
+        if (sliderframe != null && isPrivate != 'undefined') {
+            isPrivate = sliderframe.attr('isprivate');
+        }
 
         var msgId = $(box).attr("box-id");
+        var toFacebookID = $(box).find("#FacebookID").html();
+        var toUserID = $(box).find("#UserID").html(); 
 
-        var url = siteUrl + "/Handlers/InsertComment.ashx";
+        var url = siteUrl + "Handlers/InsertComment.ashx";
 
         var myJSON = {
             "messageID": msgId,
-            "body": body
+            "body": body,
+            "isPrivate": isPrivate
 
         };
-
 
         $.ajax({
             type: 'POST',
@@ -3160,8 +2824,9 @@ $(function () {
             sync: false,
             dataType: "json",
             success: function (data) {
-
-                ShowImmediateComment(data, body, msgId, box);
+                
+                
+                ShowImmediateComment(data.Id, body, msgId, box, isPrivate);
                 $(box).find("#Comment").val('').blur();
                 $(box).find("#Comment").height(14);
                 $(box).find(".Buttons").hide();
@@ -3170,6 +2835,11 @@ $(function () {
                     arrangerRunning = true;
                     IncreaseCommentsNum(box);
                     ArrangeAll();
+                }
+                try
+                {
+                    SendNotification(currentUser.facebookID, toFacebookID, data.Key);
+                } catch(err) {
                 }
             }
         });
@@ -3242,14 +2912,75 @@ $(function () {
 
 
     }
+
+    function MakeLoginMessagePopUpAlive(){
+        HidePlaceHolderCheck();
+
+        $(".placeholderField").live('click', function () {
+            var parent = $(this).parent()
+            parent.children('input').focus();
+
+        });
+
+        $(".inputWithPlaceHolder").live('keydown' ,function (e) {
+
+            HidePlaceHolder(e, this);
+
+        });
+
+        $(".inputWithPlaceHolder").live('keyup', function () {
+
+            ShowPlaceHolder(this);
+
+        });
+
+        $(".inputWithPlaceHolder").live('focus', function () {
+            CheckToHidePlaceHolder(this);
+            ChangeTextColor(this, true);
+        });
+
+        $(".inputWithPlaceHolder").live('blur', function () {
+             ChangeTextColor(this, false);
+        });
+
+        $(".btnLoginForm").live('click', function () {
+            LoginWithEmail(this);
+        });
+
+
+        $(".btnSignUp").live('click', function () {
+            SignUpWithEmail(this);
+        });
+
+
+       
+        $(".signup-why-join-expand-button").live('click', function () {
+            $(".signup-why-join-text").slideToggle("500", "swing");
+        });
+
+
+        $("#createNewAccount").live('click', function () { ShowSignUpForm(this) });
+        $("#alreadyMember").live('click', function () { ShowLoginPanel(this) });
+        
+        $('#xbuttonLoginMsg').live('click', function () { HideAddMessageWindow() });
+    }
     
     function IsLoggedIn() 
     {
         if (currentUser == null)
         {
+            $("#fuzz").css("height", $(document).height());
             $('#fuzz').show();
-            $('#fuzz').css("z-index", 2000);
+            //$('#fuzz').css("z-index", 2000);
             $('#PleaseLogin').show();
+
+           
+
+
+            $('#PleaseLogin').html($('#PopupBox').html());
+
+
+            MakeLoginMessagePopUpAlive();
             return false;
         } else 
         {
@@ -3262,6 +2993,7 @@ $(function () {
         //$(this).height(34);
         
         $(this).parents(".AddComment").children('.Buttons').show();
+        $(this).css("margin-bottom", "5px");
         OrderElements();
     }
 
@@ -3283,7 +3015,7 @@ $(function () {
         var box = $(this).parents(".Box"); // div 'Bottom'
         var msgId = box.attr("box-id");
 
-        var url = siteUrl + "/Handlers/GetMessageByID.ashx";
+        var url = siteUrl + "Handlers/GetMessageByID.ashx";
 
         var myJSON = {
             "msgId": msgId
@@ -3335,6 +3067,9 @@ $(function () {
     });
 
 
+    function GoogleFun() {
+    }
+
     //----DATA END
 
 
@@ -3361,59 +3096,391 @@ $(function () {
     }
 
 
-
+    
 
     function ArrangeBoxesInit() {
+        if (!$('#MessagesContainer').hasClass("BigBoxContainer")) {
+            screenWidth = $('html, body').width() - 40;
+            if (screenWidth < 1025) {
+                $('#LeftWing').css("margin-left", "15px");
+                $('#moreButtons').css("margin-left", "15px");
+                $('#AddMessageWindow').css("margin-left", "16px");
+                $('#CategoriesWrapper').css("display", "none");
 
-        screenWidth = $('html, body').width() - 40;
-        if (screenWidth < 1025) {
-            $('#LeftWing').css("margin-left", "15px");
-            $('#moreButtons').css("margin-left", "15px");
-            $('#AddMessageWindow').css("margin-left", "16px");
-            $('#CategoriesBar').css("display", "none");
+                //iphone   
+                //isMobile = true;
+                //ApplyMobilePhoneRules();
 
-            //$('#MessagesContainer').css("margin-left", "85px");
-        } else {
-            $('#CategoriesBar').css("display", "block");
-            if ((screenWidth == 1383) || (screenWidth == 1400)) {
-                $('#LeftWing').css("margin-left", "10px");
-                $('#moreButtons').css("margin-left", "10px");
-                $('#AddMessageWindow').css("margin-left", "11px");
 
-                //$('#MessagesContainer').css("margin-left", "7px");
-                screenWidth = 1420;
+
+                //$('#MessagesContainer').css("margin-left", "85px");
             } else {
-                $('#LeftWing').css("margin-left", "39px");
-                $('#moreButtons').css("margin-left", "39px");
-                $('#AddMessageWindow').css("margin-left", "40px");
+                $('#CategoriesWrapper').css("display", "block");
+                if ((screenWidth == 1383) || (screenWidth == 1400)) {
+                    $('#LeftWing').css("margin-left", "10px");
+                    $('#moreButtons').css("margin-left", "10px");
+                    $('#AddMessageWindow').css("margin-left", "11px");
 
-                //                if (screenWidth == 1863) {
-                //                    $('#MessagesContainer').css("margin-left", "105px");
-                //                } else if (screenWidth == 1623) {
-                //                    $('#MessagesContainer').css("margin-left", "127px");
-                //                } else if (screenWidth == 1223) {
-                //                    $('#MessagesContainer').css("margin-left", "69px");
-                //                } else if (screenWidth == 1543) {
-                //                    $('#MessagesContainer').css("margin-left", "86px");
-                //                } else if (screenWidth == 1309) {
-                //                    $('#MessagesContainer').css("margin-left", "111px");
-                //                }
+                    //$('#MessagesContainer').css("margin-left", "7px");
+                    screenWidth = 1420;
+                } else {
+                    $('#LeftWing').css("margin-left", "39px");
+                    $('#moreButtons').css("margin-left", "39px");
+                    $('#AddMessageWindow').css("margin-left", "40px");
+                }
             }
-        }
 
-        msgsPerRow = Math.floor(screenWidth / POST_WIDTH) < 1 ? 1 : Math.floor(screenWidth / POST_WIDTH);
-        var rowWidth = msgsPerRow * POST_WIDTH - 11 + "px";
-        $('#MessagesContainer').css("width", rowWidth);
-        $('#catsBar').css("width", rowWidth);
+            msgsPerRow = Math.floor(screenWidth / POST_WIDTH) < 1 ? 1 : Math.floor(screenWidth / POST_WIDTH);
+            var rowWidth = msgsPerRow * POST_WIDTH - 11 + "px";
 
-        $('#MessagesContainer').css("margin-left", "auto");
-        $('#MessagesContainer').css("margin-right", "auto");
-        boxesHeightsInRow = new Array(msgsPerRow);
-        for (i = 0; i < boxesHeightsInRow.length; i++) {
-            boxesHeightsInRow[i] = 0;
+            $('#MessagesContainer').css("width", rowWidth);
+            $('#catsBar').css("width", rowWidth);
+
+            $('#MessagesContainer').css("margin-left", "auto");
+            $('#MessagesContainer').css("margin-right", "auto");
+            boxesHeightsInRow = new Array(msgsPerRow);
+            for (i = 0; i < boxesHeightsInRow.length; i++) {
+                boxesHeightsInRow[i] = 0;
+            }
         }
     }
 
+    $(".signup-with-email-expand-button").click(function () {
+        
+        $(".sign-up-box").animate({
+            right: '500px' 
+            
+            
+        }, 500, function() {
+            // Animation complete.
+        });
+
+        $(".log-in-box").animate({
+            left: '+=50' 
+           
+
+        }, 500, function () {
+            // Animation complete.
+        });
+
+ 
+    });
+
+    $(".signup-why-join-expand-button").click(function () {
+        $(this).parents(".sign-up-box").find(".signup-why-join-text").slideToggle("500", "swing");
+    });
+
+    function IsOkLoginInputCheck(email, password) {
+        
+        var isInputOk = true;
+        if (!validateEmail(email)) {
+            SetLoginErrorMessage("Please enter a valid Email");
+            $(".login_email").addClass("RedBorder");
+            isInputOk = false;
+        } else {
+            $(".login_email").removeClass("RedBorder");
+        }
+
+        if (!validatePassword(password)) {
+            
+            SetLoginErrorMessage("Password invalid. Password must be 6-18 of letters, numbers, underscores or hyphens.");
+            $(".login_password").addClass("RedBorder");
+            isInputOk = false;
+        } else {
+            $(".login_password").removeClass("RedBorder");
+        }
+
+        return isInputOk;
+    }
+
+    function SignUpWithEmail(elem) {
+        
+        var fname = $(elem).parents(".LoginPanel").find(".signup_fname").val();
+        var lname = $(elem).parents(".LoginPanel").find(".signup_lname").val();
+        var email = $(elem).parents(".LoginPanel").find(".signup_email").val();
+        var password = $(elem).parents(".LoginPanel").find(".signup_password").val();
+
+        if (IsOkSignupFields(fname, lname, email, password)) {
+            $(".SignUpErrorMessageArea").hide();
+            var url = siteUrl + "Handlers/Register.ashx";
+
+            var myJSON = {
+                "fname": fname,
+                "lname": lname,
+                "email": email,
+                "password": password
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: myJSON,
+                sync: false,
+                dataType: "json",
+                success: function (data) { ShowSignUpMessage(data, email); }
+            })
+        }
+
+    }
+
+    function LoginWithEmail(elem) {
+
+        var email = $(elem).parents(".LoginPanel").find('.login_email').val();
+        var password = $(elem).parents(".LoginPanel").find('.login_password').val();
+        
+        if (IsOkLoginInputCheck(email, password)) {
+            var url = siteUrl + "Handlers/CheckLoginData.ashx";
+
+            var myJSON = {
+                "email": email,
+                "password": password
+            };
+
+
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: myJSON,
+                sync: false,
+                dataType: "json",
+                success: function (data) { SetCurrentUser(data); }
+            })
+        }
+    }
+
+    $(".btnSignUp").click(function () {
+        SignUpWithEmail(this);
+    });
+
+    $(".btnLoginForm").click(function () {
+        LoginWithEmail(this);
+    });
+
+    $(".placeholderField").click(function () {
+        var parent = $(this).parent()
+        
+        parent.children('input').focus();
+
+    });
+
+    function HidePlaceHolder(e, item) {
+        
+        if (e.keyCode > 0) {
+            if ((e.keyCode < 46) || (e.keyCode > 90 && e.keyCode < 94) || (e.keyCode > 111 && e.keyCode < 124) || (e.keyCode > 143 && e.keyCode < 146))
+                return;                          
+        }
+
+        RemovePlaceholderClass(item);
+    }
+
+    function ChangeTextColor(elem, hasFocus) {
+        if (hasFocus) {
+            $(elem).parent().addClass("uiStickyPlaceholderInputFocus");
+        } else {
+            $(elem).parent().removeClass("uiStickyPlaceholderInputFocus");
+        }
+        
+    }
+
+    function RemovePlaceholderClass(item) {
+        var parent = $(item).parent();
+        parent.removeClass("uiStickyPlaceholderEmptyInput");
+    }
+    HidePlaceHolderCheck();
+
+    function HidePlaceHolderCheck() {
+        $('.inputWithPlaceHolder').each(function () {
+            var elem = $(this);
+            if ($.trim(elem.val()) != "") {
+                RemovePlaceholderClass(elem);
+            }
+        });
+    }
+
+    $(".inputWithPlaceHolder").keydown(function (e) {
+        
+        HidePlaceHolder(e, this);
+
+    });
+
+    $(".inputWithPlaceHolder").focus(function (e) {
+
+        ChangeTextColor(this, true);
+
+    });
+
+    $(".inputWithPlaceHolder").blur(function (e) {
+
+        ChangeTextColor(this, false);
+
+    });
+    
+
+    function CheckToHidePlaceHolder(elem) {
+        if ($(elem).val().length > 0 && $(elem).parent().hasClass("uiStickyPlaceholderEmptyInput")) {
+            HidePlaceHolder(-1, elem)
+        }
+    }
+
+    $(".inputWithPlaceHolder").focus(function () {
+        CheckToHidePlaceHolder(this);
+    });
+
+    $(".signup_fname").blur(function () {
+        if ($(".signup_lname").val().length > 0 && $(".signup_lname").parent().hasClass("uiStickyPlaceholderEmptyInput")) {
+            HidePlaceHolder(-1, $(".signup_lname"))
+        }
+    });
+
+
+    function ShowPlaceHolder(elem) {
+        var parent = $(elem).parent();
+        if ($(elem).val().length == 0) {
+            if (!parent.hasClass("uiStickyPlaceholderEmptyInput")) {
+                parent.addClass("uiStickyPlaceholderEmptyInput");
+            }
+        }
+    }
+
+    $(".inputWithPlaceHolder").keyup(function () {
+        ShowPlaceHolder(this);
+    });
+
+
+
+    function SetCurrentUser(data) {
+        
+        if (data < 0) {
+            SetLoginErrorMessage("User/Password Incorrect or Account not Activated.")
+        } else {
+            location.reload();
+        }
+    }
+
+    function InputCheckName(name) {
+        name = ($.trim(name));
+        var re = /^[a-zA-Z\u0591-\u05F4]{2,16}$/
+        return (re.test(name))
+    }
+
+    function validatePassword(password)
+    {
+        var re = /^[A-Za-z0-9_-]{6,18}$/
+        return (re.test(password))
+    }
+
+    function validateEmail(email) { 
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    } 
+
+    function IsOkSignupFields(fname, lname, email, password) {
+        var isOkInput = true;
+
+        if (!InputCheckName(fname)) {
+            $(".signup_fname").addClass("RedBorder");
+            SetSignUpErrorMessage("First Name must be 2-16 letters.");
+            isOkInput = false;
+        } else {
+            $(".signup_fname").removeClass("RedBorder");
+        }
+
+        if (!InputCheckName(lname)) {
+            $(".signup_lname").addClass("RedBorder");
+            SetSignUpErrorMessage("Last Name must be 2-16 letters");
+            isOkInput = false;
+        } else {
+            $(".signup_lname").removeClass("RedBorder");
+        }
+
+        if (!validateEmail(email)) {
+            $(".signup_email").addClass("RedBorder");
+            SetSignUpErrorMessage("Please enter a valid email");
+            isOkInput = false;
+        } else {
+            $(".signup_email").removeClass("RedBorder");
+        }
+
+        if (!validatePassword(password)) {
+            $(".signup_password").addClass("RedBorder");
+            SetSignUpErrorMessage("Password invalid. Password must be 6-18 of letters, numbers, underscores or hyphens.");
+            isOkInput = false;
+        } else {
+            $(".signup_password").removeClass("RedBorder");
+        }
+
+        return isOkInput;
+
+    }
+
+    function SetSignUpErrorMessage(msg) {
+        $(".SignUpErrorMessageArea").html(msg);
+        $(".SignUpErrorMessageArea").show();
+    }
+
+    $("#btnSendResetPassword").click(function () {
+        var email = $("#txtSendResetEmail").val();
+        if (!validateEmail(email)) {
+            $("#txtSendResetEmail").addClass("RedBorder");
+            $('#errorEmailNoExist').html("Please enter a valid email");
+            $('#errorEmailNoExist').css('display', 'block');
+            return false;
+            } else {
+                $("#txtSendResetEmail").removeClass("RedBorder");
+        }
+
+    });
+
+
+
+    $("#btnResetPassword").click(function () {
+        var email = $("#txtResetEmail").val();
+        var password1 = $("#txtResetPass1").val();
+        var password2 = $("#txtResetPass2").val();
+
+        return IsOkPasswordResetFields(email, password1, password2);
+    });
+
+    function IsOkPasswordResetFields(email, password1, password2)
+    {
+        var isOkInput = true;
+
+        if (!validateEmail(email)) {
+            $("#txtResetEmail").addClass("RedBorder");
+            $('#errorMsg').html("Please enter a valid email");
+            $('#errorMsg').css('display', 'block');
+            return false;
+        } else {
+            $("#txtResetEmail").removeClass("RedBorder");
+            $('#errorMsg').css('display', 'none');
+        }
+
+        if (!validatePassword(password1)) {
+            $("#txtResetPass1").addClass("RedBorder");
+            $('#errorMsg').html("Password invalid. Password must be 6-18 of letters, numbers, underscores or hyphens.");
+            $('#errorMsg').css('display', 'block');
+            return false;
+        } else {
+            $("#txtResetPass1").removeClass("RedBorder");
+            $('#errorMsg').css('display', 'none');
+        }
+
+        if (password1 != password2)
+        {
+            $("#txtResetPass1").addClass("RedBorder");
+            $("#txtResetPass2").addClass("RedBorder");
+            $('#errorMsg').html("Passwords mismatch.");
+            $('#errorMsg').css('display', 'block');
+            return false;
+        } else {
+            $("#txtResetPass1").removeClass("RedBorder");
+            $("#txtResetPass2").removeClass("RedBorder");
+            $('#errorMsg').css('display', 'none');
+        }
+
+        return true;
+    }
 
 
     function GetLowestColumn() {
@@ -3450,6 +3517,7 @@ $(function () {
 
 
         for (i = startIndex; i < postsLength; i++) {
+
             currPostHeight = parseInt($(posts.eq(i)).css("height").replace("px", ""));
 
             if (i < msgsPerRow) {
@@ -3486,10 +3554,70 @@ $(function () {
             isArranging = false;
         }
 
+        if (maxYpos > 500) {
+            $('#MessagesContainer').css("min-height", maxYpos);
+        }
 
-        $('#MessagesContainer').css("min-height", maxYpos);
+    }
+
+    function ShowSignUpForm(item) {
+        // the sign up form will be shown
+        var parent = $(item).parents('li');
+
+        parent.next().addClass("DisplayBlock");
+        $(".signup_fname").removeClass("RedBorder");
+        $(".signup_lname").removeClass("RedBorder");
+        $(".signup_email").removeClass("RedBorder");
+        $(".signup_password").removeClass("RedBorder");
+        $(".LoginErrorMessageArea").html('');
+
+        $(".LoginPanel").animate({
+            left: -323
+        }, 300, "swing", function () { parent.removeClass("DisplayBlock"); });
+    }
+
+    $("#createNewAccount").click(function () {
+        ShowSignUpForm(this);
+    });
 
 
+    function ShowSignUpMessage(data, email) {
+        if (data < 0) {
+            SetSignUpErrorMessage("Email already exists");
+        } else {
+            $(".SignUpSucess").addClass("DisplayBlock");
+
+            $(".ActivationEmail").html(email);
+            $(".LoginSignUp").animate({
+                left: -646
+            }, 300, "swing", function () { $(".sign-up-box").removeClass("DisplayBlock"); });
+
+        }
+    }
+
+    function SetLoginErrorMessage(msg) {
+        $(".LoginErrorMessageArea").html(msg);
+    }
+
+
+    $("#alreadyMember").click(function () {
+        ShowLoginPanel(this);
+    
+    });
+
+    function ShowLoginPanel(elem) {
+        var parent = $(elem).parents('li');
+        parent.prev().addClass("DisplayBlock");
+
+
+
+        $(".SignUpErrorMessageArea").hide();
+       
+        $(".input-text").removeClass("RedBorder");
+        $(".LoginPanel").animate({
+            left: 0
+        }, 300, "swing", function () { parent.removeClass("DisplayBlock"); });
+        $(".signup-why-join-text").hide();
     }
 
 
@@ -3497,12 +3625,763 @@ $(function () {
 
     //-- DATA ARRANGE END
    
+
+
+    //-- Google  Maps V3
     
+    function HandleAddressInMainPage(addressObject, status, searchPhrase) {
+        
+        if (status == google.maps.GeocoderStatus.OK) {
+            address = addressObject.formatted_address;
+            
+        } else {
+            if (searchPhrase) {
+                address = searchPhrase;
+            } else {
+                address = "My Location (" + myLat + ", " + myLon + ")";
+            }
+            
+        }
+
+        SaveLocationInCookie();
+        $('#moreButtonsText').show();
+        $('#moreButtonsText').html(address + " ");
+        $.when(ChangeToSmallHeader()).then(SetSlide());
+
+    }
+
+    function HandleAddressInAddMessage(addressObject, status, searchPhrase) {
+        
+        if (status == google.maps.GeocoderStatus.OK) {
+            address = addressObject.formatted_address;
+
+        } else {
+            if (searchPhrase) {
+                address = searchPhrase;
+            } else {
+                address = "My Location (" + myLat + ", " + myLon + ")";
+            }
+        }
+
+        $("#CurrLocation").show();
+        $("#divManualAddress").hide();
+        ShowAdressDetailsInAddMessage(address, myLat, myLon);
+        showAddressInBar(myLat, myLon, address);
+
+    }
+    
+    function showPosition(position) {
+      
+        myLat = position.coords.latitude;
+        myLon = position.coords.longitude;
+        var latlon = { "lat": myLat, "lon":  myLon};
+        Caller(GenericGetAddressFromLatLon, HandleAddressInMainPage, latlon);
+
+
+    }
+
+
+    function showAddressInBar(lat, lng, searchPhrase) {
+        
+        myLat = lat;
+        myLon = lng;
+
+        var latlon = { "lat": myLat, "lon": myLon, "address":searchPhrase };
+        Caller(GenericGetAddressFromLatLon, HandleAddressInMainPage, latlon);
+    }
+
+
+    function Caller(MainFunction, CallbackFunction, args)
+    {
+        
+        MainFunction(CallbackFunction, args);
+    }
+
+    function GenericGetAddressFromLatLon(callbackFunction, latLon) {
+        
+        var geocoder = new google.maps.Geocoder();
+        var location = new google.maps.LatLng(latLon.lat, latLon.lon)
+
+        geocoder.geocode({
+            'location': location
+        },
+        function (results, status) {
+            callbackFunction(results[0], status, latLon.address)
+        });
+    }
+
+
+    function GenericGetLatLonFromAddress(callbackFunction, searchPhrase) {
+         
+        var geocoder = new google.maps.Geocoder();
+        var find_address = searchPhrase;
+
+        geocoder.geocode({
+            'address': find_address
+        },
+        function (results, status) {
+             
+            callbackFunction(results[0], status, searchPhrase)
+        });
+    }
+
+    function HandleAddress(addressObject, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            address = addressObject.formatted_address;
+            GetPosition();
+        } else {
+            address = "My Location (" + myLat + ", " + myLon + ")";
+        }
+    }
+
+    function showAddress(position) {
+
+        myLat = position.coords.latitude;
+        myLon = position.coords.longitude;
+        var latlon = { "lat": myLat, "lon": myLon };
+        Caller(GenericGetAddressFromLatLon, HandleAddressInAddMessage, latlon);
+    }
+
+    function showAddressInAddMessage(searchPhrase, lat, lng) {
+        myLat = lat;
+        myLon = lng;
+        var latlon = { "lat": myLat, "lon": myLon, "address":searchPhrase };
+        Caller(GenericGetAddressFromLatLon, HandleAddressInAddMessage, latlon);
+    }
+
+
+ 
+    function SetLatLonInAddMessage(addressObject, status, searchPhrase)
+    {
+        if (status == google.maps.GeocoderStatus.OK) {
+            var lat = addressObject.geometry.location.lat();
+            var lng = addressObject.geometry.location.lng();
+
+            showAddressInAddMessage(searchPhrase, lat, lng);
+            showAddressInBar(lat, lng, searchPhrase);
+            
+        } else {
+            alert("Location not found");
+            
+        }
+    }
+
+    function SetLatLonInMainPage(addressObject, status, searchPhrase) {
+        
+        if (status == google.maps.GeocoderStatus.OK) {
+            var lat = addressObject.geometry.location.lat();
+            var lng = addressObject.geometry.location.lng();
+
+            showAddressInBar(lat, lng, searchPhrase);
+
+        } else {
+            alert("Location not found");
+
+        }
+    }
+
+
+    function GetLatLngToAddMessage(searchPhrase) {
+        Caller(GenericGetLatLonFromAddress, SetLatLonInAddMessage, searchPhrase);
+    }
+
+    function GetLatLng(searchPhrase) {
+        
+        Caller(GenericGetLatLonFromAddress, SetLatLonInMainPage, searchPhrase);
+
+         
+    }
+
+
+    function SetLocationInAddressBar() {
+        if (history.pushState) {
+            if (address.startsWith("My Location ("))
+            {
+                var ll = myLat + "," + myLon;
+                var stateObj = { "myLat": myLat, "myLon": myLon };
+                history.pushState(stateObj, 'Viewing Posts Around ' + ll, rootDir + 'll/' + ll);
+            } else {
+                var address_no_space = address.ReplaceAll(",", "").ReplaceAll(" ", "_").ReplaceAll("/", "_")
+                var stateObj = { "address": address };
+                history.pushState(stateObj, 'Viewing Posts Around ' + address, rootDir + 'in/' + address_no_space);
+            }
+            
+        }
+    }
+
+    function HasDataMainPage() {
+        $('#moreButtonsText').html(address + " ");
+        $.when(ChangeToSmallHeader()).then(SetSlide());
+    }
+
+    function CallbackFunctionMainPage(position) {
+        showPosition(position);
+    }
+
+    function NoSupportMainPage() {
+        $('#moreButtonsText').html("<b>Your browser doesn't support it...</b> please type your address manually...");
+    }
+
+    // Auto Discover on the homepage
+    function GetPosition() {
+        // if you have address already
+        if (HasAddress()) {
+            HasDataMainPage()
+        } else {
+            //ShowMoreButtonsArea(40);
+            if (window.navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                showPosition, errorCallback, {
+                    enableHighAccuracy: true, maximumAge: 600000
+                });
+            } else {
+                NoSupportMainPage();
+            }
+        }
+    }
+
+
+
+    function ShowLocationInAddMessgae() {
+        GetAddress(false);
+        $("#CurrLocation").show();
+        $("#divManualAddress").hide();
+    }
+
+
+    function HasAddress() {
+        if (address != "" && myLat != "" && myLon != "")
+            return true;
+        return false;
+    }
+
+    function RunAutoDicoverInAddMessage() {
+
+        GetAddress(true);
+        $("#CurrLocation").show();
+        $("#divManualAddress").hide();
+
+
+    };
+
+
+
+    function ShowSearchLocationInAddMessage() {
+
+        $("#txtAddMessageLat").val('');
+        $("#txtAddMessageLon").val('');
+
+        $("#CurrLocation").hide();
+        $("#divManualAddress").show();
+
+
+    };
+
+
+    //function inverseOrder(marker, b) {
+    //    return -GOverlay.getZIndex(marker.getPoint().lat());
+    //}
+
+
+    function importanceOrder(marker, b) {
+        return GOverlay.getZIndex(marker.getPoint().lat()) + marker.importance * 1000000;
+    }
+
+    //function createMarker(latlng, markerOptions, importance) {
+    //    var marker = new GMarker(latlng, markerOptions);
+    //    marker.importance = importance;
+    //    GEvent.addListener(marker, "click", function () {
+    //        var myHtml = latlng.toString();
+    //        myMap.openInfoWindowHtml(latlng, myHtml);
+    //    });
+    //    return marker;
+    //}
+
+    //function AddMultipleMarkers(data) {
+
+    //    /// צריך להביא את כל המרקרים ולא רק את החבילה הנוכחית אחרת אל תציג את זה
+
+    //    var myData = eval(data);
+
+    //    // Create our "tiny" marker icon
+    //    var blueIcon = new GIcon(G_DEFAULT_ICON);
+    //    blueIcon.image = "http://gmaps-samples.googlecode.com/svn/trunk/markers/blue/blank.png";
+
+    //    // Set up our GMarkerOptions object
+    //    var markerOptions = {
+    //        icon: blueIcon
+    //        , zIndexProcess: importanceOrder
+
+    //    };
+
+    //    var latlng;
+    //    var marker;
+    //    for (var i = 0; i < myData.length; i++) {
+    //        latlng = new GLatLng(myData[i].latitude, myData[i].longitude);
+    //        marker = createMarker(latlng, markerOptions, 0);
+    //        myMap.addOverlay(marker);
+    //    }
+    //}
+
 
 
     
+    function showMyLocation(lat, lng) {
 
 
+        //var icon = GetMarker();
+        //var markerOptions = {
+        //    icon: icon
+        //    , zIndexProcess: importanceOrder
+
+        //};
+
+        //jsCenter = new GLatLng(lat, lng);
+        //var marker = new GMarker(jsCenter, markerOptions);
+        //marker.importance = 100;
+        //var htmlMap = document.getElementById("MapReal");
+        //if (htmlMap == null)
+        //    return;
+        //myMap = new GMap2(htmlMap);
+
+        //myMap.setCenter(jsCenter);
+        //$("#MapReal").show();
+        //myMap.addOverlay(marker);
+        
+        var mapOptions = {
+            center: new google.maps.LatLng(lat, lng),
+            zoom: 15,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+
+        };
+        myMap = new google.maps.Map(document.getElementById("MapReal"),
+            mapOptions);
+        $("#MapReal").show();
+        DrawMarkerIn(lat, lng, myMap);
+
+
+
+        
+    }
+
+
+    var circle; 
+    function DrawMarkerIn(lat, lng, myMap) {
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(lat, lng),
+            title: address,
+            //icon: siteUrl + "images/markers/image.png",
+            //shadow: siteUrl + "images/markers/shadow.png",
+
+            draggable: true,
+            flat: false,
+            animation: google.maps.Animation.DROP
+
+        });
+        markerPositionChanged(marker, myMap);
+        // To add the marker to the map, call setMap();
+        marker.setMap(myMap);
+
+
+        circle = new google.maps.Circle({
+            map: myMap,
+            radius: 3000,
+            fillColor: '#6AA1BB',
+            strokeWeight: 1,
+            strokeColor: "#FFF",
+            fillOpacity: 0.3,
+            clickable: false
+            
+        });
+
+
+        var rad = 0;
+        var sop = 1;
+        var sw = 1;
+        var fillop = 0.6;
+        
+
+
+        setTimeout(function () {
+            for (var i = 0; i < 10; i++) {
+                setTimeout(function () {
+                    animate();
+                    rad += 310;
+                    sop -= 0.1;
+                    //fillop -= 0.1;
+                    sw -= 0.1;
+                }, i * 50);
+            }
+        },500);
+
+        function animate() {
+            var circle2 = new google.maps.Circle({
+                map: myMap,
+                radius: rad,
+                center: new google.maps.LatLng(lat, lng),
+                strokeColor: "#FFF",
+                fillColor: "#FFF",
+                fillOpacity: fillop,
+                strokeWeight: sw,
+                strokeOpacity: sop
+            });
+            setTimeout(function () {
+                circle2.setMap(null);
+            }, 100);
+        }
+
+        function animate1() {
+            var circle2 = new google.maps.Circle({
+                map: myMap,
+                radius: rad,
+                center: new google.maps.LatLng(lat, lng),
+                strokeColor: "#FFF",
+                fillColor: "#FFF",
+                fillOpacity: fillop,
+                strokeWeight: sw,
+                strokeOpacity: sop
+            });
+            setTimeout(function () {
+                circle2.setMap(null);
+            }, 100);
+        }
+
+        circle.bindTo('center', marker, 'position');
+        //addRadiusChanged(circle);
+    }
+
+    function addRadiusChanged(c) {
+        google.maps.event.addListener(c, 'radius_changed', function () {
+            var radius = c.getRadius();
+            alert(radius);
+            // do something with radius
+        });
+    }
+
+    function markerPositionChanged(c, map) {
+        google.maps.event.addListener(c, 'dragend', function (event) {
+            myLat = event.latLng.lat();
+            myLon = event.latLng.lng();
+            
+            var latlon = { "lat": myLat, "lon":  myLon};
+            map.setCenter(new google.maps.LatLng(myLat, myLon))
+            Caller(GenericGetAddressFromLatLon, HandleAddressInMainPage, latlon);
+            // do something with radius
+        });
+    }
+
+
+    function ShowLocationOnMap(lat, lng) {
+
+        var center = new GLatLng(lat, lng);
+
+        var icon = GetMarker();
+        var markerOptions = { icon: icon };
+
+        var marker = new GMarker(center, markerOptions);
+
+        var jsMap = new GMap2(document.getElementById("map_canvas"));
+        jsMap.setCenter(center, 15);
+        jsMap.setUIToDefault();
+
+        jsMap.setMapType(G_NORMAL_MAP);
+        jsMap.checkResize();
+        jsMap.addOverlay(marker);
+
+
+
+        //V3
+        //        var latlng = new google.maps.LatLng(lat, lng);
+        //        var myOptions = {
+        //            zoom: 15,
+        //            center: latlng,
+        //            mapTypeId: google.maps.MapTypeId.ROADMAP
+        //        };
+        //        var map = new google.maps.Map(document.getElementById("map_canvas"),
+        //        myOptions);
+
+        //        var marker = new google.maps.Marker({
+        //            position: latlng,
+        //            title: "Post Around Me !"
+        //        });
+
+        //        // To add the marker to the map, call setMap();
+        //        marker.setMap(map);
+
+
+
+        $("#Map").show();
+        $("#fuzz").show();
+        $('#fuzz').css('z-index', '100');
+        ResizeMap(jsMap);
+
+    }
+
+
+
+    function ResizeMap(jsMap) {
+        try {
+            var center = jsMap.getCenter();
+            jsMap.checkResize();
+            jsMap.setCenter(center);
+        } catch (err) { }
+    }
+
+    function SetZoom(zoomLevel, radius) {
+       // myMap.setCenter(jsCenter);
+        myMap.setZoom(zoomLevel);
+        circle.setRadius(radius);
+        myMap.setCenter(new google.maps.LatLng(myLat, myLon));
+    }
+
+    function ShowAdressDetailsInAddMessage(address, myLat, myLon) {
+        $('#divAddress').html(address + " ");
+        $('#divAddressApprove').hide();
+        $('#divAddressContainer').show();
+        $("#divBrowserDontSupport").hide();
+
+        $("#txtAddMessageLat").val(myLat);
+        $("#txtAddMessageLon").val(myLon);
+        $("#txtAddMessageAddress").val(address);
+
+        SaveLocationInCookie();
+    }
+
+    function GetAddress(force) {
+
+        if (HasAddress() && !force) {
+            ShowAdressDetailsInAddMessage(address, myLat, myLon);
+        }
+        else if (window.navigator.geolocation) {
+
+            $('#divAddress').html('');
+            $('#divAddressApprove').show();
+            $('#divAddressContainer').hide();
+            $("#divBrowserDontSupport").hide();
+
+            navigator.geolocation.getCurrentPosition(
+            showAddress, errorCallbackAddMessage, {
+                enableHighAccuracy: true, maximumAge: 600000
+            }
+        );
+        }
+    }
+
+
+    function errorCallbackAddMessage(error) {
+
+        var errMsg = "";
+        var showTryAgain = false;
+        var errJSON = GetErrorLocationMessage(error);
+        if (errJSON.Code == errorCodes.UNKNOWN_ERROR || errJSON.Code == errorCodes.PERMISSION_DENIED) {
+            errMsg = errJSON.Message;
+            showTryAgain = true;
+        } else if (errJSON.Code == errorCodes.TIMEOUT) {
+            //navigator.geolocation.getCurrentPosition(showPosition, errorCallback, { enableHighAccuracy: true, maximumAge: 600000 });
+        } else {
+            errMsg = errJSON.Message;
+        }
+
+        if (errMsg != "") {
+            $("#divBrowserDontSupport").html(errMsg);
+            $("#TopMessageAddPost").show();
+            $("#divBrowserDontSupport").show();
+            $('#divAddressApprove').hide();
+            $('#divAddressContainer').hide();
+
+            $('#LocationLinksAddPost').show();
+            if (showTryAgain) {
+                $('#TryAgainWrapperAddPost').show();
+            }
+        }
+
+
+        //$("#divBrowserDontSupport").html(error.message + " ");
+        //        $("#divBrowserDontSupport").show();
+        //        $('#divAddressApprove').hide();
+        //        $('#divAddressContainer').hide();
+
+
+    }
+
+    var errorCodes = { "UNKNOWN_ERROR": 0, "PERMISSION_DENIED": 1, "POSITION_UNAVAILABLE": 2, "TIMEOUT": 3 };
+
+    function GetErrorLocationMessage(error) {
+
+        var errJSON = {
+            "Message": ERROR_UNKNOWN_ERROR,
+            "Code": errorCodes.UNKNOWN_ERROR
+        };
+
+        switch (error.code) {
+            case errorCodes.PERMISSION_DENIED:
+                errJSON.Message = ERROR_PERMISSION_DENIED;
+                errJSON.Code = errorCodes.PERMISSION_DENIED;
+                break;
+            case errorCodes.POSITION_UNAVAILABLE:
+                errJSON.Message = ERROR_POSITION_UNAVAILABLE;
+                errJSON.Code = errorCodes.POSITION_UNAVAILABLE;
+                break;
+            case errorCodes.TIMEOUT:
+                errJSON.Code = errorCodes.TIMEOUT;
+                break;
+        }
+
+
+        return errJSON;
+    }
+
+    function errorCallback(error) {
+
+        var errMsg = "";
+        var showTryAgain = false;
+        var errJSON = GetErrorLocationMessage(error);
+        if (errJSON.Code == errorCodes.UNKNOWN_ERROR || errJSON.Code == errorCodes.PERMISSION_DENIED) {
+            errMsg = errJSON.Message;
+            showTryAgain = true;
+        } else if (errJSON.Code == errorCodes.TIMEOUT) {
+            navigator.geolocation.getCurrentPosition(showPosition, errorCallback, { enableHighAccuracy: true, maximumAge: 600000 });
+        } else {
+            errMsg = errJSON.Message;
+        }
+
+        if (errMsg != "") {
+            $('#moreButtonsText').html(errMsg);
+            $('#LocationLinks').show();
+            if (showTryAgain) {
+                $('#TryAgainWrapper').show();
+            }
+        }
+    }
+
+
+
+    function HideWrittenTextInSearchBox() {
+        $('#content').val('');
+        $('#content').blur();
+    }
+
+
+    function ShowGeoHead() {
+        if ($("#GeoHead").hasClass("GeoHeadDisable")) {
+            $("#GeoHead").removeClass("GeoHeadDisable");
+        }
+    }
+
+    $('#AutoDiscover').click(function () {
+
+        //$('#MapBg').hide();
+        $("#WelcomeBubble").hide();
+        $("#AutoDiscoverBubble").hide();
+        $("#autoDiscoverText").hide();
+
+
+        $('#moreButtonsText').html("Please click <b>'Allow'</b> above to <b>Share Location</b>...");
+
+
+        myLat = "";
+        myLon = "";
+        address = "";
+
+        GetPosition();
+
+
+        //$('#moreButtonsTextArea').hide();
+        //$('#SearchBtn').hide();
+        $('#moreButtonsText').css("cursor", "text");
+        $('#moreButtonsText').show();
+        $('#TopMessage').show();
+        $('#SearchLocation').hide();
+        $('#LocationLinks').hide();
+        //$('#SaveLocation').show();
+        //$('#AutoDiscover').hide();
+    });
+
+
+    function PerformGoToLocation(searchPhrase) {
+
+
+
+        MakeAddressLinkabilityDie();
+
+        //$('#MapBg').hide();
+        $("#WelcomeBubble").hide();
+        $("#AutoDiscoverBubble").hide();
+        GetLatLng(searchPhrase);
+
+
+    }
+
+    $('#SearchBtn').click(function () {
+        var searchPhrase = $('#content').val();
+        if (searchPhrase == '') {
+            ClearPositionCookie()
+        } else {
+            PerformGoToLocation(searchPhrase);
+        }
+    });
+
+
+
+
+
+    var currLat = "";
+    var currLon = "";
+    var currAddress = "";
+
+    function DisplayMap() {
+
+        var box = $(this).parents(".Box"); // div 'Bottom'
+
+
+        $("#Map").css("margin-top", $(document).scrollTop() + 20);
+        currLat = $(box).find("#CurrLat").html();
+        currLon = $(box).find("#CurrLng").html();
+        currAddress = $(box).find("#FullAddress").html();
+        $("#MapAddress").html(currAddress);
+        ShowLocationOnMap(currLat, currLon);
+    }
+
+
+    function SetThisAsMyAddress() {
+
+        
+        showAddressInBar(myLat, myLon, address);
+
+        //$('#moreButtonsText').html(address + " ");
+        //$.when(ChangeToSmallHeader()).then(SetSlide());
+
+
+    }
+
+
+    $('#SetThisAsMyAddress').click(function () {
+
+        myLat = currLat;
+        myLon = currLon;
+        address = currAddress;
+        showAddressInBar(myLat, myLon, address);
+        $("#xbuttonPopUp").click();
+
+    });
+
+
+
+    $('#ViewOnMapSite').click(function () {
+
+        myLat = currLat;
+        myLon = currLon;
+        var url = "https://maps.google.com/maps?daddr=" + myLat + "," + myLon;
+        window.open(url);
+
+    });
+    //------------------------END LOCATION STUFF
+
+ 
 
 });
 
+
+
+
+ 

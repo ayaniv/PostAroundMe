@@ -11,17 +11,19 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Globalization;
 using PostAroundService;
+using PostAround.Entities;
 
-public partial class Controls_LoginPanel : System.Web.UI.UserControl
+
+public partial class Controls_LoginPanel : BaseControl
 {
     public static string FaceBookAppKey;
-    public static string siteUrl;
+  
     private string MyAccessToken;
     protected void Page_Load(object sender, EventArgs e)
     {
         // Login Scenario
         FaceBookAppKey = ConfigurationManager.AppSettings["facebookAppKey"];
-        siteUrl = ConfigurationManager.AppSettings["SiteUrl"];
+       
 
         int userId = Tools.GetUserIdFromCookie(Context);
         User user = null;
@@ -50,7 +52,35 @@ public partial class Controls_LoginPanel : System.Web.UI.UserControl
             // continue the flow to get the user details
             if (!string.IsNullOrWhiteSpace(facebookReturnedServerCode))
             {
-                string url = siteUrl;
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                
+                
+                string page = Path.GetFileNameWithoutExtension(HttpContext.Current.Request.Url.AbsoluteUri).ToLower();
+                if (page == "post")
+                {
+                    sb.Append(siteUrl);
+                    string id = Request.QueryString["id"];
+                    string title = Request.QueryString["title"];
+                    if (!string.IsNullOrWhiteSpace(id) && !string.IsNullOrWhiteSpace(id))
+                    {
+                        sb.Append("post/" + id);
+                        sb.Append("/" + title);
+                    }
+                }
+                else
+                {
+                    Uri uri = new Uri(Request.Url.AbsoluteUri);
+                    string address = Tools.GetQueryStringByKey(uri, "address");
+                    string url = siteUrl;
+                    if (address != null && address != "")
+                    {
+                        url = Tools.GetFriendlyUrl(siteUrl, address, true);
+                    }
+                    
+                    sb.Append(url);
+                }
+
+                
                 //string page = Path.GetFileNameWithoutExtension(Request.Url.AbsolutePath);
                 //page = page.ToLower();
 
@@ -71,7 +101,7 @@ public partial class Controls_LoginPanel : System.Web.UI.UserControl
                 //}
 
                 SaveEncryptedCodeInCookie(facebookReturnedServerCode);
-                Response.Redirect(url);
+                Response.Redirect(sb.ToString());
                 return;
                 
             }
@@ -97,6 +127,9 @@ public partial class Controls_LoginPanel : System.Web.UI.UserControl
                             user = GetUserDetailsFromToken(accessToken);
                             //save the user in db
                             userId = SaveUserInDB(user);
+
+                            //no need this. i added in sql
+                            //SetUserEmailPemission(userId);
 
                         }
                     }
@@ -226,7 +259,7 @@ public partial class Controls_LoginPanel : System.Web.UI.UserControl
         //siteUrl = uri.GetLeftPart(UriPartial.Path);
 
         string url = "https://www.facebook.com/dialog/oauth?client_id={0}&redirect_uri={1}&scope=email,user_birthday" /*+ state*/;
-        url = String.Format(url, FaceBookAppKey, HttpUtility.UrlEncode(siteUrl));
+        url = String.Format(url, FaceBookAppKey, HttpUtility.UrlEncode(Request.Url.AbsoluteUri));
         Response.Redirect(url);
     }
 
@@ -264,6 +297,8 @@ public partial class Controls_LoginPanel : System.Web.UI.UserControl
             resp.FirstName = user.firstName;
             resp.LastName = user.lastName;
             resp.Image = user.avatarImageUrl;
+            resp.facebookID = user.facebookID;
+            
             //resp.userID = encUserId;
             resp.link = user.link;
 
@@ -285,10 +320,10 @@ public partial class Controls_LoginPanel : System.Web.UI.UserControl
             Uri uri = new Uri(HttpContext.Current.Request.Url.AbsoluteUri);
             siteUrl = uri.GetLeftPart(UriPartial.Path);
         }
-        
-        
 
-        url = String.Format(url, FaceBookAppKey, HttpUtility.UrlEncode(siteUrl), secretCode, code);
+
+
+        url = String.Format(url, FaceBookAppKey, HttpUtility.UrlEncode(Request.Url.AbsoluteUri), secretCode, code);
 
         string response = Tools.CallUrl(url);
         // now we got the string string: 'access_token=gfdgfdgd&expires=5108' or an error message
@@ -390,11 +425,26 @@ public partial class Controls_LoginPanel : System.Web.UI.UserControl
         return user;
     }
 
+    private void SetUserEmailPemission(int userId)
+    {
+        UserPermission up = new UserPermission();
+        up.date = DateTime.Now.Date;
+        up.permissionId = (int)Enums.Permissions.EmailPermission;
+        up.status = true;
+        up.userId = userId;
+        PostAroundServiceClient client = new PostAroundServiceClient();
+        int response = client.SetUserPermission(up);
+        client.Close();
+    }
+
     private int SaveUserInDB(User user)
     {
         int userId;
+        user.birthday = user.regDate; // patch fixes the facebook issue
+
         PostAroundServiceClient client = new PostAroundServiceClient();
         userId = client.InsertUpdateUser(user);
+        
         client.Close();
         return userId;
 
@@ -426,7 +476,7 @@ public partial class Controls_LoginPanel : System.Web.UI.UserControl
         if (user != null)
         {
             UserName.InnerHtml = user.firstName + " " + user.lastName;
-            UserImage.InnerHtml = "<img src=" + user.avatarImageUrl + "/>";
+            UserImage.InnerHtml = "<img src=" + user.avatarImageUrl + " />";
         }
         else
         {

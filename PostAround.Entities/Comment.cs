@@ -43,6 +43,9 @@ namespace PostAround.Entities
         [DataMember]
         public bool Mine;
 
+        [DataMember]
+        public bool isPrivate;
+
         public Comment() { }
 
     }

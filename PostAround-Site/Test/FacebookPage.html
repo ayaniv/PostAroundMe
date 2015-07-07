@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html ng-app="facebookPage" ng-controller="facebookPageController" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    
+    <script src="../scripts/angular/angular.min.js" type='text/javascript'></script>
+    <script src="../scripts/angular/angular-animate.min.js" type='text/javascript'></script>
+    <script type="text/javascript" src="facebookPage.js"></script>
+    <link rel="stylesheet" href="" type="text/css" media="screen" charset="utf-8" />
+
+    <title></title>
+    
+</head>
+<body>
+    <div ng-repeat="item in data.data  | filter: { from.id: '330275757502' }">
+        <div><a href="{{item.link}}" target="_blank" />{{item.message}}</a></div>
+        <div>{{item.id}}</div>
+        <div>{{item.created_time | date:'dd MMMM, yyyy HH:mm:ss'}}</div>
+        <div>likes: {{item.likes.data.length}}</div>
+        <div>shares: {{item.shares.count}}</div>
+        <div>comments: {{item.comments.data.length}}</div>
+        <div><img src="{{item.picture}}" /></div>
+        
+    </div>
+    
+
+</body>
+</html>

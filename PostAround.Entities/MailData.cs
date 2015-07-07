@@ -25,6 +25,8 @@ namespace PostAround.Entities
         public string SenderImage;
         [DataMember]
         public string recipientEmail;
+        [DataMember]
+        public string postHeader;
 
     }
 }

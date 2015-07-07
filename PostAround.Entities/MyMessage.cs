@@ -10,6 +10,10 @@ namespace PostAround.Entities
     public class MyMessage
     {
         [DataMember]
+        public string relativeDate { get; set; }
+        [DataMember]
+        public string titleSlugged { get; set; }
+        [DataMember]
         public int msgId { get; set; }
         [DataMember]
         public string latitude { get; set; }
@@ -67,6 +71,12 @@ namespace PostAround.Entities
         public bool Mine { get; set; }
         [DataMember]
         public string link { get; set; }
+        [DataMember]
+        public int totalShares { get; set; }
+        [DataMember]
+        public string facebookID { get; set; }
+        [DataMember]
+        public string secret { get; set; }
          
         
         

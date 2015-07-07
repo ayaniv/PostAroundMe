@@ -26,7 +26,7 @@
 
     </script>
 
-    <fb:like send="false" layout="button_count" show_faces="false"></fb:like>
+    <fb:like send="false" layout="button_count" href="<%=pageUrl %>" show_faces="false"></fb:like>
 
 <%--<div class="fb-like" data-send="false" data-layout="button_count" data-show-faces="false"></div>--%>
 

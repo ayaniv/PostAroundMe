@@ -18,17 +18,95 @@
 
 <%@ Import Namespace="System.Data" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://ogp.me/ns/fb#" xml:lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://ogp.me/ns/fb#" xml:lang="en"  xmlns:addthis="http://www.addthis.com/help/api-spec">
 <head runat="server">
-    <title>Post Around Me | Local Pinboard</title>
+    
     <uc1:Head runat="server" />
     
     
 
 </head>
 <body>
+
+
+
+    <div id="mobileHeader" class="MobileContainer" style="display: none">
+
+        <nav class="main-nav" id="main-nav">
+          <a href="#">This</a>
+          <a href="#">Little</a>
+          <a href="#">Piggy</a>
+          <a href="#">Went</a>
+          <a href="#">To</a>
+          <a href="#">Market</a>
+        </nav>
+
+        <div class="page-wrap">
+            <div class="MobileTop">
+
+                <div class="MobileSettings">
+                    <div class="MobileSettingsLine"></div>
+                    <div class="MobileSettingsLine"></div>
+                    <div class="MobileSettingsLine"></div>
+                </div>
+
+                <div class="MobileLogo">
+                    <img src="<%=siteUrl %>images/mobile_logo.png" />
+                </div>
+
+
+            </div>
+            <div class="MobileTopSecondary">
+                    <div class="Wrapper">
+                    <div class="MobileTopSecondaryText" style="margin-left:13px;">My Posts</div>
+                    <div class="MobileTopSecondaryText" style="margin-left:84px;">Current Location</div>
+                    <div class="MobileTopSecondaryText" style="margin-left:123px;">Map</div>
+                        </div>
+                <div class="Selected"></div>
+            </div>
+
+            <div class="MobileLocation">
+               Bitzaron 2, Tel Aviv
+            </div>
+
+            <div class="MobileBottom">
+                <div class="Wrapper">
+                <div class="MobileButton">
+                    <div class="Entry">
+                        <div class="AddPostIconBig"></div>
+                        <div class="AddPostText">Add Post</div>
+                    </div>
+                </div>
+
+
+                <div class="MobileBottomPas">
+                    <div class="Line WhiteBlue"></div>
+                    <div class="Line DarkBlue"></div>
+
+                </div>
+             
+                <div class="MobileButton NoMargin" style="margin-top:15px  !important; margin-left:8px  !important;">
+                    <div class="Entry">
+                        <div class="AddPostText NoMargin">Everything</div>
+                    </div>
+               
+                </div>
+
+                 <div class="AddPostText NoMargin"  style="margin-top:32px !important; margin-left:5px !important; margin-right:5px !important;">Within</div>
+
+                 <div class="MobileButton NoMargin" style="margin-top:15px !important;">
+                    <div class="Entry">
+                        <div class="AddPostText NoMargin">2km</div>
+                    </div>
+                     </div>
+
+    </div>
+            </div>
+        </div>
+    </div>
+
 <uc1:MetaTags ID="MetaTags1" runat="server" />
 <uc1:FacebookInit ID="FacebookInit1" runat="server" />
 
@@ -62,7 +140,7 @@
                 
 
         <div id="NoPostsText" style="display:none;  min-height:500px; text-align:center; color:#505050; position:relative; clear:both; top:0;  width:862px; margin:0 auto; padding:25px 30px;">
-        <img id="TextLinkAddPost" style="cursor:pointer" src="images/yet.png">
+        <img id="TextLinkAddPost" style="cursor:pointer" src="<%=siteUrl %>images/yet.png">
         
         </div>
 
@@ -82,9 +160,8 @@
 </div>
 
 
-<div id="PleaseLogin" style="display:none; z-index:10001; background-color:#FFF; border:2px solid #CCC; width:300px; height:120px; top:25%; left:50%; margin-left:-152px; position:fixed; ">
-	Hello
-</div>
+<div id="PleaseLogin" class="LoginMessage CenterLoginMessage"></div>
+
 
 
 
@@ -108,23 +185,24 @@
     
     <script id="TemplateCommentBig" type="text/x-jQuery-tmpl">
                             <div id="SingleCommentView" comment-id="${ID}">
-                            <div class="SingleComment" style="width:503px" >
+                            <div class="SingleComment" >
                                 <div id="commentImage" class="CommentImage">
                                     <img src="${avatarImageUrl}" />
                                 </div>
                                 
-                                <div class="CommentWrapper" style="width:476px">
+                                <div class="CommentWrapper">
                                 
                                     {{if Mine}}
-                                    <div id="HideComment"></div>
+                                    <div id="HideComment" class="SmallXButton"></div>
                                     {{/if}}
 
                                     <div id="commentUserName">
                                         <a href="${commentUserLink}" target="_blank">${name}</a>
+                                        <span id="CommentText" class="CommentText"  dir="${GetLanguageDirection(body)}"  style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</span>
                                     </div>
-                                    <div id="CommentText" class="CommentText" style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</div>
+                                    
                                     <div class="CommentDate">${strDate} at ${strTime}</div>
-
+                                    <div class="PosterOnly" style="display:none;">· Poster Only&nbsp;·&nbsp;<span class="Locker"></span></div>
                                 </div>
 
                             </div>
@@ -146,15 +224,16 @@
                                 <div class="CommentWrapper">
                                 
                                     {{if Mine}}
-                                    <div id="HideComment"></div>
+                                    <div id="HideComment" class="SmallXButton"></div>
                                     {{/if}}
 
                                     <div id="commentUserName">
                                         <a href="${commentUserLink}" target="_blank">${name}</a>
+                                        <span id="CommentText" class="CommentText"  dir="${GetLanguageDirection(body)}"  style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</span>
                                     </div>
-                                    <div id="CommentText" class="CommentText" style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</div>
+                                    
                                     <div class="CommentDate">${strDate} at ${strTime}</div>
-
+                                    <div class="PosterOnly" style="display:none;">· Poster Only&nbsp;·&nbsp;<span class="Locker"></span></div>
                                 </div>
 
                             </div>
@@ -174,7 +253,7 @@
                 <div id="BoxLine" class="Line" color="${catColor}" style="background-color:${catColor}">
                 </div>
                 <div class="TextArea">
-                
+                <div style="bottom:0; position:absolute; width: 11px; height: 5px; background:url('<%=siteUrl%>images/icons.png') -149px -22px; "></div>
                     <div class="BoxHead">
                 
                 <div class="FullAddress">
@@ -182,15 +261,15 @@
                 <div class="TextAddress">${msgAddress}</div>        
                 </div>
                         <div>
-                            <div class="BoxCategory" style="color:#a3a3a3">${category}</div>
-                            <div style="float:right" id="locationWrapper">
+                            <div class="BoxCategory">${category}</div>
+                            <div class="BoxLocation">
                             
-                            <div id="Marker"></div>
-                            <a href="<%=siteUrl %>post/${msgId}" onclick="return false;" id="ShowOnMap" class="Word">{{html ShowDistance(Distance, msgAddress)}}</a>
+                            <div class="SmallLocationIcon"></div>
+                            <a href="<%=siteUrl %>post/${msgId}/${titleSlugged}" onclick="return false;" id="ShowOnMap" class="Word">{{html ShowDistance(Distance, msgAddress)}}</a>
                             
                             </div>
                         </div>
-                            <div class="BoxHeader" style="direction:${GetLanguageDirection(title)}; text-align:left">${title}</div>
+                            <a href="<%=siteUrl %>post/${msgId}/${titleSlugged}" onclick="return false;" id="LinkToPost" class="BoxHeader" style="direction:${GetLanguageDirection(title)}; text-align:${GetLanguageDirection(title)};">${title}</a>
 
 
 
@@ -207,7 +286,7 @@
 
 
                         
-                <a class="ImageBox" style="font-size:0" href="<%=siteUrl %>post/${msgId}" onclick="return false;">
+                <a class="ImageBox" style="font-size:0" href="<%=siteUrl %>post/${msgId}/${titleSlugged}" onclick="return false;">
                 <img src='<%=siteUrl %>UploadedResized/${image}' style="height:${ImageHeight}px;"  />
                 </a>
             
@@ -220,49 +299,65 @@
 
                 <div class="Text" style="direction:${GetLanguageDirection(description)}">{{html FormatText(description)}}</div>
                 
-                <div class="MessageName" style="margin-top:10px;">
+                <div style="margin-top:10px; display:none"">
                     
                     <div id="CurrLat" style="display:none">${latitude}</div>
                     <div id="CurrLng" style="display:none">${longitude}</div>
                     <div id="FullAddress" style="display:none">${msgAddress}</div>
+                    <div id="FacebookID" style="display:none">${facebookID}</div>
+                    <div id="UserID" style="display:none">${userid}</div>
                 
                     
                 
                 </div>
 
-                <div class="MessageName">
-                    <a href="${link}" target="_blank"><img src="${userImage}" style="border:0; float:left; width:45px; height:45px; margin-right:6px" /></a> 
-                    <a href="${link}" target="_blank" style="float:left; margin-top:-2px">${Name}</a>
-                    <br />
-                    <span style="float:left; margin-top:-2px;">Posted on ${Date}</span>
+                <div class="MessageName" style="position:relative">
+                    <a href="${link}" target="_blank"><img src="${userImage}" class="UserAvatar" /></a> 
+                    <span style="width:201px; padding-top:3px;  float:left; color:#d2d2d2; font-weight:bold">Posted By</span><br />
+                    <a href="${link}" style="width:201px;"  target="_blank">${Name}</a>
                     <br />
                     
-                    <div style="margin-top:-3px; float:left;">
-                    <span style="background:url('images/icons.png') -331px 0px; width:22px; height:18px; float:left;"></span>
-                    <div style="margin-top:2px; float:left;">
-                    <span style="color:#333; font-weight:bold;">88</span>&nbsp;Share · Follow · Comment
-                    </div>
-                    </div>
 
-<div style="height:20px; display:none;">
-<div class="addthis_toolbox addthis_default_style" addthis:url="http://postaround.me/post/553">
-<a class="addthis_button_preferred_1" style="margin-top:2px;"></a>
-<a class="addthis_button_preferred_2" style="margin-top:2px;"></a>
-<a class="addthis_button_preferred_3" style="margin-top:2px;"></a>
-<a class="addthis_button_preferred_4" style="margin-top:2px;"></a>
-<a class="addthis_button_preferred_5" style="margin-top:2px;"></a>
-</div>
-</div>
+                    
+                    <div style="height:22px; width:100%; padding-top:7px;" class="SharingArea">
+                            <div class="ShareButton" style="width:100%; height:22px; font-size:12px; font-family:Tahoma, Verdana, Arial;  color:#666; float:left;">
+                                <span class="ShareIcon"></span>
+                                <span style="margin-left:4px; margin-top:1px; color:#b2b2b2; font-weight:bold; float:left;">${totalShares}</span>
+                                <span style="margin-left:4px; margin-top:1px; color:#b2b2b2; float:left;">Shares</span>
+                                <span style="float:left; color:#b2b2b2; margin-top:1px; margin-left:4px; margin-right:4px; display:none">· ${totalViews} Views ·</span>
+                                <span style="float:right; color:#b2b2b2; margin-top:1px;">${relativeDate}</span>
+                            
 
+                                        </div>
+
+                                            <div class="SharingDiv">
+                                            <div class="addthis_toolbox addthis_default_style " addthis:url="http://postaround.me/post/${msgId}">
+                                            <div style="float:left; margin-top:2px;">
+                                            <a class="addthis_button_preferred_1"></a>
+                                                <a class="addthis_button_preferred_2"></a>
+                                                 <a class="addthis_button_preferred_3"></a>
+                                                 <a class="addthis_button_preferred_4"></a>
+                                                <a class="addthis_button_preferred_5"></a>
+                                            <a class="addthis_button_email"></a>
+                                                
+
+                                                </div>
+                                                <a class="addthis_button_google_plusone"  <%="g:plusone:size"%>="medium" <%="g:plusone:count"%>="false"></a>
+                                            <a class="addthis_button_facebook_like" <%="fb:like:layout"%>="button_count"></a>
+
+
+                                            </div>
+                                            </div>
+                </div>
                 </div>
                 
 
                 
 
                 {{if Mine}}
-                <div class="Grey">
-                <div id="EditPost" class="MyButton MineButton">Edit</div>
-                <div id="HidePost" class="MyButton MineButton">Hide</div>
+                <div class="TransparentGrey OnPostButtons">
+                <div id="EditPost" class="MyButton MineButton RightButton">Edit</div>
+                <div id="HidePost" class="MyButton MineButton LeftButton">Remove</div>
                 </div>
                     
                 {{/if}}
@@ -276,13 +371,19 @@
              
                 <div class="Bottom" id="CommentsArea">
  
-                    <div class="BottomLine"></div>
+                   
                     
                     <div id="currCommentsView" class="CommentsArea">
 
                         {{each comments}}
                          <div id="SingleCommentView" comment-id="${ID}">
-                            <div class="SingleComment" >
+                            
+                                {{if isPrivate}}
+                                <div class="SingleComment PrivateComment" >
+                                {{else}}
+                                <div class="SingleComment" >
+                                {{/if}}
+                                
                                 <div id="commentImage" class="CommentImage">
                                     <img src="${avatarImageUrl}" />
                                 </div>
@@ -290,18 +391,18 @@
                                 <div class="CommentWrapper">
                                 
                                     {{if Mine}}
-                                    <div id="HideComment"></div>
+                                    <div id="HideComment" class="SmallXButton"></div>
                                     {{/if}}
 
                                     <div id="commentUserName">
                                         <a href="${commentUserLink}" target="_blank">${name}</a>
+                                        <span id="CommentText" class="CommentText" dir="${GetLanguageDirection(body)}" style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</span>
                                     </div>
-                                    <div id="CommentText" class="CommentText" style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</div>
-                                    <div class="CommentDate" style="float:left">${strDate} at ${strTime}</div>
                                     
-                                    
-                                    <div id="PosterOnly" class="CommentDate" style="float:left; display:none;">· Poster Only&nbsp;·&nbsp;<span style="width:9px; height:11px; background:url('images/icons.png') -352px -2px; float:right; margin-top:1px;"></span></div>
-                                    
+                                    <div class="CommentDate">${strDate} at ${strTime}</div>
+                                    {{if isPrivate}}
+                                    <div class="PosterOnly">· Poster Only&nbsp;·&nbsp;<span class="Locker"></span></div>
+                                    {{/if}}
                                     
 
                                 </div>
@@ -342,7 +443,7 @@
                 </div>
                 
                 </div>
-                <div style="background:url('images/boxShadow.png') no-repeat; width:273px; height:10px; float:left;"></div>
+                <div style="width:273px; height:10px; float:left;"></div><!-- background:url('images/boxShadow.png') no-repeat;  -->
             </div>
             
             
@@ -428,7 +529,7 @@
         else {
             if (meters == -1) {
 
-            retVal = "around <b>" + GetStatefromAddress(address, meters) + "</b>";
+            retVal = "<b>" + GetStatefromAddress(address, meters) + "</b>";
             } else
                 if (meters > 1000) {
                     distance = Math.round(meters / 1000) + "KM";
@@ -509,23 +610,37 @@
         return str;
     }
 
-    function GetLanguageDirection(str) {
+    function checkRTL(s) {
+        var ltrChars = 'A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02B8\u0300-\u0590\u0800-\u1FFF' + '\u2C00-\uFB1C\uFDFE-\uFE6F\uFEFD-\uFFFF',
+            rtlChars = '\u0591-\u07FF\uFB1D-\uFDFD\uFE70-\uFEFC',
+            rtlDirCheck = new RegExp('^[^' + ltrChars + ']*[' + rtlChars + ']');
+
+        return rtlDirCheck.test(s);
+    };
+
+    function GetLanguageDirection(selector) {
+        var string = selector;
+        for (var i = 0; i < string.length; i++) {
+            var isRTL = checkRTL(string[i]);
+            var dir = isRTL ? 'RTL' : 'LTR';
+            if (dir === 'RTL') var finalDirection = 'RTL';
+            if (finalDirection == 'RTL') dir = 'RTL';
+        }
         
-        //english
-        var direction = "ltr"
+        if (dir == 'LTR') {
+            return "ltr";
+        } else {
+            return "rtl";
+        }
+    }
 
-        str = str.replace(/[0-9]/g, '');
-        str = str.trim();
 
-        //hebrew
-        if ((str.charCodeAt(0) > 0x590) && (str.charCodeAt(0) < 0x5FF))
-            direction = "rtl";
+    function GetLanguageAlign(str) {
+        var direction = GetLanguageDirection(str);
+        if (direction == "rtl")
+            return "right";
+        return "left"
 
-        //arabic
-        else if ((str.charCodeAt(0) > 0x600) && (str.charCodeAt(0) < 0x6FF))
-            direction = "rtl";
-
-        return direction;
 
     }
 
@@ -542,6 +657,7 @@
     
     <link rel="canonical" href="<%=siteUrl %>" />
     
+
     
 
     

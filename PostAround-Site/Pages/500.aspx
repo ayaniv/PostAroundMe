@@ -5,9 +5,30 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://ogp.me/ns/fb#" xml:lang="en">
 <head id="Head1" runat="server">
-    <title>Post Around Me | Local Pinboard</title>
+    <title>PostAround.Me • Local Pinboard</title>
     <uc1:Head runat="server" />
     
+    <script type="text/javascript">
+        
+        function OpenUrl() {
+            var param = getParameterByName("aspxerrorpath");
+            var url = siteUrl + param;
+            window.location = url;
+        }
+
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+            var regexS = "[\\?&]" + name + "=([^&#]*)";
+            var regex = new RegExp(regexS);
+            var results = regex.exec(window.location.search);
+            if (results == null)
+                return "";
+            else
+                return decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+
+       
+    </script>
     
 
 </head>
@@ -17,7 +38,7 @@
     <form id="form1" runat="server">
     <div style="width:500px; height:400px; padding:50px; background:url('http://postaround.me/images/bgWhite80.png') repeat scroll 0 0 transparent; margin-left:auto; margin-right:auto; margin-top:50px;">
     <a href="http://postaround.me">
-    <img alt="Post Around Me | Local Pinboard" style="border:0; width:246px; height:43px; border:0" title="PostAround.Me | Local Pinboard" src="http://postaround.me/images/logoHead.png" />
+    <img alt="PostAround.Me • Local Pinboard" style="border:0; width:246px; height:43px; border:0" title="PostAround.Me | Local Pinboard" src="http://postaround.me/images/logoHead.png" />
     </a>
     <br /><br />
     <span style="color:#6AA1BB; clear:both; font-size:48px; font-weight:bold; font-family:Trebuchet MS,Arial,Sans-Serif">500</span>
@@ -27,7 +48,7 @@
 <br /><br /><br />
 
 <span style="font-family:Georgia, Arial, Sans-Serif; color:#424E55; margin-top:20px; float:left; font-size:16px;">
-Try to <a title="Refresh" style="color:#6AA1BB;" href="http://postaround.me">reload</a> the page. Or visit our <a style="color:#6AA1BB;" href="http://www.facebook.com/postaround">Facebook Page</a>. Facebook servers might be more reliable <span style="font-size:24px;">;)</span>
+Try to <a title="Refresh" style="color:#6AA1BB;" onclick="OpenUrl()" href="#">reload</a> the page. Or visit our <a style="color:#6AA1BB;" href="http://www.facebook.com/postaround">Facebook Page</a>. Facebook servers might be more reliable <span style="font-size:24px;">;)</span>
 </span>
     </div>
     </form>

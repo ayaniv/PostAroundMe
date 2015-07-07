@@ -44,7 +44,10 @@
   <ItemGroup>
     <Compile Include="BriefMessage.cs" />
     <Compile Include="Category.cs" />
+    <Compile Include="CommentResult.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="Helpers.cs" />
+    <Compile Include="LoginDetail.cs" />
     <Compile Include="MailData.cs" />
     <Compile Include="Comment.cs" />
     <Compile Include="Feedback.cs" />

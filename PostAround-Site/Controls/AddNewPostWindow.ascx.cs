@@ -8,11 +8,12 @@ using PostAround.Entities;
 using PostAroundService;
 using System.Configuration;
 
-public partial class Controls_AddNewPostWindow : System.Web.UI.UserControl
+public partial class Controls_AddNewPostWindow : BaseControl
 {
+  
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+           
             int userId = Tools.GetUserIdFromCookie(Context);
             if (userId > 0)
             {

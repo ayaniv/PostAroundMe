@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Controls_BottomLoader : System.Web.UI.UserControl
+public partial class Controls_BottomLoader : BaseControl
 {
     protected void Page_Load(object sender, EventArgs e)
     {

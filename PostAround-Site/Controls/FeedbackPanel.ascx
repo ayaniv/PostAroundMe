@@ -4,13 +4,13 @@
 <div class="feedback-panel">
     <a class="feedback-tab" href="Default.aspx">Feedback</a>
  <div id="FeedbackContent">
-    <div style="width:100%; height:40px; background-image:url('images/addMessageBgTop.gif'); background-repeat:repeat-x; ">
+    <div style="width:100%; height:40px; background-image:url('<%=siteUrl%>images/addMessageBgTop.gif'); background-repeat:repeat-x; ">
         <div style="padding:9px; font-size:20px; font-weight:500; color:#57849d;">
-            <div style="float:left;background:url('images/headings.png') no-repeat 0px 0px; width:231px; height:22px;">&nbsp;</div>
+            <div style="float:left;background:url('<%=siteUrl%>images/headings.png') no-repeat 0px 0px; width:231px; height:22px;">&nbsp;</div>
             
             
             <div id="xbuttonFeedback" style="width:14px; height:15px; float: right; cursor: pointer;">
-         <div style="background: url('images/icons.png') repeat scroll -140px -143px; float: right;
+         <div style="background: url('<%=siteUrl%>images/icons.png') repeat scroll -140px -143px; float: right;
              height: 14px; width: 11px;">
          </div>
      </div>

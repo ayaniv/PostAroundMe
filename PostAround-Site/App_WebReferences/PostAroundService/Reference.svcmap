@@ -18,15 +18,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost/PostAroundService/service.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost/PostAroundService/service.svc/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Service.xsd" MetadataType="Schema" ID="45131b9f-e890-44a8-b441-78d0a6345df8" SourceId="1" SourceUrl="http://yaniv-laptop/PostAroundService/Service.svc?xsd=xsd1" />
-    <MetadataFile FileName="PostAroundMeDataSet.xsd" MetadataType="Schema" ID="70c24351-3f0e-4364-9228-d2f96a696ee4" SourceId="1" SourceUrl="http://yaniv-laptop/PostAroundService/Service.svc?xsd=xsd2" />
-    <MetadataFile FileName="Service1.xsd" MetadataType="Schema" ID="ff131842-7435-47cd-8121-04e117114359" SourceId="1" SourceUrl="http://yaniv-laptop/PostAroundService/Service.svc?xsd=xsd3" />
-    <MetadataFile FileName="PostAroundService.wsdl" MetadataType="Wsdl" ID="415d78d5-b72c-4f11-91d9-f5925ae08509" SourceId="1" SourceUrl="http://yaniv-laptop/PostAroundService/Service.svc?wsdl" />
-    <MetadataFile FileName="Service.disco" MetadataType="Disco" ID="6748e16f-eeb8-4fd4-8989-942d3560a9c8" SourceId="1" SourceUrl="http://yaniv-laptop/PostAroundService/Service.svc?disco" />
-    <MetadataFile FileName="Service3.xsd" MetadataType="Schema" ID="7b8dc650-c400-4925-8b0d-b1cb877ff41b" SourceId="1" SourceUrl="http://yaniv-laptop/PostAroundService/Service.svc?xsd=xsd0" />
+    <MetadataFile FileName="service1.wsdl" MetadataType="Wsdl" ID="a8b89af3-4c94-4cbc-b996-0bd4c7315c30" SourceId="1" SourceUrl="http://localhost/PostAroundService/service.svc/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="355f925e-2660-4222-91b5-425ecef7cf7b" SourceId="1" SourceUrl="http://localhost/PostAroundService/service.svc/mex" />
+    <MetadataFile FileName="service2.xsd" MetadataType="Schema" ID="647322ad-c4d1-4780-a964-6b69eb2c9046" SourceId="1" SourceUrl="http://localhost/PostAroundService/service.svc/mex" />
+    <MetadataFile FileName="PostAround.Entities1.xsd" MetadataType="Schema" ID="118e33d2-5940-42e9-b768-e2e0824097e0" SourceId="1" SourceUrl="http://localhost/PostAroundService/service.svc/mex" />
+    <MetadataFile FileName="Arrays1.xsd" MetadataType="Schema" ID="5356cc2a-096e-4696-abe6-40afc5e75436" SourceId="1" SourceUrl="http://localhost/PostAroundService/service.svc/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

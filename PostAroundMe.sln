@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostAround.DAL", "PostAround.DAL\PostAround.DAL.csproj", "{56F8890E-B154-4706-AC5C-D88C97CAC317}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostAround.Logic", "PostAround.Logic\PostAround.Logic.csproj", "{9F811977-57F1-4956-AEFA-B2C44A425A43}"
@@ -46,7 +46,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "PostAroundServices", "PostA
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "38676"
+		VWDPort = "38678"
 	EndProjectSection
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "MockUp", "MockUp\", "{85896782-1387-4BFA-9B6F-5B91A55EAD86}"

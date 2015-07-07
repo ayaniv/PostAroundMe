@@ -1,12 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="CategoriesButton.ascx.cs" Inherits="Controls_CategoriesButton" %>
 
-            <div id="btnCategory" class="ChooseCategory" onselectstart='return false;' >
-                
-                    
-                        
-                        Everything
-                        
-                    
+            <div id="btnCategory" class="ChooseCategory" onselectstart='return false;' data-i18n="header.everything">
                 
                 
             </div>

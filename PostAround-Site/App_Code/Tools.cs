@@ -9,12 +9,49 @@ using System.Configuration;
 using System.Security.Cryptography;
 using System.Net.Mail;
 using System.Threading;
+using System.Globalization;
+using PostAround.Entities;
+
 
 /// <summary>
 /// Summary description for Tools
 /// </summary>
 public static class Tools
 {
+    public static string GetFriendlyUrl(string siteUrl, string address, bool isSlugged) {
+        if (address == null || address == "")
+            return siteUrl;
+
+        string format = "{0}in/{1}";
+        string url = string.Format(format, siteUrl, isSlugged ? address : address.Slugify());
+        return url;
+    }
+    public static string GetQueryStringByKey(Uri uri, string key)
+    {
+        // this gets all the query string key value pairs as a collection
+        var newQueryString = HttpUtility.ParseQueryString(uri.Query);
+
+        // this returns the value if key exists
+        return newQueryString.Get(key);
+
+    }
+
+    public static string RemoveQueryStringByKey(Uri uri, string key)
+    {
+        // this gets all the query string key value pairs as a collection
+        var newQueryString = HttpUtility.ParseQueryString(uri.Query);
+
+        // this removes the key if exists
+        newQueryString.Remove(key);
+
+        // this gets the page path from root without QueryString
+        string pagePathWithoutQueryString = uri.GetLeftPart(UriPartial.Path);
+
+        return newQueryString.Count > 0
+            ? String.Format("{0}?{1}", pagePathWithoutQueryString, newQueryString)
+            : pagePathWithoutQueryString;
+    }
+
     public static string CallUrl(string url)
     {
         string result = null;
@@ -57,6 +94,19 @@ public static class Tools
 
         // Close the stream:
         log.Close();
+    }
+
+    public static string HashIt(string toBeHashed)
+    {
+        string hashedValue = "";
+        //string key = ConfigurationManager.AppSettings["EncryptKey"];
+        //toBeHashed = key + toBeHashed;
+
+        SHA256 alg = SHA256.Create();
+        alg.ComputeHash(Encoding.UTF8.GetBytes(toBeHashed));
+        hashedValue = BitConverter.ToString(alg.Hash);
+
+        return hashedValue;
     }
 
 
@@ -165,20 +215,45 @@ public static class Tools
  
     }
 
+    public static string Capitalize(string s)
+    {
+        return char.ToUpper(s[0]) + s.Substring(1).ToLower();
+    }
+
+    public static bool InputCheck(string whatToCheck, string regexValidate)
+    {
+        return true;
+    }
+
 
     public static bool IsDirectLink(HttpContext context)
     {
-        return (context.Request.QueryString["id"] != null);
+        bool hasQueryStringID = (context.Request.QueryString["id"] != null);
+        bool isTaiwan = (HttpContext.Current.Request.Url.AbsoluteUri.ToLower().Contains("taiwan-receipt-lottery-checker.aspx"));
+        return (hasQueryStringID || isTaiwan);
+    }
+
+    public static string GetProtocol(HttpContext context)
+    {
+        Uri uri  = new Uri(context.Request.Url.AbsoluteUri);
+        string protocol = uri.Scheme;
+        return protocol;
     }
 
     public static string SetUserIdInCookie(int userId, HttpContext context)
     {
-        string encUserId = Tools.Encrypt(userId.ToString(), true).Replace('+', '$');
-        // save encrypted userid in cookie
-        HttpCookie userCookie = new HttpCookie("UserLogin");
-        userCookie["userId"] = encUserId;
-        userCookie.Expires = DateTime.Now.AddDays(7);
-        context.Response.Cookies.Add(userCookie);
+        string encUserId = null;
+        try
+        {
+            encUserId = Tools.Encrypt(userId.ToString(), true).Replace('+', '$');
+            // save encrypted userid in cookie
+            HttpCookie userCookie = new HttpCookie("UserLogin");
+            userCookie["userId"] = encUserId;
+            userCookie.Expires = DateTime.Now.AddDays(7);
+            context.Response.Cookies.Add(userCookie);
+        }
+        catch (Exception ex) { }
+
         return encUserId;
 
     }
@@ -219,6 +294,7 @@ public static class Tools
     }
 
 
+  
 
     
 

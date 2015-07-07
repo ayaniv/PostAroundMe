@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Configuration;
 
-public partial class Controls_FacebookLikePage : System.Web.UI.UserControl
+public partial class Controls_FacebookLikePage : BaseControl
 {
     public static string FaceBookAppKey;
     protected void Page_Load(object sender, EventArgs e)

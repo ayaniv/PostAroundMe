@@ -26,10 +26,12 @@
     <asp:Repeater runat="server" ID="rptLinks">
     <HeaderTemplate></HeaderTemplate>
     <ItemTemplate>
-    <a href="<%=SiteUrl %>post/<%# ((BriefMessage)Container.DataItem).msgId %>"><%# ((BriefMessage)Container.DataItem).Title %></a>
+    <a href="<%=siteUrl %>post/<%# ((BriefMessage)Container.DataItem).msgId %>/<%# ((BriefMessage)Container.DataItem).Title.Slugify() %>"><%# ((BriefMessage)Container.DataItem).Title %></a>
     </ItemTemplate>
     <FooterTemplate></FooterTemplate>
     </asp:Repeater>
+        <a href="<%=siteUrl %>in/ביצרון">לוח מודעות שכונת ביצרון</a>
+        <a href="<%=siteUrl %>in/אוניברסיטת_תל_אביב">לוח מודעות אוניברסיטת תל אביב</a>
     </div>
     
     </form>

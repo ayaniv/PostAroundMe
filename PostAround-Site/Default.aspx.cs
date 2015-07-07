@@ -13,27 +13,18 @@ using PostAroundService;
 using PostAround.Entities;
 using System.Collections.Generic;
 
-public partial class _Default : System.Web.UI.Page 
+public partial class _Default : BasePage 
 {
-    protected string siteUrl;
+   
     //protected string homePage;
-    
+   
 
     //User currentUser;
     protected void Page_Load(object sender, EventArgs e)
     {
-        siteUrl = ConfigurationManager.AppSettings["SiteUrl"];
-        //homePage = ConfigurationManager.AppSettings["HomePage"];
+        Session["Test"] = "Testing..";
 
-        //int ID = 1;
-        //if (Request.Cookies["PostAroundUserCookie"] != null)
-        //    ID = Convert.ToInt32(Request.Cookies["PostAroundUserCookie"].Value);
-
-        if (Tools.IsDirectLink(Context))
-        {
-            // go to bring post by id and show it on server
-        }
-
+    
 
     }
 

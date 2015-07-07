@@ -32,6 +32,9 @@ public class LoginResponseSuccess
     [DataMember]
     public string link;
 
+    [DataMember]
+    public string facebookID;
+
     public LoginResponseSuccess()
     {
 

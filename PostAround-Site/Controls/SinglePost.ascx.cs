@@ -10,16 +10,18 @@ using System.Configuration;
 using System.Web.UI.HtmlControls;
 using System.Text.RegularExpressions;
 
-public partial class Controls_SinglePost : System.Web.UI.UserControl
+public partial class Controls_SinglePost : BaseControl
 {
-    protected string homePage;
+    
     protected DateTime fullDate;
 
     protected string BigBoxLat;
     protected string BigBoxLon;
     protected string BigBoxAddress;
+    protected string BigBoxAddressNoSpace;
 
     protected string directionDescription;
+    protected string alignDescription;
     protected string directionAddress;
     protected string directionTitle;
 
@@ -28,9 +30,14 @@ public partial class Controls_SinglePost : System.Web.UI.UserControl
 
     protected int msgId;
     protected string bigBoxLineColor;
-
+    protected string facebookID;
+  
 
     public string PageTitle { get; set; }
+    protected string myLat;
+    protected string myLon;
+
+    
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -39,10 +46,9 @@ public partial class Controls_SinglePost : System.Web.UI.UserControl
         
         try
         {
+            GetDataFromCookie();
 
 
-
-            homePage = ConfigurationManager.AppSettings["HomePage"];
             string strMsgId = Request.QueryString["id"];
             
             string mapPathResized = System.Configuration.ConfigurationManager.AppSettings["PhysicalPath"] + @"\UploadedResizedBig";
@@ -53,36 +59,53 @@ public partial class Controls_SinglePost : System.Web.UI.UserControl
                 MyMessage msg = GetMessageByID(msgId);
                 if (msg == null)
                     throw new Exception();
+                
+                
+                if (!msg.Mine)
+                    ltrlButtons.Text = @"<div class=""slider-frame""><span class=""slider-button""><span class=""PublicIcon PublicIconOn""></span>Public</span><span class=""slider-button-off""><span class=""PrivateIcon""></span>Private</span></div>";
 
-                this.Page.Title = msg.title + " : Post Around Me";
-
+                this.Page.Title = msg.title + " • " + msg.msgAddress;
+                facebookID = msg.facebookID;
                 ltrlAddress.Text = msg.msgAddress;
                 directionAddress = GetLanguageDirection(ltrlAddress.Text);
-                BigBoxAddress = Tools.EncodeTo64(ltrlAddress.Text);
-                ltrlUserImage.Text = "<img src=" + msg.userImage + " style='height:50px; width:50px; border:0;' />";
+                BigBoxAddress = ltrlAddress.Text;
+                BigBoxAddressNoSpace = BigBoxAddress.Replace(",", "").Replace(" ", "_").Replace("/", "_");
+                ltrlUserImage.Text = "<img src=" + msg.userImage + " style='height:50px; width:50px; border-radius:50px; border-bottom-right-radius:2px; border:0;' />";
                 ltrlName.Text = msg.Name;
-                ltrlDate.Text = "Posted on " + msg.Date; // +" at " + msg.Time;
+                ltrlDate.Text = msg.relativeDate; //"On " + msg.Date; //+ " at " + msg.Time;
+                ltrlAddressUser.Text = "Around " + ltrlAddress.Text;
                 //fullDate = msg.FullDate;
                 ltrlCategory.Text = msg.category;
                 ltrlTitle.Text = msg.title;
+                titleContainer.Style.Add("direction", GetLanguageDirection(ltrlTitle.Text));
+                titleContainer.Style.Add("text-align", GetLanguageDirection(ltrlTitle.Text));
+
                 ltrlText.Text = FormatText(msg.description);
+
                 directionDescription = GetLanguageDirection(ltrlText.Text);
+                alignDescription = directionDescription == "ltr" ? "left" : "right";
                 bigBoxLineColor = msg.catColor;
 
                 directionTitle = GetLanguageDirection(ltrlTitle.Text);
                 BigBoxLat = msg.latitude;
                 BigBoxLon = msg.longitude;
 
-                pageUrl = homePage + "post/" + msg.msgId;
+                pageUrl = siteUrl + "post/" + msg.msgId + "/" + msg.title.Slugify();
 
-                mapUrl = "https://maps.google.com/maps?q=" + BigBoxLat + "," + BigBoxLon + "&t=m&z=16";
+                mapUrl = "https://maps.google.com/maps?daddr=" + BigBoxLat + "," + BigBoxLon; // +"&t=m&z=16";
+                
+                if (!string.IsNullOrWhiteSpace(myLat) && !string.IsNullOrWhiteSpace(myLon))
+                {
+                    mapUrl = mapUrl + "&saddr=" + myLat + "," + myLon;
+                }
+                
 
                 if (!string.IsNullOrWhiteSpace(msg.image))
                 {
                     // attach image height
                     System.Drawing.Image objImage = System.Drawing.Image.FromFile(mapPathResized + "\\" + msg.image);
                     msg.ImageHeight = objImage.Height;
-                    ltrlMedia.Text = "<img src=" + homePage + "/UploadedResizedBig/" + msg.image + " style='height:" + msg.ImageHeight + "px;" + " width:533px; border:0;' />";
+                    ltrlMedia.Text = "<img src=" + siteUrl + "UploadedResizedBig/" + msg.image + " style='height:" + msg.ImageHeight + "px;" + " width:610px; float:left; border:0;' />";
                 }
 
                 rptComments.ItemCreated += new RepeaterItemEventHandler(rptComments_ItemCreated);
@@ -101,12 +124,25 @@ public partial class Controls_SinglePost : System.Web.UI.UserControl
         }
         catch (Exception ex)
         {
-            Response.Redirect(homePage);
+            Response.Redirect(siteUrl);
         }
     }
 
 
-     
+    private void GetDataFromCookie()
+    {
+        HttpCookie cookie = Request.Cookies["UserInfo"];
+
+        if (cookie != null)
+        {
+            if (!string.IsNullOrEmpty(cookie["lat"]))
+                myLat = cookie["lat"];
+
+            if (!string.IsNullOrEmpty(cookie["lng"]))
+                myLon = cookie["lng"];
+
+        }
+    }
 
     private PostAround.Entities.MyMessage GetMessageByID(int msgId)
     {
@@ -117,6 +153,10 @@ public partial class Controls_SinglePost : System.Web.UI.UserControl
         int userId = 0;
 
         userId = Tools.GetUserIdFromCookie(Context);
+        //if (userId <= 0)
+        //{
+        //    AddCommentPanel.Visible = false;
+        //}
         
         PostAroundServiceClient client = new PostAroundServiceClient();
 
@@ -144,11 +184,18 @@ public partial class Controls_SinglePost : System.Web.UI.UserControl
 
             Comment item = (Comment)e.Item.DataItem;
             ((Literal)e.Item.FindControl("cmtUserImage")).Text = "<img src='" + item.avatarImageUrl +"' />";
-            ((Literal)e.Item.FindControl("cmtUserName")).Text = "<a href='" + item.commentUserLink + "' target='_blank'>" + item.name + "</a>";
+            ((Literal)e.Item.FindControl("cmtUserName")).Text = "<a href='" + item.commentUserLink + "' target='_blank' >" + item.name + "</a>";
             ((Literal)e.Item.FindControl("cmtBody")).Text = FormatText(item.body);
             ((Literal)e.Item.FindControl("cmtDate")).Text = item.strDate + " at " + item.strTime;
 
             ((HtmlGenericControl)e.Item.FindControl("CommentText")).Style.Add("direction", GetLanguageDirection(item.body));
+            ((HtmlGenericControl)e.Item.FindControl("CommentText")).Attributes.Add("dir", GetLanguageDirection(item.body));
+            string strComment = @"<div id=""HideComment"" class=""SmallXButton""></div>";
+            if (item.Mine == true)
+            {
+                ((Literal)e.Item.FindControl("ltrlCommentXButton")).Text = strComment;
+                
+            }
             
             
             //((TextBox)e.Item.FindControl("txtDropDownCategoryId")).Text = item.ID.ToString();
@@ -167,29 +214,51 @@ public partial class Controls_SinglePost : System.Web.UI.UserControl
 
     }
 
-    protected string GetLanguageDirection(string str)
+
+    protected string GetLanguageAlign(string str)
     {
-        //english
-        string direction = "ltr";
-
-        if (str == null)
-            return direction;
-
-        str = Regex.Replace(str, @"[\d-]", string.Empty);
-        str = str.Trim();
-
-
-        //hebrew
-        if ((str[0] > 0x590) && (str[0] < 0x5FF))
-            direction = "rtl";
-
-        //arabic
-        else if ((str[0] > 0x600) && (str[0] < 0x6FF))
-            direction = "rtl";
-
-        return direction;
+        string direction = GetLanguageDirection(str);
+        if (direction == "rtl")
+            return "right";
+        return "left";
 
     }
+
+    private bool checkRTL(char s) {
+        string ltrChars = "A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02B8\u0300-\u0590\u0800-\u1FFF" + "\u2C00-\uFB1C\uFDFE-\uFE6F\uFEFD-\uFFFF";
+        string rtlChars = "\u0591-\u07FF\uFB1D-\uFDFD\uFE70-\uFEFC";
+        string rtlDirCheck = "^[^" + ltrChars + "]*[" + rtlChars + "]";
+
+        return Regex.IsMatch(s.ToString(), rtlDirCheck);
+    }
+
+    protected string GetLanguageDirection(string str) {
+        string dir = "LTR";
+        bool isRTL = false;
+        string finalDirection = "LTR";
+        for (var i = 0; i < str.Length; i++) {
+            isRTL = checkRTL(str[i]);
+            dir = isRTL ? "RTL" : "LTR";
+            
+            if (dir == "RTL")
+            {
+                finalDirection = "RTL";
+            }
+                
+            if (finalDirection == "RTL")
+            {
+                 dir = "RTL";
+            }
+               
+        }
+        
+        if (dir == "LTR") {
+            return "ltr";
+        } else {
+            return "rtl";
+        }
+    }
+
 
     private string Linkify(string inputText) {
         //URLs starting with http://, https://, or ftp://
