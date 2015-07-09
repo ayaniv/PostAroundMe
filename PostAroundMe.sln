@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostAround.DAL", "PostAround.DAL\PostAround.DAL.csproj", "{56F8890E-B154-4706-AC5C-D88C97CAC317}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostAround.Logic", "PostAround.Logic\PostAround.Logic.csproj", "{9F811977-57F1-4956-AEFA-B2C44A425A43}"
@@ -26,6 +28,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "PostAround-Site", "PostArou
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "38684"
+		SlnRelativePath = "PostAround-Site\"
 	EndProjectSection
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "PostAroundServices", "PostAroundServices\", "{2F0FB8B3-643E-4932-9206-711B73ED854B}"
@@ -47,6 +50,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "PostAroundServices", "PostA
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "38678"
+		SlnRelativePath = "PostAroundServices\"
 	EndProjectSection
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "MockUp", "MockUp\", "{85896782-1387-4BFA-9B6F-5B91A55EAD86}"
@@ -67,6 +71,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "MockUp", "MockUp\", "{85896
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "38682"
+		SlnRelativePath = "MockUp\"
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostAround.Entities", "PostAround.Entities\PostAround.Entities.csproj", "{97DA5407-FED4-4920-9FB8-E3DFCB26667F}"
