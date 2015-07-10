@@ -1705,9 +1705,9 @@
   </wsdl:binding>
   <wsdl:service name="PostAroundService">
     <wsdl:port name="WSHttpBinding_IPostAroundService" binding="tns:WSHttpBinding_IPostAroundService">
-      <soap12:address location="http://aharony3.emea.hpqcorp.net/PostAroundService/Service.svc" />
+      <soap12:address location="http://localhost/PostAroundService/Service.svc" />
       <wsa10:EndpointReference>
-        <wsa10:Address>http://aharony3.emea.hpqcorp.net/PostAroundService/Service.svc</wsa10:Address>
+        <wsa10:Address>http://localhost/PostAroundService/Service.svc</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
           <Dns>localhost</Dns>
         </Identity>
