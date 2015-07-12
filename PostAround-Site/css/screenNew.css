@@ -745,6 +745,11 @@ hr.style-eight:after {
 .Bottom .CommentsArea .SingleComment .CommentWrapper #commentUserName .CommentText a {  font-weight:normal; word-break: break-all }
 
 
+.BottomDiv .Text a.linkLightGrey:link, .BottomDiv .Text a.linkLightGrey:visited
+{
+    color:#dfdfdf; font-style:normal; font-size:12px; font-weight:bold;
+}
+
 .Bottom .CommentsArea .SingleComment .CommentWrapper {  word-wrap:break-word; display:block; line-height:16px; font-family: Tahoma, Arial; text-align:left; color:#424E55; font-size:12px; }
 .Bottom .CommentsArea .SingleComment .CommentWrapper .CommentDate { clear:both; color:#A3A3A3; font-size:11px; margin-left:5px; float:left; }
 .Bottom .CommentsArea .SingleComment .CommentWrapper .PosterOnly { color:#A3A3A3; font-size:11px; margin-left:5px; float:left; }

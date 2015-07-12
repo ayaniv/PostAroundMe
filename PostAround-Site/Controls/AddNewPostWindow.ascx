@@ -128,7 +128,7 @@
              </div>
          <div id="divAddressContainer" style="margin-bottom:6px; " >
              <div class="SmallLocationIcon" style="margin-top:4px"></div>
-             <div style="float:left; font-size:16px; font-family:Calibri, Arial; font-style:italic; color:#57849D;">Post around:</div>
+             <div style="float:left; font-size:16px; font-family:Calibri, Arial; font-style:italic; color:#57849D;" data-i18n="post.PostAround"></div>
              <div  id="divAddress" style="clear:both; padding-left: 15px; width:310px; color: #82898e;
                  font-size: 15px;">
                  </div>

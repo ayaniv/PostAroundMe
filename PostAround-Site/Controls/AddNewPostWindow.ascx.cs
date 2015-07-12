@@ -26,13 +26,39 @@ public partial class Controls_AddNewPostWindow : BaseControl
 
                 rptCategoriesColumn1.ItemCreated += new RepeaterItemEventHandler(rptCategories_ItemCreated);
 
-                rptCategoriesColumn1.DataSource = lstCategories;
+                rptCategoriesColumn1.DataSource = L10NCategories(lstCategories);
                 rptCategoriesColumn1.DataBind();
 
   
             }
         
     }
+
+
+    private List<Category> L10NCategories(List<Category> lst)
+    {
+        List<Category> retVal = new List<Category>();
+
+        foreach (Category item in lst)
+        {
+            Category cat = new Category();
+            cat.ID = item.ID;
+            cat.Color = item.Color;
+            cat.Name = (String)GetGlobalResourceObject("Resource", Format(item.Name));
+            retVal.Add(cat);
+        }
+
+        return retVal;
+    }
+
+    private string Format(string str)
+    {
+        string retVal = str.Replace(" ", "").Replace("&", "").Replace("/", "");
+
+
+        return retVal;
+    }
+
 
     void rptCategories_ItemCreated(object sender, RepeaterItemEventArgs e)
     {

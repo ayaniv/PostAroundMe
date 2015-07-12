@@ -9,6 +9,6 @@ public partial class Controls_SiteLocationBar : BaseControl
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        //lblForAmount.Text = (String)GetGlobalResourceObject("Resource", "UpToDistance");
     }
 }

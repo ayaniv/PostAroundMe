@@ -267,7 +267,7 @@ $(function () {
                     //currResults = jQuery.grep(allResults, function (a) { return a.Distance <= ui.value && a.Distance >= 0 });
 
                 } else {
-                    alert("Please Insert Location");
+                    alert(i18n.t("errors.NO_LOCATION"));
                 }
             }
 
@@ -582,7 +582,9 @@ $(function () {
     function SetSlide() {
 
         $("#slider").slider("value", 3000);
-        $("#amount").val("3KM");
+        var str = i18n.t("header.NUMBER_KM");
+        str = str.replace("{0}", "3");
+        $("#amount").val(str);
 
 
 
@@ -845,7 +847,7 @@ $(function () {
         sortBy = $(this).children("input").val();
 
         if ((sortBy == 1) && (myLon == "" && myLat == ""))
-            alert("Please Insert Location");
+            alert(i18n.t("errors.NO_LOCATION"));
         else {
             fromNumber = 0;
             $.when(ZeroiseBoxes()).then(GetMessages());
@@ -906,7 +908,7 @@ $(function () {
         }
 
 
-        if (($.trim($("#txtPopupTitle").val()) == '') || ($.trim($("#txtPopupTitle").val()) == 'Add Title...')) {
+        if (($.trim($("#txtPopupTitle").val()) == '')) {
             $("#txtPopupTitle").css("border-color", "#FF0000");
             if (errorText != "")
                 errorText = errorText + ", ";
@@ -918,7 +920,7 @@ $(function () {
         }
 
 
-        if (($.trim($("#txtPopupDetails").val()) == '') || ($.trim($("#txtPopupDetails").val()) == "Spread your post around here !")) {
+        if (($.trim($("#txtPopupDetails").val()) == '')) {
             $("#txtPopupDetails").css("border-color", "#FF0000");
             if (errorText != "")
                 errorText = errorText + ", "
@@ -1168,7 +1170,7 @@ $(function () {
 
                 } else {
 
-                    $("#MandatoryFields").html("Server Returned Error. Try again");
+                    $("#MandatoryFields").html(i18n.t("errors.SERVER_ERROR"));
                     $("#MandatoryFieldsMessage").show();
 
                 }
@@ -1193,7 +1195,7 @@ $(function () {
 
         //categorId
         currPostCategory = "";
-        $("#addPostBtnCategoryText").html('<span style="margin-left:5px; padding-top:3px; float:left;">Choose Category...</span>');
+        $("#addPostBtnCategoryText").html('<span style="margin-left:5px; padding-top:3px; float:left;">' + i18n.t('post.choose-category') + '</span>');
 
         //Title
         $("#txtPopupTitle").val('');
@@ -1488,22 +1490,23 @@ $(function () {
 
     $('.slider-button-off').live('click', function () {
         if ($(this).parents('.slider-frame').attr("IsPrivate") != "true") {
-                $(this).parents('.slider-frame').children('.slider-button').addClass('on').html('<span class="PrivateIcon PrivateIconOn"></span>Private');
+            $(this).parents('.slider-frame').children('.slider-button').addClass('on').html('<span class="PrivateIcon PrivateIconOn"></span><span data-i18n="messages.private"></span>');
                 $(this).parents('.slider-frame').children('.slider-button').css("background-position", "0px 0px");
-                $(this).css("display", "none").css("left", "0").fadeIn().html('<span class="PublicIcon"></span>Public');
+                $(this).css("display", "none").css("left", "0").fadeIn().html('<span class="PublicIcon"></span><span data-i18n="messages.public"></span>');
                 $(this).parents('.slider-frame').attr("IsPrivate", "true");
                 $(this).parents('.AddComment').children('#Comment').css('border', "1px dashed #6AA1BB");
-                $(this).parents('.AddComment').children('#Comment').attr('placeholder', 'Reply to poster only...');
+                $(this).parents('.AddComment').children('#Comment').attr('placeholder', i18n.t("messages.poster_only"));
             } else {
-                $(this).parents('.slider-frame').children('.slider-button').removeClass('on').html('<span class="PublicIcon PublicIconOn"></span>Public');
+            $(this).parents('.slider-frame').children('.slider-button').removeClass('on').html('<span class="PublicIcon PublicIconOn"></span><span data-i18n="messages.public"></span>');
                 $(this).parents('.slider-frame').children('.slider-button').css("background-position", "-8px 0px");
-                $(this).css("display", "none").css("left", "50%").fadeIn().html('<span class="PrivateIcon"></span>Private');
+                $(this).css("display", "none").css("left", "50%").fadeIn().html('<span class="PrivateIcon"></span><span data-i18n="messages.private"></span>');
                 $(this).parents('.slider-frame').attr("IsPrivate", "false");
                 $(this).parents('.AddComment').children('#Comment').css('border', "solid 1px #cbd2d4");
-                $(this).parents('.AddComment').children('#Comment').attr('placeholder', 'Post a comment...');
-        }
+                $(this).parents('.AddComment').children('#Comment').attr('placeholder', i18n.t("messages.post_comment"));
+            }
         $(this).parents('.AddComment').children('#Comment').focus();
-            });
+        $(this).parents('.slider-frame').i18n();
+        });
 
             $('.slider-button').live('click', function () {
                 $(this).parents('.slider-frame').children('.slider-button-off').click();
@@ -2611,6 +2614,7 @@ $(function () {
         var currColumn = $.tmpl("MessageTemplate", data);
 
         $(currColumn).appendTo("#MessagesContainer");
+        $("#MessagesContainer").i18n();
 
     }
 
@@ -2788,13 +2792,13 @@ $(function () {
         if (currentUser == null) {
             if (!isDirectLink) {
                 if (PopUpIsOpened) {
-                    alert("Please Login");
+                    alert(i18n.t("errors.NOT_LOGIN"));
                 }
                 else {
                     ShowAddMessageWindow(true);
                 }
             } else {
-                alert("Please Login");
+                alert(i18n.t("errors.NOT_LOGIN"));
             }
             return;
         }
@@ -2846,7 +2850,7 @@ $(function () {
 
     }
     function DeletePost() {
-        var answer = confirm("Hide that post?")
+        var answer = confirm(i18n.t("confirm_hide"));
         if (answer) {
             var box = $(this).parents(".Box"); // div 'Bottom'
             var msgId = box.attr("box-id");
@@ -3183,7 +3187,7 @@ $(function () {
 
         if (!validatePassword(password)) {
             
-            SetLoginErrorMessage("Password invalid. Password must be 6-18 of letters, numbers, underscores or hyphens.");
+            SetLoginErrorMessage(i18n.t("error.PASSWORD_ERROR"));
             $(".login_password").addClass("RedBorder");
             isInputOk = false;
         } else {
@@ -3352,7 +3356,7 @@ $(function () {
     function SetCurrentUser(data) {
         
         if (data < 0) {
-            SetLoginErrorMessage("User/Password Incorrect or Account not Activated.")
+            SetLoginErrorMessage(i18n.t("errors.NOT_ACTIVATED_OR_WRONG_PASSWORD"))
         } else {
             location.reload();
         }
@@ -3404,7 +3408,7 @@ $(function () {
 
         if (!validatePassword(password)) {
             $(".signup_password").addClass("RedBorder");
-            SetSignUpErrorMessage("Password invalid. Password must be 6-18 of letters, numbers, underscores or hyphens.");
+            SetSignUpErrorMessage(i18n.t("errors.PASSWORD_ERROR"));
             isOkInput = false;
         } else {
             $(".signup_password").removeClass("RedBorder");
@@ -3458,7 +3462,7 @@ $(function () {
 
         if (!validatePassword(password1)) {
             $("#txtResetPass1").addClass("RedBorder");
-            $('#errorMsg').html("Password invalid. Password must be 6-18 of letters, numbers, underscores or hyphens.");
+            $('#errorMsg').html(i18n.t("errors.PASSWORD_ERROR"));
             $('#errorMsg').css('display', 'block');
             return false;
         } else {
@@ -3761,7 +3765,7 @@ $(function () {
             showAddressInBar(lat, lng, searchPhrase);
             
         } else {
-            alert("Location not found");
+            alert(i18n.t("errors.LOCATION_NOT_FOUND"));
             
         }
     }
@@ -3775,7 +3779,7 @@ $(function () {
             showAddressInBar(lat, lng, searchPhrase);
 
         } else {
-            alert("Location not found");
+            alert(i18n.t("errors.LOCATION_NOT_FOUND"));
 
         }
     }
@@ -3819,7 +3823,7 @@ $(function () {
     }
 
     function NoSupportMainPage() {
-        $('#moreButtonsText').html("<b>Your browser doesn't support it...</b> please type your address manually...");
+        $('#moreButtonsText').html("erros.BROWSER_NO_SUPPORT");
     }
 
     // Auto Discover on the homepage
@@ -4275,9 +4279,7 @@ $(function () {
         $("#AutoDiscoverBubble").hide();
         $("#autoDiscoverText").hide();
 
-
-        $('#moreButtonsText').html("Please click <b>'Allow'</b> above to <b>Share Location</b>...");
-
+        $('#moreButtonsText').html(i18n.t("post.please-click") + ' ' + i18n.t("post.allow") + ' ' + i18n.t("post.above-to") + ' ' +  i18n.t("share-location") + "...");
 
         myLat = "";
         myLon = "";

@@ -8,25 +8,37 @@
             <div style="margin-top:8px;">
             
             <div class="Text" style="float:left;">
-            Copyright © 2012-2013 PostAround.Me. All Rights Reserved.
+                <asp:Literal ID="ltrlCopyright" runat="server"></asp:Literal>
+            
             </div>
                   <div class="Text" style="float:right; margin-right:47px;">
-            <span><a href="<%=siteUrl %>Sitelinks.aspx" target="_blank">site links</a></span>
+            <span>
+                <asp:HyperLink runat="server" ID="lnkSiteLinks"></asp:HyperLink>
+            </span>
             <span style=" margin-right:4px; margin-left:4px;">/</span>
-            <span><a href="http://blog.postaround.me" target="_blank">blog</a></span>
+            <span>
+                <asp:HyperLink runat="server" ID="lnkBlog"></asp:HyperLink>
+            </span>
             <span style=" margin-right:4px; margin-left:4px;">/</span>
-            <span><a href="mailto:yaniv@postaround.me">contact</a></span>
+            <span>
+                <asp:HyperLink runat="server" ID="lnkContact"></asp:HyperLink>
+            </span>
             <span style=" margin-right:4px; margin-left:4px;">/</span>
-            <span><a href="<%=siteUrl %>Pages/Terms.aspx" target="_blank">terms</a></span>
+            <span>
+                <asp:HyperLink runat="server" ID="lnkTerms"></asp:HyperLink>
+            </span>
             <span style=" margin-right:4px; margin-left:4px;">/</span>
-            <span><a href="<%=siteUrl %>Pages/Privacy.aspx" target="_blank">privacy</a></span>
+            <span>
+                <asp:HyperLink runat="server" ID="lnkPrivacy"></asp:HyperLink>                
+            </span>
         </div>
 
                 <div class="Text" style="clear:both; float:left; padding-top:20px; color:#dfdfdf; width:400px;">
-                
-    <a href="<%=siteUrl %>" style="color:#dfdfdf; font-style:normal; font-size:12px; font-weight:bold;">Post Around Me</a> is fun and easy way to share with your neighbors. <br />
-    Know a good restarurant around? Need a ladder to borrow? Want to sell your sofa? Looking for a babysitter? Anything you want to share with your neighborhood,
-    just post it around in public and find out what's good in your hood !
+    
+                    <asp:HyperLink runat="server" CssClass="linkLightGrey" ID="lnkPostAroundMe"></asp:HyperLink>            
+                    <asp:Literal runat="server" ID="FooterText"></asp:Literal>
+
+    
                     
 
             </div>

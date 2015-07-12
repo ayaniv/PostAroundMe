@@ -9,6 +9,33 @@ using PostAroundService;
 
 public partial class Controls_CategoriesButton : BaseControl
 {
+
+    private List<Category> L10NCategories(List<Category> lst)
+    {
+        List<Category> retVal = new List<Category>();
+
+        foreach (Category item in lst)
+        {
+            Category cat = new Category();
+            cat.ID = item.ID;
+            cat.Color = item.Color;
+            cat.Name = (String)GetGlobalResourceObject("Resource", Format(item.Name));
+            retVal.Add(cat);
+        }
+
+        return retVal;
+    }
+
+    private string Format(string str)
+    {
+        string retVal = str.Replace(" ", "").Replace("&", "").Replace("/", "");
+
+
+        return retVal;
+    }
+
+
+
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -27,7 +54,7 @@ public partial class Controls_CategoriesButton : BaseControl
 
         rptCategoriesColumn1.ItemCreated += new RepeaterItemEventHandler(rptCategories_ItemCreated);
 
-        rptCategoriesColumn1.DataSource = lstCategories; //.Take(8);
+        rptCategoriesColumn1.DataSource = L10NCategories(lstCategories); //.Take(8);
         rptCategoriesColumn1.DataBind();
 
         //rptCategoriesColumn2.ItemCreated += new RepeaterItemEventHandler(rptCategories_ItemCreated);

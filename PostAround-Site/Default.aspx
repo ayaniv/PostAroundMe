@@ -144,7 +144,6 @@
         
         </div>
 
- 
         <div id="MessagesContainer" class="Content">
         
         
@@ -313,7 +312,7 @@
 
                 <div class="MessageName" style="position:relative">
                     <a href="${link}" target="_blank"><img src="${userImage}" class="UserAvatar" /></a> 
-                    <span style="width:201px; padding-top:3px;  float:left; color:#d2d2d2; font-weight:bold">Posted By</span><br />
+                    <span style="width:201px; padding-top:3px;  float:left; color:#d2d2d2; font-weight:bold" data-i18n="messages.posted_by"></span><br />
                     <a href="${link}" style="width:201px;"  target="_blank">${Name}</a>
                     <br />
                     
@@ -323,7 +322,7 @@
                             <div class="ShareButton" style="width:100%; height:22px; font-size:12px; font-family:Tahoma, Verdana, Arial;  color:#666; float:left;">
                                 <span class="ShareIcon"></span>
                                 <span style="margin-left:4px; margin-top:1px; color:#b2b2b2; font-weight:bold; float:left;">${totalShares}</span>
-                                <span style="margin-left:4px; margin-top:1px; color:#b2b2b2; float:left;">Shares</span>
+                                <span style="margin-left:4px; margin-top:1px; color:#b2b2b2; float:left;" data-i18n="messages.shares"></span>
                                 <span style="float:left; color:#b2b2b2; margin-top:1px; margin-left:4px; margin-right:4px; display:none">· ${totalViews} Views ·</span>
                                 <span style="float:right; color:#b2b2b2; margin-top:1px;">${relativeDate}</span>
                             
@@ -356,8 +355,8 @@
 
                 {{if Mine}}
                 <div class="TransparentGrey OnPostButtons">
-                <div id="EditPost" class="MyButton MineButton RightButton">Edit</div>
-                <div id="HidePost" class="MyButton MineButton LeftButton">Remove</div>
+                <div id="EditPost" class="MyButton MineButton RightButton" data-i18n="messages.edit"></div>
+                <div id="HidePost" class="MyButton MineButton LeftButton"  data-i18n="messages.remove"></div>
                 </div>
                     
                 {{/if}}
@@ -420,15 +419,15 @@
                         
                         
                         
-                        <textarea maxlength="500" id="Comment" placeholder="Post a comment...">Post a comment...</textarea>
+                        <textarea maxlength="500" id="Comment" data-i18n="[placeholder]messages.post_comment"></textarea>
                         
                         <div class="Buttons">
                         <div style="position:absolute; left:0; float:left;">
                             
                             {{if !Mine}}
                             <div class="slider-frame">
-                                <span class="slider-button"><span class="PublicIcon PublicIconOn"></span>Public</span>
-                                <span class="slider-button-off"><span class="PrivateIcon"></span>Private</span>
+                                <span class="slider-button"><span class="PublicIcon PublicIconOn"></span><span data-i18n="messages.public"></span></span>
+                                <span class="slider-button-off"><span class="PrivateIcon"></span><span data-i18n="messages.private"></span></span>
                             </div>
                             {{/if}}
 
@@ -436,7 +435,7 @@
 
      
                         <div class="Orange">
-                        <div id="BtnPostComment" class="MyButton" title="Post Comment" style="float:right; padding:2px 12px 2px 12px;">Post</div>
+                        <div id="BtnPostComment" class="MyButton" data-i18n="post.post;[title]messages.post_comment" style="float:right; padding:2px 12px 2px 12px;"></div>
                         </div>
                         </div>
                     </div>

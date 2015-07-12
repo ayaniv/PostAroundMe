@@ -8,7 +8,8 @@
 <div id="SliderBar" class="Slider">
                 <div style="width:246px;">
                     
-                    <label for="amount" style="float:left">Up to Distance:</label>
+                    <label for="amount" style="float:left" data-i18n="header.UpToDistance"></label>
+
 	                <input readonly="readonly" value="ALL" type="text" id="amount" style="float:right; background:transparent; border:0; color:#666; font-weight:bold; font-size:16px; font-style:italic; width:50px; font-family:Calibri,Arial; text-align:right; padding:0px; margin:0px;  " />
 	            </div>
 	            <div style="width:244px; float:left; margin-top:4px;">
@@ -35,7 +36,7 @@
            <div style="clear:both">
            <div class="LocationText" title="Show/Hide location on map"  id="moreButtonsText"></div>
            </div>
-           <div style="float:left; color:#333; font-size:12px; font-weight:bold; font-family:Trebuchet MS, Arial, Sans-Serif; text-transform:uppercase;" data-i18n="header.showing-posts"></div>
+           <div style="float:left; color:#333; font-size:14px; font-weight:bold; font-family:Trebuchet MS, Arial, Sans-Serif; text-transform:uppercase;" data-i18n="header.showing-posts"></div>
            <div id="LocationLinks" style="float:left;">
            <div style="float:left; margin-left:10px; color:#6AA1BB; font-family:Trebuchet MS, Arial, Sans-Serif; font-size:14px; ">|</div>
            <div class="LocationLink" style="float:left; margin-left:10px; color:#6AA1BB; font-family:Trebuchet MS, Arial, Sans-Serif; font-size:14px; "  id="btnShowMap"  data-i18n="header.show-map"></div>
