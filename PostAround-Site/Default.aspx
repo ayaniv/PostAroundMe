@@ -200,8 +200,15 @@
                                         <span id="CommentText" class="CommentText"  dir="${GetLanguageDirection(body)}"  style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</span>
                                     </div>
                                     
-                                    <div class="CommentDate">${strDate} at ${strTime}</div>
-                                    <div class="PosterOnly" style="display:none;">· Poster Only&nbsp;·&nbsp;<span class="Locker"></span></div>
+                                    <div class="CommentDate">
+                                        <span>${strDate}</span>
+                                        <span class="CommentDateAt" data-i18n="messages.at"></span>
+                                        <span>${strTime}</span>
+
+                                    </div>
+                                    <div class="PosterOnly" style="display:none;">
+                                        <span data-i18n="messages.PosterOnly"></span>
+                                        <span class="Locker"></span></div>
                                 </div>
 
                             </div>
@@ -231,8 +238,15 @@
                                         <span id="CommentText" class="CommentText"  dir="${GetLanguageDirection(body)}"  style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</span>
                                     </div>
                                     
-                                    <div class="CommentDate">${strDate} at ${strTime}</div>
-                                    <div class="PosterOnly" style="display:none;">· Poster Only&nbsp;·&nbsp;<span class="Locker"></span></div>
+                                    <div class="CommentDate">
+                                        <span>${strDate} </span>
+                                        <span class="CommentDateAt" data-i18n="messages.at"></span>
+                                         <span>${strTime}</span>
+
+                                    </div>
+                                    <div class="PosterOnly" style="display:none;">
+                                        <span data-i18n="messages.PosterOnly"></span>
+                                <span class="Locker"></span></div>
                                 </div>
 
                             </div>
@@ -252,7 +266,7 @@
                 <div id="BoxLine" class="Line" color="${catColor}" style="background-color:${catColor}">
                 </div>
                 <div class="TextArea">
-                <div style="bottom:0; position:absolute; width: 11px; height: 5px; background:url('<%=siteUrl%>images/icons.png') -149px -22px; "></div>
+                <div class="CommentDash"></div>
                     <div class="BoxHead">
                 
                 <div class="FullAddress">
@@ -260,7 +274,7 @@
                 <div class="TextAddress">${msgAddress}</div>        
                 </div>
                         <div>
-                            <div class="BoxCategory">${category}</div>
+                            <div class="BoxCategory">${TranslateCategory(category)}</div>
                             <div class="BoxLocation">
                             
                             <div class="SmallLocationIcon"></div>
@@ -312,19 +326,19 @@
 
                 <div class="MessageName" style="position:relative">
                     <a href="${link}" target="_blank"><img src="${userImage}" class="UserAvatar" /></a> 
-                    <span style="width:201px; padding-top:3px;  float:left; color:#d2d2d2; font-weight:bold" data-i18n="messages.posted_by"></span><br />
+                    <span style="width:201px; padding-top:3px;  float:left; color:#d2d2d2; font-weight:bold" data-i18n="messages.posted_by"></span>
                     <a href="${link}" style="width:201px;"  target="_blank">${Name}</a>
                     <br />
                     
 
                     
                     <div style="height:22px; width:100%; padding-top:7px;" class="SharingArea">
-                            <div class="ShareButton" style="width:100%; height:22px; font-size:12px; font-family:Tahoma, Verdana, Arial;  color:#666; float:left;">
+                            <div class="ShareButton">
                                 <span class="ShareIcon"></span>
-                                <span style="margin-left:4px; margin-top:1px; color:#b2b2b2; font-weight:bold; float:left;">${totalShares}</span>
-                                <span style="margin-left:4px; margin-top:1px; color:#b2b2b2; float:left;" data-i18n="messages.shares"></span>
-                                <span style="float:left; color:#b2b2b2; margin-top:1px; margin-left:4px; margin-right:4px; display:none">· ${totalViews} Views ·</span>
-                                <span style="float:right; color:#b2b2b2; margin-top:1px;">${relativeDate}</span>
+                                <span class="totalShares">${totalShares}</span>
+                                <span class="totalSharesLabel" data-i18n="messages.shares"></span>
+                                <span class="totalViews">· ${totalViews} Views ·</span>
+                                <span class="relativeDate">${Translate(relativeDate)}</span>
                             
 
                                         </div>
@@ -398,9 +412,18 @@
                                         <span id="CommentText" class="CommentText" dir="${GetLanguageDirection(body)}" style="direction:${GetLanguageDirection(body)}" >{{html FormatText(body)}}</span>
                                     </div>
                                     
-                                    <div class="CommentDate">${strDate} at ${strTime}</div>
+                                    <div class="CommentDate">
+                                        <span>${strDate}</span>
+                                        <span class="CommentDateAt" data-i18n="messages.at"></span>
+                                        <span>${strTime}</span>
+
+                                    </div>
                                     {{if isPrivate}}
-                                    <div class="PosterOnly">· Poster Only&nbsp;·&nbsp;<span class="Locker"></span></div>
+                                    <div class="PosterOnly">
+                                    <span data-i18n="messages.PosterOnly"></span>
+                                        <span class="Locker"></span>
+
+                                    </div>
                                     {{/if}}
                                     
 
@@ -426,8 +449,8 @@
                             
                             {{if !Mine}}
                             <div class="slider-frame">
-                                <span class="slider-button"><span class="PublicIcon PublicIconOn"></span><span data-i18n="messages.public"></span></span>
-                                <span class="slider-button-off"><span class="PrivateIcon"></span><span data-i18n="messages.private"></span></span>
+                                <span data-i18n="[title]messages.public_whatis" class="slider-button"><span class="PublicIcon PublicIconOn"></span><span data-i18n="messages.public"></span></span>
+                                <span data-i18n="[title]messages.private_whatis" class="slider-button-off"><span class="PrivateIcon"></span><span data-i18n="messages.private"></span></span>
                             </div>
                             {{/if}}
 
@@ -474,27 +497,6 @@
         return x1 + x2;
     }
 
-    function FormatNumber(meters) {
-        var retVal = "";
-        if (meters < 0) {
-            if (meters == -2) {
-                retVal = "Here"
-            }
-            if (meters == -1)
-                retVal = "N/A";
-        }
-        else if (meters < 1000)
-            retVal = meters;
-        else
-            retVal = addCommas(Math.round(meters / 1000));
-
-        return retVal;
-
-
-    }
-
-
-
 
     function FormatText(text) {
         text = Linkify(text);
@@ -523,7 +525,7 @@
         var retVal = "";
         var distance = "";
         if (meters == -2) {
-            retVal = "posted <b>Here</b>"
+            retVal = i18n.t("messages.posted_here");
         }
         else {
             if (meters == -1) {
@@ -531,15 +533,15 @@
             retVal = "<b>" + GetStatefromAddress(address, meters) + "</b>";
             } else
                 if (meters > 1000) {
-                    distance = Math.round(meters / 1000) + "KM";
+                    distance = Math.round(meters / 1000) + " " + i18n.t("header.KM");
                 }
                 else {
-                    distance = meters + "m";
+                    distance = meters + " " + i18n.t("messages.m");
                 }
         }
 
         if (retVal == "") {
-            retVal = "<b>" + distance +  "</b> around";
+            retVal =  distance + " "  + i18n.t("messages.around");
         }
 
         return retVal;
@@ -616,6 +618,38 @@
 
         return rtlDirCheck.test(s);
     };
+
+    function TranslateCategory(str) {
+        str = str.ReplaceAll(" ", "").ReplaceAll("&", "").ReplaceAll("/", "").ReplaceAll("\\", "");
+        var lookupValue = "categories." + str
+        return i18n.t(lookupValue);
+    }
+
+
+    function Translate(date) {
+        var retVal = null;
+        var array = date.split('#');
+        var lookupValue = "dates.";
+        if (array.length > 1)
+        {
+            if (array[0] == 2 && array[1] == "YearsAgo") {
+                lookupValue += "TwoYearsAgo"
+                retVal = i18n.t(lookupValue);
+            } else if (array[0] == 2 && array[1] == "DaysAgo") {
+                lookupValue += "TwoDays"
+                retVal = i18n.t(lookupValue);
+            } else {
+                lookupValue += array[1];
+                retVal = array[0] + " " + i18n.t(lookupValue);
+            }
+            
+        } else {
+            lookupValue += array[0];
+            retVal = i18n.t(lookupValue)
+        }
+        return retVal;
+    }
+
 
     function GetLanguageDirection(selector) {
         var string = selector;

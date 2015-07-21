@@ -181,40 +181,40 @@ public class PostAroundService : IPostAroundService
 
         if (delta < 60)
         {
-            return ts.Seconds == 1 ? "one second ago" : ts.Seconds
-                    + " seconds ago";
+            return ts.Seconds == 1 ? "OneSecondAgo" : ts.Seconds
+                    + "#SecondsAgo";
         }
         if (delta < 120)
         {
-            return "a minute ago";
+            return "aMinuteAgo";
         }
         if (delta < 2700) // 45 * 60
         {
-            return ts.Minutes + " minutes ago";
+            return ts.Minutes + "#MinutesAgo";
         }
         if (delta < 5400) // 90 * 60
         {
-            return "an hour ago";
+            return "AnHourAgo";
         }
         if (delta < 86400)
         { // 24 * 60 * 60
-            return ts.Hours + " hours ago";
+            return ts.Hours + "#HoursAgo";
         }
         if (delta < 172800)
         { // 48 * 60 * 60
-            return "yesterday";
+            return "Yesterday";
         }
         if (delta < 2592000)
         { // 30 * 24 * 60 * 60
-            return ts.Days + " days ago";
+            return ts.Days + "#DaysAgo";
         }
         if (delta < 31104000)
         { // 12 * 30 * 24 * 60 * 60
             int months = Convert.ToInt32(Math.Floor((double)ts.Days / 30));
-            return months <= 1 ? "one month ago" : months + " months ago";
+            return months <= 1 ? "OneMonthAgo" : months + "#MonthsAgo";
         }
         int years = Convert.ToInt32(Math.Floor((double)ts.Days / 365));
-        return years <= 1 ? "one year ago" : years + " years ago";
+        return years <= 1 ? "OneYearAgo" : years + "#YearsAgo";
     }
 
 

@@ -269,11 +269,11 @@ qq.FileUploaderBasic = function(o){
         onCancel: function(id, fileName){},
         // messages                
         messages: {
-            typeError: "{file} has invalid extension. Only {extensions} are allowed.",
-            sizeError: "{file} is too large, maximum file size is {sizeLimit}.",
-            minSizeError: "{file} is too small, minimum file size is {minSizeLimit}.",
-            emptyError: "{file} is empty, please select files again without it.",
-            onLeave: "The files are being uploaded, if you leave now the upload will be cancelled."            
+            typeError: i18n.t("fileuploader.typeError"),
+            sizeError: i18n.t("fileuploader.sizeError"),
+            minSizeError: i18n.t("fileuploader.minSizeError"),
+            emptyError: i18n.t("fileuploader.emptyError"),
+            onLeave: i18n.t("fileuploader.onLeave")
         },
         showMessage: function(message){
             alert(message);
@@ -487,9 +487,9 @@ qq.FileUploader = function(o){
         listElement: null,
 
         template: '<div title="Add Photo" class="qq-uploader">' + 
-                '<div class="qq-upload-drop-area"><span>Drop photo here</span></div>' +
-                '<div class="qq-upload-button">Browse...</div>' +
-                '<ul class="qq-upload-list" style="position:absolute; margin-left:110px; margin-top:7px; width:188px; overflow:hidden; padding-right:2px;color:#424E55;"><li>Browse or drag photo...</li></ul>' +
+                '<div class="qq-upload-drop-area"><span data-i18n="fileuploader.Drop_photo_here"></span></div>' +
+                '<div class="qq-upload-button-shape"><span  data-i18n="fileuploader.browse"></span><div class="qq-upload-button"></div></div>' +
+                '<ul class="qq-upload-list" style="position:absolute; margin-left:110px; margin-top:7px; width:188px; overflow:hidden; padding-right:2px;color:#424E55;"><li data-i18n="fileuploader.browse-or-drag"></li></ul>' +
              '</div>',
 
         // template for one item in file list
@@ -497,8 +497,8 @@ qq.FileUploader = function(o){
                 '<span class="qq-upload-file"></span>' +
                 '<span class="qq-upload-spinner"></span>' +
                 '<span class="qq-upload-size"></span>' +
-                '<a class="qq-upload-cancel" href="#">Cancel</a>' +
-                '<span class="qq-upload-failed-text">Failed</span>' +
+                '<a class="qq-upload-cancel" href="#" data-i18n="fileuploader.cancel"></a>' +
+                '<span class="qq-upload-failed-text" data-i18n="fileuploader.failed"></span>' +
             '</li>',        
         
         classes: {
@@ -779,7 +779,7 @@ qq.UploadButton = function(o){
     
     // make button suitable container for input
     qq.css(this._element, {
-        position: 'relative',
+        
         overflow: 'hidden',
         // Make sure browse button is in the right side
         // in Internet Explorer
@@ -881,7 +881,7 @@ qq.UploadHandlerAbstract = function(o){
 };
 qq.UploadHandlerAbstract.prototype = {
     log: function(str){
-        if (this._options.debug && window.console) console.log('[uploader] ' + str);        
+        //if (this._options.debug && window.console) console.log('[uploader] ' + str);        
     },
     /**
      * Adds file or file input to the queue

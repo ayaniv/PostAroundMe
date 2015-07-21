@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="aMinuteAgo" xml:space="preserve">
+    <value>a minute ago</value>
+  </data>
+  <data name="AnHourAgo" xml:space="preserve">
+    <value>an hour ago</value>
+  </data>
   <data name="Bar" xml:space="preserve">
     <value>Bar</value>
   </data>
@@ -131,6 +137,9 @@
   </data>
   <data name="Copyright" xml:space="preserve">
     <value>Copyright © 2012-2013 PostAround.Me. All Rights Reserved.</value>
+  </data>
+  <data name="DaysAgo" xml:space="preserve">
+    <value>days ago</value>
   </data>
   <data name="Education" xml:space="preserve">
     <value>Education</value>
@@ -147,6 +156,9 @@
   <data name="General" xml:space="preserve">
     <value>General</value>
   </data>
+  <data name="HoursAgo" xml:space="preserve">
+    <value>hours ago</value>
+  </data>
   <data name="HousingDevelopment" xml:space="preserve">
     <value>Housing Development</value>
   </data>
@@ -159,11 +171,26 @@
   <data name="LostFound" xml:space="preserve">
     <value>Lost &amp; Found</value>
   </data>
+  <data name="MinutesAgo" xml:space="preserve">
+    <value>minutes ago</value>
+  </data>
+  <data name="MonthsAgo" xml:space="preserve">
+    <value>months ago</value>
+  </data>
   <data name="MusicEntertaiment" xml:space="preserve">
     <value>Music &amp; Entertaiment</value>
   </data>
   <data name="Neighborliness" xml:space="preserve">
     <value>Neighborliness</value>
+  </data>
+  <data name="OneMonthAgo" xml:space="preserve">
+    <value>one month ago</value>
+  </data>
+  <data name="OneSecondAgo" xml:space="preserve">
+    <value>one second ago</value>
+  </data>
+  <data name="OneYearAgo" xml:space="preserve">
+    <value>one year ago</value>
   </data>
   <data name="Pets" xml:space="preserve">
     <value>Pets</value>
@@ -183,6 +210,9 @@
   <data name="Restaurantcafe" xml:space="preserve">
     <value>Restaurant/cafe</value>
   </data>
+  <data name="SecondsAgo" xml:space="preserve">
+    <value>seconds ago</value>
+  </data>
   <data name="SiteLinks" xml:space="preserve">
     <value>site links</value>
   </data>
@@ -195,7 +225,19 @@
   <data name="Travel" xml:space="preserve">
     <value>Travel</value>
   </data>
+  <data name="TwoDays" xml:space="preserve">
+    <value>day before yesterday</value>
+  </data>
+  <data name="TwoYearsAgo" xml:space="preserve">
+    <value>2 years ago</value>
+  </data>
   <data name="UpToDistance" xml:space="preserve">
     <value>Up To Distance:</value>
+  </data>
+  <data name="YearsAgo" xml:space="preserve">
+    <value>years ago</value>
+  </data>
+  <data name="Yesterday" xml:space="preserve">
+    <value>yesterday</value>
   </data>
 </root>

@@ -87,17 +87,11 @@ $(function () {
         detectLngQS: 'lang',
         fallbackLng: 'en',
         useLocalStorage: false
+        //, detectLngFromHeaders: false
     };
 
-    var ERROR_PERMISSION_DENIED;
-    var ERROR_UNKNOWN_ERROR;
-    var ERROR_POSITION_UNAVAILABLE;
-    var FIELD_CATEGORY;
-    var FIELD_DETAILS;
-    var FIELD_TITLE;
-    var FIELD_LOCATION;
-
-   
+    
+          
     i18n.init(i18nOptions, function (err, t) {
         // translate nav
         $("body").i18n();
@@ -105,14 +99,7 @@ $(function () {
         // programatical access
         //var appName = t("app.name");
         //alert(appName);
-        ERROR_PERMISSION_DENIED = t("errors.PERMISSION_DENIED")
-        ERROR_UNKNOWN_ERROR = t("errors.UNKNOWN_ERROR"),
-        ERROR_POSITION_UNAVAILABLE = t("errors.POSITION_UNAVAILABLE")
-
-        FIELD_CATEGORY = t("post.category")
-        FIELD_DETAILS = t("post.details")
-        FIELD_TITLE = t("post.title")
-        FIELD_LOCATION = t("post.location")
+        
     });
 
 
@@ -284,19 +271,19 @@ $(function () {
         slide: function (event, ui) {
            
             if (ui.value > 10000) {
-                $("#amount").val("ALL");
+                $("#amount").val(i18n.t("header.All"));
             } else {
                 if (ui.value < 1000)
                     if (ui.value <= 0) {
-                        $("#amount").val("Here");
+                        $("#amount").val(i18n.t("header.Here"));
                         ui.value = 0;
                     }
                     else {
-                        $("#amount").val(ui.value + "m");
+                        $("#amount").val(ui.value + i18n.t("header.m"));
                     }
                 else {
 
-                    $("#amount").val((ui.value / 1000) + "KM");
+                    $("#amount").val((ui.value / 1000) + " " + i18n.t("header.KM"));
                 }
 
             }
@@ -582,8 +569,7 @@ $(function () {
     function SetSlide() {
 
         $("#slider").slider("value", 3000);
-        var str = i18n.t("header.NUMBER_KM");
-        str = str.replace("{0}", "3");
+        var str = "3 " + i18n.t("header.KM");
         $("#amount").val(str);
 
 
@@ -901,7 +887,7 @@ $(function () {
         if (currPostCategory == "") {
             $("#ddlCategory").css("border-color", "#FF0000");
             
-            errorText = FIELD_CATEGORY;
+            errorText = i18n.t("post.category");
             flag = true;
         } else {
             $("#ddlCategory").css("border-color", "#C8C8C8");
@@ -912,7 +898,7 @@ $(function () {
             $("#txtPopupTitle").css("border-color", "#FF0000");
             if (errorText != "")
                 errorText = errorText + ", ";
-            errorText = errorText + FIELD_TITLE;
+            errorText = errorText + i18n.t("post.title");
 
             flag = true;
         } else {
@@ -924,7 +910,7 @@ $(function () {
             $("#txtPopupDetails").css("border-color", "#FF0000");
             if (errorText != "")
                 errorText = errorText + ", "
-            errorText = errorText + FIELD_DETAILS;
+            errorText = errorText + i18n.t("post.details");
 
             flag = true;
         } else {
@@ -936,7 +922,7 @@ $(function () {
             //Radio2Click();
             if (errorText != "")
                 errorText = errorText + ", "
-            errorText = errorText + FIELD_LOCATION;
+            errorText = errorText + i18n.t("post.location");
             flag = true;
         } else {
             $(".ui-button").css("border-color", "#C8C8C8");
@@ -1385,6 +1371,8 @@ $(function () {
         $('#divManualAddress').show();
         $('#TopMessageAddPost').hide();
     });
+
+
 
 
     function ToggleMapPanel(isRegular) {
@@ -1948,6 +1936,16 @@ $(function () {
         $(this).css("background-color", "");
         $("#SortBox").hide();
         //$('#topShpitz').animate({ marginLeft: "42px" });
+    });
+
+    
+
+    $('#divLanguage').hover(function () {
+        $("#LanguageBox").show();
+
+    }, function () {
+        $(this).css("background-color", "");
+        $("#LanguageBox").hide();
     });
 
     $('#divAbout').hover(function () {
@@ -4213,17 +4211,17 @@ $(function () {
     function GetErrorLocationMessage(error) {
 
         var errJSON = {
-            "Message": ERROR_UNKNOWN_ERROR,
+            "Message": i18n.t("errors.UNKNOWN_ERROR"),
             "Code": errorCodes.UNKNOWN_ERROR
         };
 
         switch (error.code) {
             case errorCodes.PERMISSION_DENIED:
-                errJSON.Message = ERROR_PERMISSION_DENIED;
+                errJSON.Message = i18n.t("errors.PERMISSION_DENIED");
                 errJSON.Code = errorCodes.PERMISSION_DENIED;
                 break;
             case errorCodes.POSITION_UNAVAILABLE:
-                errJSON.Message = ERROR_POSITION_UNAVAILABLE;
+                errJSON.Message = i18n.t("errors.POSITION_UNAVAILABLE");
                 errJSON.Code = errorCodes.POSITION_UNAVAILABLE;
                 break;
             case errorCodes.TIMEOUT:

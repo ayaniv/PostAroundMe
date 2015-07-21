@@ -46,21 +46,42 @@
         <div id="RightWing" style="float:right; height:80px; width:400px; margin-right:17px;">
         
         <ul class="HeaderList" style="float:right">
-            <li style="cursor:pointer;" id="divMobileLink">
-                <span class="MobileIcon"></span>
-                <span style="font-weight:bold" data-i18n="header.mobile">
-                </span>
-                </li>
-        <li style="cursor:default;" id="divAbout">
+
+            <li style="cursor:default;" id="divLanguage">
         
         
-        <!-- About Start -->
-            <span style="float:left;" data-i18n="header.about">
+        <!-- Language Start -->
+            <span class="HeaderMenu" data-i18n="header.language">
             </span>
     
         
         
-        <span style="background:url('<%=siteUrl%>images/icons.png'); float:right; background-position:-100px -152px; margin-left:7px; width:7px; margin-top:5px; height:4px;"></span>
+        <span class="HeaderMenuArrow"></span>
+        
+        <div id="LanguageBox" class="MoreBox" style="width:84px;">
+            <ul>
+                <li><a href="<%=siteUrl %>?lang=en" class="LogoutLink" style="padding:0;">English</a></li>
+                <li><a href="<%=siteUrl %>?lang=he"  class="LogoutLink">עברית</a></li>
+            </ul>
+            
+            
+      </div>
+    
+    
+    <!--Language End-->
+        
+        </li>
+
+        <li style="cursor:default;" id="divAbout">
+        
+        
+        <!-- About Start -->
+            <span class="HeaderMenu" data-i18n="header.about">
+            </span>
+    
+        
+        
+        <span class="HeaderMenuArrow"></span>
         
         <div id="AboutBox" class="MoreBox" style="width:84px;">
             <ul>
@@ -94,18 +115,18 @@
         <li id="liCategory">
         
         <uc1:CategoriesButton ID="CategoriesButton1" runat="server" />
-        <span style="background:url('<%=siteUrl%>images/icons.png'); float:right; background-position:-100px -152px; margin-left:7px; width:7px; margin-top:5px; height:4px;"></span>
+        <span class="HeaderMenuArrow"></span>
         
         </li>
         
         <li id="liSort">
         <!-- Sort Start -->
-        <div id="btnSort" class="ChooseCategory"  data-i18n="header.newest-on-top">
+        <div id="btnSort" class="ChooseCategory HeaderMenu"  data-i18n="header.newest-on-top">
                     
                 
         </div>
 
-        <span style="background:url('<%=siteUrl%>images/icons.png'); float:right; background-position:-100px -152px; margin-left:7px; margin-top:5px; width:7px; height:4px;"></span>
+        <span class="HeaderMenuArrow"></span>
         
 
         
@@ -157,7 +178,7 @@
 
         <div style="float:left; margin-top:3px; margin-left:8px; color:#666; font-size:12px;">
         
-        <textarea maxlength="400" id="txtPopupDetails1" style="margin-top:3px; overflow:hidden; width:315px; height:18px; color:#3c3c3c; border:solid 1px #b8b8b8; resize:none;  padding:4px; font-size:14px; font-family:Tahoma, Arial" data-i18n="[placeholder]header.placeholder;[title]post.details"></textarea>
+        <textarea maxlength="400" id="txtPopupDetails1" data-i18n="[placeholder]header.placeholder;[title]post.details"></textarea>
         </div>
         
         </div>
@@ -174,13 +195,13 @@
       <div id="MapPas" style="height:190px; width:100%; background:url('<%=siteUrl%>images/map_pas.png'); position:relative">
       <div id="MapPasShade" style="position:absolute; z-index:1; width:100%; height:18px; top:0;"></div>
       <div id="MapPasText" style="background:url('<%=siteUrl%>images/bgWhite80.png'); height:90px; width:862px; position:relative; margin:0 auto; top:27px; padding:25px 30px;">
-      <div style="float:left"> 
+      <div class="bannerTitle"> 
       <h1>
           <span class="font1" data-i18n="header.whats-good"></span>
           <span class="font2" data-i18n="header.in-the-hood"></span></h1>
       </div>
-      <div style="float:left; margin-left:40px; margin-right:30px; width:1px; height:100%; background-color:#505050;"></div>
-      <div data-i18n="header.description" style="float:left; text-transform:uppercase; color:#505050; font-family: Trebuchet MS, Arial; text-align:center; width:420px; font-size:18px; padding:20px 15px 0 15px;">
+      <div class="bannerLine"></div>
+      <div class="bannerText" data-i18n="header.description">
       </div>
       
       </div>

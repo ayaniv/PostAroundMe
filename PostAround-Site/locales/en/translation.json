@@ -3,6 +3,7 @@
     "direction": "ltr"
   },
   "header": {
+    "write_your_post_here": "Write your post around here",
     "logo-text": "Local Pinboard",
     "add-post": "Add Post",
     "everything": "Everything",
@@ -34,8 +35,14 @@
     "hide-map": "Hide Map",
     "showing-posts": "Showing posts around here",
     "get_posts_around": "Get Posts Around",
-    "NUMBER_KM": "{0}KM",
-    "UpToDistance" :  "Up To Distance"
+    "KM": "KM",
+    "m": "m",
+    "Here": "Here",
+    "All": "ALL",
+    "UpToDistance": "Up To Distance",
+    "language": "Language",
+    "go": "go"
+
   },
   "post": {
     "details": "Details",
@@ -54,9 +61,33 @@
     "location": "Location",
     "category": "Category",
     "please-fill": "Please fill the following fields:",
-    "PostAround" :  "Post around:"
+    "PostAround": "Post around:"
+  },
+  "categories": {
+    "Bar": "Bar",
+    "BuySell": "Buy & Sell",
+    "Education": "Education",
+    "Events": "Events",
+    "General": "General",
+    "HousingDevelopment": "Housing Development",
+    "Jobs": "Jobs",
+    "Kids": "Kids",
+    "LostFound": "Lost & Found",
+    "MusicEntertaiment": "Music & Entertaiment",
+    "Neighborliness": "Neighborliness",
+    "Pets": "Pets",
+    "Recommendations": "Recommendations",
+    "Rentals": "Rentals",
+    "Restaurantcafe": "Restaurant/cafe",
+    "SportsLeisure": "Sports & Leisure",
+    "Travel": "Travel"
   },
   "messages": {
+    "posted_here": "posted Here",
+    "m": "m",
+    "around":  "around",
+    "at": "at",
+    "PosterOnly": "Poster Only",
     "confirm_hide": "Hide that post?",
     "shares": "Shares",
     "remove": "Remove",
@@ -65,11 +96,21 @@
     "public": "Public",
     "private": "Private",
     "posted_by": "Posted By",
-    "poster_only" :  "Reply to poster only..."
+    "poster_only": "Reply to poster only...",
+    "public_whatis": "switch to Public so everybody will see your comment",
+    "private_whatis": "switch to Private to expose your comment to the poster of this post only"
   },
   "fileuploader": {
     "browse": "Browse...",
-    "browse-or-drag": "Browse or drag photo..."
+    "browse-or-drag": "Browse or drag photo...",
+    "cancel": "Cancel",
+    "failed": "Failed",
+    "Drop_photo_here": "Drop photo here",
+    "typeError": "{file} has invalid extension. Only {extensions} are allowed.",
+    "sizeError": "{file} is too large, maximum file size is {sizeLimit}.",
+    "minSizeError": "{file} is too small, minimum file size is {minSizeLimit}.",
+    "emptyError": "{file} is empty, please select files again without it.",
+    "onLeave": "The files are being uploaded, if you leave now the upload will be cancelled."
   },
   "errors": {
     "UNKNOWN_ERROR": "Ooops... Couldn't get your location. Please click 'Change' to try again or to set it manually",
@@ -81,7 +122,7 @@
     "PASSWORD_ERROR": "Password invalid. Password must be 6-18 of letters, numbers, underscores or hyphens.",
     "NOT_ACTIVATED_OR_WRONG_PASSWORD": "User/Password Incorrect or Account not Activated.",
     "LOCATION_NOT_FOUND": "Location not found",
-    "BROWSER_NO_SUPPORT":  "Your browser doesn't support it... please type your address manually..."
+    "BROWSER_NO_SUPPORT": "Your browser doesn't support it... please type your address manually..."
   },
   "login": {
     "create-new-account": "Create New Account",
@@ -104,6 +145,22 @@
     "success-line3": "Please check your mailbox and click on the activation link we've sent you.",
     "success-line4": "If you do not receive an email from us within 30 minutes, please check your email's spam and junk filters, or contact us at"
 
+  },
+  "dates": {
+    "OneSecondAgo": "one second ago",
+    "SecondsAgo": "seconds ago",
+    "aMinuteAgo": "a minute ago",
+    "MinutesAgo": "minutes ago",
+    "AnHourAgo": "an hour ago",
+    "HoursAgo": "hours ago",
+    "Yesterday": "yesterday",
+    "TwoDays": "day before yesterday",
+    "DaysAgo": "days ago",
+    "OneMonthAgo": "one month ago",
+    "MonthsAgo": "months ago",
+    "OneYearAgo": "one year ago",
+    "TwoYearsAgo": "2 years ago",
+    "YearsAgo":  "years ago"
   }
 
 }

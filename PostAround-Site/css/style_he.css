@@ -1,0 +1,232 @@
+﻿body {
+}
+
+
+h1 { direction:rtl }
+
+.bannerTitle { 
+    float:right;
+}
+
+.bannerLine {  float:right; }
+
+.bannerText {float:right;
+} 
+
+#autoDiscoverText { right:42px; left:auto; }
+
+.PostBox .AutoDiscoverButton { float:right; }
+
+.autoDiscoverInput { float:right; }
+
+.uiStickyPlaceholderInput .placeholderField { direction:rtl; left:auto; right:0; }
+
+
+.Bottom .AddComment {
+    direction:rtl;
+}
+
+#moreButtons {
+    float:right !important;
+    margin-right:39px !important;
+    margin-left:auto !important;
+}
+
+#moreButtons > div > div,
+#moreButtons > div {
+    float:right !important;
+}
+
+#SliderBar {
+    margin-left:47px;
+    float:left !important;
+}
+
+label[for="amount"] {
+    float: right !important;
+    direction: rtl;
+}
+
+label[for="amount"] + input {
+    text-align:left !important;
+    direction:rtl;
+    float:left !important;
+}
+
+#catsBar {
+    float: right !important;
+    padding-right: 39px !important;
+    padding-left: 49px !important;
+    width: auto !important;
+}
+#catsBar li {
+    float:right;
+}
+
+.Content .Box .BoxBody .BoxHead .BoxCategory {
+    float:right;
+
+}
+
+.Content .Box .BoxBody .BoxHead .BoxLocation {
+    float:left;
+}
+
+.SmallLocationIcon {
+    margin-left:5px;
+    float:right;
+}
+
+.Content .Box .BoxBody .MessageName a {
+    float:right;
+    text-align:right;
+    
+
+}
+
+.Content .Box .BoxBody .MessageName .UserAvatar {
+    
+    margin-right:0;
+    margin-left:6px;
+}
+
+ .Content .Box .BoxBody .MessageName {
+     text-align:right;
+ }
+
+ .ShareIcon { float:right;}
+.totalSharesLabel,
+.totalShares{
+    
+    margin-left: 0;
+    margin-right: 4px;
+    float: right;
+
+}
+
+.relativeDate { float:left}
+
+.CommentDash { right:20px;}
+
+.Bottom .CommentsArea .SingleComment .CommentImage { float:right }
+
+.Bottom .CommentsArea .SingleComment .CommentWrapper #commentUserName a { float:right; margin-right:0; margin-left:4px; }
+.Bottom .CommentsArea .SingleComment .CommentWrapper { text-align:right }
+.Bottom .CommentsArea .SingleComment .CommentWrapper .CommentDate { margin-left:0; margin-right:5px; float:right;}
+
+.PostBox .Search .SearchbBtnText {
+    padding-left: 15px;
+    padding-right: 5px;
+    padding-top: 8px;
+    font-size:16px;
+}
+
+.goArrow {
+    border-width: 6px 6px 6px 0;
+    border-color: transparent #ffffff transparent transparent;
+    right:auto;
+
+}
+
+ .HeaderMenu { float:right; }
+ .HeaderMenuArrow { 
+     float:left;
+     margin-right:7px;
+     margin-left:0;
+ }
+
+.login-panel-text, 
+#txtPopupDetails1,
+.PostExample,
+.PostLocationTitle,
+.AddPostField > textarea,
+.AddPostField > input {
+     text-align:right;
+     direction:rtl;
+ }
+
+.PostExample { float:right; }
+
+.relativeDate { direction: rtl }
+
+
+ #addPostBtnCategory #ddlCategory ul li {
+     margin-right:1px !important;
+     direction:rtl !important;
+     float: right !important;
+ }
+
+ 
+ #addPostBtnCategory #ddlCategory .MoreIcon {
+     float:left !important;
+ }
+
+ #txtPopupDetails { width: 299px; height: 70px; padding-left: 20px !important; margin-top: 0px; float: left; }
+
+ #xbutton { left:0 !important; right: auto !important;}
+
+ .qq-upload-list {
+     right:0;
+     margin-left:auto !important;
+     width:213px !important;
+     padding-right:4px !important;
+     list-style:none !important;
+ }
+
+ .qq-upload-list li {
+     float:right !important;
+     width:auto !important;
+ }
+
+ li .Color { 
+
+     margin-right:10px;
+     margin-left:0;
+     float:right;
+ }
+
+ .DropDown li .Option { float:right; margin-left:0; margin-right:10px; }
+ .PostBottomWrapper {  float:left; }
+ .PopupBox .AutoDiscover {float:right; margin-right:0; margin-left:2px;}
+ .PopupBox .Search { float:left; margin:0; margin-right:2px;}
+ #addMessageAddressInput { float:right !important; text-align:right}
+ #MandatoryFieldsMessage { float:right !important; text-align:right; direction:rtl}
+
+ .qq-upload-button-shape > span {float:right; direction:rtl; width:100%; }
+ .BoxLocation a b { float:right; direction:rtl; }
+
+ .FullAddress .Arrow { margin-left:20px; float:left;}
+
+ .FullAddress { margin-right:10px; margin-left:0; left:14px; right:auto;  }
+
+ .PostAroundTitle { float:right; direction:rtl; }
+
+ #divAddress { text-align:right !important}
+
+ #divAddressChange { float:right; width: auto !important}
+
+ #divAddressApprove { float:right; text-align:right;}
+
+ li .Option.OptionButton {  margin-right:9px; margin-left:0; margin-top:-3px }
+
+.Bottom .CommentsArea .SingleComment .CommentWrapper .PosterOnly {
+     float:right;
+     margin-right: 2px;
+     margin-left:0;
+
+ }
+
+.PosterOnly .Locker {
+    float:right;
+}
+
+.CommentDate span {
+    float:right;
+}
+
+.SelectedCategoryInBar {
+    right:10px;
+    left:auto;
+}
+
+.Content .Box .BoxBody .BoxHead .Word { direction:rtl }

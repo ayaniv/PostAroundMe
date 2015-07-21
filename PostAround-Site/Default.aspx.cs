@@ -16,45 +16,39 @@ using System.Globalization;
 
 public partial class _Default : BasePage 
 {
-   
+
     //protected string homePage;
-   
+
+    protected string lang;
 
     //User currentUser;
     protected void Page_Load(object sender, EventArgs e)
     {
-    
+
+        if (lang != null && lang != "")
+        {
+            lang = lang.Split('-')[0];
+            Page.Header.Controls.Add(
+            new System.Web.UI.LiteralControl("<link rel=\"stylesheet\" type=\"text/css\" href=\"" + ResolveUrl("~/css/style_" + lang + ".css") + "\" />"));
+        }
+        
 
     }
 
     protected override void InitializeCulture()
     {
+
         base.InitializeCulture();
-        string lang = null;
-        string lang_cookie = null;
-        string lang_qs = Request.QueryString["lang"];
-        HttpCookie cookie = Request.Cookies["i18next"];
-        if (cookie != null )
-        {
-            lang_cookie = cookie.Value;
-        }
-        
-        if (lang_qs != null  && lang_qs != "")
-        {
-            lang = lang_qs;
-        } else
-        {
-            if (lang_cookie != null && lang_cookie != "")
-            {
-                lang = lang_cookie;
-            }
-        }
+        lang = Tools.GetLocale(Context);
         if (lang != null && lang != "" && lang != "en")
         {
             System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
             System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo(lang);
         }
+
         
+
+
     }
 
 

@@ -72,7 +72,7 @@ public partial class Controls_SinglePost : BaseControl
                 BigBoxAddressNoSpace = BigBoxAddress.Replace(",", "").Replace(" ", "_").Replace("/", "_");
                 ltrlUserImage.Text = "<img src=" + msg.userImage + " style='height:50px; width:50px; border-radius:50px; border-bottom-right-radius:2px; border:0;' />";
                 ltrlName.Text = msg.Name;
-                ltrlDate.Text = msg.relativeDate; //"On " + msg.Date; //+ " at " + msg.Time;
+                ltrlDate.Text = GetDate(msg.relativeDate); //"On " + msg.Date; //+ " at " + msg.Time;
                 ltrlAddressUser.Text = "Around " + ltrlAddress.Text;
                 //fullDate = msg.FullDate;
                 ltrlCategory.Text = msg.category;
@@ -126,6 +126,34 @@ public partial class Controls_SinglePost : BaseControl
         {
             Response.Redirect(siteUrl);
         }
+    }
+
+    private string GetDate(string date)
+    {
+        string retVal = null;
+        string[] array = date.Split('#');
+        
+        if (array.Length > 1)
+        {
+            if (array[0] == "2" && array[1] == "YearsAgo")
+            {
+                retVal = (String)GetGlobalResourceObject("Resource", "TwoYearsAgo");
+            }
+            else if (array[0] == "2" && array[1] == "DaysAgo")
+            {
+                retVal = (String)GetGlobalResourceObject("Resource", "TwoDays");
+            }
+            else
+            {
+                retVal = array[0] + " " + (String)GetGlobalResourceObject("Resource", array[1]);
+            }
+
+        }
+        else
+        {
+            retVal = (String)GetGlobalResourceObject("Resource", array[0]);
+        }
+        return retVal;
     }
 
 

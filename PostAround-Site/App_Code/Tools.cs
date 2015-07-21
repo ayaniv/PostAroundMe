@@ -26,6 +26,42 @@ public static class Tools
         string url = string.Format(format, siteUrl, isSlugged ? address : address.Slugify());
         return url;
     }
+
+    public static string GetLocale(HttpContext context)
+    {
+        string lang = null;
+        string lang_cookie = null;
+        string lang_qs = context.Request.QueryString["lang"];
+        HttpCookie cookie = context.Request.Cookies["i18next"];
+        if (cookie != null)
+        {
+            lang_cookie = cookie.Value;
+        }
+
+        if (lang_qs != null && lang_qs != "")
+        {
+            lang = lang_qs;
+        }
+        else
+        {
+            if (lang_cookie != null && lang_cookie != "")
+            {
+                lang = lang_cookie;
+            }
+        }
+        if (lang == null || lang == "")
+        {
+            var userLanguages = context.Request.UserLanguages;
+            var ci = userLanguages.Count() > 0
+                ? new CultureInfo(userLanguages[0])
+                : CultureInfo.InvariantCulture;
+
+            lang = ci.ToString();
+        }
+        return lang;
+
+    }
+
     public static string GetQueryStringByKey(Uri uri, string key)
     {
         // this gets all the query string key value pairs as a collection
@@ -54,8 +90,9 @@ public static class Tools
 
     public static string CallUrl(string url)
     {
+        //Uri myUri = new Uri(url, UriKind.Absolute);
         string result = null;
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(HttpUtility.UrlDecode(url));
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         if (response.StatusCode.Equals(HttpStatusCode.OK))
         {

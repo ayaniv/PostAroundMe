@@ -1,14 +1,30 @@
 .qq-uploader { position:relative; width: 100%;}
 
-.qq-upload-button 
+
+.qq-upload-button-shape .qq-upload-button 
+{
+    position:absolute;
+	width:100%;
+    height:100%;
+    left:0;
+    top:0;
+
+}
+
+.qq-upload-button-shape
 {
 	float:left;
-    display:block; /* or inline-block */
+    
     width: 92px; padding: 6px; padding-top:5px; text-align:center;    
     background:url('../images/addmessageIcons.png') no-repeat 0px 0px;
     color:#3c3c3c; height:19px; font-size:16px;
     margin-right:1px;
+    position:relative;
 }
+.qq-upload-button-shape > span {
+    text-align:center;
+}
+
 .qq-upload-button-hover {  /*background-position:0px -30px;*/ }
 .qq-upload-button-focus { outline:1px dotted black;}
 

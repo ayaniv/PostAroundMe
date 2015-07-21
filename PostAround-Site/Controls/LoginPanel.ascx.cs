@@ -17,13 +17,13 @@ using PostAround.Entities;
 public partial class Controls_LoginPanel : BaseControl
 {
     public static string FaceBookAppKey;
-  
+
     private string MyAccessToken;
     protected void Page_Load(object sender, EventArgs e)
     {
         // Login Scenario
         FaceBookAppKey = ConfigurationManager.AppSettings["facebookAppKey"];
-       
+
 
         int userId = Tools.GetUserIdFromCookie(Context);
         User user = null;
@@ -42,10 +42,10 @@ public partial class Controls_LoginPanel : BaseControl
         else
         {
             // user isnt logged in
-            
+
             string facebookReturnedServerCode = Request.QueryString["code"];
-            
-            
+
+
             string accessToken = null;
 
             // in case of returned from facebook login
@@ -53,8 +53,16 @@ public partial class Controls_LoginPanel : BaseControl
             if (!string.IsNullOrWhiteSpace(facebookReturnedServerCode))
             {
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                string url = Request.Url.AbsoluteUri;
+                int index = url.IndexOf("code=");
+                if (index > 0)
+                {
+                    url = url.Substring(0, index - 1);
+                }
                 
                 
+
+                /*
                 string page = Path.GetFileNameWithoutExtension(HttpContext.Current.Request.Url.AbsoluteUri).ToLower();
                 if (page == "post")
                 {
@@ -76,11 +84,11 @@ public partial class Controls_LoginPanel : BaseControl
                     {
                         url = Tools.GetFriendlyUrl(siteUrl, address, true);
                     }
-                    
+
                     sb.Append(url);
                 }
+                */
 
-                
                 //string page = Path.GetFileNameWithoutExtension(Request.Url.AbsolutePath);
                 //page = page.ToLower();
 
@@ -101,9 +109,9 @@ public partial class Controls_LoginPanel : BaseControl
                 //}
 
                 SaveEncryptedCodeInCookie(facebookReturnedServerCode);
-                Response.Redirect(sb.ToString());
+                Response.Redirect(url);
                 return;
-                
+
             }
             else
             {
@@ -158,7 +166,7 @@ public partial class Controls_LoginPanel : BaseControl
                 //Set AccessToken
             }
         }
-        
+
     }
 
     private void ShowUserDiv()
@@ -182,7 +190,7 @@ public partial class Controls_LoginPanel : BaseControl
     protected void lnkbLogOut_Click(object sender, EventArgs e)
     {
         // to logout we need to do 5 things
-        
+
         // 1. log the user out of facebook since on log in he entered facebook.
         // i chose not to do it
         //LogoutFromFacebook()
@@ -223,11 +231,11 @@ public partial class Controls_LoginPanel : BaseControl
         //        siteUrl += page + ".aspx";
         //}
         Response.Redirect(siteUrl);
-        
 
 
 
-        
+
+
 
 
     }
@@ -290,7 +298,7 @@ public partial class Controls_LoginPanel : BaseControl
         if (user != null && !string.IsNullOrWhiteSpace(encUserId))
         {
             System.Web.Script.Serialization.JavaScriptSerializer oSerializer;
-            
+
             LoginResponseSuccess resp = new LoginResponseSuccess();
 
             resp.Status = 1;
@@ -298,7 +306,7 @@ public partial class Controls_LoginPanel : BaseControl
             resp.LastName = user.lastName;
             resp.Image = user.avatarImageUrl;
             resp.facebookID = user.facebookID;
-            
+
             //resp.userID = encUserId;
             resp.link = user.link;
 
@@ -314,15 +322,6 @@ public partial class Controls_LoginPanel : BaseControl
         string secretCode = ConfigurationManager.AppSettings["facebookAppSecret"];
         string url = "https://graph.facebook.com/oauth/access_token?client_id={0}&redirect_uri={1}&client_secret={2}&code={3}";
 
-        string page = Path.GetFileNameWithoutExtension(Request.Url.AbsolutePath).ToLower();
-        if (page != "default")
-        {
-            Uri uri = new Uri(HttpContext.Current.Request.Url.AbsoluteUri);
-            siteUrl = uri.GetLeftPart(UriPartial.Path);
-        }
-
-
-
         url = String.Format(url, FaceBookAppKey, HttpUtility.UrlEncode(Request.Url.AbsoluteUri), secretCode, code);
 
         string response = Tools.CallUrl(url);
@@ -337,7 +336,7 @@ public partial class Controls_LoginPanel : BaseControl
             //take only the token itself
             accessToken = accessToken.Split('=')[1];
 
-            
+
         }
 
         return accessToken;
@@ -371,7 +370,7 @@ public partial class Controls_LoginPanel : BaseControl
         {
             string url = String.Format("https://graph.facebook.com/me?access_token={0}", token);
             response = Tools.CallUrl(url);
-            
+
         }
         catch (Exception ex)
         {
@@ -397,12 +396,12 @@ public partial class Controls_LoginPanel : BaseControl
                 // make user instance and put values in it
                 user = new User();
                 user.firstName = facebookResponse.first_name;
-                
+
                 if (!string.IsNullOrWhiteSpace(facebookResponse.middle_name))
-                    user.lastName = facebookResponse.middle_name + " " +  facebookResponse.last_name;
-                else 
+                    user.lastName = facebookResponse.middle_name + " " + facebookResponse.last_name;
+                else
                     user.lastName = facebookResponse.last_name;
-                
+
                 user.facebookID = facebookResponse.id;
                 user.email = facebookResponse.email;
                 user.avatarImageUrl = "https://graph.facebook.com/" + facebookResponse.id + "/picture";
@@ -420,7 +419,7 @@ public partial class Controls_LoginPanel : BaseControl
                 user.regDate = DateTime.Now;
             }
 
-            
+
         }
         return user;
     }
@@ -440,11 +439,12 @@ public partial class Controls_LoginPanel : BaseControl
     private int SaveUserInDB(User user)
     {
         int userId;
-        user.birthday = user.regDate; // patch fixes the facebook issue
+        user.birthday = user.regDate;
+
 
         PostAroundServiceClient client = new PostAroundServiceClient();
         userId = client.InsertUpdateUser(user);
-        
+
         client.Close();
         return userId;
 
@@ -483,10 +483,10 @@ public partial class Controls_LoginPanel : BaseControl
             UserName.InnerHtml = "";
             UserImage.InnerHtml = "";
         }
-        
-    
+
+
     }
 
- 
+
 
 }

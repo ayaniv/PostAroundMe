@@ -13,7 +13,7 @@
                         <span class="SelectedCategoryInBar"></span>
                         <asp:TextBox runat="server" ID="txtDropDownCategoryId" type="text" style="display:none"></asp:TextBox>
                         <asp:Label runat="server" ID="ltrlDropDownColor" CssClass="Color" style="margin:0"></asp:Label>
-                        <asp:Label runat="server" ID="ltrlDropDownOption" CssClass="Option" style="margin-left:9px; margin-top:-3px"></asp:Label>
+                        <asp:Label runat="server" ID="ltrlDropDownOption" CssClass="Option OptionButton"></asp:Label>
                     </li>
                 </ItemTemplate>
 

@@ -198,4 +198,46 @@
   <data name="UpToDistance" xml:space="preserve">
     <value>הצג עד למרחק:</value>
   </data>
+  <data name="aMinuteAgo" xml:space="preserve">
+    <value>לפני דקה</value>
+  </data>
+  <data name="AnHourAgo" xml:space="preserve">
+    <value>שעה</value>
+  </data>
+  <data name="DaysAgo" xml:space="preserve">
+    <value>ימים</value>
+  </data>
+  <data name="HoursAgo" xml:space="preserve">
+    <value>שעות</value>
+  </data>
+  <data name="MinutesAgo" xml:space="preserve">
+    <value>דקות</value>
+  </data>
+  <data name="MonthsAgo" xml:space="preserve">
+    <value>חודשים</value>
+  </data>
+  <data name="OneMonthAgo" xml:space="preserve">
+    <value>לפני חודש</value>
+  </data>
+  <data name="OneSecondAgo" xml:space="preserve">
+    <value>ממש עכשיו</value>
+  </data>
+  <data name="OneYearAgo" xml:space="preserve">
+    <value>לפני שנה</value>
+  </data>
+  <data name="SecondsAgo" xml:space="preserve">
+    <value>שניות</value>
+  </data>
+  <data name="TwoDays" xml:space="preserve">
+    <value>לפני יומיים</value>
+  </data>
+  <data name="TwoYearsAgo" xml:space="preserve">
+    <value>לפני שנתיים</value>
+  </data>
+  <data name="YearsAgo" xml:space="preserve">
+    <value>שנים</value>
+  </data>
+  <data name="Yesterday" xml:space="preserve">
+    <value>אתמול</value>
+  </data>
 </root>

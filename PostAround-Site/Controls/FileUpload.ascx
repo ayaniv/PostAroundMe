@@ -12,6 +12,7 @@
                 debug: true,
                 onComplete: function (id, fileName, responseJSON) { $("#txtImage").val(responseJSON.name); $("#txtImageHeight").val(responseJSON.height); $("#RemoveImage").show(); }
             });
+            $("#file-uploader-demo1").i18n();
         }
 
         $("#RemoveImage").click(function () {
@@ -20,7 +21,7 @@
             $("#txtImage").val('');
             $("#RemoveImage").hide();
 
-            $("<li>Browse or drag photo...</li>").appendTo(".qq-upload-list");
+            $("<li data-i18n='fileuploader.browse-or-drag'></li>").appendTo(".qq-upload-list").i18n();
 
         });
 

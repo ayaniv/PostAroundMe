@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="SortButton.ascx.cs" Inherits="Controls_SortButton" %>
 
-           <div id="btnSort" class="ChooseCategory" >
+           <div id="btnSort" class="ChooseCategory HeaderMenu" >
                 
                     <ul>
                         <li style="float:left; margin:0px; font-weight:bold; padding:0px; width:84px" id="btnSortText">Newest on top</li>
