@@ -2848,7 +2848,7 @@ $(function () {
 
     }
     function DeletePost() {
-        var answer = confirm(i18n.t("confirm_hide"));
+        var answer = confirm(i18n.t("messages.confirm_hide"));
         if (answer) {
             var box = $(this).parents(".Box"); // div 'Bottom'
             var msgId = box.attr("box-id");
