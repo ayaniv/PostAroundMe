@@ -22,7 +22,7 @@ public partial class Controls_FacebookLoginButton : BaseControl
         FaceBookAppKey = ConfigurationManager.AppSettings["facebookAppKey"];
 
         string url = "https://www.facebook.com/dialog/oauth?client_id={0}&redirect_uri={1}&scope=email,user_birthday";
-        url = String.Format(url, FaceBookAppKey, HttpUtility.UrlEncode(Request.Url.AbsoluteUri));
+        url = String.Format(url, FaceBookAppKey, HttpUtility.UrlEncode(domain + Request.RawUrl));
         linkFacebookLogin.NavigateUrl = url;
  
     }

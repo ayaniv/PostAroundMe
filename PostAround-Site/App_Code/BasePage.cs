@@ -9,11 +9,13 @@ using System.Web;
 /// </summary>
 public class BasePage : System.Web.UI.Page
 {
+    protected string domain;
     protected string siteUrl;
     protected string siteUrlSecured;
 
     protected override void OnInit(EventArgs e)
     {
+        domain = ConfigurationManager.AppSettings["Domain"];
         siteUrl = ConfigurationManager.AppSettings["SiteUrl"];
         siteUrlSecured = ConfigurationManager.AppSettings["SiteUrlSecured"];
 

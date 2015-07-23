@@ -3516,14 +3516,14 @@ $(function () {
         if (maxYpos == 0)
             startIndex = 0;
 
-
+        var direction = i18n.t("settings.direction");
 
         for (i = startIndex; i < postsLength; i++) {
 
             currPostHeight = parseInt($(posts.eq(i)).css("height").replace("px", ""));
 
             if (i < msgsPerRow) {
-                $(posts.eq(i)).css("left", POST_WIDTH * i + "px");
+                $(posts.eq(i)).css(direction, POST_WIDTH * i + "px");
                 $(posts.eq(i)).css("top", "0px");
                 boxesHeightsInRow[i] += currPostHeight;
 
@@ -3535,7 +3535,7 @@ $(function () {
                 var minColumn = GetLowestColumn();
 
                 // and put the next post there
-                $(posts.eq(i)).css("left", POST_WIDTH * minColumn.index + "px");
+                $(posts.eq(i)).css(direction, POST_WIDTH * minColumn.index + "px");
                 $(posts.eq(i)).css("top", minColumn.height + "px");
 
                 // increase the column height watcher

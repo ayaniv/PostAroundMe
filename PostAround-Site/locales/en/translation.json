@@ -1,6 +1,6 @@
 ﻿{
   "settings": {
-    "direction": "ltr"
+    "direction": "left"
   },
   "header": {
     "write_your_post_here": "Write your post around here",
@@ -84,6 +84,7 @@
   },
   "messages": {
     "posted_here": "posted Here",
+    "comments": "Comments",
     "m": "m",
     "around":  "around",
     "at": "at",

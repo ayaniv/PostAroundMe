@@ -1,6 +1,6 @@
 ﻿{
   "settings": {
-    "direction": "rtl"
+    "direction": "right"
   },
   "header": {
     "write_your_post_here": "כתוב את מודעתך כאן",
@@ -86,6 +86,7 @@
   },
   "messages": {
     "posted_here": "פורסם כאן",
+    "comments": "תגובות",
     "m": "מטר",
     "around":  "ממך",
     "at": "בשעה",

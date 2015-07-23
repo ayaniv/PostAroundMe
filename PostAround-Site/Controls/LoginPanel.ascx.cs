@@ -53,7 +53,7 @@ public partial class Controls_LoginPanel : BaseControl
             if (!string.IsNullOrWhiteSpace(facebookReturnedServerCode))
             {
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                string url = Request.Url.AbsoluteUri;
+                string url = Request.RawUrl;
                 int index = url.IndexOf("code=");
                 if (index > 0)
                 {
@@ -109,7 +109,7 @@ public partial class Controls_LoginPanel : BaseControl
                 //}
 
                 SaveEncryptedCodeInCookie(facebookReturnedServerCode);
-                Response.Redirect(url);
+                Response.Redirect(domain + url);
                 return;
 
             }
@@ -252,24 +252,7 @@ public partial class Controls_LoginPanel : BaseControl
         Context.Response.Cookies.Add(userCookie);
     }
 
-    protected void btnFacebook_Click(object sender, EventArgs e)
-    {
-        //string state = "";
-        //string queryString = Request.QueryString["id"];
-        //if (!String.IsNullOrWhiteSpace(queryString))
-        //{
-        //    state = SetFacebookLoginState(Convert.ToInt32(queryString));
-        //    state = Tools.EncodeTo64(state);
-        //    state = "&state=" + state;
-        //}
-
-        //Uri uri = new Uri(HttpContext.Current.Request.Url.AbsoluteUri);
-        //siteUrl = uri.GetLeftPart(UriPartial.Path);
-
-        string url = "https://www.facebook.com/dialog/oauth?client_id={0}&redirect_uri={1}&scope=email,user_birthday" /*+ state*/;
-        url = String.Format(url, FaceBookAppKey, HttpUtility.UrlEncode(Request.Url.AbsoluteUri));
-        Response.Redirect(url);
-    }
+ 
 
     private void LogoutFromFacebook(string site_url, string accessToken)
     {
@@ -322,7 +305,7 @@ public partial class Controls_LoginPanel : BaseControl
         string secretCode = ConfigurationManager.AppSettings["facebookAppSecret"];
         string url = "https://graph.facebook.com/oauth/access_token?client_id={0}&redirect_uri={1}&client_secret={2}&code={3}";
 
-        url = String.Format(url, FaceBookAppKey, HttpUtility.UrlEncode(Request.Url.AbsoluteUri), secretCode, code);
+        url = String.Format(url, FaceBookAppKey, HttpUtility.UrlEncode(domain + Request.RawUrl), secretCode, code);
 
         string response = Tools.CallUrl(url);
         // now we got the string string: 'access_token=gfdgfdgd&expires=5108' or an error message

@@ -22,7 +22,7 @@ h1 { direction:rtl }
 .uiStickyPlaceholderInput .placeholderField { direction:rtl; left:auto; right:0; }
 
 
-.Bottom .AddComment {
+.Bottom .AddComment textarea {
     direction:rtl;
 }
 
@@ -230,3 +230,21 @@ label[for="amount"] + input {
 }
 
 .Content .Box .BoxBody .BoxHead .Word { direction:rtl }
+
+.PostBox .Field input[type="text"] { direction:rtl;}
+
+#LeftWing {
+     /* float:right; */
+}
+
+#RightWing  {
+     /*float:left;*/
+}
+
+.HeaderList li {
+    /*float:right;*/
+}
+
+
+.ShareButton .Spacing {margin-right:8px; margin-left:0}
+.ShareButton .totalSharesLabel {margin-right:3px;}

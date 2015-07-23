@@ -395,6 +395,15 @@ hr.style-eight:after {
      #AddMessageWindow {margin-left: 1px}
 }
 
+
+#LeftWing {
+     float:left; height:80px; width:400px; margin-left:39px; 
+}
+
+#RightWing  {
+     float:right; height:80px; width:400px; margin-right:17px;
+}
+
 #catsBar li { cursor:pointer; position:relative; margin-right:6px; margin-top:6px; height:10px; padding:10px; background-color:#f0f0f0; float:left; color:#82898e; font-family:Arial; font-size:14px; }
 
 .SelectedCategoryInBar { left:10px; display:none; position:absolute; width:15px; height:14px; background:url('../images/icons.png') -315px -7px; margin-top:-4px; }
@@ -679,12 +688,13 @@ border-radius:3px;
 right:0;
 }
 
+.ShareButton .Spacing {margin-left:8px;}
 
 .CommentDash { bottom:0; position:absolute; width: 11px; height: 5px; background:url('../images/icons.png') -149px -22px;  }
 .relativeDate { float:right; color:#b2b2b2; margin-top:1px; }
 .totalViews {  float:left; color:#b2b2b2; margin-top:1px; margin-left:4px; margin-right:4px; display:none }
-.totalSharesLabel { margin-left:4px; margin-top:1px; color:#b2b2b2; float:left; }
-.totalShares { margin-left:4px; margin-top:1px; color:#b2b2b2; font-weight:bold; float:left; }
+.totalSharesLabel { margin-left:3px; margin-top:1px; color:#b2b2b2; float:left; }
+.totalShares { margin-left:4px; margin-top:1px; color:#b2b2b2; float:left; }
 .ShareButton { width:100%; height:22px; font-size:12px; font-family:Tahoma, Verdana, Arial;  color:#666; float:left; }
 
 .ShareIcon {

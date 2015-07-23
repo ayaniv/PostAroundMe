@@ -48,7 +48,7 @@
 <br /><br /><br />
 
 <span style="font-family:Georgia, Arial, Sans-Serif; color:#424E55; margin-top:20px; float:left; font-size:16px;">
-Try to <a title="Refresh" style="color:#6AA1BB;" onclick="OpenUrl()" href="#">reload</a> the page. Or visit our <a style="color:#6AA1BB;" href="http://www.facebook.com/postaround">Facebook Page</a>. Facebook servers might be more reliable <span style="font-size:24px;">;)</span>
+Try to <a title="Refresh" style="color:#6AA1BB;" onclick="OpenUrl()" href="#">reload</a> the page, Or <asp:LinkButton style="color:#6AA1BB;" runat="server" ID="lnkClearCookie" Text="Clear Cookies" OnClick="lnkClearCookie_Click"></asp:LinkButton> Or visit our <a style="color:#6AA1BB;" href="http://www.facebook.com/postaround">Facebook Page</a>. Facebook servers might be more reliable <span style="font-size:24px;">;)</span>
 </span>
     </div>
     </form>

@@ -195,7 +195,7 @@ public partial class Controls_MorePosts : BaseControl
         PostAround.Entities.MyMessage message = client.GetMessageById(msgId, currLon, currLat, regionId, timeZone, userId);
         if (message != null)
         {
-            message.comments = client.GetCommentsByMessageID(message.msgId, userId, timeZone);
+            message.comments = client.GetCommentsByMessageID(message.msgId, userId, timeZone, 0);
         }
 
         client.Close();

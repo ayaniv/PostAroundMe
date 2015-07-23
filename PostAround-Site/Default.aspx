@@ -337,7 +337,9 @@
                                 <span class="ShareIcon"></span>
                                 <span class="totalShares">${totalShares}</span>
                                 <span class="totalSharesLabel" data-i18n="messages.shares"></span>
-                                <span class="totalViews">· ${totalViews} Views ·</span>
+                                <span class="totalShares Spacing">${CommentsNumber}</span>
+                                <span class="totalSharesLabel"  data-i18n="messages.comments"></span>
+                                
                                 <span class="relativeDate">${Translate(relativeDate)}</span>
                             
 

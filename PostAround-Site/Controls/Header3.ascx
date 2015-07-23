@@ -43,7 +43,7 @@
         
         </div>
 
-        <div id="RightWing" style="float:right; height:80px; width:400px; margin-right:17px;">
+        <div id="RightWing">
         
         <ul class="HeaderList" style="float:right">
 
@@ -107,7 +107,7 @@
         
         
         </div>
-        <div id="LeftWing" style="float:left; height:80px; width:400px; margin-left:39px; ">
+        <div id="LeftWing">
         <ul class="HeaderList">
         <li style="width:90px;" id="liAddPost"><span class="AddPostIcon"></span><span data-i18n="header.add-post"></span>
         <%--<div style="background:url('images/icons.png');  background-position:-100px -156px; margin-left:7px; z-index:1; position:absolute; margin-top:8px; width:10px; clear:both; height:6px;" ></div>--%>

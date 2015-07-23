@@ -9,12 +9,14 @@ using System.Web;
 /// </summary>
 public class BaseControl : System.Web.UI.UserControl
 {
-
+    
+    protected string domain;
     protected string siteUrl;
     protected string siteUrlSecured;
 
     protected override void OnInit(EventArgs e)
     {
+        domain = ConfigurationManager.AppSettings["Domain"]; 
         siteUrl = ConfigurationManager.AppSettings["SiteUrl"];
         siteUrlSecured = ConfigurationManager.AppSettings["SiteUrlSecured"];
         

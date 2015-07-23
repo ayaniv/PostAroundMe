@@ -74,7 +74,7 @@ public class GetMessages : IHttpHandler {
             //attach comments
             if (messages[i].CommentsNumber > 0)
             {
-                messages[i].comments = client.GetCommentsByMessageID(currMsgId, userid, timeZone);
+                messages[i].comments = client.GetCommentsByMessageID(currMsgId, userid, timeZone, 5);
             }
                 //messages[i].comments =  comments.Where(c => c.messageID == messages[i].msgId).ToArray();
                                         

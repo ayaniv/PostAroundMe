@@ -806,16 +806,21 @@ public class PostAroundService : IPostAroundService
     }
 
 
-    public List<Comment> GetCommentsByMessageID(int msgId, int userId, int timeZone = 0)
+    public List<Comment> GetCommentsByMessageID(int msgId, int userId, int timeZone = 0, int top = 0)
     {
         List<Comment> comments = new List<Comment>();
         CommentsTableAdapter adapter = new CommentsTableAdapter();
 
         PostAroundMeDataSet.CommentsDataTable dt = new PostAroundMeDataSet.CommentsDataTable();
         dt = adapter.GetCommentsByMessageID(msgId);
+        
+        
 
         comments = CommentsDtToList(dt, userId, timeZone);
-
+        if (top > 0)
+        {
+            comments = comments.OrderByDescending(m => m.date).ToList().Take(top).OrderBy(m => m.date).ToList();
+        }
         return comments;
 
     }
