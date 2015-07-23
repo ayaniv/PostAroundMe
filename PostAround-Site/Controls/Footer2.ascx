@@ -7,11 +7,11 @@
 <div class="BottomDiv" >
             <div style="margin-top:8px;">
             
-            <div class="Text" style="float:left;">
+            <div class="Text Copyright">
                 <asp:Literal ID="ltrlCopyright" runat="server"></asp:Literal>
             
             </div>
-                  <div class="Text" style="float:right; margin-right:47px;">
+                  <div class="Text FooterLinks">
             <span>
                 <asp:HyperLink runat="server" ID="lnkSiteLinks"></asp:HyperLink>
             </span>
@@ -33,7 +33,7 @@
             </span>
         </div>
 
-                <div class="Text" style="clear:both; float:left; padding-top:20px; color:#dfdfdf; width:400px;">
+                <div class="Text Description">
     
                     <asp:HyperLink runat="server" CssClass="linkLightGrey" ID="lnkPostAroundMe"></asp:HyperLink>            
                     <asp:Literal runat="server" ID="FooterText"></asp:Literal>

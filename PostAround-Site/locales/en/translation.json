@@ -3,6 +3,8 @@
     "direction": "left"
   },
   "header": {
+    "logout": "Logout",
+    "myposts":  "My Posts",
     "write_your_post_here": "Write your post around here",
     "logo-text": "Local Pinboard",
     "add-post": "Add Post",

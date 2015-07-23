@@ -1091,7 +1091,7 @@ li .Option.OptionButton {  margin-left:9px; margin-top:-3px }
     background: #FFF;
     border: #779aad 1px solid;
     position:fixed;
-    top:213px;
+    top:337px;
     left:-312px;
     z-index:1100;
     height:350px;
@@ -1652,3 +1652,17 @@ float:left;
 .bannerLine {  float:left; margin-left:40px; margin-right:30px; width:1px; height:100%; background-color:#505050; }
 
 .bannerText {  float:left; text-transform:uppercase; color:#505050; font-family: Trebuchet MS, Arial; text-align:center; width:420px; font-size:18px; padding:20px 15px 0 15px; }
+
+.BottomDiv .Copyright {
+    float:left;
+}
+
+.BottomDiv .FooterLinks {
+     float:right; margin-right:47px;
+}
+
+.BottomDiv .Description {
+     clear:both; float:left; padding-top:20px; color:#dfdfdf; width:400px;
+}
+
+.DisplayBlock { display:block }

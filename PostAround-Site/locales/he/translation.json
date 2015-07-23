@@ -3,6 +3,8 @@
     "direction": "right"
   },
   "header": {
+    "logout": "התנתק",
+    "myposts":  "המודעות שלי",
     "write_your_post_here": "כתוב את מודעתך כאן",
     "logo-text": "לוח מודעות מקומי",
     "add-post": "פרסם",

@@ -248,3 +248,16 @@ label[for="amount"] + input {
 
 .ShareButton .Spacing {margin-right:8px; margin-left:0}
 .ShareButton .totalSharesLabel {margin-right:3px;}
+
+.BottomDiv .Copyright {
+    float:right; margin-right:47px; direction:rtl;
+}
+
+.BottomDiv .FooterLinks {
+    float:left;
+     
+}
+
+.BottomDiv .Description {
+     float:right; direction:rtl; margin-right:47px; 
+}

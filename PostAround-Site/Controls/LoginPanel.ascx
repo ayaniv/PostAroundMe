@@ -40,9 +40,9 @@
            <div id="MoreBox" class="MoreBox" style="margin-top:33px; ">
       
             <ul>
-            <li id="btnMyPosts" style="cursor:pointer;">My Posts</li>
+            <li id="btnMyPosts" style="cursor:pointer;" data-i18n="header.myposts">My Posts</li>
             <li id="btnSettings" style="display:none; cursor:pointer;">Settings</li>
-            <li id="logoutLink" ><asp:LinkButton runat="server" id="lnkbLogOut" onclick="lnkbLogOut_Click" CssClass="LogoutLink">Logout</asp:LinkButton></li>
+            <li id="logoutLink" ><asp:LinkButton runat="server" id="lnkbLogOut" onclick="lnkbLogOut_Click" CssClass="LogoutLink"><span data-i18n="header.logout"></span></asp:LinkButton></li>
             </ul>
             
             
