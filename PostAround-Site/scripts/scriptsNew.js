@@ -2275,6 +2275,8 @@ $(function () {
         }
     }
 
+
+
     function DisableAutoDiscoverForUnsupportedBrowsers() {
         if (!isBrowserSupportGeoocation) {
             $("#AutoDiscover").css("cursor", "default");
@@ -2611,9 +2613,21 @@ $(function () {
 
         var currColumn = $.tmpl("MessageTemplate", data);
 
+        SetStyleForMessagesContainer();
         $(currColumn).appendTo("#MessagesContainer");
         $("#MessagesContainer").i18n();
 
+    }
+
+    
+    function SetStyleForMessagesContainer() {
+        if (myLat == "" && myLon == "")
+        {
+            $("#MessagesContainer").addClass("NoLocation");
+        } else {
+            $("#MessagesContainer").removeClass("NoLocation");
+        }
+        
     }
 
 
@@ -2687,7 +2701,7 @@ $(function () {
 
     function GetMessages() {
 
-        if (getMessagesRunning) { // don't do anything if an AJAX request is pending
+        if (getMessagesRunning || myLat == ""  && myLon == "" && fromNumber > 0) { // don't do anything if an AJAX request is pending OR not insereted location and request next pacakage
             return;
         }
 
@@ -2761,7 +2775,14 @@ $(function () {
 
             stopLoadMore = false;
             if (fromNumber == 0) {
-                $('#MessagesContainer').empty();
+                if (myLat == "" && myLon == "")
+                {
+                    // do nothing
+                } else {
+                    $(".Overlay").hide();
+                    $('#MessagesContainer').empty();
+                }
+                
                 $('#BottomDiv').css("margin-top", "0px");
             }
 
@@ -4269,6 +4290,11 @@ $(function () {
             $("#GeoHead").removeClass("GeoHeadDisable");
         }
     }
+
+    $('#discoverTeaser').click(function () {
+        $('body').scrollTop(0);
+        $('#AutoDiscover').click();
+    });
 
     $('#AutoDiscover').click(function () {
 

@@ -145,10 +145,14 @@
         
         </div>
 
+        <div id="MessagesContainerWrapper" style="position:relative;">
+            <div class="Overlay">
+                <span id="discoverTeaser">צפה במודעות במיקום שלך</span>
+            </div>
+
         <div id="MessagesContainer" class="Content">
-        
-        
-        
+        </div>
+
         </div>
  
          <uc1:Loader ID="Loader1" runat="server" />
