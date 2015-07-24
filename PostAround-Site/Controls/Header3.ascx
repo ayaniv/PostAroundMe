@@ -26,7 +26,7 @@
         
 
 
-<div id="TopHeader">
+<div id="TopHeader" runat="server">
 
       <div id="MainHeader" class="FixedHeader" style="border-bottom:1px solid #e2ddcf; /*min-width:910px;*/ height:80px; background:#FCFCFC url('<%=siteUrl%>images/bgtop2.png'); width:100%;">
         <div style="margin:0 auto; padding:0">

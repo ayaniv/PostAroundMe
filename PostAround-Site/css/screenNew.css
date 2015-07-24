@@ -1018,7 +1018,7 @@ right:0;
     text-shadow: none;
 }
 
-#BottomDiv {
+.FooterWrapper {
     margin-top:210px; position:relative; bottom:0; width:100%
 }
 
@@ -1137,7 +1137,7 @@ li .Option.OptionButton {  margin-left:9px; margin-top:-3px }
     position:fixed;
     top:337px;
     left:-312px;
-    z-index:1100;
+    z-index:10001;
     height:350px;
 }
 

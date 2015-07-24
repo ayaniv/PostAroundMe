@@ -21,6 +21,7 @@ public partial class Controls_Head : BaseControl
     protected string dontShowMeAgainWelcome = "";
     protected bool isMobile;
     protected bool isDirectLink;
+    protected bool isSlimFit;
     protected string rootDir;
     protected string accessToken;
     protected string sendFacebookNotifications;
@@ -64,8 +65,11 @@ public partial class Controls_Head : BaseControl
         string currUrl = Request.Url.AbsoluteUri;
         if (!currUrl.Contains("www."))
             siteUrl = siteUrl.Replace("www.", "");
-        
-        
+
+        string page = System.IO.Path.GetFileNameWithoutExtension(HttpContext.Current.Request.Url.AbsoluteUri);
+        page = page.ToLower();
+        isSlimFit = page == "slimfit";
+
         accessToken = ConfigurationManager.AppSettings["facebookAppAccessToken"];
         sendFacebookNotifications = ConfigurationManager.AppSettings["SendFacebookNotifications"];
         //SetQueryStringData();

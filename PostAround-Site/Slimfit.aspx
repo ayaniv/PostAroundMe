@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true"  CodeFile="Default.aspx.cs" Inherits="_Default" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true"  CodeFile="Slimfit.aspx.cs" Inherits="_Default" %>
 
 <%@ Register src="Controls/HeadNew.ascx" tagname="Head" tagprefix="uc1" %>
 
@@ -25,7 +25,7 @@
 <head runat="server">
     
     <uc1:Head runat="server" />
-    
+    <meta name="robots" content="noindex" />
     
 
 </head>
@@ -33,80 +33,7 @@
 
 
 
-    <div id="mobileHeader" class="MobileContainer" style="display: none">
-
-        <nav class="main-nav" id="main-nav">
-          <a href="#">This</a>
-          <a href="#">Little</a>
-          <a href="#">Piggy</a>
-          <a href="#">Went</a>
-          <a href="#">To</a>
-          <a href="#">Market</a>
-        </nav>
-
-        <div class="page-wrap">
-            <div class="MobileTop">
-
-                <div class="MobileSettings">
-                    <div class="MobileSettingsLine"></div>
-                    <div class="MobileSettingsLine"></div>
-                    <div class="MobileSettingsLine"></div>
-                </div>
-
-                <div class="MobileLogo">
-                    <img src="<%=siteUrl %>images/mobile_logo.png" />
-                </div>
-
-
-            </div>
-            <div class="MobileTopSecondary">
-                    <div class="Wrapper">
-                    <div class="MobileTopSecondaryText" style="margin-left:13px;">My Posts</div>
-                    <div class="MobileTopSecondaryText" style="margin-left:84px;">Current Location</div>
-                    <div class="MobileTopSecondaryText" style="margin-left:123px;">Map</div>
-                        </div>
-                <div class="Selected"></div>
-            </div>
-
-            <div class="MobileLocation">
-               Bitzaron 2, Tel Aviv
-            </div>
-
-            <div class="MobileBottom">
-                <div class="Wrapper">
-                <div class="MobileButton">
-                    <div class="Entry">
-                        <div class="AddPostIconBig"></div>
-                        <div class="AddPostText">Add Post</div>
-                    </div>
-                </div>
-
-
-                <div class="MobileBottomPas">
-                    <div class="Line WhiteBlue"></div>
-                    <div class="Line DarkBlue"></div>
-
-                </div>
-             
-                <div class="MobileButton NoMargin" style="margin-top:15px  !important; margin-left:8px  !important;">
-                    <div class="Entry">
-                        <div class="AddPostText NoMargin">Everything</div>
-                    </div>
-               
-                </div>
-
-                 <div class="AddPostText NoMargin"  style="margin-top:32px !important; margin-left:5px !important; margin-right:5px !important;">Within</div>
-
-                 <div class="MobileButton NoMargin" style="margin-top:15px !important;">
-                    <div class="Entry">
-                        <div class="AddPostText NoMargin">2km</div>
-                    </div>
-                     </div>
-
-    </div>
-            </div>
-        </div>
-    </div>
+    
 
 <uc1:MetaTags ID="MetaTags1" runat="server" />
 <uc1:FacebookInit ID="FacebookInit1" runat="server" />
@@ -146,9 +73,7 @@
         </div>
 
         <div id="MessagesContainerWrapper" style="position:relative;">
-            <div class="Overlay">
-                <span id="discoverTeaser" data-i18n="messages.teaser"></span>
-            </div>
+             
 
         <div id="MessagesContainer" class="Content">
         </div>

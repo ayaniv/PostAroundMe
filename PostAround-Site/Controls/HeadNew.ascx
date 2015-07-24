@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="HeadNew.ascx.cs" Inherits="Controls_Head" %>
 
 <%@ Register Src="GAC.ascx" TagName="GAC" TagPrefix="uc1" %>
-<meta name="viewport" content="width=device-width,initial-scale=0.5,maximum-scale=1" />
+<!--<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />-->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <!-- scripts -->
 
@@ -26,6 +26,7 @@
     var isDirectLink = <%=isDirectLink.ToString().ToLower() %>;
     var accessToken = '<%=HttpUtility.JavaScriptStringEncode(accessToken) %>';
     var sendFacebookNotifications = '<%=HttpUtility.JavaScriptStringEncode(sendFacebookNotifications) %>';
+    var isSlimFit = <%=isSlimFit.ToString().ToLower() %>;
             
             
     </script>

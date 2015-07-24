@@ -156,10 +156,13 @@ $(function () {
     var lastBottomMargin = 0;
     var currZoomLevel = 0;
     // if not support in Geolocation
+ 
     isBrowserSupportGeoocation = true;
     CheckBrowserSupport();
     DisableAutoDiscoverForUnsupportedBrowsers();
 
+
+ 
 
     //set init values
     mouse_is_inside_popup = false;
@@ -1418,10 +1421,15 @@ $(function () {
 
     function ChangeToSmallHeader() {
 
-        $.when(ChangeToSmallHeaderStep1()).then(ChangeToSmallHeaderStep2());
-        if (!isDirectLink) {
-            SetLocationInAddressBar();
+        if (!isSlimFit)
+        {
+            $.when(ChangeToSmallHeaderStep1()).then(ChangeToSmallHeaderStep2());
+            if (!isDirectLink) {
+                SetLocationInAddressBar();
+            }
         }
+        
+       
     }
 
     function ChangeToSmallHeaderStep2() {
@@ -1439,15 +1447,20 @@ $(function () {
     }
 
     function ChangeToSmallHeaderStep1() {
-        showMyLocation(myLat, myLon);
+        
+        
+            showMyLocation(myLat, myLon);
+            if ($('#MapPas').css("display") != "none") {
+                $('#MapPasText').fadeOut();
+                $('#moreButtonsText').css("cursor", "pointer");
+                $('#LocationLinks').show();
+                $('#TopMessage').show();
+                $('#SearchLocation').hide();
+            }
+        
+        
 
-        if ($('#MapPas').css("display") != "none") {
-            $('#MapPasText').fadeOut();
-            $('#moreButtonsText').css("cursor", "pointer");
-            $('#LocationLinks').show();
-            $('#TopMessage').show();
-            $('#SearchLocation').hide();
-        }
+        
 
 
 
@@ -2278,7 +2291,7 @@ $(function () {
 
 
     function DisableAutoDiscoverForUnsupportedBrowsers() {
-        if (!isBrowserSupportGeoocation) {
+        if (!isBrowserSupportGeoocation && !isSlimFit) {
             $("#AutoDiscover").css("cursor", "default");
             $("#AutoDiscover").unbind('click');
             $("#AutoDiscover").unbind('hover');
@@ -2783,7 +2796,7 @@ $(function () {
                     $('#MessagesContainer').empty();
                 }
                 
-                $('#BottomDiv').css("margin-top", "0px");
+                $('.FooterWrapper').css("margin-top", "0px");
             }
 
             resultsNum += myData.length;
