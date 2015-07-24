@@ -261,3 +261,7 @@ label[for="amount"] + input {
 .BottomDiv .Description {
      float:right; direction:rtl; margin-right:47px; 
 }
+
+.Overlay #discoverTeaser {
+    direction:rtl
+}
