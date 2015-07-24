@@ -265,3 +265,7 @@ label[for="amount"] + input {
 .Overlay #discoverTeaser {
     direction:rtl
 }
+
+ .qq-upload-list li.qq-upload-success {
+     float:left;
+ }

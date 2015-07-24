@@ -268,7 +268,7 @@ h1 .font2
     width:100%;
     height:150px;
     position:absolute;
-     z-index:999999;
+     z-index:10000;
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#7db9e8+0,f5f3eb+91&amp;0+0,1+97 */
 background: -moz-linear-gradient(top,  rgba(125,185,232,0) 0%, rgba(245,243,235,0.94) 91%, rgba(245,243,235,1) 97%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(125,185,232,0)), color-stop(91%,rgba(245,243,235,0.94)), color-stop(97%,rgba(245,243,235,1))); /* Chrome,Safari4+ */
