@@ -980,8 +980,14 @@ right:0;
     text-shadow: none;
 }
 
+#BottomDiv {
+    margin-top:210px; position:relative; bottom:0; width:100%
+}
 
-.BottomDiv { margin-top:0px; display:block;  padding-top:50px;  background-color:#2C2C2C;  height:220px; background:#989694 url('../images/footer_bg.png'); background-repeat:repeat-x;  min-width:100%;  min-height:70px; }
+.BottomDiv { margin-top:0px; display:block;  padding-top:50px;  background-color:#2C2C2C;  height:220px; background:#989694 url('../images/footer_bg.png'); background-repeat:repeat-x;  min-width:100%;  min-height:70px;
+
+             
+}
 
 .BottomDiv .Logo { margin-left:47px;  }
 .BottomDiv .Text { margin-left:47px;  font-size:13px; color:#FFF;   }

@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Sitelinks.aspx.cs" Inherits="Sitelinks" %>
 <%@ Register src="Controls/HeadNew.ascx" tagname="Head" tagprefix="uc1" %>
 <%@ Register src="Controls/SimpleHeader.ascx" tagname="SimpleHeader" tagprefix="uc1" %>
-<%@ Register src="Controls/Footer2.ascx" tagname="Footer" tagprefix="uc1" %>
+
 
 <%@ Import Namespace="PostAround.Entities" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

@@ -45,7 +45,10 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
             <uc1:MorePosts ID="MorePosts1" runat="server" />   
     
     <div class="PostBottom">
+                
+<div id="BottomDiv">
         <uc1:Footer ID="Footer1" runat="server" />
+    </div>
 </div>
         </div>
          

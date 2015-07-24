@@ -5,7 +5,7 @@
 
 <%@ Register src="Controls/Header3.ascx" tagname="Header" tagprefix="uc1" %>
 <%@ Register src="Controls/AddPostContainer2.ascx" tagname="AddPost" tagprefix="uc1" %>
-<%@ Register src="Controls/Footer2.ascx" tagname="Footer" tagprefix="uc1" %>
+
 <%@ Register src="Controls/FeedbackPanel.ascx" tagname="Feedback" tagprefix="uc1" %>
 <%@ Register src="Controls/BottomLoader.ascx" tagname="Loader" tagprefix="uc1" %>
 <%@ Register src="Controls/ShowMap.ascx" tagname="ShowMap" tagprefix="uc1" %>
