@@ -147,7 +147,7 @@
 
         <div id="MessagesContainerWrapper" style="position:relative;">
             <div class="Overlay">
-                <span id="discoverTeaser">צפה במודעות במיקום שלך</span>
+                <span id="discoverTeaser" data-i18n="messages.teaser"></span>
             </div>
 
         <div id="MessagesContainer" class="Content">

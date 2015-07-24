@@ -4,7 +4,7 @@
   },
   "header": {
     "logout": "Logout",
-    "myposts":  "My Posts",
+    "myposts": "My Posts",
     "write_your_post_here": "Write your post around here",
     "logo-text": "Local Pinboard",
     "add-post": "Add Post",
@@ -85,10 +85,11 @@
     "Travel": "Travel"
   },
   "messages": {
+    "teaser":  "Show posts around your location",
     "posted_here": "posted Here",
     "comments": "Comments",
     "m": "m",
-    "around":  "around",
+    "around": "around",
     "at": "at",
     "PosterOnly": "Poster Only",
     "confirm_hide": "Hide that post?",

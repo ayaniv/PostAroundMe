@@ -4,7 +4,7 @@
   },
   "header": {
     "logout": "התנתק",
-    "myposts":  "המודעות שלי",
+    "myposts": "המודעות שלי",
     "write_your_post_here": "כתוב את מודעתך כאן",
     "logo-text": "לוח מודעות מקומי",
     "add-post": "פרסם",
@@ -87,10 +87,11 @@
     "Travel": "תיירות"
   },
   "messages": {
+    "teaser":  "צפה במודעות במיקום שלך",
     "posted_here": "פורסם כאן",
     "comments": "תגובות",
     "m": "מטר",
-    "around":  "ממך",
+    "around": "ממך",
     "at": "בשעה",
     "PosterOnly": "למפרסם בלבד",
     "confirm_hide": "למחוק את המודעה הזו?",
