@@ -269,3 +269,11 @@ label[for="amount"] + input {
  .qq-upload-list li.qq-upload-success {
      float:left;
  }
+
+ .HeaderList li.SlimFitButton {
+     float:right;
+ }
+
+ .PoweredBy {
+     float:left;
+ }

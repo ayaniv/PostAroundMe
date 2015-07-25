@@ -497,6 +497,14 @@ $(function () {
             $('#xbutton').click();
     });
 
+    
+
+    $('#liAddPost_SlimFit').click(function () {
+        
+            ShowAddMessageWindow(true);
+        
+    });
+
     $('#liAddPost').click(function () {
         if ($('#AddMessageWindow').css("display") == "none")
             ShowAddMessageWindow(true);
@@ -2288,6 +2296,10 @@ $(function () {
         }
     }
 
+    if (isSlimFit)
+    {
+        $("#divAddressChange").hide();
+    }
 
 
     function DisableAutoDiscoverForUnsupportedBrowsers() {

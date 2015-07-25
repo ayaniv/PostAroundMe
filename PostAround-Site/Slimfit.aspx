@@ -3,6 +3,7 @@
 <%@ Register src="Controls/HeadNew.ascx" tagname="Head" tagprefix="uc1" %>
 
 <%@ Register src="Controls/Header3.ascx" tagname="Header" tagprefix="uc1" %>
+<%@ Register src="Controls/HeaderSlimFit.ascx" tagname="HeaderSlimFit" tagprefix="uc1" %>
 <%@ Register src="Controls/AddPostContainer2.ascx" tagname="AddPost" tagprefix="uc1" %>
 <%@ Register src="Controls/Footer2.ascx" tagname="Footer" tagprefix="uc1" %>
 <%@ Register src="Controls/PressStrip.ascx" tagname="PressStrip" tagprefix="uc1" %>
@@ -56,7 +57,9 @@
     
 
  
+        
     <uc1:Header ID="Header1" runat="server" />
+        <uc1:HeaderSlimFit ID="HeaderSlimFit" runat="server" />
     <uc1:AddPost ID="AddPost1" runat="server" />
    <uc1:ShowMap ID="ShowMap1" runat="server" />
    <uc1:PopUp ID="PopUp1" runat="server" />
@@ -72,7 +75,7 @@
         
         </div>
 
-        <div id="MessagesContainerWrapper" style="position:relative;">
+        <div id="MessagesContainerWrapper" style="position:relative; top:50px;">
              
 
         <div id="MessagesContainer" class="Content">

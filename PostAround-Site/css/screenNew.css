@@ -283,6 +283,32 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#007db9e8', e
 
 }
 
+.SlimFitHeader + .AddMessage {
+    top:15% !important;
+    left:50% !important;
+    margin-left:-162px !important;
+}
+
+.SlimFitHeader {
+     background-color:#808080; position:fixed; height:40px; width:100%;
+
+}
+
+.PoweredBy {
+    float:right; font-size:11px; color:#dadddd; padding:15px;
+}
+
+.PoweredBy a {
+   text-decoration:none; color:#dadddd
+}
+
+.PoweredBy a:hover {
+    text-decoration:underline;
+}
+
+.SlimFitButton {
+     cursor:pointer;
+}
 
 .PressStripTitle {
     background-color:#666;

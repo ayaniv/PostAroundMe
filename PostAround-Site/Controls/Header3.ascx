@@ -109,7 +109,7 @@
         </div>
         <div id="LeftWing">
         <ul class="HeaderList">
-        <li style="width:90px;" id="liAddPost"><span class="AddPostIcon"></span><span data-i18n="header.add-post"></span>
+        <li id="liAddPost"><span class="AddPostIcon"></span><span data-i18n="header.add-post"></span>
         <%--<div style="background:url('images/icons.png');  background-position:-100px -156px; margin-left:7px; z-index:1; position:absolute; margin-top:8px; width:10px; clear:both; height:6px;" ></div>--%>
         </li>
         <li id="liCategory">
