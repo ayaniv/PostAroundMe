@@ -43,7 +43,8 @@
     "All": "ALL",
     "UpToDistance": "Up To Distance",
     "language": "Language",
-    "go": "go"
+    "go": "go",
+    "press": "The press loves us, we love them back"
 
   },
   "post": {
@@ -85,7 +86,7 @@
     "Travel": "Travel"
   },
   "messages": {
-    "teaser":  "See what's good in your hood !",
+    "teaser": "Continue with you current location",
     "posted_here": "posted Here",
     "comments": "Comments",
     "m": "m",

@@ -262,7 +262,7 @@ label[for="amount"] + input {
      float:right; direction:rtl; margin-right:47px; 
 }
 
-.Overlay #discoverTeaser {
+#discoverTeaser {
     direction:rtl
 }
 

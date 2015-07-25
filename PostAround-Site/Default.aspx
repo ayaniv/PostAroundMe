@@ -147,7 +147,7 @@
 
         <div id="MessagesContainerWrapper" style="position:relative;">
             <div class="Overlay">
-                <span id="discoverTeaser" data-i18n="messages.teaser"></span>
+                
             </div>
 
         <div id="MessagesContainer" class="Content">
@@ -183,7 +183,9 @@
 
         
 <div class="FooterWrapper" id="BottomDiv" runat="server">
-    
+    <div class="TeaserContainer">
+        <span id="discoverTeaser" data-i18n="messages.teaser"></span>
+    </div>
     <uc1:PressStrip ID="PressStrip" runat="server" /> 
     <uc1:Footer ID="Footer" runat="server" /> 
 </div>
