@@ -2793,6 +2793,7 @@ $(function () {
                     // do nothing
                 } else {
                     $(".Overlay").hide();
+                    $(".TeaserContainer").hide();
                     $('#MessagesContainer').empty();
                 }
                 
