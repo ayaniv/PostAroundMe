@@ -290,7 +290,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#007db9e8', e
 }
 
 .SlimFitHeader {
-     background-color:#808080; position:fixed; height:40px; width:100%;
+     background-color:#808080; position:fixed; height:40px; width:100%; z-index:400;
 
 }
 

@@ -87,6 +87,8 @@
             <ul>
                 <li id="liBlog"><a href="http://blog.postaround.me" target="_blank" class="LogoutLink" style="padding:0;"  data-i18n="header.blog"></a></li>
                 <li id="liContact"><a href="mailto:yaniv@postaround.me"  class="LogoutLink" data-i18n="header.contact"></a></li>
+                <li id="liContact"><a href="http://goo.gl/sOXPS"  class="LogoutLink" data-i18n="header.mobile"></a></li>
+                <li id="liContact"><a href="http://eepurl.com/bufBZb"  class="LogoutLink"  data-i18n="header.developers"></a></li>
             </ul>
             
             
