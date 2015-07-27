@@ -9,6 +9,6 @@ public partial class Controls_HeaderSlimFit : System.Web.UI.UserControl
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        ltrlTitle.Text = Request.QueryString["title"];
     }
 }

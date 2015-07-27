@@ -399,8 +399,7 @@ $(function () {
 
 
 
-
-
+  
 
     ShowPosts();
     function ShowPosts() {
@@ -4177,10 +4176,12 @@ $(function () {
     }
 
     function SetZoom(zoomLevel, radius) {
-       // myMap.setCenter(jsCenter);
+        // myMap.setCenter(jsCenter);
+        if (!isSlimFit) {
         myMap.setZoom(zoomLevel);
         circle.setRadius(radius);
         myMap.setCenter(new google.maps.LatLng(myLat, myLon));
+        }
     }
 
     function ShowAdressDetailsInAddMessage(address, myLat, myLon) {

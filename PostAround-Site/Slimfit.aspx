@@ -15,6 +15,7 @@
 <%@ Register src="Controls/SocialLinks.ascx" tagname="SocialLinks" tagprefix="uc1" %>
 <%@ Register src="Controls/MetaTags.ascx" tagname="MetaTags" tagprefix="uc1" %>
 
+<%@ Register src="Controls/CategoriesBar.ascx" tagname="CategoriesBar" tagprefix="uc1" %>
 
 
 
@@ -59,13 +60,15 @@
  
         
     <uc1:Header ID="Header1" runat="server" />
-        <uc1:HeaderSlimFit ID="HeaderSlimFit" runat="server" />
-    <uc1:AddPost ID="AddPost1" runat="server" />
+<uc1:HeaderSlimFit ID="HeaderSlimFit" runat="server" />
+<uc1:AddPost ID="AddPost1" runat="server" />
    <uc1:ShowMap ID="ShowMap1" runat="server" />
    <uc1:PopUp ID="PopUp1" runat="server" />
-
+<uc1:CategoriesBar Visible="false" ID="CategoriesBar1" runat="server" />
   
-
+        <style>
+            #catsBar { margin-top:39px}
+        </style>
 
 
                 

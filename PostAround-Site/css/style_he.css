@@ -282,3 +282,5 @@ label[for="amount"] + input {
      direction:rtl;
      text-align:right;
  }
+
+ .SlimFitButton .AddPostIcon {float:right; margin-left:7px; margin-right0;}

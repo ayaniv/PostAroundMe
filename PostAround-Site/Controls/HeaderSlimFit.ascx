@@ -5,6 +5,6 @@
         
         </li>
             </ul>
-
+    <asp:Label CssClass="SlimFitTitle" runat="server" ID="ltrlTitle"></asp:Label>
     <span class="PoweredBy">powered by <a href="http://postaround.me" target="_blank">PostAround.me</a></span>
     </div>

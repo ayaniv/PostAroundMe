@@ -283,6 +283,17 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#007db9e8', e
 
 }
 
+.SlimFitTitle {
+    padding:12px;
+    color:#fff;
+    font-size:14px;
+    display:inline-block;
+}
+
+#MessagesContainerWrapper {
+    clear:both;
+}
+
 .SlimFitHeader + .AddMessage {
     top:15% !important;
     left:50% !important;
@@ -290,7 +301,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#007db9e8', e
 }
 
 .SlimFitHeader {
-     background-color:#808080; position:fixed; height:40px; width:100%; z-index:400;
+     background-color:#808080; position:fixed; height:39px; width:100%; z-index:400; text-align:center;
 
 }
 
@@ -306,8 +317,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#007db9e8', e
     text-decoration:underline;
 }
 
+.SlimFitButton:hover {
+    background-color:#f77c05 !important;
+}
 .SlimFitButton {
      cursor:pointer;
+     background-color:#f78c1d;
+
 }
 
 .PressStripTitle {
