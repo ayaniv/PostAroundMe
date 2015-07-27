@@ -79,7 +79,7 @@ namespace PostAround.ServiceContracts
         CommentResult InsertComment(Comment comment);
 
         [OperationContract]
-        List<Comment> GetCommentsByMessageID(int id, int userId, int timeZone, int top);
+        List<Comment> GetCommentsByMessageID(int id, int userId, int timeZone = 0, int top = 0);
 
         [OperationContract]
         Comment GetCommentByID(int id);
