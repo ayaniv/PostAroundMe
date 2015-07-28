@@ -10,7 +10,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://ogp.me/ns/fb#" xml:lang="en">
 <head id="Head1" runat="server">
-    
+    <meta name="viewport" content="width=device-width,initial-scale=0.5,maximum-scale=1" />
     <uc1:Head ID="PageHeader1" runat="server" />
     
 </head>
@@ -29,10 +29,10 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
             
 
         <div style="position:relative; min-height:100%">
-    <uc1:SimpleHeader ID="SimpleHeader1" runat="server" />
+    
         
      <uc1:AddPostContainer ID="AddPostContainer1" runat="server" />
-    <div id="SinglePostContainer" style=" margin:0 auto; padding-top:100px; width:920px;">
+    <div id="SinglePostContainer" >
 
     <uc1:MetaTags ID="MetaTags1" runat="server" />
     <uc1:SinglePost ID="SinglePost1" runat="server" />  
@@ -41,12 +41,7 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
             
             <uc1:MorePosts ID="MorePosts1" runat="server" />   
     
-    <div class="PostBottom">
-                
-<div id="BottomDiv">
-        <uc1:Footer ID="Footer1" runat="server" />
-    </div>
-</div>
+ 
         </div>
          
     </form>
