@@ -84,7 +84,8 @@
     "Rentals": "Rentals",
     "Restaurantcafe": "Restaurant/cafe",
     "SportsLeisure": "Sports & Leisure",
-    "Travel": "Travel"
+    "Travel": "Travel",
+    "HealthBeauty":  "Health & Beauty"
   },
   "messages": {
     "teaser": "Continue with you current location",

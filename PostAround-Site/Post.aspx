@@ -29,8 +29,10 @@ box-shadow: 0px 6px 6px #666; -moz-box-shadow: 0px 6px 6px #666; -webkit-box-sha
             
 
         <div style="position:relative; min-height:100%">
-    
-        
+            <div style="display:none">
+     <uc1:SimpleHeader ID="SimpleHeader1" runat="server" />
+        </div>
+
      <uc1:AddPostContainer ID="AddPostContainer1" runat="server" />
     <div id="SinglePostContainer" >
 

@@ -240,4 +240,7 @@
   <data name="Yesterday" xml:space="preserve">
     <value>אתמול</value>
   </data>
+  <data name="HealthBeauty" xml:space="preserve">
+    <value>בריאות ויופי</value>
+  </data>
 </root>

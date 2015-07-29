@@ -829,7 +829,7 @@ right:0;
 
     .MorePosts .MorePostsTitle {
        
-         width: 272px; padding:10px 14px 10px 14px; float: left; background-color: #fff; margin-top: 0px; border-bottom: 1px solid #ced0d2; font-size:16px; font-weight:bold; color:#3b3b3d;
+         width: 272px; padding:10px 14px 10px 14px; float: left; margin-top: 0px; border-bottom: 1px solid #ced0d2; font-size:16px; font-weight:bold; color:#3b3b3d;
          
     }
 
@@ -923,7 +923,7 @@ right:0;
       z-index: 100; 
 }
 .Bottom .CommentsArea .SingleComment .CommentWrapper #commentUserName { margin-right:5px; margin-left:5px; }
-.Bottom .CommentsArea .SingleComment .CommentWrapper #commentUserName a { font-weight:bold; float:left; margin-right:4px; } 
+.Bottom .CommentsArea .SingleComment .CommentWrapper #commentUserName a { font-weight:bold; margin-right:4px; display:inline-block; } 
 .Bottom .CommentsArea .SingleComment .CommentWrapper #commentUserName .CommentText a {  font-weight:normal; word-break: break-all }
 
 
@@ -934,7 +934,8 @@ right:0;
 .PostBottomWrapper {  margin-top:12px; float:right; }
 .PostExample { clear:both; float:left; font-size:11px; font-style:italic; padding:6px; }
 .Bottom .CommentsArea .SingleComment .CommentWrapper {  word-wrap:break-word; display:block; line-height:16px; font-family: Tahoma, Arial; text-align:left; color:#424E55; font-size:12px; }
-.Bottom .CommentsArea .SingleComment .CommentWrapper .CommentDate { clear:both; color:#A3A3A3; font-size:11px; margin-left:5px; float:left; }
+.Bottom .CommentsArea .SingleComment .CommentWrapper .CommentDate { clear:both; color:#A3A3A3; font-size:11px; margin-left:5px; display:inline-block; }
+#BigBoxComments .Bottom .CommentsArea .SingleComment .CommentWrapper { font-size:14px; }
 .CommentDateAt { margin-left:3px; margin-right:3px; }
 .Bottom .CommentsArea .SingleComment .CommentWrapper .PosterOnly { color:#A3A3A3; font-size:11px; margin-left:5px; float:left; }
 

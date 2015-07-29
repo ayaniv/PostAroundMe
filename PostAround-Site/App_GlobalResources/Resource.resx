@@ -240,4 +240,7 @@
   <data name="Yesterday" xml:space="preserve">
     <value>yesterday</value>
   </data>
+  <data name="HealthBeauty" xml:space="preserve">
+    <value>Health &amp; Beauty</value>
+  </data>
 </root>
