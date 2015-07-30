@@ -29,3 +29,7 @@ _ReSharper*/
 .vs/config/applicationhost.config
 PostAround-Site/Web.config
 PostAround-Site/Web.config
+PostAround-Site/Test/online/data.csv
+PostAround-Site/Test/online/jquery.tipsy.js
+PostAround-Site/Test/online/index.html
+PostAround-Site/Test/online/stylesheet.css

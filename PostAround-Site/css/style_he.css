@@ -284,3 +284,6 @@ label[for="amount"] + input {
  }
 
  .SlimFitButton .AddPostIcon {float:right; margin-left:7px; margin-right0;}
+
+ .SmallXButton { right:auto; left:0; }
+

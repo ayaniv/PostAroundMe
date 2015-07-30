@@ -19,7 +19,7 @@ public partial class Controls_Footer2 : BaseControl
         lnkPostAroundMe.NavigateUrl = siteUrl;
 
         lnkSiteLinks.Text = (String)GetGlobalResourceObject("Resource", "SiteLinks");
-        lnkSiteLinks.NavigateUrl = Site + "Sitelinks.aspx";
+        lnkSiteLinks.NavigateUrl = siteUrl + "Sitelinks.aspx";
 
         lnkBlog.Text = (String)GetGlobalResourceObject("Resource", "Blog");
         lnkBlog.NavigateUrl = "http://blog.postaround.me";
