@@ -82,6 +82,7 @@ public partial class Controls_MorePosts : BaseControl
     {
         PostAroundServiceClient client = new PostAroundServiceClient();
         List<MyMessage> messages = client.GetMessages(lat, lon, 0, 0, takeNum, 0, lstCatID.ToArray(), 0, 0, 4000, 0).ToList();
+        client.Close();
         return messages;
     }
 
