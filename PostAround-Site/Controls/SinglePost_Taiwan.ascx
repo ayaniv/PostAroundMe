@@ -31,6 +31,7 @@
              color:#FFF;
              font-size:36px;
              text-transform:capitalize;
+             display:block;
          }
     </style>
 <div id="fb-root"></div>
@@ -60,7 +61,7 @@
     <div id="BigBoxContainer" style="font-family:Georgia, Arial, Sans-Serif; color:#424e55">
 
         
-        <div id="BigBoxWrer" class="Box" style="width: 610px; min-height: 800px; padding: 15px; background-color: #FFF; float: left;">
+        <div id="BigBoxWrer" class="Box" style="width: 610px; margin-left:55px; min-height: 800px; padding: 15px; background-color: #FFF; float: left;">
 
 
 

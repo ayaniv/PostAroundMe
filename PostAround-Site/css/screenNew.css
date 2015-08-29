@@ -728,6 +728,11 @@ hr.style-eight:after {
 .PostBottom .BottomDiv { float:left; position:static; bottom:auto; left:auto; width:100%; margin-top:15px;
 }
 
+.PostBottom .BottomDivAfter {
+    width:100%;
+    float:left;
+}
+
 .LocationLink { cursor:pointer; }
 
 .AddMessage { display:none;  }
