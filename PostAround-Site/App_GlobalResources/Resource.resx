@@ -136,7 +136,7 @@
     <value>contact</value>
   </data>
   <data name="Copyright" xml:space="preserve">
-    <value>Copyright © 2012-2013 PostAround.Me. All Rights Reserved.</value>
+    <value>Copyright © 2015 PostAround.Me. All Rights Reserved.</value>
   </data>
   <data name="DaysAgo" xml:space="preserve">
     <value>days ago</value>
@@ -242,5 +242,20 @@
   </data>
   <data name="HealthBeauty" xml:space="preserve">
     <value>Health &amp; Beauty</value>
+  </data>
+  <data name="PopularBoards" xml:space="preserve">
+    <value>Featured Loactions</value>
+  </data>
+  <data name="Press" xml:space="preserve">
+    <value>In the press</value>
+  </data>
+  <data name="SiteAbout" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="SiteUse" xml:space="preserve">
+    <value>Navigate</value>
+  </data>
+  <data name="WhoRwe" xml:space="preserve">
+    <value>who are we?</value>
   </data>
 </root>

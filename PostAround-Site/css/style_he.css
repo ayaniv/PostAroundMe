@@ -26,6 +26,8 @@ h1 { direction:rtl }
     direction:rtl;
 }
 
+.BottomDivAfter {direction:rtl;}
+
 #moreButtons {
     float:right !important;
     margin-right:39px !important;
@@ -255,12 +257,19 @@ label[for="amount"] + input {
 
 .BottomDiv .FooterLinks {
     float:left;
-     
+    direction:rtl;
 }
 
 .BottomDiv .Description {
-     float:right; direction:rtl; margin-right:47px; 
+     float:right;
+     direction:rtl;
+     margin-right:47px;
+     margin-left:auto;
 }
+.FacebookLikeBox {
+    float:left; margin-left:47px
+}
+
 
 #discoverTeaser {
     direction:rtl

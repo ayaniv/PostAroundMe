@@ -36,11 +36,11 @@ public partial class Controls_Head : BaseControl
 
         if (HttpContext.Current.Request.Url.AbsoluteUri.ToLower().Contains("taiwan-receipt-lottery-checker.aspx"))
         {
-            GAC1.Visible = false;
+           GAC1.Visible = false;
         }
 
         addressFromQueryString = Request.QueryString["address"];
-        if (!string.IsNullOrWhiteSpace(addressFromQueryString))
+        if (string.IsNullOrWhiteSpace(addressFromQueryString))
         {
             GetDataFromCookie();
         }
@@ -86,6 +86,13 @@ public partial class Controls_Head : BaseControl
 
             if (!string.IsNullOrEmpty(cookie["lng"]))
                 myLon = cookie["lng"];
+
+            if (!string.IsNullOrEmpty(cookie["address"]))
+            {
+
+                address = Tools.DecodeFrom64(cookie["address"]);
+            }
+                
 
         }
     }

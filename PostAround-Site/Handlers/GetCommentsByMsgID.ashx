@@ -31,7 +31,7 @@ public class GetCommentsByMsgID : IHttpHandler {
         {
             PostAroundServiceClient client = new PostAroundServiceClient();
 
-            PostAround.Entities.Comment[] currComments = client.GetCommentsByMessageID(ID, userId, timeZone);
+            PostAround.Entities.Comment[] currComments = client.GetCommentsByMessageID(ID, userId, timeZone, 0);
 
             client.Close();
 

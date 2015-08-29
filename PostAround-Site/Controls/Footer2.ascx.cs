@@ -33,7 +33,9 @@ public partial class Controls_Footer2 : BaseControl
         lnkPrivacy.Text = (String)GetGlobalResourceObject("Resource", "Privacy");
         lnkPrivacy.NavigateUrl = siteUrl + "Pages/Privacy.aspx";
 
+        featuredLocations.Text = (String)GetGlobalResourceObject("Resource", "PopularBoards");
 
+        siteUse.Text = (String)GetGlobalResourceObject("Resource", "SiteUse");
 
     }
 }

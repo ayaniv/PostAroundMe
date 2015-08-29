@@ -327,11 +327,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#007db9e8', e
 }
 
 .PressStripTitle {
-    background-color:#666;
+    
     padding-top:5px;
     padding-bottom:5px;
     font-size:16px;
-    color:#f5f3eb;
+    color:#666;
 }
 
 .LoginMessageToDelete {
@@ -1087,15 +1087,28 @@ right:0;
     margin-top:210px; position:relative; bottom:0; width:100%
 }
 
-.BottomDiv { margin-top:0px; display:block;  padding-top:50px;  background-color:#2C2C2C;  height:220px; background:#989694 url('../images/footer_bg.png'); background-repeat:repeat-x;  min-width:100%;  min-height:70px;
+.BottomDiv { margin-top:0px; display:block;  padding-top:70px; height:256px;
+             background:#3C3C3C url('../images/footer_bg.png'); background-repeat:repeat-x; min-width:100%;  min-height:70px;
 
              
+}
+
+.FooterLinks .Heading {
+    font-size:18px; padding-bottom:5px;color:#dfdfdf;
+}
+
+.FooterLinks a {
+    color:#dfdfdf !important;
+}
+
+.BottomDivAfter {
+    background-color: #2f2f2f; color:#dfdfdf; font-size:12px; padding:14px 47px;
 }
 
 .BottomDiv .Logo { margin-left:47px;  }
 .BottomDiv .Text { margin-left:47px;  font-size:13px; color:#FFF;   }
     .BottomDiv .Text a {
-        text-decoration:none; font-style:italic; font-size:14px;
+        text-decoration:none; font-size:14px;
     }
 .BottomDiv .Text a:link, .BottomDiv .Text a:visited { color:#FFF;  }
 .BottomDiv .Text a:hover {text-decoration:underline;}
@@ -1766,10 +1779,15 @@ float:left;
 
 .BottomDiv .FooterLinks {
      float:right; margin-right:47px;
+     line-height:18px;
 }
 
 .BottomDiv .Description {
-     clear:both; float:left; padding-top:20px; color:#dfdfdf; width:400px;
+     float:left; color:#dfdfdf; width:400px;
+}
+
+.FacebookLikeBox {
+    float:right; margin-right:47px
 }
 
 .DisplayBlock { display:block }

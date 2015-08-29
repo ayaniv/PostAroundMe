@@ -175,7 +175,7 @@
     <value>צור קשר</value>
   </data>
   <data name="Copyright" xml:space="preserve">
-    <value>כל הזכויות שמורות © 2012-2015 פוסט-אראונד-מי.</value>
+    <value>כל הזכויות שמורות © 2015 פוסט-אראונד-מי.</value>
   </data>
   <data name="Everything" xml:space="preserve">
     <value>הכל</value>
@@ -242,5 +242,20 @@
   </data>
   <data name="HealthBeauty" xml:space="preserve">
     <value>בריאות ויופי</value>
+  </data>
+  <data name="PopularBoards" xml:space="preserve">
+    <value>מיקומים נבחרים</value>
+  </data>
+  <data name="Press" xml:space="preserve">
+    <value>כתבו עלינו</value>
+  </data>
+  <data name="SiteAbout" xml:space="preserve">
+    <value>אודות האתר</value>
+  </data>
+  <data name="SiteUse" xml:space="preserve">
+    <value>שימוש באתר</value>
+  </data>
+  <data name="WhoRwe" xml:space="preserve">
+    <value>מי אנחנו</value>
   </data>
 </root>
